@@ -1,5 +1,5 @@
 <template>
-  <p class="caption" :style="style">
+  <p class="caption" :style="typography">
     <slot></slot>
   </p>
 </template>
@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .caption {
-  font-size: 14px;
+  font-size: var(--caption-fs);
   font-weight: 300;
   color: var(--white-base);
 }

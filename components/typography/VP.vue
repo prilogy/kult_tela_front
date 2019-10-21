@@ -1,5 +1,5 @@
 <template>
-  <p class="p" :style="style">
+  <p class="p" :style="typography">
     <slot></slot>
   </p>
 </template>
@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .p {
-  font-size: 16px;
+  font-size: var(--p-fs);
   font-weight: 400;
   color: var(--white-base);
 }

@@ -19,11 +19,14 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: {
+    color: 'blue',
+    height: '5px'
+  },
   /*
    ** Global CSS
    */
-  css: ['~/css/main.css', '~/css/reset.css'],
+  css: ['~/css/main.css', '~/css/reset.css', '~/css/fonts.css'],
   /*
    ** Plugins to load before mounting the App
    */

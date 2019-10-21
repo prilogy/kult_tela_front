@@ -4,6 +4,10 @@ import VH3 from './typography/VH3';
 import VP from './typography/VP';
 import VCaption from './typography/VCaption';
 
+import VNav from './ui/VNav';
+import VFooter from './ui/VFooter';
+import VButton from './ui/VButton';
+
 export {
   /*
    * TYPOGRAPHY
@@ -12,5 +16,11 @@ export {
   VH2,
   VH3,
   VP,
-  VCaption
+  VCaption,
+  /*
+   * USER INTERFACE
+   */
+  VNav,
+  VFooter,
+  VButton
 };

@@ -15,14 +15,11 @@ export default {
     color: String
   },
   computed: {
-    style() {
+    typography() {
       return {
         color: this.color || '',
         fontWeight: WEIGHTS[this.weight] || this.defaultWidth || ''
       };
     }
-  },
-  created() {
-    console.log(this.fontWeight);
   }
 };

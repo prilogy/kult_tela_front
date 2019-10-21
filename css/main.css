@@ -1,10 +1,28 @@
 :root {
   --grey-base: #1d1d22;
-  --grey-light1: #5c5c5f;
-  --grey-light2: #bebebf;
-  --yellow-base: #eef36a;
+  --grey-light1: #383840;
+  --grey-light2: #5c5c5f;
+  --grey-light3: #bebebf;
+
+  --yellow-base: #eff621;
   --yellow-trans1: #eef36ab3;
+
   --white-base: #ffffff;
+}
+
+body {
+  --h1-fs: 40px;
+  --h2-fs: 32px;
+  --h3-fs: 24px;
+  --p-fs: 16px;
+  --caption-fs: 14px;
+
+  --body-max-width: 1280px;
+  --space: 20px;
+  --space-half: calc(var(--space) / 2);
+  --space-third: calc(var(--space) / 3);
+
+  --navbar-height: 60px;
 }
 
 * {

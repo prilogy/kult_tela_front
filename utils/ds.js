@@ -55,7 +55,7 @@ let colors = {};
 
 cssVars.forEach(vname => {
   const cname = vname.slice(2).split('-');
-  if (!colors[cname[0]]) colors[cname[0]] = new Object();
+  if (!colors[cname[0]]) colors[cname[0]] = {};
   colors[cname[0]][cname[1]] = _c(vname);
 });
 

@@ -1,0 +1,37 @@
+export default {
+  props: {
+    mt: String,
+    mb: String,
+    ml: String,
+    mr: String,
+    mx: String,
+    my: String,
+    ma: String,
+
+    pt: String,
+    pb: String,
+    pl: String,
+    pr: String,
+    px: String,
+    py: String,
+    pa: String
+  },
+  computed: {
+    indents() {
+      const v = this;
+      return {
+        margin: v.ma || v.my + ' ' + v.mx || '',
+        marginTop: v.mt || '',
+        marginBottom: v.mb || '',
+        marginLeft: v.ml || '',
+        marginRight: v.mr || '',
+
+        padding: v.ma || v.my + ' ' + v.mx || '',
+        paddingTop: v.mt || '',
+        paddingBottom: v.mb || '',
+        paddingLeft: v.ml || '',
+        paddingRight: v.mr || ''
+      };
+    }
+  }
+};

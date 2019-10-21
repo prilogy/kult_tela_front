@@ -1,5 +1,5 @@
 <template>
-  <h2 class="h2" :style="style">
+  <h2 class="h2" :style="typography">
     <slot></slot>
   </h2>
 </template>
@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .h2 {
-  font-size: 32px;
+  font-size: var(--h2-fs);
   font-weight: 500;
   color: var(--yellow-base);
 }
