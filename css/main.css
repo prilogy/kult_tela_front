@@ -1,0 +1,16 @@
+:root {
+  --grey-base: #1d1d22;
+  --grey-light1: #5c5c5f;
+  --grey-light2: #bebebf;
+  --yellow-base: #eef36a;
+  --yellow-trans1: #eef36ab3;
+  --white-base: #ffffff;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-smooth: auto;
+  transition: 0.24s all;
+}

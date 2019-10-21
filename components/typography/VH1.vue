@@ -8,17 +8,14 @@
 import typography from '../../mixins/typography';
 
 export default {
-  mixins: [typography],
-  data() {
-    return {
-        defaultWidth: 600
-    };
-  }
+  mixins: [typography]
 };
 </script>
 
 <style scoped>
 .h1 {
   font-size: 40px;
+  font-weight: 600;
+  color: var(--yellow-base);
 }
 </style>

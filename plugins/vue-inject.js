@@ -1,4 +1,4 @@
-import ds from '../utils/ds'
-import Vue from 'vue'
+import ds from "../utils/ds";
+import Vue from "vue";
 
-Vue.prototype.$ds = ds
+Vue.prototype.$ds = ds;

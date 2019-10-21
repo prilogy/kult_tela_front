@@ -20,18 +20,50 @@ const hexOpacity = {
   10: '1A',
   5: '0D',
   0: '00'
-}
+};
+
+const cssVars = Array.from(document.styleSheets)
+  .filter(
+    sheet =>
+      sheet.href === null || sheet.href.startsWith(window.location.origin)
+  )
+  .reduce(
+    (acc, sheet) =>
+      (acc = [
+        ...acc,
+        ...Array.from(sheet.cssRules).reduce(
+          (def, rule) =>
+            (def =
+              rule.selectorText === ':root'
+                ? [
+                    ...def,
+                    ...Array.from(rule.style).filter(name =>
+                      name.startsWith('--')
+                    )
+                  ]
+                : def),
+          []
+        )
+      ]),
+    []
+  );
+
+const _c = name =>
+  getComputedStyle(document.documentElement).getPropertyValue(name);
+
+let colors = {};
+
+cssVars.forEach(vname => {
+  const cname = vname.slice(2).split('-');
+  if (!colors[cname[0]]) colors[cname[0]] = new Object();
+  colors[cname[0]][cname[1]] = _c(vname);
+});
 
 const ds = {
-  colors: {
-    grey: { base: '#1D1D22', light1: '#5C5C5F', light2: '#BEBEBF' },
-    yellow: { base: '#EEF36A', trans1: '#EEF36AB3' },
-    white: { base: '#FFFFFF' },
-    ylw: 'red'
-  },
+  colors,
   withOpacity(color, opacity) {
-    return color + hexOpacity[opacity]
+    return color + hexOpacity[opacity];
   }
-}
+};
 
-export default ds
+export default ds;
