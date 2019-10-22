@@ -1,6 +1,6 @@
 <template>
   <button :style="indents" :class="{ button: true, 'button--w100': w100 }">
-    <VH3>
+    <VH3 :weight="weight">
       <slot></slot>
     </VH3>
   </button>
@@ -12,7 +12,8 @@ import indents from '../../mixins/indents';
 
 export default {
   props: {
-    w100: Boolean
+    w100: Boolean,
+    weight: String
   },
   components: { VH3 },
   mixins: [indents]
@@ -30,9 +31,9 @@ export default {
 }
 
 .button:active,
+.button:hover,
 .button:focus {
-  background: var(--grey-base);
-  box-shadow: 0 0 0 inset var(--yellow-base);
+  background: var(--yellow-trans1);
 }
 
 .button h3 {

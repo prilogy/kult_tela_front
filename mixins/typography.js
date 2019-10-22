@@ -2,6 +2,7 @@ const WEIGHTS = {
   bold: 600,
   medium: 500,
   regular: 400,
+  normal: 400,
   light: 300,
   600: 600,
   500: 500,

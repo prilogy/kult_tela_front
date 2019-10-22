@@ -26,11 +26,11 @@ export default {
         marginLeft: v.ml || '',
         marginRight: v.mr || '',
 
-        padding: v.ma || v.my + ' ' + v.mx || '',
-        paddingTop: v.mt || '',
-        paddingBottom: v.mb || '',
-        paddingLeft: v.ml || '',
-        paddingRight: v.mr || ''
+        padding: v.pa || (v.py + ' ' + v.px || ''),
+        paddingTop: v.pt || '',
+        paddingBottom: v.pb || '',
+        paddingLeft: v.pl || '',
+        paddingRight: v.pr || ''
       };
     }
   }
