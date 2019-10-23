@@ -1,5 +1,9 @@
 <template>
-  <button :style="indents" :class="{ button: true, 'button--w100': w100 }">
+  <button
+    @click="$emit('click')"
+    :style="indents"
+    :class="{ button: true, 'button--w100': w100 }"
+  >
     <VH3 :weight="weight">
       <slot></slot>
     </VH3>

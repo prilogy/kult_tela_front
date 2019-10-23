@@ -8,6 +8,8 @@ import VNav from './ui/VNav';
 import VFooter from './ui/VFooter';
 import VButton from './ui/VButton';
 
+import VError from './utils/VError';
+
 export {
   /*
    * TYPOGRAPHY
@@ -22,5 +24,9 @@ export {
    */
   VNav,
   VFooter,
-  VButton
+  VButton,
+  /**
+   * USTILITIES
+   */
+  VError
 };

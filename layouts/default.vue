@@ -4,16 +4,18 @@
     <main>
       <nuxt />
     </main>
+    <VError></VError>
     <!--    <VFooter></VFooter>-->
   </div>
 </template>
 
 <script>
-import { VNav, VFooter } from '~/components';
+import { VNav, VFooter, VError } from '~/components';
 export default {
   components: {
     VNav,
-    VFooter
+    VFooter,
+    VError
   }
 };
 </script>

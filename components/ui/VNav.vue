@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <div class="nav__dropdown" v-if="burgetToggle">
+    <div class="nav__dropdown" v-if="burgerToggle">
       <VH2 v-for="link in dropdownLinks" :key="link.id">{{ link.name }}</VH2>
       <VButton mt="var(--space-half)" w100>Добавить на рабочий стол</VButton>
     </div>
@@ -9,7 +9,7 @@
       <n-link v-for="link in links" :key="link.id" to="/">
         <div class="icon"></div>
       </n-link>
-      <button @click="burgetToggle = !burgetToggle">
+      <button @click="burgerToggle = !burgerToggle">
         <svg
           width="35"
           height="35"
@@ -17,7 +17,7 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            :fill="burgetToggle ? $ds.colors.yellow.base : $ds.colors.grey.base"
+            :fill="burgerToggle ? $ds.colors.yellow.base : $ds.colors.grey.base"
             d="M0 0h35v7H0zM0 14h35v7H0zM0 28h35v7H0z"
           />
         </svg>
@@ -29,12 +29,13 @@
 <script>
 import VH2 from '../typography/VH2';
 import VButton from './VButton';
+import { mapActions } from 'vuex';
 
 export default {
   components: { VH2, VButton },
   data() {
     return {
-      burgetToggle: false,
+      burgerToggle: false,
       links: [
         { id: 0, name: 'Моё питание', icon: '' },
         { id: 1, name: 'Топ 100', icon: '' },
@@ -50,6 +51,9 @@ export default {
         { id: 5, name: 'Выйти из аккаунта' }
       ]
     };
+  },
+  methods: {
+    ...mapActions(['SET_ERROR'])
   }
 };
 </script>
