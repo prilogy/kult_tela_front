@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/vue-inject.js'],
+  plugins: ['~/plugins/vue-inject.js', '~/plugins/axios.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -41,12 +41,17 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'nuxt-client-init-module'
   ],
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
+  env: {
+    API_URL: process.env.API_URL || 'http://localhost:3001/'
+  },
   axios: {},
   /*
    ** Build configuration
@@ -57,4 +62,4 @@ export default {
      */
     extend(config, ctx) {}
   }
-};
+}

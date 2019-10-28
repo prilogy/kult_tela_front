@@ -2,7 +2,7 @@
   <nav class="nav">
     <div class="nav__dropdown" v-if="burgerToggle">
       <VH2 v-for="link in dropdownLinks" :key="link.id">{{ link.name }}</VH2>
-      <VButton mt="var(--space-half)" w100>Добавить на рабочий стол</VButton>
+      <VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>
     </div>
 
     <div class="nav__icons">
@@ -29,10 +29,10 @@
 <script>
 import VH2 from '../typography/VH2';
 import VButton from './VButton';
-import { mapActions } from 'vuex';
+import VPWAPrompt from '../utils/VPWAPrompt';
 
 export default {
-  components: { VH2, VButton },
+  components: { VH2, VButton, VPWAPrompt },
   data() {
     return {
       burgerToggle: false,
@@ -49,11 +49,17 @@ export default {
         { id: 3, name: 'Связь с поддержкой' },
         { id: 4, name: 'Общий чат' },
         { id: 5, name: 'Выйти из аккаунта' }
-      ]
+      ],
+      isPWAInstalled: false
     };
   },
-  methods: {
-    ...mapActions(['SET_ERROR'])
+  created() {
+    if (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true
+    ) {
+      this.isPWAInstalled = true;
+    }
   }
 };
 </script>

@@ -11,36 +11,73 @@
         </div>
       </div>
       <div class="login-form__middle">
-        <input
-          class="login-form__middle__input"
-          type="text"
-          placeholder="Логин"
-        />
-        <input
-          class="login-form__middle__input"
-          type="password"
-          placeholder="Пароль"
-        />
+        <form id="login-form" @submit.prevent="doLogin">
+          <VInput
+            type="text"
+            autocomplete="username"
+            placeholder="Логин"
+            required
+            v-model="login"
+          />
+          <VInput
+            class="login-form__middle__input"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Пароль"
+            required
+            v-model="password"
+          />
+        </form>
       </div>
       <div class="login-form__bottom">
         <VP class="login-form__bottom__caption">Забыли пароль?</VP>
-        <VButton weight="regular" pa="var(--space-half)">Войти</VButton>
+        <VButton
+          type="submit"
+          form="login-form"
+          weight="regular"
+          pa="var(--space-half)"
+          value="submit"
+        >
+          Войти
+        </VButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { VH3, VH1, VButton, VP } from '../components';
+import { VH3, VH1, VButton, VP, VInput } from '../components'
+import { mapActions } from 'vuex'
 
 export default {
+  layout: 'noNav',
   components: {
+    VInput,
     VH3,
     VH1,
     VButton,
     VP
+  },
+  data() {
+    return {
+      login: '',
+      password: ''
+    }
+  },
+  methods: {
+    doLogin(e) {
+      const user = {
+        email: this.login,
+        password: this.password
+      }
+
+      this.LOGIN(user)
+    },
+    ...mapActions({
+      LOGIN: 'auth/LOGIN'
+    })
   }
-};
+}
 </script>
 
 <style scoped>
@@ -70,22 +107,7 @@ export default {
   margin: var(--space-half) 0;
 }
 
-.login-form__middle__input {
-  background: var(--grey-light2);
-  width: 100%;
-  font-size: var(--h3-fs);
-  color: var(--grey-light3);
-  padding: var(--space-third) var(--space-half);
-  box-sizing: border-box;
-}
-
-.login-form__middle__input:active,
-.login-form__middle__input:focus {
-  background: var(--yellow-trans2);
-  color: var(--yellow-base);
-}
-
-.login-form__middle__input:first-child {
+.login-form input:first-child {
   margin-bottom: var(--space-half);
 }
 

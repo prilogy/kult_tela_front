@@ -1,22 +1,11 @@
-import Vuex from 'vuex';
-import error from './error';
+import axios from 'axios'
 
-const modules = {
-  error
-};
-
-const state = {};
-const getters = {};
-const mutations = {};
-const actions = {};
-
-const store = () =>
-  new Vuex.Store({
-    modules,
-    state,
-    getters,
-    mutations,
-    actions
-  });
-
-export default store;
+export const actions = {
+  async nuxtClientInit({ commit, dispatch }, { req, redirect }) {
+    const { data } = await axios.get('/users', {
+      baseURL: process.env.API_URL,
+      headers: { token: localStorage.getItem('token') }
+    })
+    if (data.success) await commit('auth/SET_USER', data.data.user)
+  }
+}

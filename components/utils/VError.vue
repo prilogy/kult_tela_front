@@ -1,14 +1,14 @@
 <template>
   <transition name="showup">
-    <div class="error" v-if="GET_ERROR">
-      <VP class="error__text">{{ GET_ERROR }}</VP>
+    <div class="error" v-if="ERROR">
+      <VP class="error__text">{{ ERROR }}</VP>
     </div>
   </transition>
 </template>
 
 <script>
-import { VError, VP } from '../';
-import { mapGetters } from 'vuex';
+import { VError, VP } from '../'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -16,9 +16,11 @@ export default {
     VP
   },
   computed: {
-    ...mapGetters(['GET_ERROR'])
+    ...mapGetters({
+      ERROR: 'error/GET_ERROR'
+    })
   }
-};
+}
 </script>
 
 <style scoped>
@@ -41,13 +43,14 @@ export default {
   margin: 0 auto;
   bottom: var(--space-half);
   right: 0;
+  box-shadow: 0 0 15px var(--red-base);
   left: 0;
-  //animation: error-showup 0.5s;
 }
 
 .error__text {
   color: var(--white-base);
-  font-weight: normal;
+  font-weight: lighter;
   text-align: center;
+  font-size: 20px;
 }
 </style>

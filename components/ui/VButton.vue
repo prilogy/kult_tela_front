@@ -37,7 +37,8 @@ export default {
 .button:active,
 .button:hover,
 .button:focus {
-  background: var(--yellow-trans1);
+  box-shadow: 0 3px 0 var(--yellow-trans1);
+  transform: translateY(-3px);
 }
 
 .button h3 {

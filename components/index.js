@@ -7,8 +7,10 @@ import VCaption from './typography/VCaption';
 import VNav from './ui/VNav';
 import VFooter from './ui/VFooter';
 import VButton from './ui/VButton';
+import VInput from './ui/VInput';
 
 import VError from './utils/VError';
+import VPWAPrompt from './utils/VPWAPrompt';
 
 export {
   /*
@@ -25,8 +27,10 @@ export {
   VNav,
   VFooter,
   VButton,
+  VInput,
   /**
    * USTILITIES
    */
-  VError
+  VError,
+  VPWAPrompt
 };
