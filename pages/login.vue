@@ -107,7 +107,7 @@ export default {
   margin: var(--space-half) 0;
 }
 
-.login-form input:first-child {
+.login-form div:first-child {
   margin-bottom: var(--space-half);
 }
 

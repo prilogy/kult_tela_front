@@ -13,6 +13,7 @@ export const mutations = {
     state.user = null
     state.isAuthenticated = false
     state.token = null
+    localStorage.removeItem('token')
   },
   SET_TOKEN(state, payload) {
     state.token = payload
@@ -32,22 +33,13 @@ export const actions = {
     } catch (error) {}
   },
   async AUTO_LOGIN({ commit, dispatch }) {
-    /*console.log('sdsds')
-    try {
-      const result = await this.$axios.$post('/users', {
-        email: 'sds',
-        password: 'asds'
-      })
-      console.log(result)
-      if (result.success) {
-        commit('SET_USER', result.data.user)
-        this.$router.push('/')
-      }
-    } catch (error) {}*/
     this.$router.push('/')
   },
   REGISTER({ commit }, { login, password }) {},
-  LOGOUT({ commit }) {}
+  LOGOUT({ commit }) {
+    commit('UNSET_USER')
+    $nuxt.$router.push('/login')
+  }
 }
 
 export const getters = {

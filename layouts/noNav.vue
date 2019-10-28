@@ -9,13 +9,16 @@
 </template>
 
 <script>
-import { VFooter, VError } from '~/components';
+import { VFooter, VError } from '~/components'
 export default {
+  middleware({ store, redirect }) {
+    if (store.state.auth.isAuthenticated) return redirect('/')
+  },
   components: {
     VFooter,
     VError
   }
-};
+}
 </script>
 
 <style>

@@ -1,8 +1,15 @@
 <template>
   <nav class="nav">
     <div class="nav__dropdown" v-if="burgerToggle">
-      <VH2 v-for="link in dropdownLinks" :key="link.id">{{ link.name }}</VH2>
-      <VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>
+      <button
+        @click="() => link.action()"
+        v-for="link in dropdownLinks"
+        :key="link.id"
+      >
+        <VH2>{{ link.name }}</VH2>
+      </button>
+
+      <!--<VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>-->
     </div>
 
     <div class="nav__icons">
@@ -27,9 +34,10 @@
 </template>
 
 <script>
-import VH2 from '../typography/VH2';
-import VButton from './VButton';
-import VPWAPrompt from '../utils/VPWAPrompt';
+import VH2 from '../typography/VH2'
+import VButton from './VButton'
+import VPWAPrompt from '../utils/VPWAPrompt'
+import { mapActions } from 'vuex'
 
 export default {
   components: { VH2, VButton, VPWAPrompt },
@@ -48,20 +56,25 @@ export default {
         { id: 2, name: 'Калькулятор каллорий' },
         { id: 3, name: 'Связь с поддержкой' },
         { id: 4, name: 'Общий чат' },
-        { id: 5, name: 'Выйти из аккаунта' }
+        { id: 5, name: 'Выйти из аккаунта', action: () => this.LOGOUT() }
       ],
       isPWAInstalled: false
-    };
+    }
+  },
+  methods: {
+    ...mapActions({
+      LOGOUT: 'auth/LOGOUT'
+    })
   },
   created() {
     if (
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true
     ) {
-      this.isPWAInstalled = true;
+      this.isPWAInstalled = true
     }
   }
-};
+}
 </script>
 
 <style scoped>

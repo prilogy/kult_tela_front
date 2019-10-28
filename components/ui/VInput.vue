@@ -1,21 +1,33 @@
 <template>
-  <input class="input" v-model="content" @input="handleInput" />
+  <div>
+    <VH3 weight="regular" mb="var(--space-half)" v-if="caption">{{
+      caption
+    }}</VH3>
+    <input
+      v-bind="$attrs"
+      class="input"
+      v-model="content"
+      @input="handleInput"
+    />
+  </div>
 </template>
 
 <script>
+import VH3 from '../typography/VH3'
 export default {
-  props: ['value'],
+  components: { VH3 },
+  props: ['value', 'caption'],
   data() {
     return {
       content: this.value
-    };
+    }
   },
   methods: {
     handleInput(e) {
-      this.$emit('input', this.content);
+      this.$emit('input', this.content)
     }
   }
-};
+}
 </script>
 
 <style scoped>
