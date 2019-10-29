@@ -51,6 +51,7 @@ import { mapActions } from 'vuex'
 
 export default {
   layout: 'noNav',
+  middleware: 'auth',
   components: {
     VInput,
     VH3,

@@ -86,6 +86,9 @@ export default {
 }
 
 .nav__dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   animation: dropdown-showup 0.5s;
   background: var(--grey-light1);
   padding: var(--space);

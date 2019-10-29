@@ -10,14 +10,15 @@
 </template>
 
 <script>
-import { VNav, VFooter, VError } from '~/components';
+import { VNav, VFooter, VError } from '~/components'
 export default {
+  middleware: 'notAuth',
   components: {
     VNav,
     VFooter,
     VError
   }
-};
+}
 </script>
 
 <style>

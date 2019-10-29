@@ -1,4 +1,4 @@
-import ds from '../utils/ds'
+import ds from '@/services/Colors.js'
 import Vue from 'vue'
 
 Vue.prototype.$ds = ds

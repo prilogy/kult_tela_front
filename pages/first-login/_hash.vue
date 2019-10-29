@@ -126,7 +126,7 @@ export default {
         form.append('avatar_src', this.avatar_src)
 
         try {
-          const result = await this.$axios.$post('/auth-signup/fill', form)
+          const result = await this.$api.Auth.fillInfo(form)
           if (result.success === true) {
             this.popup = true
           }
@@ -190,7 +190,7 @@ export default {
   async created() {
     const hash = this.$route.params.hash
     try {
-      const result = await this.$axios.$post('/auth-signup', { hash })
+      const result = await this.$api.Auth.isFillAllowed({ hash })
       this.email = result.data.email
     } catch (error) {
       this.redirectToLogin()

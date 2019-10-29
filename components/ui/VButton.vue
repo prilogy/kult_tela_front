@@ -1,7 +1,7 @@
 <template>
   <button
     @click="$emit('click')"
-    :style="indents"
+    :style="{ ...indents, ...buttonStyle }"
     :disabled="disabled"
     :class="{
       button: true,
@@ -9,7 +9,7 @@
       'button--disabled': disabled
     }"
   >
-    <VH3 :weight="weight">
+    <VH3 :weight="weight" :color="color">
       <slot></slot>
     </VH3>
   </button>
@@ -23,10 +23,19 @@ export default {
   props: {
     w100: Boolean,
     weight: String,
-    disabled: Boolean
+    disabled: Boolean,
+    bg: String,
+    color: String
   },
   components: { VH3 },
-  mixins: [indents]
+  mixins: [indents],
+  computed: {
+    buttonStyle() {
+      return {
+        background: this.bg
+      }
+    }
+  }
 }
 </script>
 

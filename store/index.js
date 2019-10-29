@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const actions = {
-  async nuxtClientInit({ commit, dispatch }) {
+  async nuxtClientInit({ commit }) {
     const token = localStorage.getItem('token')
     if (token) {
       const { data } = await axios.get('/auth', {

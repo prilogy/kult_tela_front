@@ -1,15 +1,16 @@
 <template>
-  <h1 class="h1" :style="typography">
+  <h1 class="h1" :style="{ ...typography, ...indents }">
     <slot></slot>
   </h1>
 </template>
 
 <script>
-import typography from '../../mixins/typography';
+import typography from '../../mixins/typography'
+import indents from '../../mixins/indents'
 
 export default {
-  mixins: [typography]
-};
+  mixins: [typography, indents]
+}
 </script>
 
 <style scoped>

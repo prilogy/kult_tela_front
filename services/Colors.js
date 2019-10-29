@@ -20,7 +20,7 @@ const hexOpacity = {
   10: '1A',
   5: '0D',
   0: '00'
-};
+}
 
 const cssVars = Array.from(document.styleSheets)
   .filter(
@@ -46,24 +46,27 @@ const cssVars = Array.from(document.styleSheets)
         )
       ]),
     []
-  );
+  )
 
 const _c = name =>
-  getComputedStyle(document.documentElement).getPropertyValue(name);
+  getComputedStyle(document.documentElement).getPropertyValue(name)
 
-let colors = {};
+let colors = {}
 
 cssVars.forEach(vname => {
-  const cname = vname.slice(2).split('-');
-  if (!colors[cname[0]]) colors[cname[0]] = {};
-  colors[cname[0]][cname[1]] = _c(vname);
-});
+  const cname = vname.slice(2).split('-')
+  if (!colors[cname[0]]) colors[cname[0]] = {}
+  colors[cname[0]][cname[1]] = _c(vname)
+})
 
-const ds = {
+const clrs = {
   colors,
   withOpacity(color, opacity) {
-    return color + hexOpacity[opacity];
+    return color + hexOpacity[opacity]
+  },
+  getHexOpacity(value) {
+    return hexOpacity[value]
   }
-};
+}
 
-export default ds;
+export default clrs

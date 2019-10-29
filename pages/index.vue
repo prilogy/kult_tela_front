@@ -12,7 +12,7 @@
 import { VH1, VH2, VH3, VP, VCaption } from '../components'
 
 export default {
-  middleware: 'auth',
+  middleware: 'notAuth',
   components: { VH1, VH2, VH3, VP, VCaption }
 }
 </script>

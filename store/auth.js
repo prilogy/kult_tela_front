@@ -24,7 +24,7 @@ export const mutations = {
 export const actions = {
   async LOGIN({ commit, dispatch }, { email, password }) {
     try {
-      const result = await this.$axios.$post('/auth', { email, password })
+      const result = await this.$api.Auth.login({ email, password })
       if (result.success) {
         commit('SET_USER', result.data.user)
         commit('SET_TOKEN', result.data.token)
@@ -32,10 +32,6 @@ export const actions = {
       }
     } catch (error) {}
   },
-  async AUTO_LOGIN({ commit, dispatch }) {
-    this.$router.push('/')
-  },
-  REGISTER({ commit }, { login, password }) {},
   LOGOUT({ commit }) {
     commit('UNSET_USER')
     $nuxt.$router.push('/login')
