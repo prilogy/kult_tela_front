@@ -24,17 +24,6 @@ export default {
 </script>
 
 <style scoped>
-.showup-enter-active,
-.showup-leave-active {
-  transform: translateY(0);
-  transition: all 0.5s;
-}
-.showup-enter,
-.showup-leave-to {
-  transform: translateY(50px);
-  opacity: 0;
-}
-
 .error {
   background: var(--red-base);
   position: fixed;

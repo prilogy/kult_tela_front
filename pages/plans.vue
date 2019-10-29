@@ -1,19 +1,28 @@
 <template>
   <div>
-    <div v-if="planToBuy">
-      <VPlanCard class="plan--opened" :plan="planToBuy"></VPlanCard>
-    </div>
-    <div>
-      <VH1 mb="var(--space)">Доступные планы</VH1>
-      <div class="plans" v-if="plans">
+    <transition name="showup--reversed">
+      <div v-if="planToBuy">
         <VPlanCard
-          @buy="handleBuy"
-          v-for="plan in plans"
-          :key="plan.id"
-          :plan="plan"
+          btnText="Выбрать другой"
+          @btnClick="planToBuy = null"
+          class="plan--opened"
+          :plan="planToBuy"
         ></VPlanCard>
       </div>
-    </div>
+    </transition>
+    <transition name="showup">
+      <div v-if="!planToBuy">
+        <VH1 mb="var(--space)">Доступные планы</VH1>
+        <div class="plans" v-if="plans">
+          <VPlanCard
+            @btnClick="handleBuy"
+            v-for="plan in plans"
+            :key="plan.id"
+            :plan="plan"
+          ></VPlanCard>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -30,13 +39,13 @@ export default {
   },
   methods: {
     handleBuy(id) {
-      console.log(id)
+      const plan = this.plans.filter(plan => plan.id === id)[0]
+      this.planToBuy = plan
     }
   },
   async created() {
     const { data: plans } = await this.$api.Plans.getAll()
     this.plans = plans
-    console.log(plans)
   }
 }
 </script>
@@ -47,10 +56,6 @@ export default {
 }
 
 .plan--opened {
-  position: fixed;
-  top: var(--space);
-  right: var(--space);
-  left: var(--space);
 }
 
 .plans > div:last-child {

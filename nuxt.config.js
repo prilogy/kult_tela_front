@@ -26,7 +26,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/css/main.css', '~/css/reset.css', '~/css/fonts.css'],
+  css: [
+    '~/css/main.css',
+    '~/css/reset.css',
+    '~/css/fonts.css',
+    '~/css/transitions.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */

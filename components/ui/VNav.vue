@@ -1,17 +1,18 @@
 <template>
   <nav class="nav">
-    <div class="nav__dropdown" v-if="burgerToggle">
-      <button
-        @click="() => link.action()"
-        v-for="link in dropdownLinks"
-        :key="link.id"
-      >
-        <VH2>{{ link.name }}</VH2>
-      </button>
+    <transition name="showup">
+      <div class="nav__dropdown" v-if="burgerToggle">
+        <button
+          @click="() => link.action()"
+          v-for="link in dropdownLinks"
+          :key="link.id"
+        >
+          <VH2>{{ link.name }}</VH2>
+        </button>
 
-      <!--<VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>-->
-    </div>
-
+        <!--<VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>-->
+      </div>
+    </transition>
     <div class="nav__icons">
       <n-link v-for="link in links" :key="link.id" to="/">
         <div class="icon"></div>
@@ -89,21 +90,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  animation: dropdown-showup 0.5s;
   background: var(--grey-light1);
   padding: var(--space);
-}
-
-@keyframes dropdown-showup {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .nav__dropdown h2 {

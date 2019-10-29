@@ -18,7 +18,7 @@
         color="var(--white-base)"
         :bg="colors[100]"
         @click="handleButton"
-        >Купить план</VButton
+        >{{ btnText || 'Купить план' }}</VButton
       >
     </div>
   </div>
@@ -31,11 +31,12 @@ import VButton from './VButton'
 export default {
   components: { VButton, VP, VH2 },
   props: {
-    plan: Object
+    plan: Object,
+    btnText: String
   },
   methods: {
     handleButton() {
-      this.$emit('buy', this.plan.id)
+      this.$emit('btnClick', this.plan.id)
     }
   },
   computed: {
