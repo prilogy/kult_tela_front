@@ -10,7 +10,7 @@
         required
         type="number"
         caption="Текущий вес"
-        v-model="weight"
+        v-model="weight_start"
       ></VInput>
 
       <VInput required type="text" caption="Пароль" v-model="password"></VInput>
@@ -32,7 +32,7 @@
         @change="handleFile"
       />
       <VButton mt="var(--space-half)" w100 @click="$refs.avatarInput.click()">{{
-        !avatar ? 'Загрузить фото' : 'Загрузить другое фото'
+        !avatar_src ? 'Загрузить фото' : 'Загрузить другое фото'
       }}</VButton>
     </form>
     <VButton
@@ -71,8 +71,8 @@ export default {
       first_name: 'sds',
       last_name: 'sdsd',
       patronymic: 'sdsd',
-      weight: '23',
-      avatar: null,
+      weight_start: '23',
+      avatar_src: null,
       password: 'asd',
       password_verify: 'asd'
     }
@@ -80,7 +80,7 @@ export default {
   methods: {
     sendForm() {},
     handleFile(e) {
-      this.avatar = e.target.files[0] || e.dataTransfer.files[0] || null
+      this.avatar_src = e.target.files[0] || e.dataTransfer.files[0] || null
     }
   },
   computed: {
@@ -92,11 +92,11 @@ export default {
         !this.first_name ||
         !this.last_name ||
         !this.patronymic ||
-        !this.weight ||
+        !this.weight_start ||
         !this.password ||
         !this.password_verify ||
         this.password !== this.password_verify ||
-        !this.avatar
+        !this.avatar_src
       )
     },
     passwordsValidate() {

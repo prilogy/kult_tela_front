@@ -5,6 +5,8 @@ export default function({ $axios, store }) {
   })
 
   $axios.onError(error => {
-    store.dispatch('error/SET_ERROR', error.response.data.error)
+    if (!error.response)
+      store.dispatch('error/SET_ERROR', 'Отсутствует подключение к серверу')
+    else store.dispatch('error/SET_ERROR', error.response.data.error)
   })
 }
