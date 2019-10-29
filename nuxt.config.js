@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/vue-inject.js', '~/plugins/axios.js'],
+  plugins: ['~/plugins/ds.js', '~/plugins/axios.js', '~/plugins/api.js'],
   /*
    ** Nuxt.js dev-modules
    */

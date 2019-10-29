@@ -4,7 +4,7 @@ export const actions = {
   async nuxtClientInit({ commit, dispatch }) {
     const token = localStorage.getItem('token')
     if (token) {
-      const { data } = await axios.get('/users', {
+      const { data } = await axios.get('/auth', {
         baseURL: process.env.API_URL,
         headers: { token }
       })

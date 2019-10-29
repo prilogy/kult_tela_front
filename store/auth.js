@@ -24,7 +24,7 @@ export const mutations = {
 export const actions = {
   async LOGIN({ commit, dispatch }, { email, password }) {
     try {
-      const result = await this.$axios.$post('/users', { email, password })
+      const result = await this.$axios.$post('/auth', { email, password })
       if (result.success) {
         commit('SET_USER', result.data.user)
         commit('SET_TOKEN', result.data.token)
