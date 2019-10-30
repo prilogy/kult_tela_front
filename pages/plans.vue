@@ -28,6 +28,7 @@
 
 <script>
 import { VH1, VPlanCard } from '../components/'
+
 export default {
   layout: 'noNav',
   components: { VPlanCard, VH1 },
@@ -39,13 +40,12 @@ export default {
   },
   methods: {
     handleBuy(id) {
-      const plan = this.plans.filter(plan => plan.id === id)[0]
-      this.planToBuy = plan
+      this.planToBuy = this.plans.filter(plan => plan.id === id)[0]
     }
   },
-  async created() {
-    const { data: plans } = await this.$api.Plans.getAll()
-    this.plans = plans
+  async asyncData(ctx) {
+    const { data: plans } = await ctx.app.$api.Plans.getAll()
+    return { plans }
   }
 }
 </script>

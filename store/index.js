@@ -1,15 +1,17 @@
-import axios from 'axios'
-
 export const actions = {
-  async nuxtClientInit({ commit }) {
-    const token = localStorage.getItem('token')
+  async nuxtClientInit({ commit, getters, dispatch }, ctx) {
+    const token = getters['auth/GET_TOKEN']
     if (token) {
-      const { data } = await axios.get('/auth', {
-        baseURL: process.env.API_URL,
-        headers: { token }
-      })
-      if (data.success) {
-        await commit('auth/SET_USER', data.data.user)
+      try {
+        const { data } = await ctx.app.$api.Auth.tokenAuth()
+        await commit('auth/SET_USER', data.user)
+      } catch (err) {
+        if (!err.response) {
+          dispatch(
+            'error/SET_ERROR',
+            'Отсутствует подключение к серверу, попробуйте позднее'
+          )
+        } else dispatch('auth/LOGOUT')
       }
     }
   }

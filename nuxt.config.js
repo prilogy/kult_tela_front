@@ -35,7 +35,12 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/ds.js', '~/plugins/axios.js', '~/plugins/api.js'],
+  plugins: [
+    '~/plugins/ds.js',
+    '~/plugins/axios.js',
+    '~/plugins/api.js',
+    '~/plugins/nuxt-client-init.client.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -46,8 +51,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    'nuxt-client-init-module'
+    '@nuxtjs/pwa'
+    //'nuxt-client-init-module'
   ],
 
   /*
