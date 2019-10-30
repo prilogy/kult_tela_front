@@ -15,7 +15,9 @@
     </transition>
     <div class="nav__icons">
       <n-link v-for="link in links" :key="link.id" to="/">
-        <div class="icon"></div>
+        <nuxt-link :to="link.url || ''">
+          <div class="icon"></div>
+        </nuxt-link>
       </n-link>
       <button @click="burgerToggle = !burgerToggle">
         <svg
@@ -46,10 +48,10 @@ export default {
     return {
       burgerToggle: false,
       links: [
-        { id: 0, name: 'Моё питание', icon: '' },
-        { id: 1, name: 'Топ 100', icon: '' },
-        { id: 2, name: 'Профиль', icon: '' },
-        { id: 3, name: 'Тренировка', icon: '' }
+        { id: 0, name: 'Профиль', icon: '', url: '/profile' },
+        { id: 1, name: 'Тренировка', icon: '' },
+        { id: 2, name: 'Моё питание', icon: '' },
+        { id: 3, name: 'Топ 100', icon: '' }
       ],
       dropdownLinks: [
         { id: 0, name: 'Оповещения' },

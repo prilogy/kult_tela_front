@@ -8,7 +8,9 @@ export const actions = {
         baseURL: process.env.API_URL,
         headers: { token }
       })
-      if (data.success) await commit('auth/SET_USER', data.data.user)
+      if (data.success) {
+        await commit('auth/SET_USER', data.data.user)
+      }
     }
   }
 }
