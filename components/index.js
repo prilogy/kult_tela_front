@@ -11,6 +11,7 @@ import VInput from './ui/VInput'
 import VPlanCard from './ui/VPlanCard'
 
 import VError from './utils/VError'
+import VSuccess from './utils/VSuccess'
 import VPWAPrompt from './utils/VPWAPrompt'
 
 export {
@@ -34,5 +35,6 @@ export {
    * USTILITIES
    */
   VError,
+  VSuccess,
   VPWAPrompt
 }

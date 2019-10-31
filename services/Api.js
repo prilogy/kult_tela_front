@@ -12,6 +12,10 @@ export default function(ctx) {
     fillInfo: data => axios.$post('/auth-signup/fill', data)
   }
 
+  this.User = {
+    updateWeight: data => axios.$post('/user/update-weight', data)
+  }
+
   this.Plans = {
     getAll: () => axios.$get('/plans')
   }

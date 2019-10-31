@@ -5,15 +5,16 @@ export const state = () => ({
 export const mutations = {
   SET_USER(state, payload) {
     let user = payload
-    if (!user.avatar_src.includes('http://'))
+    if (payload && !user.avatar_src.includes('http://'))
       user.avatar_src = this.$api.getImageLink(user.avatar_src)
     state.user = user
   }
 }
 
 export const actions = {
-  UPDATE_WEIGHT({ commit }, new_weight) {
+  async UPDATE_WEIGHT({ commit }, new_weight) {
     try {
+      const result = await this.$api.User.updateWeight({ new_weight })
     } catch (error) {}
   }
 }

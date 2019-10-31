@@ -5,6 +5,7 @@
     </VH3>
     <input
       v-bind="$attrs"
+      :type="type"
       class="input"
       v-model="content"
       @input="handleInput"
@@ -16,7 +17,7 @@
 import VH3 from '../typography/VH3'
 export default {
   components: { VH3 },
-  props: ['value', 'caption'],
+  props: ['value', 'caption', 'type'],
   data() {
     return {
       content: this.value
@@ -24,7 +25,9 @@ export default {
   },
   methods: {
     handleInput(e) {
-      this.$emit('input', this.content)
+      let content = this.content
+      if (this.type === 'number') content = content.split(',').join('.')
+      this.$emit('input', content)
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <transition name="showup">
-    <div class="error" v-if="ERROR">
-      <VP class="error__text">{{ ERROR }}</VP>
+    <div class="success" v-if="SUCCESS">
+      <VP class="success__text">{{ SUCCESS }}</VP>
     </div>
   </transition>
 </template>
@@ -16,26 +16,26 @@ export default {
   },
   computed: {
     ...mapGetters({
-      ERROR: 'popup/GET_ERROR'
+      SUCCESS: 'popup/GET_SUCCESS'
     })
   }
 }
 </script>
 
 <style scoped>
-.error {
-  background: var(--red-base);
+.success {
+  background: var(--green-base);
   position: fixed;
   padding: var(--space-half);
   width: 90vw;
   margin: 0 auto;
   bottom: var(--space-half);
   right: 0;
-  box-shadow: 0 0 15px var(--red-base);
+  box-shadow: 0 0 15px var(--green-base);
   left: 0;
 }
 
-.error__text {
+.success__text {
   color: var(--white-base);
   font-weight: lighter;
   text-align: center;

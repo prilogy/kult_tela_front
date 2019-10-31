@@ -10,7 +10,7 @@ export default function({ $axios, store, error }) {
         statusCode: 501,
         message: 'Ведутся технические работы, попробуйте заново позднее'
       })
-      store.dispatch('error/SET_ERROR', 'Отсутствует подключение к серверу')
-    } else store.dispatch('error/SET_ERROR', err.response.data.error)
+      store.dispatch('popup/SET_ERROR', 'Отсутствует подключение к серверу')
+    } else store.dispatch('popup/SET_ERROR', err.response.data.error)
   })
 }

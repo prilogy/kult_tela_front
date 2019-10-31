@@ -9,7 +9,6 @@ export const mutations = {
   },
   LOGOUT(state) {
     state.isAuthenticated = false
-    state.user = null
     state.token = null
     localStorage.removeItem('token')
   },
@@ -36,6 +35,7 @@ export const actions = {
   LOGOUT({ commit }) {
     this.$router.push('/login')
     commit('LOGOUT')
+    commit('user/SET_USER', null, { root: true })
   }
 }
 
