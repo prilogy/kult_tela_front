@@ -1,17 +1,13 @@
 export const state = () => ({
   isAuthenticated: false,
-  token: localStorage.getItem('token') || null,
-  user: null
+  token: localStorage.getItem('token') || null
 })
 
 export const mutations = {
-  SET_USER(state, payload) {
-    let user = payload
-    user.avatar_src = this.$api.getImageLink(user.avatar_src)
-    state.user = user
+  SET_AUTHENTICATED(state) {
     state.isAuthenticated = true
   },
-  UNSET_USER(state) {
+  LOGOUT(state) {
     state.isAuthenticated = false
     state.user = null
     state.token = null
@@ -24,12 +20,14 @@ export const mutations = {
 }
 
 export const actions = {
-  async LOGIN({ commit, dispatch }, { email, password }) {
+  async LOGIN({ commit }, { email, password }) {
     try {
       const result = await this.$api.Auth.login({ email, password })
       if (result.success) {
         const { user, token } = result.data
-        commit('SET_USER', user)
+
+        commit('user/SET_USER', user, { root: true })
+        commit('SET_AUTHENTICATED')
         commit('SET_TOKEN', token)
         $nuxt.$router.push('/')
       }
@@ -37,14 +35,11 @@ export const actions = {
   },
   LOGOUT({ commit }) {
     this.$router.push('/login')
-    commit('UNSET_USER')
+    commit('LOGOUT')
   }
 }
 
 export const getters = {
-  GET_USER(state) {
-    return state.user
-  },
   GET_TOKEN(state) {
     return state.token
   }

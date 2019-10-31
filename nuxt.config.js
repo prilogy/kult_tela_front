@@ -1,5 +1,6 @@
 export default {
   mode: 'spa',
+  pageTransition: 'showup',
   /*
    ** Headers of the page
    */

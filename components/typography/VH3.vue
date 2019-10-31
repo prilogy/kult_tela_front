@@ -18,6 +18,6 @@ export default {
   font-size: var(--h3-fs);
   font-weight: 500;
   color: var(--yellow-base);
-  line-height: 1.3;
+  line-height: 1.2;
 }
 </style>

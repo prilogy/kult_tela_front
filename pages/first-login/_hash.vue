@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="popup" v-if="popup">
-      <VH3 weight="regular" mb="var(--space)"
-        >Регистрация прошла успешно, теперь вы можете войти в свой аккаунт через
-        форму входа</VH3
-      >
-      <VButton w100 weight="regular" @click="redirectToLogin"
-        >К форме входа</VButton
-      >
+      <VH3 weight="regular" mb="var(--space)">
+        Регистрация прошла успешно, теперь вы можете войти в свой аккаунт через
+        форму входа
+      </VH3>
+      <VButton w100 weight="regular" @click="redirectToLogin">
+        К форме входа
+      </VButton>
     </div>
     <div v-if="!popup">
       <VH2 mb="var(--space-third)">Заполните данные</VH2>
@@ -18,6 +18,7 @@
         <VInput required caption="Отчество" v-model="patronymic"></VInput>
         <VInput
           required
+          step="0.01"
           type="number"
           caption="Текущий вес"
           v-model="weight_start"
@@ -33,8 +34,9 @@
         <VP
           mb="var(--space-half)"
           :color="passwordLenght ? 'var(--green-base)' : 'var(--red-base)'"
-          >Минимум 6 символов</VP
         >
+          Минимум 6 символов
+        </VP>
         <VInput
           type="password"
           required
@@ -59,14 +61,9 @@
           alt="Image preview"
           :src="image_preview"
         />
-        <VButton
-          mt="var(--space-half)"
-          w100
-          @click="$refs.avatarInput.click()"
-          >{{
-            !avatar_src ? 'Загрузить фото' : 'Загрузить другое фото'
-          }}</VButton
-        >
+        <VButton mt="var(--space-half)" w100 @click="$refs.avatarInput.click()">
+          {{ !avatar_src ? 'Загрузить фото' : 'Загрузить другое фото' }}
+        </VButton>
       </form>
       <VButton
         w100
@@ -82,8 +79,9 @@
       <VP
         v-if="formValidate"
         style="margin-top: var(--space-half) ;text-align: center; color: var(--red-base)"
-        >Форма заполнена неправильно</VP
       >
+        Форма заполнена неправильно
+      </VP>
     </div>
   </div>
 </template>
@@ -121,10 +119,9 @@ export default {
         form.append('first_name', this.first_name)
         form.append('last_name', this.last_name)
         form.append('patronymic', this.patronymic)
-        form.append('weight_start', this.weight_start)
+        form.append('weight_start', this.weight_start.split(',').join('.'))
         form.append('password', this.password)
         form.append('avatar_src', this.avatar_src)
-
         try {
           const result = await this.$api.Auth.fillInfo(form)
           if (result.success === true) {
@@ -187,13 +184,13 @@ export default {
           }
     }
   },
-  async created() {
-    const hash = this.$route.params.hash
+  async asyncData(ctx) {
+    const hash = ctx.params.hash
     try {
-      const result = await this.$api.Auth.isFillAllowed({ hash })
-      this.email = result.data.email
+      const result = await ctx.app.$api.Auth.isFillAllowed({ hash })
+      return { email: result.data.email }
     } catch (error) {
-      this.redirectToLogin()
+      return ctx.redirect('/login')
     }
   }
 }

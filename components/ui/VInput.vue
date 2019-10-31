@@ -1,8 +1,8 @@
 <template>
   <div>
-    <VH3 weight="regular" mb="var(--space-half)" v-if="caption">{{
-      caption
-    }}</VH3>
+    <VH3 weight="regular" v-if="caption">
+      {{ caption }}
+    </VH3>
     <input
       v-bind="$attrs"
       class="input"
@@ -31,6 +31,11 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  margin-bottom: var(--space-third);
+  font-weight: 400;
+}
+
 .input {
   background: var(--grey-light2);
   width: 100%;

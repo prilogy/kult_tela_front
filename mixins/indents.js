@@ -18,9 +18,9 @@ export default {
   },
   computed: {
     indents() {
-      const v = this;
+      const v = this
       return {
-        margin: v.ma || v.my + ' ' + v.mx || '',
+        margin: v.ma || (v.my || v.mx) ? v.my || 0 + ' ' + v.mx || 0 : '',
         marginTop: v.mt || '',
         marginBottom: v.mb || '',
         marginLeft: v.ml || '',
@@ -31,7 +31,7 @@ export default {
         paddingBottom: v.pb || '',
         paddingLeft: v.pl || '',
         paddingRight: v.pr || ''
-      };
+      }
     }
   }
-};
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile" v-if="USER">
     <div class="profile__top">
       <img :src="USER.avatar_src" alt="Avatar" class="profile__top__avatar" />
       <div class="profile__top__info">
@@ -16,7 +16,7 @@ export default {
   components: { VH2 },
   computed: {
     ...mapGetters({
-      USER: 'auth/GET_USER'
+      USER: 'user/GET_USER'
     })
   }
 }
