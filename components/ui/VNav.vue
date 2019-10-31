@@ -16,6 +16,7 @@
     <div class="nav__icons">
       <n-link v-for="link in LINKS.links" :key="link.id" :to="link.url || ''">
         <div
+          @click="hideDropdown"
           :class="{
             nav__icons__icon: true,
             'nav__icons__icon--active': link.id === LINKS.currentLinkId
