@@ -6,12 +6,19 @@
     </main>
     <VError></VError>
     <VSuccess></VSuccess>
+    <VRankNotification></VRankNotification>
     <!--    <VFooter></VFooter>-->
   </div>
 </template>
 
 <script>
-import { VNav, VFooter, VError, VSuccess } from '~/components'
+import {
+  VNav,
+  VFooter,
+  VError,
+  VSuccess,
+  VRankNotification
+} from '~/components'
 import { mapActions } from 'vuex'
 
 export default {
@@ -20,7 +27,8 @@ export default {
     VSuccess,
     VNav,
     VFooter,
-    VError
+    VError,
+    VRankNotification
   },
   methods: {
     ...mapActions({

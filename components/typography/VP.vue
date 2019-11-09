@@ -18,5 +18,6 @@ export default {
   font-size: var(--p-fs);
   font-weight: 400;
   color: var(--white-base);
+  line-height: 1.2;
 }
 </style>

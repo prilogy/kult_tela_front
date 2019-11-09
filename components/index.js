@@ -14,6 +14,7 @@ import VAvatar from './ui/VAvatar'
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
 import VPWAPrompt from './utils/VPWAPrompt'
+import VRankNotification from './utils/VRankNotification'
 
 export {
   /*
@@ -38,5 +39,6 @@ export {
    */
   VError,
   VSuccess,
-  VPWAPrompt
+  VPWAPrompt,
+  VRankNotification
 }

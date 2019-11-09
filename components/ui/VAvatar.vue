@@ -38,7 +38,6 @@ export default {
     let percent
     img.onload = () => {
       percent = (100 * 125) / img.height / 100
-      console.log(img.width * percent)
       if (img.width * percent > 125) {
         this.style = { left: '-50%' }
       }
@@ -54,6 +53,7 @@ export default {
   --avatar-inner-height: 77%;
   --avatar-max-width: 206px;
   --avatar-max-height: 290px;
+  width: var(--avatar-width);
   box-shadow: 0 0 15px 7px #191118;
 
   max-height: var(--avatar-max-height);

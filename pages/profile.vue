@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <VButton mt="var(--space-third)" weight="regular" w100>
+        <VButton @click="sds" mt="var(--space-third)" weight="regular" w100>
           Редактировать
         </VButton>
       </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { VH2, VH3, VP, VAvatar, VButton } from '../components/'
 export default {
   components: { VButton, VP, VH3, VAvatar, VH2 },
