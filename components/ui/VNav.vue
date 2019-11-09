@@ -14,14 +14,23 @@
       </div>
     </transition>
     <div class="nav__icons">
-      <n-link v-for="link in LINKS.links" :key="link.id" :to="link.url || ''">
-        <div
-          @click="hideDropdown"
-          :class="{
-            nav__icons__icon: true,
-            'nav__icons__icon--active': link.id === LINKS.currentLinkId
-          }"
-        ></div>
+      <n-link
+        v-for="(link, index) in LINKS.links"
+        :key="link.id"
+        :to="link.url || ''"
+      >
+        <div @click="hideDropdown">
+          <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg">
+            <path
+              :d="LINKS.icons[index] && LINKS.icons[index].value"
+              :fill="
+                link.id === LINKS.currentLinkId
+                  ? 'var(--yellow-base)'
+                  : 'var(--grey-base)'
+              "
+            />
+          </svg>
+        </div>
       </n-link>
       <button @click="burgerToggle = !burgerToggle">
         <svg

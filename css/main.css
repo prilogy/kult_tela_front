@@ -22,7 +22,7 @@ body {
   --p-fs: 18px;
   --caption-fs: 15px;
 
-  --body-max-width: 920px;
+  --body-max-width: 520px;
   --space: 20px;
   --space-half: calc(var(--space) / 2);
   --space-third: calc(var(--space) / 3);

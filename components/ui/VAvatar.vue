@@ -48,12 +48,19 @@ export default {
 </script>
 
 <style scoped>
-.avatar {
-  --avatar-width: 25vw;
-  --avatar-height: 35vw;
-  --avatar-inner-height: 27vw;
+.wrapper {
+  --avatar-width: 30vw;
+  --avatar-height: 42vw;
+  --avatar-inner-height: 77%;
   --avatar-max-width: 206px;
   --avatar-max-height: 290px;
+  box-shadow: 0 0 15px 7px #191118;
+
+  max-height: var(--avatar-max-height);
+  height: var(--avatar-height);
+  max-width: var(--avatar-max-width);
+}
+.avatar {
   position: relative;
   height: var(--avatar-height);
   width: var(--avatar-width);
@@ -70,7 +77,8 @@ export default {
   top: 0;
   bottom: 0;
   margin: 0 auto;
-  max-height: var(--avatar-inner-height);
+  height: var(--avatar-inner-height);
+  max-height: var(--avatar-max-height);
 }
 
 .avatar__wrapper {
@@ -79,11 +87,5 @@ export default {
   max-width: var(--avatar-max-width);
   z-index: 1;
   position: absolute;
-}
-.wrapper {
-  box-shadow: 0 0 15px 7px #191118;
-  width: var(--avatar-width);
-  max-height: var(--avatar-max-height);
-  max-width: var(--avatar-max-width);
 }
 </style>
