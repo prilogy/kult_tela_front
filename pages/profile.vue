@@ -1,7 +1,7 @@
 <template>
   <div class="profile" v-if="USER">
     <div class="profile__top">
-      <img :src="USER.avatar_src" alt="Avatar" class="profile__top__avatar" />
+      <VAvatar :rank="USER.rank" :image_src="USER.avatar_src"></VAvatar>
       <div class="profile__top__info">
         <VH2>{{ USER.first_name + ' ' + USER.last_name }}</VH2>
       </div>
@@ -11,9 +11,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { VH2 } from '../components/'
+import { VH2, VAvatar } from '../components/'
 export default {
-  components: { VH2 },
+  components: { VAvatar, VH2 },
   computed: {
     ...mapGetters({
       USER: 'user/GET_USER'

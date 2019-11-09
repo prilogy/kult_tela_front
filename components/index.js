@@ -9,6 +9,7 @@ import VFooter from './ui/VFooter'
 import VButton from './ui/VButton'
 import VInput from './ui/VInput'
 import VPlanCard from './ui/VPlanCard'
+import VAvatar from './ui/VAvatar'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -31,6 +32,7 @@ export {
   VButton,
   VInput,
   VPlanCard,
+  VAvatar,
   /**
    * USTILITIES
    */
