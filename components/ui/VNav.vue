@@ -14,15 +14,11 @@
       </div>
     </transition>
     <div class="nav__icons">
-      <n-link
-        v-for="(link, index) in LINKS.links"
-        :key="link.id"
-        :to="link.url || ''"
-      >
+      <n-link v-for="link in LINKS.links" :key="link.id" :to="link.url || ''">
         <div @click="hideDropdown">
           <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg">
             <path
-              :d="LINKS.icons[index] && LINKS.icons[index].value"
+              :d="link.icon"
               :fill="
                 link.id === LINKS.currentLinkId
                   ? 'var(--yellow-base)'

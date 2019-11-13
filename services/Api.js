@@ -19,4 +19,8 @@ export default function(ctx) {
   this.Plans = {
     getAll: () => axios.$get('/plans')
   }
+
+  this.Top = {
+    current: () => axios.$get('/top')
+  }
 }

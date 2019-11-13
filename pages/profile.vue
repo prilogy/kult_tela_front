@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <VButton @click="sds" mt="var(--space-third)" weight="regular" w100>
+        <VButton @click="" mt="var(--space-third)" weight="regular" w100>
           Редактировать
         </VButton>
       </div>
