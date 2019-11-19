@@ -6,7 +6,8 @@
     :class="{
       button: true,
       'button--w100': w100,
-      'button--disabled': disabled
+      'button--disabled': disabled,
+      'button--clear': clearstyle
     }"
   >
     <VH3 :weight="weight" :color="color">
@@ -25,7 +26,8 @@ export default {
     weight: String,
     disabled: Boolean,
     bg: String,
-    color: String
+    color: String,
+    clearstyle: Boolean
   },
   components: { VH3 },
   mixins: [indents],
@@ -65,6 +67,20 @@ export default {
 .button--disabled:focus {
   box-shadow: none;
   transform: none;
+}
+
+.button--clear {
+  border: none;
+  color: unset;
+  background: unset;
+  padding: unset;
+}
+
+.button--clear:hover,
+.button--clear:focus,
+.button--clear:active {
+  transform: unset;
+  box-shadow: unset;
 }
 
 .button h3 {

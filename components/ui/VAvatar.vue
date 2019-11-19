@@ -23,7 +23,8 @@ export default {
   },
   data() {
     return {
-      style: null
+      style: null,
+      loaded: 0
     }
   },
   computed: {

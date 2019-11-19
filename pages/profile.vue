@@ -14,7 +14,13 @@
             </div>
           </div>
         </div>
-        <VButton @click="" mt="var(--space-third)" weight="regular" w100>
+        <VButton
+          bg="var(--grey-light3)"
+          @click=""
+          mt="var(--space-third)"
+          weight="regular"
+          w100
+        >
           Редактировать
         </VButton>
       </div>

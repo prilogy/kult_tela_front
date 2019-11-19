@@ -21,6 +21,7 @@ export default function(ctx) {
   }
 
   this.Top = {
-    current: () => axios.$get('/top')
+    allTime: () => axios.$get('/top/all-time'),
+    lastMonth: () => axios.$get('/top/last-month')
   }
 }
