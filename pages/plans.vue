@@ -29,7 +29,11 @@
     </transition>
     <transition name="showup">
       <div v-if="!planToBuy">
-        <VH1 mb="var(--space)">Доступные планы</VH1>
+        <div class="top">
+          <VIcon @click="back" icon="back" />
+          <VH1>Доступные планы</VH1>
+        </div>
+
         <div class="plans" v-if="plans">
           <VPlanCard
             @btnClick="handleBuy"
@@ -45,10 +49,11 @@
 
 <script>
 import { VH1, VPlanCard, VInput, VP, VButton } from '../components/'
+import VIcon from '../components/utils/VIcon'
 
 export default {
   layout: 'noNav',
-  components: { VButton, VP, VInput, VPlanCard, VH1 },
+  components: { VIcon, VButton, VP, VInput, VPlanCard, VH1 },
   data() {
     return {
       plans: null,
@@ -57,6 +62,9 @@ export default {
     }
   },
   methods: {
+    back() {
+      this.$router.back()
+    },
     handleBuy(id) {
       this.planToBuy = this.plans.filter(plan => plan.id === id)[0]
     },
@@ -82,6 +90,15 @@ export default {
 </script>
 
 <style scoped>
+.top {
+  display: flex;
+  margin-bottom: var(--space-half);
+  align-items: baseline;
+}
+.top img {
+  margin-right: var(--space);
+}
+
 .buy-form > p {
   margin: var(--space-half) 0;
 }

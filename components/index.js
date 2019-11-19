@@ -15,6 +15,7 @@ import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
 import VPWAPrompt from './utils/VPWAPrompt'
 import VRankNotification from './utils/VRankNotification'
+import VIcon from './utils/VIcon'
 
 export {
   /*
@@ -35,10 +36,11 @@ export {
   VPlanCard,
   VAvatar,
   /**
-   * USTILITIES
+   * UTILITIES
    */
   VError,
   VSuccess,
   VPWAPrompt,
-  VRankNotification
+  VRankNotification,
+  VIcon
 }

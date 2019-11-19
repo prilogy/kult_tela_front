@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { VH1, VH3, VH2, VP, VAvatar, VButton } from '../components/'
+import { VH1, VH3, VH2, VButton } from '../components/'
 export default {
   components: {
     VButton,

@@ -17,6 +17,7 @@ export default {
 .h1 {
   font-size: var(--h1-fs);
   font-weight: 600;
+  line-height: 1.4;
   color: var(--yellow-base);
 }
 </style>
