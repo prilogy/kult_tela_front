@@ -47,6 +47,7 @@
 <script>
 import { VH1, VH3, VH2, VButton } from '../components/'
 export default {
+  middleware: 'minPlan_1',
   components: {
     VButton,
     VH2,

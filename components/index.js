@@ -10,6 +10,7 @@ import VButton from './ui/VButton'
 import VInput from './ui/VInput'
 import VPlanCard from './ui/VPlanCard'
 import VAvatar from './ui/VAvatar'
+import VProfileActions from './ui/VProfileActions'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -35,6 +36,7 @@ export {
   VInput,
   VPlanCard,
   VAvatar,
+  VProfileActions,
   /**
    * UTILITIES
    */

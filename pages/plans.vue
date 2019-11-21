@@ -92,7 +92,7 @@ export default {
 <style scoped>
 .top {
   display: flex;
-  margin-bottom: var(--space-half);
+  margin-bottom: var(--space);
   align-items: baseline;
 }
 .top img {
@@ -108,7 +108,7 @@ export default {
 }
 
 .plans div {
-  margin-bottom: var(--space);
+  margin-bottom: var(--space-half);
 }
 
 .plan--opened {

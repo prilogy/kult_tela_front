@@ -25,20 +25,26 @@
         </VButton>
       </div>
     </div>
+    <VProfileActions></VProfileActions>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { VH2, VH3, VP, VAvatar, VButton } from '../components/'
+import VProfileActions from '../components/ui/VProfileActions'
 export default {
-  components: { VButton, VP, VH3, VAvatar, VH2 },
+  components: { VProfileActions, VButton, VP, VH3, VAvatar, VH2 },
   computed: {
     info() {
       const user = this.USER
       return [
         { id: 0, title: 'Начальный вес', value: user.weight_start + 'кг' },
-        { id: 1, title: 'Сброшено кг', value: (user.weight_diff || 0) + 'кг' },
+        {
+          id: 1,
+          title: 'Сброшено кг',
+          value: (Math.ceil(user.weight_diff * 10) / 10 || 0) + 'кг'
+        },
         { id: 2, title: 'Зарегистрирован(а)', value: user.date_signup }
       ]
     },
@@ -52,6 +58,7 @@ export default {
 <style scoped>
 .profile__top {
   display: flex;
+  margin-bottom: var(--space);
 }
 
 .profile__top__info {

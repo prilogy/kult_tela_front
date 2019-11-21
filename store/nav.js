@@ -32,11 +32,10 @@ export const state = () => ({
     { id: 0, name: 'Оповещения' },
     { id: 1, name: 'Обновить вес', url: '/update-weight' },
     { id: 2, name: 'Моё питание' },
-    { id: 3, name: 'Калькулятор каллорий' },
-    { id: 4, name: 'Связь с поддержкой' },
-    { id: 5, name: 'Общий чат' },
+    { id: 3, name: 'Связь с поддержкой' },
+    { id: 4, name: 'Общий чат' },
     {
-      id: 6,
+      id: 5,
       name: 'Выйти из аккаунта',
       action: () => $nuxt.$store.dispatch('auth/LOGOUT', { root: true })
     }
