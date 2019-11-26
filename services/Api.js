@@ -6,14 +6,14 @@ export default function(ctx) {
 
   this.Auth = {
     login: user => axios.$post('/auth', user), // user = { email, password }
-    createBlankProfile: data => axios.$put('/auth-signup', data), //user = { email }
+    createBlankProfile: data => axios.$put('/auth/signup', data), //user = { email }
     tokenAuth: () => axios.$get('/auth'), // headers must contain token
-    isFillAllowed: data => axios.$post('/auth-signup', data),
-    fillInfo: data => axios.$post('/auth-signup/fill', data)
+    isFillAllowed: data => axios.$post('/auth/signup', data),
+    fillInfo: data => axios.$post('/auth/signup/fill', data)
   }
 
   this.User = {
-    updateWeight: data => axios.$post('/user/update-weight', data)
+    updateWeight: data => axios.$post('/user/update/weight', data)
   }
 
   this.Plans = {

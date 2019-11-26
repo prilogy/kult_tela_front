@@ -16,7 +16,7 @@ export default {
 <style scoped>
 .h3 {
   font-size: var(--h3-fs);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--yellow-base);
   line-height: 1.2;
 }

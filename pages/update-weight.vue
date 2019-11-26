@@ -25,14 +25,23 @@
     >
       Подтвердить
     </VButton>
+    <VH3 mt="var(--space)" mb="var(--space-half)">История вашего веса</VH3>
+    <VChartWeightHistory></VChartWeightHistory>
   </div>
 </template>
 
 <script>
-import { VH1, VInput, VP, VButton } from '../components/'
+import {
+  VH1,
+  VH3,
+  VInput,
+  VP,
+  VButton,
+  VChartWeightHistory
+} from '../components/'
 import { mapActions } from 'vuex'
 export default {
-  components: { VButton, VP, VInput, VH1 },
+  components: { VButton, VP, VH3, VInput, VH1, VChartWeightHistory },
   data() {
     return {
       new_weight: null

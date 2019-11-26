@@ -9,7 +9,7 @@ export const state = () => ({
     },
     {
       id: 1,
-      title: 'Онлайн-консультация',
+      title: 'Онлайн консультация',
       minPlan: 0,
       url: '/special/consultation',
       color: '#219653'

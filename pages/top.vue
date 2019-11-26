@@ -27,7 +27,9 @@
         </VH3>
         <VH3 :color="getColor(index)">
           {{
-            `${user.weight_start}кг > ${user.weight_start - user.weight_diff}кг`
+            `${Math.ceil(user.weight_start * 10) / 10 || 0}кг > ${Math.ceil(
+              (user.weight_start - user.weight_diff) * 10
+            ) / 10 || 0}кг`
           }}
         </VH3>
       </div>

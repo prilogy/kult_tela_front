@@ -45,6 +45,7 @@ export default {
           title: 'Сброшено кг',
           value: (Math.ceil(user.weight_diff * 10) / 10 || 0) + 'кг'
         },
+
         { id: 2, title: 'Зарегистрирован(а)', value: user.date_signup }
       ]
     },
