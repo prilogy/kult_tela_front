@@ -16,7 +16,7 @@ export default {
 <style scoped>
 .h1 {
   font-size: var(--h1-fs);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.4;
   color: var(--yellow-base);
 }

@@ -5,8 +5,7 @@ export const state = () => ({
 export const mutations = {
   SET_USER(state, payload) {
     let user = payload
-    if (payload && !user.avatar_src.includes('http://'))
-      user.avatar_src = this.$api.getImageLink(user.avatar_src)
+    user.avatar_src = this.$api.getImageLink(user.avatar_src)
     state.user = user
   },
   UPDATE_USER(state, payload) {
