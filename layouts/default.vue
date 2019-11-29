@@ -7,6 +7,7 @@
     <VError></VError>
     <VSuccess></VSuccess>
     <VRankNotification></VRankNotification>
+    <div class="phantom__block"></div>
     <!--    <VFooter></VFooter>-->
   </div>
 </template>
@@ -52,6 +53,11 @@ body {
   max-width: var(--body-max-width);
   margin: 0 auto;
 }
+
+.phantom__block {
+  height: 50px;
+}
+
 main {
   padding: var(--space);
 }

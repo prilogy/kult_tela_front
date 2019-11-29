@@ -3,19 +3,45 @@
     <VH2 class="recipe__name">{{ recipe.name }}</VH2>
     <img class="recipe__img" alt="фото продукта" :src="recipe.image_src" />
     <VP class="recipe__desc">{{ recipe.description }}</VP>
-    <VH3>Пищевая ценность</VH3>
-    <div class="recipe__guide">
-      <VP>На 100г порции</VP>
-      <VP>Грамм</VP>
+    <div class="recipe__block">
+      <VH3 class="recipe__h3">Продукты</VH3>
+      <div class="recipe__guide">
+        <VP>На порцию</VP>
+        <VP>Грамм</VP>
+      </div>
+      <ul class="recipe__info">
+        <li v-for="product in recipe.products" :key="product.id">
+          <div class="recipe__info__item">
+            <VP>{{ product.name }}</VP>
+            <VP>{{ product.weight }}</VP>
+          </div>
+        </li>
+      </ul>
     </div>
-    <ul class="recipe__info">
-      <li v-for="info in productInfo" :key="info.id">
-        <div class="recipe__info__item">
-          <VP>{{ info.title }}</VP>
-          <VP>{{ info.value }}</VP>
-        </div>
-      </li>
-    </ul>
+
+    <div class="recipe__block">
+      <VH3 class="recipe__h3">Пищевая ценность</VH3>
+      <ul class="recipe__info">
+        <li v-for="info in productInfo" :key="info.id">
+          <div class="recipe__info__item">
+            <VP>{{ info.title }}</VP>
+            <VP>{{ info.value }}</VP>
+          </div>
+        </li>
+      </ul>
+      <div class="recipe__guide">
+        <VP>На 100г порции</VP>
+        <VP>Грамм</VP>
+      </div>
+      <ul class="recipe__info">
+        <li v-for="info in productInfoGramms" :key="info.id">
+          <div class="recipe__info__item">
+            <VP>{{ info.title }}</VP>
+            <VP>{{ info.value }}</VP>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -29,13 +55,8 @@ export default {
     }
   },
   computed: {
-    productInfo() {
+    productInfoGramms() {
       return [
-        {
-          id: 0,
-          title: 'Каллорийность',
-          value: this.recipe.calories
-        },
         {
           id: 1,
           title: 'Белки',
@@ -50,6 +71,25 @@ export default {
           id: 3,
           title: 'Углеводы',
           value: this.recipe.carbohydrates
+        }
+      ]
+    },
+    productInfo() {
+      return [
+        {
+          id: 1,
+          title: 'Порция',
+          value: this.recipe.weight + 'г'
+        },
+        {
+          id: 2,
+          title: 'Калорийность',
+          value: this.recipe.calories + 'ккал / 100г'
+        },
+        {
+          id: 3,
+          title: 'Общая калорийность',
+          value: this.recipe.calories_full + 'ккал'
         }
       ]
     }
@@ -77,6 +117,14 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: var(--space-half) 0;
+}
+
+.recipe__block {
+  margin-bottom: var(--space);
+}
+
+.recipe__h3 {
+  margin-bottom: var(--space-half);
 }
 
 .recipe__guide p {
