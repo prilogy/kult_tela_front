@@ -25,5 +25,16 @@ export const getters = {
         return item
       })
     return workout
+  },
+  GET_EXERCISE_FROM_WORKOUT(state) {
+    return id => {
+      if (state.workout !== null) {
+        const exercises = [
+          ...state.workout.exercises_home,
+          ...state.workout.exercises_gym
+        ]
+        return exercises.filter(item => item.id === parseInt(id))[0]
+      } else return null
+    }
   }
 }

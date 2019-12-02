@@ -37,4 +37,8 @@ export default function(ctx) {
   this.Workout = {
     getById: id => axios.$get('/workout/' + id)
   }
+
+  this.Exercise = {
+    getById: id => axios.$get('/exercise/' + id)
+  }
 }
