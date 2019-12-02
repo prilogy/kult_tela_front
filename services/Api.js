@@ -16,7 +16,8 @@ export default function(ctx) {
   }
 
   this.User = {
-    updateWeight: data => axios.$post('/user/update/weight', data)
+    updateWeight: data => axios.$post('/user/update/weight', data),
+    updateWorkout: data => axios.$post('/user/update/workout', data)
   }
 
   this.Plans = {
@@ -31,5 +32,9 @@ export default function(ctx) {
   this.Recipes = {
     getById: id => axios.$get('/recipe/' + id),
     getAllForList: () => axios.$get('/recipe')
+  }
+
+  this.Workout = {
+    getById: id => axios.$get('/workout/' + id)
   }
 }

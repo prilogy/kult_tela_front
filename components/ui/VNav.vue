@@ -67,10 +67,7 @@ export default {
       if (link.action) link.action()
       else if (link.url) this.$router.push(link.url)
       this.hideDropdown()
-    },
-    ...mapActions({
-      LOGOUT: 'auth/LOGOUT'
-    })
+    }
   },
   computed: {
     ...mapGetters({

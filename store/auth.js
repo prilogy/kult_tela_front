@@ -32,8 +32,8 @@ export const actions = {
       }
     } catch (error) {}
   },
-  LOGOUT({ commit }) {
-    this.$router.push('/login')
+  async LOGOUT({ commit }) {
+    await this.$router.push('/login')
     commit('LOGOUT')
     commit('user/SET_USER', null, { root: true })
   }

@@ -1,3 +1,5 @@
+export const strict = false
+
 export const actions = {
   async nuxtClientInit({ commit, getters, dispatch }, ctx) {
     const token = getters['auth/GET_TOKEN']

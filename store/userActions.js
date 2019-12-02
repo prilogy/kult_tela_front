@@ -16,7 +16,7 @@ export const state = () => ({
     },
     { id: 2, title: 'Калькулятор калорий', minPlan: 0, url: '/calculator' },
     { id: 3, title: 'Посмотреть планы', minPlan: 0, url: '/plans' },
-    { id: 3, title: 'Все рецепты', minPlan: 0, url: '/recipe' }
+    { id: 4, title: 'Все рецепты', minPlan: 0, url: '/recipe' }
   ]
 })
 

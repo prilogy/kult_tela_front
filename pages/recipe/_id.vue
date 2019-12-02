@@ -128,7 +128,8 @@ export default {
 }
 
 .recipe__guide p {
-  color: var(--grey-light2);
+  color: var(--grey-light3);
+  opacity: 0.6;
 }
 
 .recipe__info__item {
