@@ -2,17 +2,28 @@
   <transition name="showup">
     <div class="error" v-if="ERROR">
       <VP class="error__text">{{ ERROR }}</VP>
+      <VIcon @click="close" class="error__icon" icon="close" />
     </div>
   </transition>
 </template>
 
 <script>
 import { VP } from '../'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import VIcon from './VIcon'
 
 export default {
   components: {
+    VIcon,
     VP
+  },
+  methods: {
+    close() {
+      this.SET_ERROR(null)
+    },
+    ...mapActions({
+      SET_ERROR: 'popup/SET_ERROR'
+    })
   },
   computed: {
     ...mapGetters({
@@ -24,11 +35,16 @@ export default {
 
 <style scoped>
 .error {
+  z-index: 101;
   background: var(--red-base);
   position: fixed;
   padding: var(--space-half);
   width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
+  max-width: var(--body-max-width);
   bottom: var(--space-half);
   right: 0;
   box-shadow: 0 0 15px var(--red-base);
@@ -38,7 +54,10 @@ export default {
 .error__text {
   color: var(--white-base);
   font-weight: lighter;
-  text-align: center;
   font-size: 20px;
+}
+
+.error__icon {
+  margin-left: var(--space);
 }
 </style>

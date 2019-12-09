@@ -90,6 +90,7 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 100;
   max-width: var(--body-max-width);
 }
 
