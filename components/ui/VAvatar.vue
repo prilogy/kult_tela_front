@@ -51,9 +51,10 @@ export default {
 .wrapper {
   --avatar-width: 30vw;
   --avatar-height: 42vw;
-  --avatar-inner-height: 77%;
+  --avatar-inner-height: 83%;
   --avatar-max-width: 206px;
   --avatar-max-height: 290px;
+
   width: var(--avatar-width);
   box-shadow: 0 0 15px 7px #191118;
 

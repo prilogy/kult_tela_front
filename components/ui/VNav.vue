@@ -36,7 +36,7 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            :fill="burgerToggle ? $ds.colors.yellow.base : $ds.colors.grey.base"
+            :fill="burgerToggle ? 'var(--yellow-base' : 'var(--grey-base)'"
             d="M0 0h35v7H0zM0 14h35v7H0zM0 28h35v7H0z"
           />
         </svg>
