@@ -23,7 +23,13 @@
           caption="Текущий вес"
           v-model="weight_start"
         ></VInput>
-
+        <VInput
+          required
+          step="0.01"
+          type="number"
+          caption="Рост"
+          v-model="height"
+        ></VInput>
         <VInput
           required
           minlength="6"
@@ -108,7 +114,8 @@ export default {
       password: '',
       password_verify: '',
       image_preview: null,
-      popup: false
+      popup: false,
+      height: ''
     }
   },
   methods: {
@@ -122,6 +129,7 @@ export default {
         form.append('weight_start', this.weight_start.split(',').join('.'))
         form.append('password', this.password)
         form.append('avatar_src', this.avatar_src)
+        form.append('height', this.height.split(',').join('.'))
         try {
           const result = await this.$api.Auth.fillInfo(form)
           if (result.success === true) {
