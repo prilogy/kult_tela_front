@@ -17,7 +17,9 @@ export default function(ctx) {
 
   this.User = {
     updateWeight: data => axios.$post('/user/update/weight', data),
-    updateWorkout: data => axios.$post('/user/update/workout', data)
+    updateWorkout: data => axios.$post('/user/update/workout', data),
+    setLastSeenNotification: id =>
+      axios.$get('/user/notification/set-last-seen/' + id)
   }
 
   this.Plans = {

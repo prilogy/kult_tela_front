@@ -30,7 +30,6 @@ export const state = () => ({
     }
   ],
   dropdownLinks: [
-    { id: 0, name: 'Оповещения' },
     { id: 1, name: 'Обновить вес', url: '/update-weight' },
     { id: 2, name: 'Моё питание' },
     { id: 3, name: 'Связь с поддержкой' },

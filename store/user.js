@@ -37,6 +37,17 @@ export const actions = {
       if (currentRank != result.data.rank)
         commit('rank/SET_NOTIFICATION', rankPopup, { root: true })
     } catch (error) {}
+  },
+  async SET_LAST_SEEN_NOTIFICATION({ commit, state }) {
+    const lastId =
+      state.user.notifications[state.user.notifications.length - 1].id
+    try {
+      const result = await this.$api.User.setLastSeenNotification(lastId)
+      if (result.success === true) commit('UPDATE_USER')
+      commit('UPDATE_USER', { notifications_last_seen: lastId })
+    } catch (e) {
+      commit('popup/SET_ERROR', 'Ошибка обновления оповещений', { root: true })
+    }
   }
 }
 

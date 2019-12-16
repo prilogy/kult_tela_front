@@ -3,6 +3,15 @@
     <transition name="showup">
       <div class="nav__dropdown" v-if="burgerToggle">
         <button
+          class="nav__dropdown__notifications_button"
+          @click="dropDownLinkAction({ url: '/notifications' })"
+        >
+          <VH2>Оповещения</VH2>
+          <VH2 color="var(--yellow-base)">
+            {{ newNotifications || '' }}
+          </VH2>
+        </button>
+        <button
           @click="dropDownLinkAction(link)"
           v-for="link in LINKS.dropdownLinks"
           :key="link.id"
@@ -70,8 +79,15 @@ export default {
     }
   },
   computed: {
+    newNotifications() {
+      const lastSeenId = this.USER.notifications_last_seen
+      const lastId = this.USER.notifications[this.USER.notifications.length - 1]
+        .id
+      return lastId - lastSeenId
+    },
     ...mapGetters({
-      LINKS: 'nav/GET_LINKS'
+      LINKS: 'nav/GET_LINKS',
+      USER: 'user/GET_USER'
     })
   },
   created() {
@@ -114,6 +130,14 @@ export default {
   justify-content: space-around;
   background: var(--grey-light2);
   height: var(--navbar-height);
+}
+
+.nav__dropdown__notifications_button {
+  display: flex;
+}
+
+.nav__dropdown__notifications_button h2:last-child {
+  margin-left: var(--space-half);
 }
 
 .nav__icons__icon {
