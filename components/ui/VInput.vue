@@ -46,6 +46,7 @@ h3 {
   color: var(--grey-light3);
   padding: var(--space-third) var(--space-half);
   box-sizing: border-box;
+  border-radius: var(--radius-half);
 }
 
 .input:active,

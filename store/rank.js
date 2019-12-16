@@ -7,7 +7,8 @@ export const mutations = {
     if (payload) {
       state.notification = {
         title: payload.title,
-        description: payload.description
+        description: payload.description,
+        downranked: payload.downranked || false
       }
     } else {
       state.notification = null
@@ -18,9 +19,6 @@ export const mutations = {
 export const actions = {
   SET_NOTIFICATION({ commit }, payload) {
     commit('SET_NOTIFICATION', payload)
-    setTimeout(() => {
-      commit('SET_NOTIFICATION', null)
-    }, 10000)
   }
 }
 

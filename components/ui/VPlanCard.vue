@@ -3,9 +3,9 @@
     class="plan"
     :style="{ borderColor: colors[100], background: colors[25] }"
   >
-    <VH2 weight="regular" :color="colors[100]" mb="var(--space-half)">{{
-      plan.name
-    }}</VH2>
+    <VH2 weight="regular" :color="colors[100]" mb="var(--space-half)">
+      {{ plan.name }}
+    </VH2>
     <VP>{{ plan.description }}</VP>
     <div class="plan__bottom">
       <VH2 weight="regular" :color="colors[100]">
@@ -18,8 +18,9 @@
         color="var(--white-base)"
         :bg="colors[100]"
         @click="handleButton"
-        >{{ btnText || 'Купить план' }}</VButton
       >
+        {{ btnText || 'Купить план' }}
+      </VButton>
     </div>
   </div>
 </template>
@@ -28,6 +29,7 @@
 import VH2 from '../typography/VH2'
 import VP from '../typography/VP'
 import VButton from './VButton'
+import VIcon from '../utils/VIcon'
 export default {
   components: { VButton, VP, VH2 },
   props: {
@@ -57,6 +59,7 @@ export default {
 .plan {
   padding: var(--space-half);
   border: 3px solid;
+  border-radius: var(--radius);
 }
 
 .plan__bottom {

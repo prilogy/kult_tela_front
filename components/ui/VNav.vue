@@ -95,6 +95,7 @@ export default {
 }
 
 .nav__dropdown {
+  border-radius: var(--radius) var(--radius) 0 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

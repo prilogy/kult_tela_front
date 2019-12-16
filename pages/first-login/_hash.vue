@@ -27,7 +27,7 @@
           required
           step="0.01"
           type="number"
-          caption="Рост"
+          caption="Рост (в см)"
           v-model="height"
         ></VInput>
         <VInput

@@ -55,6 +55,9 @@ export default {
   --avatar-max-width: 206px;
   --avatar-max-height: 290px;
 
+  border-radius: var(--radius-half);
+  overflow: hidden;
+
   width: var(--avatar-width);
   box-shadow: 0 0 15px 7px #191118;
 

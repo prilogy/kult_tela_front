@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import { VP } from '../'
 import { mapGetters, mapActions } from 'vuex'
 import VIcon from './VIcon'
+import VP from '../typography/VP'
 
 export default {
   components: {
-    VIcon,
-    VP
+    VP,
+    VIcon
   },
   methods: {
     close() {
@@ -35,6 +35,7 @@ export default {
 
 <style scoped>
 .success {
+  border-radius: var(--radius);
   z-index: 101;
   background: var(--green-base);
   position: fixed;

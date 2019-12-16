@@ -1,21 +1,20 @@
 export const state = () => ({
   actions: [
     {
-      id: 0,
       title: 'Вебинар с Мариной Богомоловой',
       minPlan: 0,
       url: '/special/webinar',
       color: '#56CCF2'
     },
     {
-      id: 1,
       title: 'Онлайн консультация',
       minPlan: 0,
       url: '/special/consultation',
       color: '#219653'
     },
-    { id: 2, title: 'Калькулятор калорий', minPlan: 0, url: '/calculator' },
-    { id: 3, title: 'Посмотреть планы', minPlan: 0, url: '/plans' }
+    { title: 'Калькулятор калорий', minPlan: 0, url: '/calculator' },
+    { title: 'Посмотреть планы', minPlan: 0, url: '/plans' },
+    { title: 'Редактировать профиль', minPlan: 0, url: '/edit' }
   ]
 })
 

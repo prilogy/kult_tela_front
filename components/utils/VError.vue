@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import { VP } from '../'
-import { mapGetters, mapActions } from 'vuex'
 import VIcon from './VIcon'
+import VP from '../typography/VP'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -35,6 +35,7 @@ export default {
 
 <style scoped>
 .error {
+  border-radius: var(--radius);
   z-index: 101;
   background: var(--red-base);
   position: fixed;

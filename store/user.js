@@ -31,7 +31,8 @@ export const actions = {
         description:
           result.data.rank > currentRank
             ? 'Поздравляем, вы достигли нового звания! Продолжайте в том же духе!'
-            : 'Вы работали не так усердно, из за чего получили понижение в звании!'
+            : 'Вы служили не так усердно, из-за чего получили понижение в звании!',
+        downranked: result.data.rank > currentRank ? false : true
       }
       if (currentRank != result.data.rank)
         commit('rank/SET_NOTIFICATION', rankPopup, { root: true })

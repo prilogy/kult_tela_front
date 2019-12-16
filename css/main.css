@@ -29,6 +29,8 @@ body {
   --space-third: calc(var(--space) / 3);
 
   --navbar-height: 60px;
+  --radius: 7px;
+  --radius-half: 4px;
 }
 
 * {

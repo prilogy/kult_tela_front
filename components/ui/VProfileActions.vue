@@ -25,8 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import VH2 from '../typography/VH2'
-import VP from '../typography/VP'
+import { VH2, VP } from '../../components'
 export default {
   components: { VP, VH2 },
   computed: {
@@ -51,6 +50,7 @@ export default {
   grid-gap: var(--space-half);
 }
 .actions__grid__item {
+  border-radius: var(--radius-half);
   padding: var(--space);
   background: #ffffff26;
   border: solid 2px var(--white-base);

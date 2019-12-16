@@ -1,7 +1,11 @@
 <template>
   <div class="profile" v-if="USER">
     <div class="profile__top">
-      <VAvatar :rank="USER.rank" :image_src="USER.avatar_src"></VAvatar>
+      <VAvatar
+        class="profile__avatar"
+        :rank="USER.rank"
+        :image_src="USER.avatar_src"
+      ></VAvatar>
       <div class="profile__top__info">
         <div>
           <VH2 weight="regular">
@@ -14,15 +18,6 @@
             </div>
           </div>
         </div>
-        <VButton
-          bg="var(--grey-light3)"
-          @click=""
-          mt="var(--space-third)"
-          weight="regular"
-          w100
-        >
-          Редактировать
-        </VButton>
       </div>
     </div>
     <VProfileActions></VProfileActions>
@@ -39,14 +34,16 @@ export default {
     info() {
       const user = this.USER
       return [
-        { id: 0, title: 'Начальный вес', value: user.weight_start + 'кг' },
+        { title: 'Начальный вес', value: user.weight_start + 'кг' },
         {
-          id: 1,
           title: 'Сброшено кг',
           value: (Math.ceil(user.weight_diff * 10) / 10 || 0) + 'кг'
         },
-
-        { id: 2, title: 'Зарегистрирован(а)', value: user.date_signup }
+        {
+          title: 'Рост',
+          value: user.height + 'см'
+        },
+        { title: 'Служит с', value: user.date_signup }
       ]
     },
     ...mapGetters({
@@ -71,6 +68,10 @@ export default {
 
 .profile__top__info h2 {
   margin-bottom: var(--space-third);
+}
+
+.profile__avatar {
+  border: solid 2px var(--yellow-base);
 }
 
 .profile__top__info__item {

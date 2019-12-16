@@ -3,7 +3,7 @@
     <transition name="showup--reversed">
       <div v-if="planToBuy" class="buy-form">
         <VPlanCard
-          btnText="Выбрать другой"
+          btnText="Изменить"
           @btnClick="planToBuy = null"
           class="plan--opened"
           :plan="planToBuy"
@@ -31,7 +31,7 @@
       <div v-if="!planToBuy">
         <div class="top">
           <VIcon @click="back" icon="back" />
-          <VH1>Доступные планы</VH1>
+          <VH2>Доступные планы</VH2>
         </div>
 
         <div class="plans" v-if="plans">
@@ -48,12 +48,12 @@
 </template>
 
 <script>
-import { VH1, VPlanCard, VInput, VP, VButton } from '../components/'
+import { VH2, VPlanCard, VInput, VP, VButton } from '../components/'
 import VIcon from '../components/utils/VIcon'
 
 export default {
   layout: 'noNav',
-  components: { VIcon, VButton, VP, VInput, VPlanCard, VH1 },
+  components: { VIcon, VButton, VP, VInput, VPlanCard, VH2 },
   data() {
     return {
       plans: null,
@@ -83,8 +83,13 @@ export default {
     }
   },
   async asyncData(ctx) {
-    const { data: plans } = await ctx.app.$api.Plans.getAll()
-    return { plans }
+    console.log(ctx)
+    try {
+      const { data: plans } = await ctx.app.$api.Plans.getAll()
+      return { plans }
+    } catch (e) {
+      ctx.redirect('/login')
+    }
   }
 }
 </script>

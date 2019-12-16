@@ -45,6 +45,7 @@ export default {
 .button {
   background: var(--yellow-base);
   padding: var(--space-half) var(--space);
+  border-radius: var(--radius-half);
 }
 
 .button--w100 {
