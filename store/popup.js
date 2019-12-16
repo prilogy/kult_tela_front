@@ -14,7 +14,6 @@ export const mutations = {
 
 export const actions = {
   SET_ERROR({ commit }, payload) {
-    console.log('211')
     commit('SET_ERROR', payload)
     setTimeout(() => {
       commit('SET_ERROR', null)

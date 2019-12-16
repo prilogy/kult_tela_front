@@ -8,7 +8,7 @@
         >
           <VH2>Оповещения</VH2>
           <VH2 color="var(--yellow-base)">
-            {{ newNotifications || '' }}
+            {{ newNotifications <= 0 ? '' : newNotifications }}
           </VH2>
         </button>
         <button
