@@ -86,6 +86,7 @@ export default {
   right: 0;
   top: 0;
   border-radius: var(--radius);
+  max-width: var(--body-max-width);
 }
 
 .notification-upranked {

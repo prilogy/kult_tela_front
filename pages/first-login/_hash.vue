@@ -213,6 +213,7 @@ form div {
   width: 100%;
 }
 .popup {
+  max-width: var(--body-max-width);
   background: var(--grey-base);
   position: fixed;
   padding: var(--space);
