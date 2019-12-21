@@ -83,7 +83,6 @@ export default {
     }
   },
   async asyncData(ctx) {
-    console.log(ctx)
     try {
       const { data: plans } = await ctx.app.$api.Plans.getAll()
       return { plans }

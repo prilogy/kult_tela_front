@@ -39,8 +39,8 @@ export const actions = {
     } catch (error) {}
   },
   async SET_LAST_SEEN_NOTIFICATION({ commit, state }) {
-    const lastId =
-      state.user.notifications[state.user.notifications.length - 1].id
+    const length = state.user.notifications.length
+    const lastId = state.user.notifications[length - 1].id
     try {
       const result = await this.$api.User.setLastSeenNotification(lastId)
       if (result.success === true) commit('UPDATE_USER')

@@ -70,7 +70,8 @@ export default {
       return this.USER.notifications_last_seen
     },
     NOTIFICATIONS() {
-      if (this.USER.notifications) return this.USER.notifications.reverse()
+      if (this.USER.notifications)
+        return this.USER.notifications.slice().reverse()
       else return []
     },
     NEW_NOTIFICATIONS() {
