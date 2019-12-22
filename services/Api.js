@@ -31,9 +31,8 @@ export default function(ctx) {
     lastMonth: () => axios.$get('/top/last-month')
   }
 
-  this.Recipes = {
-    getById: id => axios.$get('/recipe/' + id),
-    getAllForList: () => axios.$get('/recipe')
+  this.Food = {
+    getDaily: () => axios.$get('/food/daily')
   }
 
   this.Workout = {

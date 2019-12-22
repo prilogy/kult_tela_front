@@ -121,9 +121,10 @@ export default {
     })
   },
   methods: {},
-  async asyncData({ store }) {
+  async asyncData({ store, redirect }) {
     if (store.getters['workout/GET_WORKOUT'] === null)
-      store.dispatch('workout/SET_WORKOUT_BY_ID', 1)
+      await store.dispatch('workout/SET_WORKOUT_BY_ID', 1)
+    if (store.getters['workout/GET_WORKOUT'] === null) redirect('/')
   }
 }
 </script>

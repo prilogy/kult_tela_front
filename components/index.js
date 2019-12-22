@@ -12,6 +12,7 @@ import VPlanCard from './ui/VPlanCard'
 import VAvatar from './ui/VAvatar'
 import VProfileActions from './ui/VProfileActions'
 import VChartWeightHistory from './ui/VChartWeightHistory'
+import VTipSmall from './ui/VTipSmall'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -39,6 +40,7 @@ export {
   VAvatar,
   VProfileActions,
   VChartWeightHistory,
+  VTipSmall,
   /**
    * UTILITIES
    */
