@@ -1,5 +1,8 @@
 export default {
   mode: 'spa',
+  server: {
+    port: 3000 // default: 3000
+  },
   pageTransition: 'showup',
   /*
    ** Headers of the page
@@ -21,7 +24,7 @@ export default {
    ** Customize the progress-bar color
    */
   loading: {
-    color: 'var(--yellow-base)',
+    color: '#eff621',
     height: '5px'
   },
   /*
