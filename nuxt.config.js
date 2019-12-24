@@ -58,7 +58,14 @@ export default {
     '@nuxtjs/pwa'
     //'nuxt-client-init-module'
   ],
-
+  pwa: {
+    meta: {
+      theme_color: '#1d1d22',
+      name: 'Культ тела',
+      lang: 'ru',
+      icon: ''
+    }
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

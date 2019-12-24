@@ -11,8 +11,13 @@ export const mutations = {
 
 export const actions = {
   async SET_WORKOUT_BY_ID({ commit }, id) {
-    const workout = await this.$api.Workout.getById(id)
-    commit('SET_WORKOUT', workout.data)
+    try {
+      const workout = await this.$api.Workout.getById(id)
+      console.log(workout)
+      commit('SET_WORKOUT', workout.data)
+    } catch (e) {
+      this.$router.push('/')
+    }
   }
 }
 

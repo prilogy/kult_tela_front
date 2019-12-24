@@ -25,9 +25,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { VH2, VP } from '../../components'
+import VP from '../typography/VP'
+import VH2 from '../typography/VH2'
 export default {
-  components: { VP, VH2 },
+  components: { VH2, VP },
   computed: {
     ...mapGetters({
       ACTIONS: 'userActions/GET_ACTIONS'

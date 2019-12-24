@@ -32,16 +32,14 @@
 </template>
 
 <script>
-import { VP, VH2, VAvatar, VButton } from '../'
 import { mapGetters, mapActions } from 'vuex'
+import VButton from '../ui/VButton'
+import VP from '../typography/VP'
+import VAvatar from '../ui/VAvatar'
+import VH2 from '../typography/VH2'
 
 export default {
-  components: {
-    VButton,
-    VP,
-    VH2,
-    VAvatar
-  },
+  components: { VH2, VAvatar, VP, VButton },
   methods: {
     closeModal() {
       this.SET_NOTIFICATION(null)

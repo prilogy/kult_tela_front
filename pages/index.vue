@@ -8,9 +8,9 @@
       ></VAvatar>
       <div class="profile__top__info">
         <div>
-          <VH2 weight="regular">
+          <VH3 class="profile__top__info__name" weight="regular">
             {{ USER.first_name + ' ' + USER.last_name }}
-          </VH2>
+          </VH3>
           <div v-if="info">
             <div class="profile__top__info__item" v-for="item in info">
               <VP>{{ item.title }}</VP>
@@ -43,7 +43,8 @@ export default {
           title: 'Рост',
           value: user.height + 'см'
         },
-        { title: 'Служит с', value: user.date_signup }
+        { title: 'Служит с', value: user.date_signup },
+        { title: 'Войско', value: user.plan_name }
       ]
     },
     ...mapGetters({
@@ -79,6 +80,11 @@ export default {
   flex-wrap: wrap;
   line-height: 1.3;
 }
+
+.profile__top__info__name {
+  margin-bottom: var(--space-half);
+}
+
 .profile__top__info__item > p:first-child {
   color: var(--grey-light3);
   margin-right: var(--space-half);

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { VH2 } from '../components/'
+import { VH2 } from '../../components/'
 export default {
   components: {
     VH2

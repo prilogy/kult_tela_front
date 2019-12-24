@@ -5,13 +5,13 @@ export const actions = {
     const token = getters['auth/GET_TOKEN']
     if (token) {
       try {
-        const { data } = await ctx.app.$api.Auth.tokenAuth()
-        await commit('user/SET_USER', data.user)
+        const { data: user } = await ctx.app.$api.Auth.tokenAuth()
+        await commit('user/SET_USER', user)
         await commit('auth/SET_AUTHENTICATED')
       } catch (err) {
         if (!err.response) {
           dispatch(
-            'error/SET_ERROR',
+            'popup/SET_ERROR',
             'Отсутствует подключение к серверу, попробуйте позднее'
           )
         } else await dispatch('auth/LOGOUT')
