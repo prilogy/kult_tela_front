@@ -16,7 +16,7 @@ export const actions = {
       console.log(workout)
       commit('SET_WORKOUT', workout.data)
     } catch (e) {
-      this.$router.push('/')
+      this.$router.push('/workout/all')
     }
   }
 }

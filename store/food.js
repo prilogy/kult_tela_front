@@ -16,6 +16,7 @@ export const actions = {
   async SET_FOOD_MENU({ commit }, payload) {
     try {
       const { data } = await this.$api.Food.getDaily()
+      console.log(data)
       commit('SET_FOOD_MENU', data)
     } catch (e) {
       await this.$router.push('/')

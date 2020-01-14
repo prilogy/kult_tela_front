@@ -24,6 +24,7 @@
                 height="7"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                :style="part.isOpened ? 'transform: rotate(-180deg)' : ''"
               >
                 <path
                   d="M12.564 0H.436C.072 0-.131.343.094.578l6.064 6.287a.5.5 0 00.684 0L12.906.578C13.13.343 12.928 0 12.564 0z"
@@ -43,18 +44,27 @@
             </transition>
           </ul>
         </div>
-      </div>
-      <div>
-        <VTipSmall>
-          <VP color="var(--grey-light3)">
-            Обязательно прочитайте
-            <n-link to="/food/tips">
-              <span style="color: var(--yellow-base)">
-                советы по питанию
-              </span>
-            </n-link>
-          </VP>
-        </VTipSmall>
+        <div>
+          <VTipSmall>
+            <VP color="var(--grey-light3)">
+              Обязательно прочитайте
+              <n-link to="/food/tips">
+                <span style="color: var(--yellow-base)">
+                  советы по питанию
+                </span>
+              </n-link>
+            </VP>
+          </VTipSmall>
+        </div>
+        <div class="food__body__info">
+          <VH2>Пищевая ценность</VH2>
+          <ul class="food__body__info__list">
+            <li v-for="item in FOOD_MENU.info">
+              <VP>{{ item.name }}</VP>
+              <VP>{{ item.value }}</VP>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -87,13 +97,18 @@ export default {
   },
   methods: {
     setOpened(index) {
-      console.log('scas')
       this.parts[index].isOpened = !this.parts[index].isOpened
+    },
+    setOpenedBasedOnHours() {
+      const hour = new Date().getHours()
+      if (hour >= 7 && hour < 12) this.setOpened(0)
+      else if (hour >= 11 && hour < 17) this.setOpened(1)
+      else if (hour >= 17 && hour < 23) this.setOpened(2)
     }
   },
   created() {
     const menu = this.FOOD_MENU
-    if (menu) {
+    if (menu && menu.breakfast && menu.breakfast.products) {
       const { breakfast, lunch, dinner, snack } = menu
       this.parts = [
         { name: 'Завтрак', list: breakfast.products, isOpened: false },
@@ -101,6 +116,7 @@ export default {
         { name: 'Ужин', list: dinner.products, isOpened: false },
         { name: 'Перекус', list: snack.products, isOpened: false }
       ]
+      this.setOpenedBasedOnHours()
     } else this.parts = null
   },
   computed: {
@@ -140,6 +156,10 @@ export default {
   margin-bottom: var(--space);
 }
 
+.food__body > div {
+  margin-bottom: var(--space);
+}
+
 .food__list {
   padding: 0 var(--space);
   padding-left: var(--space-half);
@@ -157,6 +177,26 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.food__body__info__list {
+  max-width: 500px;
+  margin-top: var(--space-half);
+}
+
+.food__body__info .food__body__info__list li {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-half);
+  border-radius: var(--radius-half);
+}
+
+.food__body__info .food__body__info__list li:nth-child(odd) {
+  background: var(--grey-light1);
+}
+
+.food__body__info .food__body__info__list li p:last-child {
+  color: var(--yellow-base);
 }
 
 .food__list__top h3 {

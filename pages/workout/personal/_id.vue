@@ -17,10 +17,11 @@ import {
   VP,
   VIcon,
   VButton
-} from '../../components/'
+} from '../../../components/'
 import { mapGetters } from 'vuex'
 
 export default {
+  middleware: 'minPlan_1',
   components: { VButton, VIcon, VH2, VP, VInput, VPlanCard, VH1, VH3 },
   data() {
     return {

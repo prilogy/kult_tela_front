@@ -63,7 +63,7 @@ export default {
       last_name: '',
       patronymic: '',
       weight_start: null,
-      avatar_src: null,
+      avataдпщr_src: null,
       password: '',
       password_verify: '',
       image_preview: null,
