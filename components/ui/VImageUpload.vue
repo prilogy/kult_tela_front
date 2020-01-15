@@ -9,11 +9,14 @@
       @change="handleFile"
     />
     <img
-      class="image_preview"
+      class="image-preview"
       v-if="image_preview"
       alt="Image preview"
       :src="image_preview"
     />
+    <VCaption class="image-preview__caption" v-if="image_src && image_src.name">
+      {{ image_src.name }}
+    </VCaption>
     <VButton @click="$refs.avatarInput.click()">
       {{
         !$slots.default
@@ -29,8 +32,9 @@
 
 <script>
 import VButton from './VButton'
+import VCaption from '../typography/VCaption'
 export default {
-  components: { VButton },
+  components: { VCaption, VButton },
   data() {
     return {
       image_preview: null,
@@ -39,9 +43,11 @@ export default {
   },
   methods: {
     handleFile(e) {
-      this.image_src = e.target.files[0]
-      this.createImage(e.target.files[0])
-      this.$emit('imageUploaded', this.image_src)
+      if (e.target.files[0]) {
+        this.image_src = e.target.files[0]
+        this.createImage(e.target.files[0])
+        this.$emit('imageUploaded', this.image_src)
+      }
     },
     createImage(file) {
       let image = new Image()
@@ -57,10 +63,15 @@ export default {
 }
 </script>
 
-<style>
-.image_preview {
+<style scoped>
+.image-preview {
   max-width: 100%;
   margin: var(--space-half) 0;
   border-radius: var(--radius-half);
+}
+
+.image-preview__caption {
+  text-align: right;
+  margin-bottom: var(--space-half);
 }
 </style>

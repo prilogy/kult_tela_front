@@ -27,15 +27,17 @@ export const actions = {
     }
   },
   async SET_REPORT_STATUS({ commit }, payload) {
-    try {
-      const { data } = await this.$api.FoodReport.getStatus()
-      console.log(data)
-      commit('SET_REPORT_STATUS', data)
-    } catch (e) {
-      commit('popup/SET_ERROR', 'Ошибка загрузки статуса отчета', {
-        root: true
-      })
-    }
+    if (!payload) {
+      try {
+        const { data } = await this.$api.FoodReport.getStatus()
+        commit('SET_REPORT_STATUS', data)
+      } catch (e) {
+        await this.$router.push('/food')
+        commit('popup/SET_ERROR', 'Ошибка загрузки статуса отчета', {
+          root: true
+        })
+      }
+    } else commit('SET_REPORT_STATUS', payload)
   }
 }
 

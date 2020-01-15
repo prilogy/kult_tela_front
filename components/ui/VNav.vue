@@ -37,7 +37,10 @@
           </svg>
         </div>
       </n-link>
-      <button @click="burgerToggle = !burgerToggle">
+      <button class="burger" @click="burgerToggle = !burgerToggle">
+        <div class="burger__mark" v-if="newNotifications > 0">
+          <p>{{ newNotifications }}</p>
+        </div>
         <svg
           width="35"
           height="35"
@@ -59,9 +62,10 @@ import VH2 from '../typography/VH2'
 import VButton from './VButton'
 import VPWAPrompt from '../utils/VPWAPrompt'
 import { mapActions, mapGetters } from 'vuex'
+import VCaption from '../typography/VCaption'
 
 export default {
-  components: { VH2, VButton, VPWAPrompt },
+  components: { VCaption, VH2, VButton, VPWAPrompt },
   data() {
     return {
       burgerToggle: false,
@@ -138,6 +142,29 @@ export default {
 
 .nav__dropdown__notifications_button h2:last-child {
   margin-left: var(--space-half);
+}
+
+.burger {
+  position: relative;
+}
+
+.burger__mark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  position: absolute;
+  background: var(--yellow-base);
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  top: -7px;
+}
+
+.burger__mark p {
+  color: var(--grey-base);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .nav__icons__icon {

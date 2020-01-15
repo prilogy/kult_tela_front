@@ -36,7 +36,8 @@ export default function(ctx) {
   }
 
   this.FoodReport = {
-    getStatus: () => axios.$get('/user/food/report')
+    getStatus: () => axios.$get('/user/food/report'),
+    send: images => axios.$post('/user/food/report', images)
   }
 
   this.Workout = {

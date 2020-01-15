@@ -12,6 +12,7 @@ export const state = () => ({
       id: 1,
       name: 'Тренировка',
       url: '/workout',
+      nested_urls: ['/workout/personal', '/workout/all'],
       icon:
         'M12.573 31.412a.705.705 0 01-.035.991l-1.52 1.422a.7.7 0 01-.988-.036l-8.854-9.542a.705.705 0 01.036-.992l1.522-1.42a.7.7 0 01.988.037l8.851 9.54zm11.298-17.955a.705.705 0 01-.035.991l-9.57 8.939a.7.7 0 01-.987-.036l-2.284-2.464a.705.705 0 01.036-.992l9.566-8.939a.697.697 0 01.987.036l2.287 2.465zM15.83 28.369a.705.705 0 01-.036.991l-1.522 1.421a.7.7 0 01-.988-.036l-8.85-9.542a.705.705 0 01.036-.991l1.52-1.42a.7.7 0 01.987.035l8.853 9.542zm14.744-14.57a.705.705 0 01-.036.991l-1.522 1.421a.7.7 0 01-.988-.035l-8.851-9.54a.704.704 0 01.035-.991l1.526-1.425a.697.697 0 01.987.036l8.85 9.543zm3.251-3.038a.706.706 0 01-.036.992l-1.519 1.42a.697.697 0 01-.987-.035l-8.85-9.544a.706.706 0 01.036-.992l1.52-1.423a.697.697 0 01.987.035l8.849 9.547z'
     },
@@ -19,6 +20,7 @@ export const state = () => ({
       id: 2,
       name: 'Моё питание',
       url: '/food',
+      nested_urls: ['/food/personal', '/food/tips', '/food/report'],
       icon:
         'M32.083 26.25a5.834 5.834 0 01-5.833 5.833h-4.375a5.833 5.833 0 01-5.833-5.833v-2.917h9.902l4.025-6.956 2.275 1.313-3.267 5.643h3.106v2.917zm-18.958 5.833H2.917c0-4.375 0-8.75.48-13.373.395-3.69 1.095-7.54 1.853-11.418h-.875V4.375h7.292v2.917h-.875c.758 3.879 1.458 7.729 1.852 11.418.481 4.623.481 8.998.481 13.373z'
     },
@@ -53,9 +55,11 @@ export const mutations = {
 export const actions = {
   SET_CURRENT_LINK_ID({ commit, getters }) {
     const name = this.$router.history.current.name
-    const currentName = '/' + (name === 'index' ? '' : name)
+    let currentName = ('/' + (name === 'index' ? '' : name)).replace('-', '/')
     const currentLink = getters.GET_LINKS.links.filter(
-      link => link.url === currentName
+      link =>
+        link.url === currentName ||
+        (link.nested_urls && link.nested_urls.includes(currentName))
     )[0]
     if (currentLink) commit('SET_CURRENT_LINK_ID', currentLink.id)
     else commit('SET_CURRENT_LINK_ID', null)

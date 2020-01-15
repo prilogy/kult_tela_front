@@ -30,7 +30,7 @@
     <transition name="showup">
       <div v-if="!planToBuy">
         <div class="top">
-          <VIcon @click="back" icon="back" />
+          <VButtonBack />
           <VH2>Доступные планы</VH2>
         </div>
 
@@ -48,12 +48,18 @@
 </template>
 
 <script>
-import { VH2, VPlanCard, VInput, VP, VButton } from '../components/'
-import VIcon from '../components/utils/VIcon'
+import {
+  VH2,
+  VPlanCard,
+  VInput,
+  VP,
+  VButton,
+  VButtonBack
+} from '../components/'
 
 export default {
   layout: 'noNav',
-  components: { VIcon, VButton, VP, VInput, VPlanCard, VH2 },
+  components: { VButtonBack, VButton, VP, VInput, VPlanCard, VH2 },
   data() {
     return {
       plans: null,
