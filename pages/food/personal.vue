@@ -65,6 +65,9 @@
             </li>
           </ul>
         </div>
+        <nuxt-link to="/food/report">
+          <VButton w100>Отправить отчет</VButton>
+        </nuxt-link>
       </div>
     </div>
     <div v-else>
@@ -79,10 +82,12 @@
 import { VH2, VH1, VP, VH3, VTipSmall } from '../../components'
 import { mapGetters } from 'vuex'
 import VRankNotification from '../../components/utils/VRankNotification'
+import VButton from '../../components/ui/VButton'
 
 export default {
   middleware: 'minPlan_1',
   components: {
+    VButton,
     VRankNotification,
     VH1,
     VH2,

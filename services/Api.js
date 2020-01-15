@@ -35,6 +35,10 @@ export default function(ctx) {
     getDaily: () => axios.$get('/food/daily')
   }
 
+  this.FoodReport = {
+    getStatus: () => axios.$get('/user/food/report')
+  }
+
   this.Workout = {
     getById: id => axios.$get('/workout/' + id)
   }

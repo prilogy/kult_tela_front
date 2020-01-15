@@ -13,6 +13,7 @@ import VAvatar from './ui/VAvatar'
 import VProfileActions from './ui/VProfileActions'
 import VChartWeightHistory from './ui/VChartWeightHistory'
 import VTipSmall from './ui/VTipSmall'
+import VImageUpload from './ui/VImageUpload'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -41,6 +42,7 @@ export {
   VProfileActions,
   VChartWeightHistory,
   VTipSmall,
+  VImageUpload,
   /**
    * UTILITIES
    */
