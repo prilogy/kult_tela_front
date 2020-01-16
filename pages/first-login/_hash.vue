@@ -5,14 +5,20 @@
         Регистрация прошла успешно, теперь вы можете войти в свой аккаунт через
         форму входа
       </VH3>
-      <VButton w100 weight="regular" @click="redirectToLogin">
+      <VButton w100 weight="regular" @click="$router.push('/login')">
         К форме входа
       </VButton>
     </div>
     <div v-if="!popup">
       <VH2 mb="var(--space-third)">Заполните данные</VH2>
+      <VTipSmall>
+        <VP color="var(--grey-light3)">
+          Для оптимального подбора меню и комплекса упражнений укажите данные
+          достоверно!
+        </VP>
+      </VTipSmall>
       <form id="form" autocomplete="off" @submit.prevent="sendForm">
-        <VH3 mb="var(--space)">Ваш email: {{ email }}</VH3>
+        <VH3 mb="var(--space-half)">Ваш email: {{ email }}</VH3>
         <VInput required caption="Имя" v-model="first_name"></VInput>
         <VInput required caption="Фамилия" v-model="last_name"></VInput>
         <VInput required caption="Отчество" v-model="patronymic"></VInput>
@@ -32,6 +38,13 @@
         ></VInput>
         <VInput
           required
+          type="number"
+          max="100"
+          caption="Возраст"
+          v-model="age"
+        ></VInput>
+        <VInput
+          required
           minlength="6"
           type="text"
           caption="Пароль"
@@ -39,7 +52,7 @@
         ></VInput>
         <VP
           mb="var(--space-half)"
-          :color="passwordLenght ? 'var(--green-base)' : 'var(--red-base)'"
+          :color="passwordLength ? 'var(--green-base)' : 'var(--red-base)'"
         >
           Минимум 6 символов
         </VP>
@@ -53,24 +66,25 @@
           v-model="password_verify"
         ></VInput>
         <VP :color="passwordsValidate.color">{{ passwordsValidate.title }}</VP>
-        <input
-          accept="image/*"
-          required
-          ref="avatarInput"
-          style="display: none;"
-          type="file"
-          @change="handleFile"
-        />
-        <img
-          class="image_preview"
-          v-if="image_preview"
-          alt="Image preview"
-          :src="image_preview"
-        />
-        <VButton mt="var(--space-half)" w100 @click="$refs.avatarInput.click()">
-          {{ !avatar_src ? 'Загрузить фото' : 'Загрузить другое фото' }}
-        </VButton>
+        <div>
+          <VH3 weight="regular" mb="var(--space-half)" mt="var(--space-half)">
+            Аватар
+          </VH3>
+          <VImageUpload
+            w100
+            class="report__list__input"
+            @imageUploaded="avatarHandle"
+          ></VImageUpload>
+        </div>
+
+        <VTipSmall mt="var(--space-half)" mb="0">
+          <VP color="var(--grey-light3)">
+            Вы сможете изменить фото в любой момент
+          </VP>
+        </VTipSmall>
       </form>
+      <VDivider></VDivider>
+
       <VButton
         w100
         type="submit"
@@ -80,7 +94,7 @@
         value="submit"
         :disabled="formValidate"
       >
-        Сохранить
+        Сохранить и продолжить
       </VButton>
       <VP
         v-if="formValidate"
@@ -93,18 +107,34 @@
 </template>
 
 <script>
-import { VInput } from '../../components/'
-import VH3 from '../../components/typography/VH3'
-import VH2 from '../../components/typography/VH2'
-import VP from '../../components/typography/VP'
-import VButton from '../../components/ui/VButton'
-import VCaption from '../../components/typography/VCaption'
+import {
+  VInput,
+  VH2,
+  VH3,
+  VP,
+  VButton,
+  VCaption,
+  VTipSmall
+} from '../../components/'
+import VDivider from '../../components/ui/VDivider'
+import VImageUpload from '../../components/ui/VImageUpload'
 
 export default {
   layout: 'noNav',
-  components: { VCaption, VButton, VP, VH2, VH3, VInput },
+  components: {
+    VImageUpload,
+    VDivider,
+    VCaption,
+    VButton,
+    VP,
+    VH2,
+    VH3,
+    VInput,
+    VTipSmall
+  },
   data() {
     return {
+      hash: null,
       email: '',
       first_name: '',
       last_name: '',
@@ -115,47 +145,40 @@ export default {
       password_verify: '',
       image_preview: null,
       popup: false,
-      height: ''
+      height: '',
+      age: '',
+      names: [
+        'hash',
+        'first_name',
+        'last_name',
+        'patronymic',
+        'weight_start',
+        'height',
+        'avatar_src',
+        'age',
+        'password'
+      ]
     }
   },
   methods: {
     async sendForm() {
       if (!this.formValidate) {
         const form = new FormData()
-        form.append('hash', this.$route.params.hash)
-        form.append('first_name', this.first_name)
-        form.append('last_name', this.last_name)
-        form.append('patronymic', this.patronymic)
-        form.append('weight_start', this.weight_start.split(',').join('.'))
-        form.append('password', this.password)
-        form.append('avatar_src', this.avatar_src)
-        form.append('height', this.height.split(',').join('.'))
+
+        this.names.forEach(name => {
+          form.append(name, this[name])
+        })
+
         try {
           const result = await this.$api.Auth.fillInfo(form)
-          if (result.success === true) {
-            this.popup = true
-          }
+          if (result.success === true) this.popup = true
         } catch (error) {
-          this.redirectToLogin()
+          this.$router.push('/login')
         }
       }
     },
-    redirectToLogin() {
-      this.$router.push('/login')
-    },
-    handleFile(e) {
-      this.avatar_src = e.target.files[0]
-      this.createImage(e.target.files[0])
-    },
-    createImage(file) {
-      let image = new Image()
-      const reader = new FileReader()
-      let vm = this
-
-      reader.onload = e => {
-        vm.image_preview = e.target.result
-      }
-      reader.readAsDataURL(file)
+    avatarHandle(img) {
+      this.avatar_src = img
     }
   },
   computed: {
@@ -169,10 +192,11 @@ export default {
         !this.password_verify ||
         this.password !== this.password_verify ||
         !this.avatar_src ||
-        !this.passwordLenght
+        !this.age ||
+        !this.passwordLength
       )
     },
-    passwordLenght() {
+    passwordLength() {
       return this.password.length >= 6
     },
     passwordsValidate() {
@@ -196,7 +220,7 @@ export default {
     const hash = ctx.params.hash
     try {
       const result = await ctx.app.$api.Auth.isFillAllowed({ hash })
-      return { email: result.data.email }
+      return { email: result.data.email, hash }
     } catch (error) {
       return ctx.redirect('/login')
     }
@@ -205,13 +229,14 @@ export default {
 </script>
 
 <style scoped>
-form div {
+form {
+  margin-top: var(--space-half);
+  margin-bottom: var(--space);
+}
+form > div {
   margin-bottom: var(--space-half);
 }
-.image_preview {
-  margin-top: var(--space);
-  width: 100%;
-}
+
 .popup {
   max-width: var(--body-max-width);
   background: var(--grey-base);

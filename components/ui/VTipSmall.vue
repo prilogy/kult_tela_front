@@ -1,10 +1,16 @@
 <template>
-  <div class="tip">
+  <div class="tip" :style="{ ...indents }">
     <slot></slot>
   </div>
 </template>
 
-<script></script>
+<script>
+import indents from '../../mixins/indents'
+
+export default {
+  mixins: [indents]
+}
+</script>
 
 <style scoped>
 .tip {

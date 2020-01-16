@@ -11,10 +11,10 @@ import VInput from './ui/VInput'
 import VPlanCard from './ui/VPlanCard'
 import VAvatar from './ui/VAvatar'
 import VProfileActions from './ui/VProfileActions'
-import VChartWeightHistory from './ui/VChartWeightHistory'
 import VTipSmall from './ui/VTipSmall'
 import VImageUpload from './ui/VImageUpload'
 import VButtonBack from './ui/VButtonBack'
+import VDivider from './ui/VDivider'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -41,10 +41,10 @@ export {
   VPlanCard,
   VAvatar,
   VProfileActions,
-  VChartWeightHistory,
   VTipSmall,
   VImageUpload,
   VButtonBack,
+  VDivider,
   /**
    * UTILITIES
    */

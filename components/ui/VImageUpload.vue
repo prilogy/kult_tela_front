@@ -2,11 +2,10 @@
   <div>
     <input
       accept="image/*"
-      required
       ref="avatarInput"
       style="display: none;"
       type="file"
-      @change="handleFile"
+      @change.prevent="handleFile"
     />
     <img
       class="image-preview"
@@ -17,7 +16,7 @@
     <VCaption class="image-preview__caption" v-if="image_src && image_src.name">
       {{ image_src.name }}
     </VCaption>
-    <VButton @click="$refs.avatarInput.click()">
+    <VButton type="button" :w100="w100" @click="emitClick">
       {{
         !$slots.default
           ? !image_src
@@ -34,6 +33,12 @@
 import VButton from './VButton'
 import VCaption from '../typography/VCaption'
 export default {
+  props: {
+    w100: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: { VCaption, VButton },
   data() {
     return {
@@ -42,7 +47,11 @@ export default {
     }
   },
   methods: {
+    emitClick() {
+      this.$refs.avatarInput.click()
+    },
     handleFile(e) {
+      e.preventDefault()
       if (e.target.files[0]) {
         this.image_src = e.target.files[0]
         this.createImage(e.target.files[0])

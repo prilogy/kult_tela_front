@@ -1,148 +1,146 @@
 <template>
   <div>
-    <div v-if="!popup">
-      <VH2 mb="var(--space-third)">Редактировать данные</VH2>
-      <form id="form" autocomplete="off" @submit.prevent="sendForm">
-        <VH3 mb="var(--space)">Ваш email: {{ email }}</VH3>
-        <VInput required caption="Имя" v-model="first_name"></VInput>
-        <VInput required caption="Фамилия" v-model="last_name"></VInput>
-        <VInput required caption="Отчество" v-model="patronymic"></VInput>
-        <input
-          accept="image/*"
-          required
-          ref="avatarInput"
-          style="display: none;"
-          type="file"
-          @change="handleFile"
-        />
-        <img
-          class="image_preview"
-          v-if="image_preview"
-          alt="Image preview"
-          :src="image_preview"
-        />
-        <div v-else>
-          <img class="image_preview" :src="USER.avatar_src" alt="Аватар" />
-          <VH3>Ваш текущий аватар</VH3>
+    <VH2 mb="var(--space-third)">Редактировать данные</VH2>
+    <form id="form" autocomplete="off" @submit.prevent="sendForm">
+      <VH3 mb="var(--space-half)">email: {{ email }}</VH3>
+      <VInput required caption="Имя" v-model="first_name"></VInput>
+      <VInput required caption="Фамилия" v-model="last_name"></VInput>
+      <VInput required caption="Отчество" v-model="patronymic"></VInput>
+      <VInput
+        required
+        step="0.01"
+        type="number"
+        caption="Рост (в см)"
+        v-model="height"
+        max="250"
+      ></VInput>
+      <VInput
+        required
+        type="number"
+        max="100"
+        caption="Возраст"
+        v-model="age"
+      ></VInput>
+      <div>
+        <VH3 weight="regular">
+          Аватар
+        </VH3>
+        <div v-if="!avatar_src" class="avatar-preview">
+          <div class="avatar-preview__caption">
+            <VP>Текущий аватар</VP>
+          </div>
+          <img
+            class="avatar-preview__img"
+            :src="USER.avatar_src"
+            alt="avatar image"
+          />
         </div>
+        <VImageUpload
+          w100
+          class="report__list__input"
+          @imageUploaded="avatarHandle"
+        >
+          {{ !avatar_src ? 'Изменить аватар' : 'Загрузить другое фото' }}
+        </VImageUpload>
+      </div>
+    </form>
 
-        <VButton mt="var(--space-half)" w100 @click="$refs.avatarInput.click()">
-          Загрузить другое фото
-        </VButton>
-      </form>
+    <VDivider />
+    <div class="buttons">
       <VButton
-        w100
         type="submit"
         form="form"
-        weight="regular"
-        mt="var(--space)"
         value="submit"
-        :disabled="formValidate"
+        :disabled="!formValidate"
       >
         Сохранить
       </VButton>
-      <VP
-        v-if="formValidate"
-        style="margin-top: var(--space-half) ;text-align: center; color: var(--red-base)"
-      >
-        Форма заполнена неправильно
-      </VP>
+      <VButton color="var(--yellow-base)" @click="$router.push('/')">
+        Отменить
+      </VButton>
     </div>
+
+    <VP class="validation-caption" v-if="!formValidate">
+      Форма заполнена неправильно
+    </VP>
   </div>
 </template>
 
 <script>
-import { VInput, VH3, VH2, VP, VButton, VCaption } from '../components/'
-import { mapGetters } from 'vuex'
+import {
+  VInput,
+  VH3,
+  VH2,
+  VP,
+  VButton,
+  VCaption,
+  VImageUpload,
+  VDivider
+} from '../components/'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  components: { VCaption, VButton, VP, VH2, VH3, VInput },
+  components: {
+    VImageUpload,
+    VCaption,
+    VButton,
+    VP,
+    VH2,
+    VH3,
+    VInput,
+    VDivider
+  },
   data() {
     return {
       email: '',
       first_name: '',
       last_name: '',
       patronymic: '',
-      weight_start: null,
-      avataдпщr_src: null,
-      password: '',
-      password_verify: '',
-      image_preview: null,
-      popup: false,
-      height: ''
+      height: '',
+      age: '',
+      avatar_src: null
     }
   },
   methods: {
     async sendForm() {
-      if (!this.formValidate) {
+      if (this.formValidate === true) {
         const form = new FormData()
-        form.append('hash', this.$route.params.hash)
-        form.append('first_name', this.first_name)
-        form.append('last_name', this.last_name)
-        form.append('patronymic', this.patronymic)
-        form.append('weight_start', this.weight_start.split(',').join('.'))
-        form.append('password', this.password)
-        form.append('avatar_src', this.avatar_src)
-        form.append('height', this.height.split(',').join('.'))
-        try {
-          const result = await this.$api.Auth.fillInfo(form)
-          if (result.success === true) {
-            this.popup = true
-          }
-        } catch (error) {
-          this.redirectToLogin()
-        }
-      }
-    },
-    redirectToLogin() {
-      this.$router.push('/login')
-    },
-    handleFile(e) {
-      this.avatar_src = e.target.files[0]
-      this.createImage(e.target.files[0])
-    },
-    createImage(file) {
-      let image = new Image()
-      const reader = new FileReader()
-      let vm = this
+        Object.keys(this.editedData).forEach(key => {
+          form.append(key, this.editedData[key])
+        })
 
-      reader.onload = e => {
-        vm.image_preview = e.target.result
+        try {
+          const result = await this.$api.User.updateInfo(form)
+          if (result.success === true) {
+            this.SET_SUCCESS('Данные успешно изменены')
+            this.SET_USER(result.data)
+          }
+        } catch (error) {}
+        this.$router.push('/')
       }
-      reader.readAsDataURL(file)
-    }
+    },
+    avatarHandle(img) {
+      this.avatar_src = img
+    },
+    ...mapActions({
+      SET_SUCCESS: 'popup/SET_SUCCESS',
+      SET_USER: 'user/SET_USER'
+    })
   },
   computed: {
+    editedData() {
+      const user = this.USER
+      let edited = {}
+      const names = ['first_name', 'last_name', 'patronymic', 'height', 'age']
+
+      names.forEach(name => {
+        if (user[name] != this[name]) edited[name] = this[name]
+      })
+      if (this.avatar_src) edited.avatar_src = this.avatar_src
+
+      return edited
+    },
     formValidate() {
-      return (
-        !this.first_name ||
-        !this.last_name ||
-        !this.patronymic ||
-        !this.weight_start ||
-        !this.password ||
-        !this.password_verify ||
-        this.password !== this.password_verify ||
-        !this.avatar_src ||
-        !this.passwordLenght
-      )
-    },
-    passwordLenght() {
-      return this.password.length >= 6
-    },
-    passwordsValidate() {
-      if (this.password === '' && this.password_verify === '')
-        return {
-          title: '',
-          color: 'transparent'
-        }
-      return this.password === this.password_verify
-        ? {
-            title: 'Пароли совпадают',
-            color: 'var(--green-base)'
-          }
-        : {
-            title: 'Пароли должны совпадать!',
-            color: 'var(--red-base)'
-          }
+      return Object.keys(this.editedData).length !== 0
     },
     ...mapGetters({
       USER: 'user/GET_USER'
@@ -151,28 +149,67 @@ export default {
   created() {
     const user = this.USER
     this.email = user.email
+    this.first_name = user.first_name
+    this.last_name = user.last_name
+    this.patronymic = user.patronymic
+    this.height = user.height
+    this.age = user.age
   }
 }
 </script>
 
 <style scoped>
+form {
+  margin-bottom: var(--space);
+}
 form div {
   margin-bottom: var(--space-half);
 }
-.image_preview {
+
+.avatar-preview {
+  margin-top: var(--space-half);
+  position: relative;
+}
+
+.avatar-preview__caption {
+  padding: var(--space-half);
+  border-radius: 0 0 0 var(--radius);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--grey-base);
+}
+
+.avatar-preview__caption p {
+  color: var(--yellow-base) !important;
+}
+
+.avatar-preview__img {
+  border-radius: var(--radius-half);
+  max-width: 100%;
+}
+
+.buttons {
+  display: flex;
   margin-top: var(--space);
+}
+
+.buttons button:first-child {
   width: 100%;
 }
-.popup {
-  max-width: var(--body-max-width);
-  background: var(--grey-base);
-  position: fixed;
-  padding: var(--space);
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: fit-content;
-  margin: auto;
+
+.buttons button:last-child {
+  margin-left: var(--space-half);
+  background: none !important;
+}
+
+.buttons button:last-child > h3 {
+  color: var(--yellow-base) !important;
+}
+
+.validation-caption {
+  margin-top: var(--space-half);
+  text-align: center;
+  color: var(--red-base);
 }
 </style>
