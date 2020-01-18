@@ -43,7 +43,8 @@ export default {
     '~/plugins/axios.js',
     '~/plugins/api.js',
     '~/plugins/nuxt-client-init.client.js',
-    '~/plugins/global.js'
+    '~/plugins/global.js',
+    '~/plugins/socket-io.js'
   ],
   /*
    ** Nuxt.js dev-modules
