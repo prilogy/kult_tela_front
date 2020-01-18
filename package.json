@@ -14,7 +14,9 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
     "nuxt": "^2.0.0",
-    "nuxt-client-init-module": "^0.1.7"
+    "nuxt-client-init-module": "^0.1.7",
+    "socket.io-client": "^2.3.0",
+    "vue-socket.io": "^3.0.7"
   },
   "devDependencies": {
     "prettier": "1.16.3"
