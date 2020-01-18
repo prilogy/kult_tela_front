@@ -107,15 +107,7 @@
 </template>
 
 <script>
-import {
-  VInput,
-  VH2,
-  VH3,
-  VP,
-  VButton,
-  VCaption,
-  VTipSmall
-} from '../../components/'
+import { VInput, VTipSmall } from '../../components/'
 import VDivider from '../../components/ui/VDivider'
 import VImageUpload from '../../components/ui/VImageUpload'
 
@@ -124,11 +116,6 @@ export default {
   components: {
     VImageUpload,
     VDivider,
-    VCaption,
-    VButton,
-    VP,
-    VH2,
-    VH3,
     VInput,
     VTipSmall
   },

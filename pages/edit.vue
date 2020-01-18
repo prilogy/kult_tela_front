@@ -67,27 +67,13 @@
 </template>
 
 <script>
-import {
-  VInput,
-  VH3,
-  VH2,
-  VP,
-  VButton,
-  VCaption,
-  VImageUpload,
-  VDivider
-} from '../components/'
+import { VInput, VImageUpload, VDivider } from '../components/'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     VImageUpload,
-    VCaption,
-    VButton,
-    VP,
-    VH2,
-    VH3,
-    VInput,
-    VDivider
+    VDivider,
+    VInput
   },
   data() {
     return {

@@ -26,10 +26,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { VH2, VH3, VP, VAvatar, VButton } from '../components/'
-import VProfileActions from '../components/ui/VProfileActions'
+import { VAvatar, VProfileActions } from '../components/'
 export default {
-  components: { VProfileActions, VButton, VP, VH3, VAvatar, VH2 },
+  components: { VProfileActions, VAvatar },
   computed: {
     info() {
       const user = this.USER

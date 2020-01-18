@@ -47,14 +47,7 @@
 </template>
 
 <script>
-import { VH1, VH3, VH2, VButton } from '../components/'
 export default {
-  components: {
-    VButton,
-    VH2,
-    VH3,
-    VH1
-  },
   data() {
     return {
       topSwitch: false,

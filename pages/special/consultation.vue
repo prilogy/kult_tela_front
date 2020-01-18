@@ -42,9 +42,9 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { VH2, VButton, VInput, VP } from '../../components/'
+import { VInput } from '../../components/'
 export default {
-  components: { VH2, VButton, VInput, VP },
+  components: { VInput },
   data() {
     return {
       tutor: '',

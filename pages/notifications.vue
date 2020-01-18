@@ -52,11 +52,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { VH2, VH3, VP, VButton } from '../components/'
-import VCaption from '../components/typography/VCaption'
 import VIcon from '../components/utils/VIcon'
 export default {
-  components: { VIcon, VCaption, VButton, VP, VH3, VH2 },
+  components: { VIcon },
   methods: {
     pushTo(url) {
       this.$router.push(url)

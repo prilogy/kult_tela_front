@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import { VH1, VH3, VInput, VP, VButton } from '../components/'
+import { VInput } from '../components/'
 import { mapActions } from 'vuex'
 export default {
-  components: { VButton, VP, VH3, VInput, VH1 },
+  components: { VInput },
   data() {
     return {
       new_weight: null

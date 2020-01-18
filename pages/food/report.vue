@@ -56,27 +56,13 @@
 </template>
 
 <script>
-import {
-  VH2,
-  VH1,
-  VP,
-  VH3,
-  VTipSmall,
-  VImageUpload,
-  VButton,
-  VButtonBack
-} from '../../components'
+import { VTipSmall, VImageUpload, VButtonBack } from '../../components'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   middleware: 'minPlan_1',
   components: {
-    VButton,
-    VH1,
-    VH2,
-    VH3,
     VImageUpload,
-    VP,
     VTipSmall,
     VButtonBack
   },

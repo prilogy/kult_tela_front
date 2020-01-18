@@ -6,9 +6,9 @@
         <div class="login-form__top__button">
           <VH3 weight="regular">или</VH3>
           <nuxt-link to="/plans">
-            <VButton weight="regular" pa="var(--space-half)"
-              >Купить доступ</VButton
-            >
+            <VButton weight="regular" pa="var(--space-half)">
+              Купить доступ
+            </VButton>
           </nuxt-link>
         </div>
       </div>
@@ -48,18 +48,14 @@
 </template>
 
 <script>
-import { VH3, VH1, VButton, VP, VInput } from '../components'
+import { VInput } from '../components'
 import { mapActions } from 'vuex'
 
 export default {
   layout: 'noNav',
   middleware: 'auth',
   components: {
-    VInput,
-    VH3,
-    VH1,
-    VButton,
-    VP
+    VInput
   },
   data() {
     return {

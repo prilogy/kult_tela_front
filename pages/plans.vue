@@ -48,18 +48,11 @@
 </template>
 
 <script>
-import {
-  VH2,
-  VPlanCard,
-  VInput,
-  VP,
-  VButton,
-  VButtonBack
-} from '../components/'
+import { VPlanCard, VInput, VButtonBack } from '../components/'
 
 export default {
   layout: 'noNav',
-  components: { VButtonBack, VButton, VP, VInput, VPlanCard, VH2 },
+  components: { VButtonBack, VInput, VPlanCard },
   data() {
     return {
       plans: null,

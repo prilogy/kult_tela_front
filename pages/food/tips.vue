@@ -8,13 +8,10 @@
 </template>
 
 <script>
-import { VH2, VButtonBack } from '../../components/'
-import VButton from '../../components/ui/VButton'
+import { VButtonBack } from '../../components/'
 export default {
   components: {
-    VButtonBack,
-    VButton,
-    VH2
+    VButtonBack
   }
 }
 </script>

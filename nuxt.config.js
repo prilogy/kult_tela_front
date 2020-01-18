@@ -40,10 +40,10 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/ds.js',
     '~/plugins/axios.js',
     '~/plugins/api.js',
-    '~/plugins/nuxt-client-init.client.js'
+    '~/plugins/nuxt-client-init.client.js',
+    '~/plugins/global.js'
   ],
   /*
    ** Nuxt.js dev-modules

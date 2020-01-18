@@ -92,20 +92,12 @@
 </template>
 
 <script>
-import {
-  VH1,
-  VH2,
-  VH3,
-  VPlanCard,
-  VInput,
-  VP,
-  VButton
-} from '../../../components/'
+import { VInput, VButton } from '../../../components/'
 import { mapGetters } from 'vuex'
 
 export default {
   middleware: 'minPlan_1',
-  components: { VButton, VH2, VP, VInput, VPlanCard, VH1, VH3 },
+  components: { VButton, VInput },
   data() {
     return {
       type: false
