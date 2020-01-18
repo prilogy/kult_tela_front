@@ -1,5 +1,8 @@
 <template>
-  <hr class="divider" :style="{ 'border-color': color }" />
+  <hr
+    class="divider"
+    :style="{ 'border-color': color, 'border-width': width + 'px' }"
+  />
 </template>
 
 <script>
@@ -8,6 +11,10 @@ export default {
     color: {
       type: String,
       default: 'var(--grey-light1)'
+    },
+    width: {
+      type: Number,
+      default: 1
     }
   }
 }
