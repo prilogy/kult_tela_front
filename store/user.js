@@ -4,9 +4,7 @@ export const state = () => ({
 
 export const mutations = {
   SET_USER(state, payload) {
-    let user = payload
-    user.avatar_src = this.$api.getImageLink(user.avatar_src)
-    state.user = user
+    state.user = payload
   },
   UPDATE_USER(state, payload) {
     if (state.user) {

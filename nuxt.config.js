@@ -1,3 +1,5 @@
+const API_URL_DEFAULT = 'http://localhost:3001/'
+
 export default {
   mode: 'spa',
   server: {
@@ -44,7 +46,10 @@ export default {
     '~/plugins/api.js',
     '~/plugins/nuxt-client-init.client.js',
     '~/plugins/global.js',
-    '~/plugins/socket-io.js'
+    {
+      src: '~/plugins/socket-io.js',
+      ssr: false
+    }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -57,7 +62,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
-    //'nuxt-client-init-module'
   ],
   pwa: {
     meta: {
@@ -72,7 +76,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:3001/'
+    API_URL: process.env.API_URL || API_URL_DEFAULT
   },
   axios: {},
   /*

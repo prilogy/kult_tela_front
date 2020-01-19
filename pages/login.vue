@@ -64,13 +64,13 @@ export default {
     }
   },
   methods: {
-    doLogin(e) {
+    async doLogin(e) {
       const user = {
         email: this.login,
         password: this.password
       }
 
-      this.LOGIN(user)
+      await this.LOGIN(user)
     },
     ...mapActions({
       LOGIN: 'auth/LOGIN'

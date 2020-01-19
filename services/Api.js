@@ -15,6 +15,11 @@ export default function(ctx) {
     fillInfo: data => axios.$post('/auth/signup/fill', data)
   }
 
+  this.Chat = {
+    getAll: () => axios.$get('/chat'),
+    getWithId: id => axios.$get('/chat/' + id)
+  }
+
   this.User = {
     updateWeight: data => axios.$post('/user/update/weight', data),
     updateWorkout: data => axios.$post('/user/update/workout', data),

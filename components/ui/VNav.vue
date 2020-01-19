@@ -38,7 +38,10 @@
         </div>
       </n-link>
       <button class="burger" @click="burgerToggle = !burgerToggle">
-        <div class="burger__mark" v-if="newNotifications > 0">
+        <div
+          class="burger__mark"
+          v-if="newNotifications && newNotifications > 0"
+        >
           <p>{{ newNotifications }}</p>
         </div>
         <svg
@@ -79,20 +82,30 @@ export default {
     dropDownLinkAction(link) {
       if (link.action) link.action()
       else if (link.url) this.$router.push(link.url)
-      this.hideDropdown()
     }
   },
   computed: {
+    currentRoute() {
+      return this.$route.name
+    },
     newNotifications() {
-      const lastSeenId = this.USER.notifications_last_seen
-      const lastId = this.USER.notifications[this.USER.notifications.length - 1]
-        .id
-      return lastId - lastSeenId
+      if (this.USER) {
+        const lastSeenId = this.USER.notifications_last_seen
+        const lastId = this.USER.notifications[
+          this.USER.notifications.length - 1
+        ].id
+        return lastId - lastSeenId
+      } else return null
     },
     ...mapGetters({
       LINKS: 'nav/GET_LINKS',
       USER: 'user/GET_USER'
     })
+  },
+  watch: {
+    currentRoute() {
+      this.hideDropdown()
+    }
   },
   created() {
     if (
@@ -110,8 +123,8 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 100;
   max-width: var(--body-max-width);
+  z-index: 100;
 }
 
 .nav__dropdown {
@@ -121,6 +134,7 @@ export default {
   align-items: flex-start;
   background: var(--grey-light1);
   padding: var(--space);
+  z-index: 999;
 }
 
 .nav__dropdown h2 {
@@ -134,6 +148,7 @@ export default {
   justify-content: space-around;
   background: var(--grey-light2);
   height: var(--navbar-height);
+  z-index: 1000;
 }
 
 .nav__dropdown__notifications_button {

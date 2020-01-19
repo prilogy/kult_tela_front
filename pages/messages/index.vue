@@ -2,21 +2,26 @@
   <div class="messages">
     <VH2 class="messages__title">Сообщения</VH2>
     <div>
-      <ul v-for="room in rooms" :key="room.id" class="messages__contacts">
+      <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
           <div class="contact">
-            <img :src="room.avatar_src" class="contact__avatar" alt="avatar" />
+            <VAvatarSmall class="contact__avatar" :src="chat.user.avatar_src" />
             <div class="contact__aside">
               <div class="contact__aside__top">
-                <VP class="contact__aside__top__name">{{ room.name }}</VP>
-                <VP class="contact__aside__top__time">{{ room.date }}</VP>
+                <VP class="contact__aside__top__name">{{ chat.user.name }}</VP>
+                <VP class="contact__aside__top__time">
+                  {{ chat.last_message.date }}
+                </VP>
               </div>
               <div class="contact__aside__bottom">
                 <VP class="contact__aside__bottom__text">
-                  {{ cutUnderWidth(room.text) }}
+                  {{ chat.last_message.text }}
                 </VP>
-                <div class="contact__aside__bottom__mark">
-                  <VCaption>2</VCaption>
+                <div
+                  v-if="chat.messages_unread !== 0"
+                  class="contact__aside__bottom__mark"
+                >
+                  <VCaption>{{ chat.messages_unread }}</VCaption>
                 </div>
               </div>
             </div>
@@ -25,53 +30,35 @@
         </li>
       </ul>
     </div>
-    <div><VP ref="phantomChar" class="phantom-char">S</VP></div>
+    <VButton @click="">
+      emit event
+    </VButton>
+    <div>
+      <VP ref="phantomChar" class="phantom-char">S</VP>
+    </div>
   </div>
 </template>
 
 <script>
-import { VDivider } from '../../components/'
+import { mapGetters } from 'vuex'
+import { VDivider, VAvatarSmall } from '../../components/'
 export default {
-  components: { VDivider },
+  components: { VAvatarSmall, VDivider },
   data() {
-    return {
-      charWidth: null,
-      rooms: [
-        {
-          id: 0,
-          name: 'Иван Иванов',
-          text: 'Алло ты где ? Тута...',
-          unread: 2,
-          avatar_src:
-            'https://i.pinimg.com/originals/bd/71/46/bd7146bb7f82b89c3a39489e44b36941.jpg',
-          date: '15:50'
-        },
-        {
-          id: 1,
-          name: 'Инджирбашвилли Куов',
-          text: 'Что по поводу завтра? ГО?!!! yf[[asdas[ asdasdas dashdasy das',
-          unread: 2,
-          avatar_src:
-            'https://i.pinimg.com/originals/bd/71/46/bd7146bb7f82b89c3a39489e44b36941.jpg',
-          date: '3 Окт.'
-        }
-      ]
-    }
+    return {}
   },
-  methods: {
-    cutUnderWidth(value) {
-      if (!value) return ''
-      value = value.toString()
-      const safeWidth = window.innerWidth - 50 - 10
-      const safeAmount = Math.floor(safeWidth / this.charWidth) - 2
-
-      const diff = value.length - safeAmount
-      console.log(`len: ${value.length}, safeAM: ${safeAmount}, diff: ${diff}`)
-      return diff > 0 ? value.substr(0, value.length - diff) + '...' : value
-    }
+  computed: {
+    ...mapGetters({
+      CHATS: 'chat/GET_CHATS'
+    })
   },
+  methods: {},
+  fetch({ store }) {
+    store.dispatch('chat/FEED_CHATS')
+  },
+  created() {},
   mounted() {
-    this.charWidth = this.$refs.phantomChar.$el.offsetWidth
+    this.$store.dispatch('chat/eventA')
   }
 }
 </script>
@@ -96,10 +83,6 @@ export default {
 }
 
 .contact .contact__avatar {
-  min-width: var(--avatar-size) !important;
-  max-width: var(--avatar-size) !important;
-  height: var(--avatar-size);
-  border-radius: calc(var(--avatar-size) * 2);
   margin-right: var(--space-half);
 }
 
@@ -126,6 +109,11 @@ export default {
 
 .contact__aside__bottom__text {
   color: var(--white-trans1);
+  text-overflow: ellipsis;
+  /*
+  white-space: nowrap;
+  overflow: hidden;
+  width: 416px;*/
 }
 
 .messages__contacts__item .contact__divider {

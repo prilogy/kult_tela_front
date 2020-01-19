@@ -15,6 +15,7 @@ import VTipSmall from './ui/VTipSmall'
 import VImageUpload from './ui/VImageUpload'
 import VButtonBack from './ui/VButtonBack'
 import VDivider from './ui/VDivider'
+import VAvatarSmall from './ui/VAvatarSmall'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -45,6 +46,7 @@ export {
   VImageUpload,
   VButtonBack,
   VDivider,
+  VAvatarSmall,
   /**
    * UTILITIES
    */

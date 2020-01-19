@@ -1,18 +1,17 @@
 import Vue from 'vue'
-import socketio from 'socket.io-client'
-import VueSocketIO from 'vue-socket.io'
+import VueSocketIOExt from 'vue-socket.io-extended'
+import io from 'socket.io-client'
+
+const API_URL = process.env.API_URL
 
 export default ({ store }) => {
-  const SocketInstance = socketio(process.env.API_URL, {
-    query: {
-      token: store.getters['auth/GET_TOKEN']
-    }
-  })
-
-  Vue.use(
-    new VueSocketIO({
-      debug: true,
-      connection: SocketInstance
+  const token = store.getters['auth/GET_TOKEN']
+  if (token) {
+    const socket = io.connect(process.env.API_URL, {
+      query: {
+        token: token
+      }
     })
-  )
+    Vue.use(VueSocketIOExt, socket, { store })
+  }
 }

@@ -16,7 +16,7 @@
     "nuxt": "^2.0.0",
     "nuxt-client-init-module": "^0.1.7",
     "socket.io-client": "^2.3.0",
-    "vue-socket.io": "^3.0.7"
+    "vue-socket.io-extended": "^4.0.1"
   },
   "devDependencies": {
     "prettier": "1.16.3"

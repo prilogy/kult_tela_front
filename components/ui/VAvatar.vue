@@ -1,13 +1,19 @@
 <template>
   <div class="wrapper">
     <div class="avatar">
-      <img alt="avatar wrapper" class="avatar__wrapper" :src="wrapper_src" />
+      <img
+        ref="rankImage"
+        alt="avatar wrapper"
+        class="avatar__wrapper"
+        :src="wrapper_src"
+      />
       <img
         :style="style"
         ref="avatar"
         alt="avatar"
         class="avatar__img"
         :src="image_src"
+        @load="resize($refs.avatar)"
       />
     </div>
   </div>
@@ -21,7 +27,7 @@ export default {
   },
   data() {
     return {
-      style: null,
+      style: {},
       loaded: 0
     }
   },
@@ -31,18 +37,30 @@ export default {
       return '/ranks/' + rank + '.png'
     }
   },
-  async created() {
-    const img = new Image()
-    img.src = this.image_src
-    let percent
-    img.onload = () => {
-      percent = (100 * 125) / img.height / 100
-      if (img.width * percent > 125) {
-        this.style = { left: '-50%' }
+  methods: {
+    resize(img) {
+      const height = img.clientHeight
+      const width = img.clientWidth
+      const size = this.$refs.rankImage.clientHeight
+
+      const _img = new Image()
+      _img.src = this.wrapper_src
+      _img.onload = () => {
+        let leftOffset = null
+
+        if (width > height) {
+          const diffK = 1 - (height - size) / height
+          const newWidth = width * diffK
+          leftOffset = -1 * ((newWidth - size) / 2)
+
+          this.style = {
+            left: leftOffset
+          }
+        }
       }
     }
   }
-} //125 176 140
+}
 </script>
 
 <style scoped>
@@ -52,6 +70,8 @@ export default {
   --avatar-inner-height: 83%;
   --avatar-max-width: 206px;
   --avatar-max-height: 290px;
+  --avatar-min-width: 93px;
+  --avatar-min-height: 135px;
 
   border-radius: var(--radius-half);
   overflow: hidden;
@@ -62,6 +82,8 @@ export default {
   max-height: var(--avatar-max-height);
   height: var(--avatar-height);
   max-width: var(--avatar-max-width);
+  min-width: var(--avatar-min-width);
+  min-height: var(--avatar-min-height);
 }
 .avatar {
   position: relative;
@@ -70,6 +92,8 @@ export default {
   overflow: hidden;
   max-height: 290px;
   max-width: 206px;
+  min-width: var(--avatar-min-width);
+  min-height: var(--avatar-min-height);
 }
 
 .avatar__img {
@@ -82,6 +106,8 @@ export default {
   margin: 0 auto;
   height: var(--avatar-inner-height);
   max-height: var(--avatar-max-height);
+  min-width: calc(var(--avatar-min-width) - 10px);
+  min-height: calc(var(--avatar-min-height) - 30px);
 }
 
 .avatar__wrapper {
@@ -90,5 +116,7 @@ export default {
   max-width: var(--avatar-max-width);
   z-index: 1;
   position: absolute;
+  min-width: var(--avatar-min-width);
+  min-height: var(--avatar-min-height);
 }
 </style>

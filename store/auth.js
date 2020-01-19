@@ -29,6 +29,7 @@ export const actions = {
         commit('SET_AUTHENTICATED')
         commit('SET_TOKEN', token)
         $nuxt.$router.push('/')
+        window.location.reload(true)
       }
     } catch (error) {}
   },
