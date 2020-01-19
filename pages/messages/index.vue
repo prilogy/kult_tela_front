@@ -1,6 +1,6 @@
 <template>
   <div class="messages">
-    <VH2 class="messages__title">Сообщения</VH2>
+    <VPageHeading>Сообщения</VPageHeading>
     <div>
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">

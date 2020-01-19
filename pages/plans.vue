@@ -29,10 +29,9 @@
     </transition>
     <transition name="showup">
       <div v-if="!planToBuy">
-        <div class="top">
-          <VButtonBack />
-          <VH2>Доступные планы</VH2>
-        </div>
+        <VPageHeading button titleOffset="var(--space)">
+          Доступные планы
+        </VPageHeading>
 
         <div class="plans" v-if="plans">
           <VPlanCard

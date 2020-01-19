@@ -10,13 +10,15 @@
       </VButton>
     </div>
     <div v-if="!popup">
-      <VH2 mb="var(--space-third)">Заполните данные</VH2>
-      <VTipSmall>
-        <VP color="var(--grey-light3)">
-          Для оптимального подбора меню и комплекса упражнений укажите данные
-          достоверно!
-        </VP>
-      </VTipSmall>
+      <VPageHeading>
+        Заполните данные
+        <template v-slot:info>
+          <VTipSmall>
+            Для оптимального подбора меню и комплекса упражнений укажите данные
+            достоверно!
+          </VTipSmall>
+        </template>
+      </VPageHeading>
       <form id="form" autocomplete="off" @submit.prevent="sendForm">
         <VH3 mb="var(--space-half)">Ваш email: {{ email }}</VH3>
         <VInput required caption="Имя" v-model="first_name"></VInput>

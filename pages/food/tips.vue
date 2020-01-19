@@ -1,9 +1,6 @@
 <template>
   <div class="tips">
-    <div class="tips__top">
-      <VButtonBack></VButtonBack>
-      <VH2>Советы по питанию</VH2>
-    </div>
+    <VPageHeading button>Советы по питанию</VPageHeading>
   </div>
 </template>
 
@@ -15,13 +12,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.tips__top {
-  display: flex;
-  align-items: center;
-}
-.tips__top h2 {
-  margin-left: var(--space);
-}
-</style>

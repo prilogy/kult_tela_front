@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VH2>Тренировка</VH2>
+    <VPageHeading>Тренировка</VPageHeading>
     <div v-if="WORKOUT != null" class="workout">
       <VH3 class="workout__name">{{ WORKOUT.name }}</VH3>
       <VP class="workout__desc">{{ WORKOUT.description }}</VP>

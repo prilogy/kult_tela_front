@@ -1,6 +1,6 @@
 <template>
   <div class="notifications">
-    <VH2 mb="var(--space)">Оповещения</VH2>
+    <VPageHeading>Оповещения</VPageHeading>
     <div v-if="!NOTIFICATIONS">
       <VH3
         weight="regular"

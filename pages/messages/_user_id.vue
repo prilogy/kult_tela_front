@@ -1,12 +1,18 @@
 <template>
   <div>
-    <VPageHeading>Все упражнения</VPageHeading>
+    <VH2>Все упражнения</VH2>
     <div class="body"></div>
   </div>
 </template>
 
 <script>
-import { VPlanCard, VInput, VIcon, VTipSmall } from '../../components/'
+import {
+  VPlanCard,
+  VInput,
+  VButtonBack,
+  VIcon,
+  VTipSmall
+} from '../../components/'
 import { mapGetters } from 'vuex'
 
 export default {

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="info">
-      <VH1>Обновить вес</VH1>
-      <VP color="var(--grey-light3)">
+    <VPageHeading>
+      Обновить вес
+      <template v-slot:info>
         Старайтесь обновлять вес хотя-бы раз в два дня чтобы контролировать
         процесс похудения было проще
-      </VP>
-    </div>
+      </template>
+    </VPageHeading>
     <form id="weight-update" @submit.prevent="updateWeight">
       <VInput
         type="number"

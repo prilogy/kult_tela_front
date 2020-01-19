@@ -1,12 +1,15 @@
 <template>
   <div class="consultation">
-    <VH2 class="consultation__title">Онлайн консультация</VH2>
-    <VP class="consultation__description">
-      Онлайн консультация ыы. Текст
-      <br />
-      Заполните форму ниже и оплатите участие, укажите удобный диапазон дат
-      когда вам будет удобно
-    </VP>
+    <VPageHeading>
+      Онлайн консультация
+      <template v-slot:info>
+        Онлайн консультация ыы. Текст
+        <br />
+        Заполните форму ниже и оплатите участие, укажите удобный диапазон дат
+        когда вам будет удобно
+      </template>
+    </VPageHeading>
+
     <form id="consultation__form" @submit.prevent="proceedToPay">
       <select
         required
@@ -65,15 +68,6 @@ export default {
 </script>
 
 <style scoped>
-.consultation {
-}
-.consultation__title {
-  margin-bottom: var(--space-half);
-}
-.consultation__description {
-  margin-bottom: var(--space-half);
-}
-
 select {
   background: var(--grey-light2);
   width: 100%;

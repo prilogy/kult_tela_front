@@ -4,6 +4,7 @@ import VH3 from '~/components/typography/VH3'
 import VP from '~/components/typography/VP'
 import VCaption from '~/components/typography/VCaption'
 import VButton from '~/components/ui/VButton'
+import VPageHeading from '~/components/ui/VPageHeading'
 
 import Vue from 'vue'
 
@@ -14,6 +15,8 @@ Vue.component('VP', VP)
 Vue.component('VCaption', VCaption)
 
 Vue.component('VButton', VButton)
+
+Vue.component('VPageHeading', VPageHeading)
 
 import ds from '@/services/Colors.js'
 

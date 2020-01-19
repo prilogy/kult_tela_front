@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <VH1 mb="var(--space)">Лучшие солдаты</VH1>
+    <VPageHeading>Лучшие солдаты</VPageHeading>
     <div class="top__switch">
       <VButton clearstyle @click="toggleSwitch(false)">
         <VH3

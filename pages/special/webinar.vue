@@ -1,11 +1,14 @@
 <template>
   <div class="webinar">
-    <VH2 class="webinar__title">Вебинар с Мариной Богомоловой</VH2>
-    <VP class="webinar__description">
-      Описание. Сверх крутая штука крч! Состоится 20.11 в 19:00 через Skype
-      <br />
-      Заполните форму ниже и оплатите участие
-    </VP>
+    <VPageHeading level="3">
+      Вебинар с Мариной Богомоловой
+      <template v-slot:info>
+        Описание. Сверх крутая штука крч! Состоится 20.11 в 19:00 через Skype
+        <br />
+        Заполните форму ниже и оплатите участие
+      </template>
+    </VPageHeading>
+
     <form id="webinar__form" @submit.prevent="proceedToPay">
       <VInput
         required
@@ -30,10 +33,10 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { VH2, VP, VInput, VButton } from '../../components/'
+import { VInput } from '../../components/'
 
 export default {
-  components: { VP, VH2, VButton, VInput },
+  components: { VInput },
   data() {
     return {
       date_from: '',
@@ -52,19 +55,8 @@ export default {
 }
 </script>
 
-<style scoped>
-.webinar {
-}
-.webinar__title {
-  margin-bottom: var(--space-half);
-}
-.webinar__description {
-  margin-bottom: var(--space-half);
-}
-
-#webinar__form {
-}
-#webinar__form > div {
-  margin-bottom: var(--space-half);
+<style>
+#webinar__form > div > .input {
+  margin-bottom: var(--space-half) !important;
 }
 </style>

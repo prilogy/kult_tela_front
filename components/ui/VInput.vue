@@ -14,9 +14,7 @@
 </template>
 
 <script>
-import VH3 from '../typography/VH3'
 export default {
-  components: { VH3 },
   props: ['value', 'caption', 'type'],
   data() {
     return {

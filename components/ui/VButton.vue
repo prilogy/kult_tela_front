@@ -43,6 +43,7 @@ export default {
 
 <style scoped>
 .button {
+  cursor: pointer;
   background: var(--yellow-base);
   padding: var(--space-half) var(--space);
   border-radius: var(--radius-half);

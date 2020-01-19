@@ -1,14 +1,14 @@
 <template>
   <div class="food">
     <div v-if="parts">
-      <div class="food__top">
-        <VH1>Ваше питание</VH1>
-        <VP class="food__top__desc">
+      <VPageHeading>
+        Ваше питание
+        <template v-slot:info>
           Ваше персональное меню питания, подобранное нашими экспертами.
           <br />
           Меню обновляется каждый день.
-        </VP>
-      </div>
+        </template>
+      </VPageHeading>
       <div class="food__body">
         <div>
           <VH2 class="food__top">Продукты</VH2>

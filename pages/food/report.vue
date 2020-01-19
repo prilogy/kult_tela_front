@@ -1,15 +1,13 @@
 <template>
   <div class="report">
     <div class="report__top">
-      <div class="report__top__title">
-        <VButtonBack />
-        <VH2>Отчет о питании</VH2>
-      </div>
-
-      <VP v-if="!isAllUploaded" color="var(--grey-light3)">
-        Загрузите фото после каждого приема пищи, чтобы наши специалисты могли
-        понять, все ли вы делаете правильно!
-      </VP>
+      <VPageHeading button>
+        Отчет о питании
+        <template v-if="!isAllUploaded" v-slot:info>
+          Загрузите фото после каждого приема пищи, чтобы наши специалисты могли
+          понять, все ли вы делаете правильно!
+        </template>
+      </VPageHeading>
     </div>
     <div v-if="!isAllUploaded">
       <ul class="report__list">
@@ -133,15 +131,6 @@ export default {
 <style>
 .report__top {
   margin-bottom: var(--space-half);
-}
-
-.report__top__title {
-  display: flex;
-  align-items: center;
-}
-
-.report__top h2 {
-  margin-left: var(--space);
 }
 
 .report__list__li {
