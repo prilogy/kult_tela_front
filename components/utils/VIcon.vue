@@ -20,4 +20,8 @@ export default {
 .icon {
   height: 100%;
 }
+
+.icon path {
+  fill: red !important;
+}
 </style>

@@ -17,7 +17,7 @@ export default function(ctx) {
 
   this.Chat = {
     getAll: () => axios.$get('/chat'),
-    getWithId: id => axios.$get('/chat/' + id)
+    getById: id => axios.$get('/chat/' + id)
   }
 
   this.User = {

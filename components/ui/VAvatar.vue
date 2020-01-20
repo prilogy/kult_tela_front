@@ -1,11 +1,12 @@
 <template>
   <div class="wrapper">
-    <div class="avatar">
+    <div class="avatar" v-show="_loaded">
       <img
         ref="rankImage"
         alt="avatar wrapper"
         class="avatar__wrapper"
         :src="wrapper_src"
+        @load="setLoaded(0)"
       />
       <img
         :style="style"
@@ -13,7 +14,7 @@
         alt="avatar"
         class="avatar__img"
         :src="image_src"
-        @load="resize($refs.avatar)"
+        @load="setLoaded(1)"
       />
     </div>
   </div>
@@ -28,24 +29,34 @@ export default {
   data() {
     return {
       style: {},
-      loaded: 0
+      loaded: { 0: false, 1: false }
     }
   },
   computed: {
     wrapper_src() {
       const rank = this.rank
       return '/ranks/' + rank + '.png'
+    },
+    _loaded() {
+      return this.loaded[0] && this.loaded[1]
     }
   },
   methods: {
+    setLoaded(id) {
+      this.loaded[id] = true
+      if (this._loaded === true) {
+        console.log('resize')
+        this.resize(this.$refs.avatar)
+      }
+    },
     resize(img) {
-      const height = img.clientHeight
-      const width = img.clientWidth
-      const size = this.$refs.rankImage.clientHeight
-
       const _img = new Image()
       _img.src = this.wrapper_src
       _img.onload = () => {
+        const height = img.clientHeight
+        const width = img.clientWidth
+        const size = this.$refs.rankImage.clientHeight
+
         let leftOffset = null
 
         if (width > height) {
@@ -54,7 +65,7 @@ export default {
           leftOffset = -1 * ((newWidth - size) / 2)
 
           this.style = {
-            left: leftOffset
+            left: leftOffset + 'px'
           }
         }
       }
@@ -84,7 +95,20 @@ export default {
   max-width: var(--avatar-max-width);
   min-width: var(--avatar-min-width);
   min-height: var(--avatar-min-height);
+  background: var(--yellow-base);
 }
+
+@keyframes anima {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .avatar {
   position: relative;
   height: var(--avatar-height);
@@ -94,6 +118,7 @@ export default {
   max-width: 206px;
   min-width: var(--avatar-min-width);
   min-height: var(--avatar-min-height);
+  animation: anima 0.3s;
 }
 
 .avatar__img {

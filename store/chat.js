@@ -12,15 +12,25 @@ export const mutations = {
   },
   SET_CHATS(state, payload) {
     state.chats = payload
+  },
+  SET_CHAT(state, chat) {
+    const index = state.chats.map(item => item.id).indexOf(chat.id)
+    if (index === -1) state.chats.push(chat)
+    else state.chats[index] = chat
   }
 }
 
 export const actions = {
   async FEED_CHATS({ commit }) {
-    const { data: chats } = await this.$api.Chat.getAll()
-    commit('SET_CHATS', chats)
+    try {
+      const { data: chats } = await this.$api.Chat.getAll()
+      commit('SET_CHATS', chats)
+    } catch (e) {}
   },
-  async FEED_CHAT_WITH_ID({ commit }) {},
+  async FEED_CHAT_WITH_ID({ commit }, id) {
+    const { data: chat } = await this.$api.Chat.getById(id)
+    await commit('SET_CHAT', chat)
+  },
   eventA() {
     console.log('asdasd')
     socket(this).emit('eventAA', 'GETAFAKAUS')
@@ -31,8 +41,6 @@ export const actions = {
 }
 
 export const getters = {
-  GET_CHATS(state) {
-    return state.chats
-  },
-  GET_CHAT_BY_ID(state, id) {}
+  GET_CHATS: state => state.chats,
+  GET_CHAT_BY_ID: state => id => state.chats.filter(el => el.user_id == id)[0]
 }

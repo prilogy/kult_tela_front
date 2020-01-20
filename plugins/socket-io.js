@@ -12,6 +12,12 @@ export default ({ store }) => {
         token: token
       }
     })
+
+    /**
+     * @IMPORTANT disables warnings caused by this plugin
+     * */
+    Vue.config.silent = true
+
     Vue.use(VueSocketIOExt, socket, { store })
   }
 }

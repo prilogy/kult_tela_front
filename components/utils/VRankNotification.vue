@@ -112,8 +112,10 @@ export default {
 
 .notification-downranked .notification__avatar {
   border: solid 2px var(--grey-light2);
+  background: var(--grey-light2);
   box-shadow: 0 0 50px var(--grey-light2);
 }
+
 .notification h2 {
   text-align: center;
   font-weight: 400;

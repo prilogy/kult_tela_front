@@ -1,5 +1,5 @@
 <template>
-  <VIcon @click="back" icon="back" />
+  <VIcon :style="{ color: 'white' }" @click="back" icon="back" />
 </template>
 
 <script>

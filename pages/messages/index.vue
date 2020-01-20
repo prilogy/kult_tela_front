@@ -4,35 +4,40 @@
     <div>
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
-          <div class="contact">
-            <VAvatarSmall class="contact__avatar" :src="chat.user.avatar_src" />
-            <div class="contact__aside">
-              <div class="contact__aside__top">
-                <VP class="contact__aside__top__name">{{ chat.user.name }}</VP>
-                <VP class="contact__aside__top__time">
-                  {{ chat.last_message.date }}
-                </VP>
-              </div>
-              <div class="contact__aside__bottom">
-                <VP class="contact__aside__bottom__text">
-                  {{ chat.last_message.text }}
-                </VP>
-                <div
-                  v-if="chat.messages_unread !== 0"
-                  class="contact__aside__bottom__mark"
-                >
-                  <VCaption>{{ chat.messages_unread }}</VCaption>
+          <nuxt-link :to="'/messages/' + chat.user_id">
+            <div class="contact">
+              <VAvatarSmall
+                class="contact__avatar"
+                :src="chat.user.avatar_src"
+              />
+              <div class="contact__aside">
+                <div class="contact__aside__top">
+                  <VP class="contact__aside__top__name">
+                    {{ chat.user.name }}
+                  </VP>
+                  <VP class="contact__aside__top__time">
+                    {{ chat.messages[chat.messages.length - 1].date }}
+                  </VP>
+                </div>
+                <div class="contact__aside__bottom">
+                  <VP class="contact__aside__bottom__text">
+                    {{ chat.messages[chat.messages.length - 1].text }}
+                  </VP>
+                  <div
+                    v-if="chat.messages_unread !== 0"
+                    class="contact__aside__bottom__mark"
+                  >
+                    <VCaption>{{ chat.messages_unread }}</VCaption>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </nuxt-link>
           <VDivider class="contact__divider"></VDivider>
         </li>
       </ul>
     </div>
-    <VButton @click="">
-      emit event
-    </VButton>
+
     <div>
       <VP ref="phantomChar" class="phantom-char">S</VP>
     </div>
@@ -54,7 +59,9 @@ export default {
   },
   methods: {},
   fetch({ store }) {
-    store.dispatch('chat/FEED_CHATS')
+    if (store.getters['chat/GET_CHATS'].length === 0) {
+      store.dispatch('chat/FEED_CHATS')
+    }
   },
   created() {},
   mounted() {

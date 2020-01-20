@@ -1,13 +1,10 @@
 <template>
   <div>
-    <VNav></VNav>
     <main>
       <nuxt />
     </main>
     <VError></VError>
     <VSuccess></VSuccess>
-    <VRankNotification></VRankNotification>
-    <div class="offset"></div>
     <!--    <VFooter></VFooter>-->
   </div>
 </template>
@@ -28,21 +25,7 @@ export default {
     VSuccess,
     VNav,
     VFooter,
-    VError,
-    VRankNotification
-  },
-  methods: {
-    ...mapActions({
-      SET_CURRENT_LINK_ID: 'nav/SET_CURRENT_LINK_ID'
-    })
-  },
-  created() {
-    this.SET_CURRENT_LINK_ID()
-  },
-  watch: {
-    $route() {
-      this.SET_CURRENT_LINK_ID()
-    }
+    VError
   }
 }
 </script>
@@ -53,11 +36,6 @@ body {
   max-width: var(--body-max-width);
   margin: 0 auto;
 }
-
-.offset {
-  height: 50px;
-}
-
 main {
   padding: var(--space);
 }
