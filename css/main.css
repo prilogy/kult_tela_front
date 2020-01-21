@@ -4,6 +4,7 @@
   --grey-light2: #5c5c5f;
   --grey-light3: #bebebf;
   --grey-trans1: #1d1d22c4;
+  --grey-trans2: #1d1d2233;
 
   --yellow-base: #eff621;
   --yellow-trans1: #eef36ab3;
@@ -44,5 +45,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-smooth: auto;
-  transition: 0.24s all;
+  transition: 0.24s all !important;
 }

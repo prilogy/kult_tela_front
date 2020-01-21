@@ -36,7 +36,7 @@ export default {
 <style scoped>
 .success {
   border-radius: var(--radius);
-  z-index: 101;
+  z-index: 1000;
   background: var(--green-base);
   position: fixed;
   display: flex;

@@ -45,7 +45,6 @@ export default {
     setLoaded(id) {
       this.loaded[id] = true
       if (this._loaded === true) {
-        console.log('resize')
         this.resize(this.$refs.avatar)
       }
     },

@@ -68,12 +68,9 @@ export default {
       (document.body.clientWidth > cssMaxWidth
         ? cssMaxWidth
         : document.body.clientWidth) * 0.75
-
-    console.log(this.maxWidth)
   },
   fetch({ store }) {
     if (store.getters['chat/GET_CHATS'].length === 0) {
-      console.log('feeding chats')
       store.dispatch('chat/FEED_CHATS')
     }
   }

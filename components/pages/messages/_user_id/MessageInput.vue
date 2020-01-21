@@ -1,6 +1,12 @@
 <template>
   <div class="box">
-    <input class="box__input" v-model="input" />
+    <div
+      ref="area"
+      @input="handleArea"
+      class="box__input"
+      contenteditable
+      @keydown="handleEnterDelete"
+    ></div>
     <button
       :class="{ box__btn: true, 'box__btn--disabled': input === '' }"
       @click="sendMessage"
@@ -27,24 +33,40 @@ export default {
     }
   },
   methods: {
+    handleArea(e) {
+      this.input = e.target.innerText
+    },
+    handleEnterDelete(e) {
+      if (e.key === 'Backspace' || e.key === 'Enter') {
+        this.$emit('heightChanged')
+      }
+      if (
+        e.key === 'Enter' &&
+        (this.input === '' || this.input.indexOf('\n\n') !== -1)
+      ) {
+        e.preventDefault()
+      }
+    },
     sendMessage() {
       if (this.input) this.$emit('sendMessage', this.input)
-      this.input = ''
+      this.$refs.area.innerHTML = ''
     }
   }
 }
 </script>
 
 <style scoped>
+.box > div {
+  transition: 0s height !important;
+}
 .box {
   max-width: var(--body-max-width);
-  margin: auto;
+  margin: 0 auto;
   position: fixed;
   background: var(--grey-light1) !important;
   bottom: 0;
   right: 0;
   box-sizing: border-box;
-  height: 50px;
   align-items: flex-end;
   left: 0;
   display: flex;
@@ -57,11 +79,26 @@ export default {
   font-size: 18px;
   color: var(--white-base);
   font-weight: 300;
+  background: none;
+  border: none;
+  resize: none;
+  padding: var(--space-third);
+  line-height: 1.3;
+  overflow: hidden;
+  border-radius: var(--radius-half);
+  max-height: 130px;
+}
+
+.box__input:active,
+.box__input:focus {
+  outline: none;
+  background: var(--grey-trans2);
 }
 
 .box__btn {
   padding: var(--space-third);
   cursor: pointer;
+  margin-left: var(--space-third);
 }
 
 .box__btn--disabled svg {

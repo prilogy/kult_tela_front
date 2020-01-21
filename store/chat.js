@@ -14,7 +14,7 @@ export const mutations = {
     state.chats = payload
   },
   SET_CHAT(state, chat) {
-    const index = state.chats.map(item => item.id).indexOf(chat.id)
+    const index = state.chats.map(item => item.user_id).indexOf(chat.user_id)
     if (index === -1) state.chats.push(chat)
     else {
       this._vm.$set(state.chats, index, chat)
@@ -49,6 +49,9 @@ export const actions = {
   },
   async socket_chatMessage({ commit }, message) {
     if (message) await commit('ADD_MESSAGE', message)
+  },
+  async socket_chatMessageFirst({ commit, dispatch }, message) {
+    dispatch('FEED_CHAT_WITH_USER_ID', message.to_user_id)
   }
 }
 

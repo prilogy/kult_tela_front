@@ -20,11 +20,19 @@
     </div>
     <div class="chat__main" v-if="CHAT">
       <div style="height: 200px"></div>
-      <AllMessages :chat="CHAT" :myId="ME.id"></AllMessages>
+      <AllMessages
+        v-if="!CHAT.chat_is_empty"
+        :chat="CHAT"
+        :myId="ME.id"
+      ></AllMessages>
       <div :style="{ height: bottomOffset }" class="chat__main__offset"></div>
     </div>
 
-    <MessageInput @sendMessage="sendMessage"></MessageInput>
+    <MessageInput
+      ref="messageInputArea"
+      @sendMessage="sendMessage"
+      @heightChanged="setBottomOffset"
+    ></MessageInput>
   </div>
 </template>
 
@@ -51,6 +59,13 @@ export default {
     }
   },
   methods: {
+    setBottomOffset() {
+      setTimeout(() => {
+        this.bottomOffset =
+          this.$refs.messageInputArea.$el.clientHeight - 20 + 'px'
+        this.scrollToBottom()
+      }, 30)
+    },
     sendMessage(text) {
       this.$store.dispatch('chat/SEND_MESSAGE', {
         text,
@@ -60,16 +75,22 @@ export default {
       this.scrollToBottom()
     },
     scrollToBottom() {
-      window.scrollTo(0, document.body.clientHeight + 200)
+      window.scrollTo(0, document.body.clientHeight)
     }
   },
   watch: {
     CHAT() {
-      //console.log('list rerender')
-      setTimeout(() => this.scrollToBottom(), 50)
+      this.$nextTick(() => {
+        this.setBottomOffset()
+      })
     }
   },
   computed: {
+    areaHeight() {
+      return this.$refs.messageInputArea
+        ? this.$refs.messageInputArea.$el.clientHeight
+        : null
+    },
     CHAT() {
       const user_id = this.$route.params.user_id
       return this.$store.getters['chat/GET_CHAT_BY_USER_ID'](user_id)
@@ -78,11 +99,18 @@ export default {
       return this.$store.getters['user/GET_USER']
     }
   },
-  fetch({ store, params }) {
-    store.dispatch('chat/FEED_CHAT_WITH_USER_ID', params.user_id)
+  async fetch({ store, params, redirect }) {
+    try {
+      await store.dispatch('chat/FEED_CHAT_WITH_USER_ID', params.user_id)
+    } catch (e) {
+      redirect('/messages')
+    }
   },
-  mounted() {
-    setTimeout(() => this.scrollToBottom(), 100)
+  async mounted() {
+    this.setBottomOffset()
+    await this.$nextTick(() => {
+      this.scrollToBottom()
+    })
   }
 }
 </script>
@@ -111,6 +139,10 @@ export default {
 }
 .chat .chat__top__info > div {
   margin-right: var(--space-new);
+}
+
+.chat__main-is-empty {
+  height: 100%;
 }
 
 .chat__bottom {
@@ -150,5 +182,6 @@ export default {
 
 .chat__main__offset {
   width: 100%;
+  transition: 0s height !important;
 }
 </style>

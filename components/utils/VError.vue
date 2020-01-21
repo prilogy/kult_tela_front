@@ -36,7 +36,7 @@ export default {
 <style scoped>
 .error {
   border-radius: var(--radius);
-  z-index: 101;
+  z-index: 1000;
   background: var(--red-base);
   position: fixed;
   padding: var(--space-half);

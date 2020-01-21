@@ -7,9 +7,7 @@
       'message--mark': isLastInSeq && !isMy
     }"
   >
-    <VP class="message__text">
-      {{ message.text }}
-    </VP>
+    <VP class="message__text" v-text="message.text"></VP>
     <VCaption class="message__time">{{ message.time }}</VCaption>
   </div>
 </template>
@@ -48,11 +46,9 @@ export default {
   margin-left: calc(-1 * var(--space-third));
 }
 
-.message p {
-  word-break: break-all;
-}
-
 .message .message__text {
+  word-break: break-all;
+  white-space: pre-line;
   font-weight: 300;
   z-index: 10;
 }
