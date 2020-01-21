@@ -1,3 +1,4 @@
-import MessageCloud from './MessageCloud'
+import AllMessages from './AllMessages'
+import MessageInput from './MessageInput'
 
-export { MessageCloud }
+export { AllMessages, MessageInput }

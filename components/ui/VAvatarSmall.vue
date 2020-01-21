@@ -1,5 +1,10 @@
 <template>
-  <div class="display: block">
+  <div class="box">
+    <span
+      v-if="mark"
+      :style="'--mark-border-color:' + mark.borderColor"
+      class="avatar__online-mark"
+    ></span>
     <div :style="'--size:' + size" class="wrapper">
       <div class="avatar">
         <img
@@ -26,6 +31,13 @@ export default {
     size: {
       type: String,
       default: '50px'
+    },
+    online: {
+      type: Boolean,
+      default: false
+    },
+    mark: {
+      type: Object
     }
   },
   data() {
@@ -42,6 +54,9 @@ export default {
 </script>
 
 <style scoped>
+.box {
+  position: relative;
+}
 .wrapper {
   width: var(--size);
   height: var(--size);
@@ -53,5 +68,19 @@ export default {
 }
 .avatar__img {
   position: absolute;
+}
+
+.avatar__online-mark {
+  z-index: 10;
+  position: absolute;
+  display: inline-block;
+  --mark-size: calc(var(--size) / 4);
+  border-radius: 50%;
+  background: var(--green-base);
+  height: 11px;
+  width: 11px;
+  bottom: 0;
+  right: 0;
+  border: 2px solid var(--mark-border-color);
 }
 </style>

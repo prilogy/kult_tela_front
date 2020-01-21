@@ -1,0 +1,76 @@
+<template>
+  <div class="box">
+    <input class="box__input" v-model="input" />
+    <button
+      :class="{ box__btn: true, 'box__btn--disabled': input === '' }"
+      @click="sendMessage"
+    >
+      <svg
+        width="20"
+        fill="var(--yellow-base)"
+        height="18"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.4 17.4l17.45-7.48a1 1 0 000-1.84L1.4.6a.993.993 0 00-1.39.91L0 6.12c0 .5.37.93.87.99L15 9 .87 10.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"
+        />
+      </svg>
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  },
+  methods: {
+    sendMessage() {
+      if (this.input) this.$emit('sendMessage', this.input)
+      this.input = ''
+    }
+  }
+}
+</script>
+
+<style scoped>
+.box {
+  max-width: var(--body-max-width);
+  margin: auto;
+  position: fixed;
+  background: var(--grey-light1) !important;
+  bottom: 0;
+  right: 0;
+  box-sizing: border-box;
+  height: 50px;
+  align-items: flex-end;
+  left: 0;
+  display: flex;
+  padding: var(--space-half);
+  z-index: 1000;
+}
+
+.box__input {
+  width: 100%;
+  font-size: 18px;
+  color: var(--white-base);
+  font-weight: 300;
+}
+
+.box__btn {
+  padding: var(--space-third);
+  cursor: pointer;
+}
+
+.box__btn--disabled svg {
+  fill: var(--grey-light2);
+}
+
+.box__btn:focus,
+.box__btn:active,
+.box__btn:hover {
+  opacity: 0.5;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="messages">
+  <div :style="'--msg-max-width:' + maxWidth + 'px'" class="messages">
     <VPageHeading>Сообщения</VPageHeading>
     <div>
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
@@ -7,6 +7,9 @@
           <nuxt-link :to="'/messages/' + chat.user_id">
             <div class="contact">
               <VAvatarSmall
+                :mark="
+                  chat.user_status ? { borderColor: 'var(--grey-base)' } : null
+                "
                 class="contact__avatar"
                 :src="chat.user.avatar_src"
               />
@@ -37,10 +40,6 @@
         </li>
       </ul>
     </div>
-
-    <div>
-      <VP ref="phantomChar" class="phantom-char">S</VP>
-    </div>
   </div>
 </template>
 
@@ -50,22 +49,33 @@ import { VDivider, VAvatarSmall } from '../../components/'
 export default {
   components: { VAvatarSmall, VDivider },
   data() {
-    return {}
+    return {
+      maxWidth: null
+    }
   },
   computed: {
     ...mapGetters({
       CHATS: 'chat/GET_CHATS'
     })
   },
-  methods: {},
+  mounted() {
+    const cssMaxWidth = Number(
+      getComputedStyle(document.body)
+        .getPropertyValue('--body-max-width')
+        .replace('px', '')
+    )
+    this.maxWidth =
+      (document.body.clientWidth > cssMaxWidth
+        ? cssMaxWidth
+        : document.body.clientWidth) * 0.75
+
+    console.log(this.maxWidth)
+  },
   fetch({ store }) {
     if (store.getters['chat/GET_CHATS'].length === 0) {
+      console.log('feeding chats')
       store.dispatch('chat/FEED_CHATS')
     }
-  },
-  created() {},
-  mounted() {
-    this.$store.dispatch('chat/eventA')
   }
 }
 </script>
@@ -114,13 +124,12 @@ export default {
   font-weight: 500;
 }
 
-.contact__aside__bottom__text {
+.messages .contact__aside__bottom__text {
   color: var(--white-trans1);
-  text-overflow: ellipsis;
-  /*
   white-space: nowrap;
   overflow: hidden;
-  width: 416px;*/
+  text-overflow: ellipsis;
+  width: var(--msg-max-width);
 }
 
 .messages__contacts__item .contact__divider {
