@@ -70,7 +70,7 @@ export default {
         : document.body.clientWidth) * 0.75
   },
   fetch({ store }) {
-    if (store.getters['chat/GET_CHATS'].length === 0) {
+    if ([0, 1].includes(store.getters['chat/GET_CHATS'].length)) {
       store.dispatch('chat/FEED_CHATS')
     }
   }

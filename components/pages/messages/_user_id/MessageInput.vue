@@ -5,7 +5,7 @@
       @input="handleArea"
       class="box__input"
       contenteditable
-      @keydown="handleEnterDelete"
+      @keydown="handleKeys"
     ></div>
     <button
       :class="{ box__btn: true, 'box__btn--disabled': input === '' }"
@@ -29,28 +29,43 @@
 export default {
   data() {
     return {
-      input: ''
+      input: '',
+      lineNumber: 1
     }
   },
   methods: {
     handleArea(e) {
       this.input = e.target.innerText
     },
-    handleEnterDelete(e) {
+    handleKeys(e) {
+      if (e.key === 'Backspace') {
+        if (this.lineNumber > 0) this.lineNumber -= 1
+      }
       if (e.key === 'Backspace' || e.key === 'Enter') {
         this.$emit('heightChanged')
       }
-      if (
-        e.key === 'Enter' &&
-        (this.input === '' || this.input.indexOf('\n\n') !== -1)
-      ) {
-        e.preventDefault()
+      if (e.key === 'Enter') {
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault()
+          this.sendMessage()
+        }
+        if (this.input === '') {
+          e.preventDefault()
+        }
       }
+    },
+    focusOnArea() {
+      this.$refs.area.focus()
     },
     sendMessage() {
       if (this.input) this.$emit('sendMessage', this.input)
       this.$refs.area.innerHTML = ''
+      this.input = ''
+      this.focusOnArea()
     }
+  },
+  mounted() {
+    this.focusOnArea()
   }
 }
 </script>
@@ -87,6 +102,7 @@ export default {
   overflow: hidden;
   border-radius: var(--radius-half);
   max-height: 130px;
+  overflow-y: auto;
 }
 
 .box__input:active,

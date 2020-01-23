@@ -42,7 +42,7 @@ import {
   AllMessages,
   MessageInput
 } from '../../components/pages/messages/_user_id/'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   components: {
@@ -71,46 +71,64 @@ export default {
         text,
         to_user_id: this.CHAT.user_id
       })
-      this.input = ''
-      this.scrollToBottom()
     },
     scrollToBottom() {
       window.scrollTo(0, document.body.clientHeight)
+    },
+    focusOnMessageInputArea() {
+      this.$refs.messageInputArea.focusOnArea()
     }
   },
   watch: {
-    CHAT() {
-      this.$nextTick(() => {
-        this.setBottomOffset()
-      })
+    CHAT: {
+      deep: true,
+      handler() {
+        this.$nextTick(() => this.scrollToBottom())
+      }
     }
   },
   computed: {
-    areaHeight() {
-      return this.$refs.messageInputArea
-        ? this.$refs.messageInputArea.$el.clientHeight
-        : null
-    },
-    CHAT() {
-      const user_id = this.$route.params.user_id
-      return this.$store.getters['chat/GET_CHAT_BY_USER_ID'](user_id)
-    },
-    ME() {
-      return this.$store.getters['user/GET_USER']
-    }
+    ...mapState({
+      CHAT: state => state.chat.currentChat,
+      ME: state => state.user.user
+    })
   },
+
   async fetch({ store, params, redirect }) {
+    const user_id = parseInt(params.user_id)
+    const index = store.getters['chat/GET_CHATS']
+      .map(item => item.user_id)
+      .indexOf(user_id)
     try {
-      await store.dispatch('chat/FEED_CHAT_WITH_USER_ID', params.user_id)
+      if (
+        index === -1 ||
+        store.getters['chat/GET_CHATS'][index].messages.length === 1
+      ) {
+        await store.dispatch('chat/FEED_CHAT_WITH_USER_ID', {
+          id: user_id,
+          setAsCurrent: true
+        })
+      } else {
+        await store.dispatch('chat/SET_CURRENT_CHAT', user_id)
+      }
     } catch (e) {
       redirect('/messages')
     }
   },
+  beforeUpdate() {
+    this.$store.dispatch('chat/SET_LAST_SEEN_MESSAGE', this.CHAT.id)
+  },
   async mounted() {
     this.setBottomOffset()
-    await this.$nextTick(() => {
+    this.$nextTick(() => {
       this.scrollToBottom()
     })
+    document.addEventListener('keypress', () => {
+      this.focusOnMessageInputArea()
+    })
+  },
+  destroyed() {
+    this.$store.dispatch('chat/RETURN_CURRENT_CHAT')
   }
 }
 </script>

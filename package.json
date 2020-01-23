@@ -19,6 +19,7 @@
     "vue-socket.io-extended": "^4.0.1"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "prettier": "1.16.3"
   },
   "prettier": {

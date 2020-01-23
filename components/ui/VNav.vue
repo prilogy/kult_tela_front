@@ -82,6 +82,7 @@ export default {
     dropDownLinkAction(link) {
       if (link.action) link.action()
       else if (link.url) this.$router.push(link.url)
+      this.hideDropdown()
     }
   },
   computed: {
@@ -91,10 +92,12 @@ export default {
     newNotifications() {
       if (this.USER) {
         const lastSeenId = this.USER.notifications_last_seen
-        const lastId = this.USER.notifications[
-          this.USER.notifications.length - 1
-        ].id
-        return lastId - lastSeenId
+        if (this.USER.notifications) {
+          const lastId = this.USER.notifications[
+            this.USER.notifications.length - 1
+          ].id
+          return lastId - lastSeenId
+        } else return null
       } else return null
     },
     ...mapGetters({

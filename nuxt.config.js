@@ -1,4 +1,5 @@
 const API_URL_DEFAULT = 'http://localhost:3001/'
+require('dotenv').config()
 
 export default {
   mode: 'spa',
@@ -27,7 +28,7 @@ export default {
    */
   loading: {
     color: '#eff621',
-    height: '5px'
+    height: '4px'
   },
   /*
    ** Global CSS
