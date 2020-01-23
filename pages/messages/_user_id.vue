@@ -18,20 +18,20 @@
         </div>
       </div>
     </div>
-    <div class="chat__main" v-if="CHAT">
-      <div style="height: 200px"></div>
+
+    <div ref="messages" class="chat__main" v-if="CHAT">
       <AllMessages
-        v-if="!CHAT.chat_is_empty"
+        class="chat__main__content"
         :chat="CHAT"
         :myId="ME.id"
       ></AllMessages>
-      <div :style="{ height: bottomOffset }" class="chat__main__offset"></div>
     </div>
 
     <MessageInput
+      class="chat__bottom"
       ref="messageInputArea"
       @sendMessage="sendMessage"
-      @heightChanged="setBottomOffset"
+      @heightChanged="scrollToBottom"
     ></MessageInput>
   </div>
 </template>
@@ -42,7 +42,7 @@ import {
   AllMessages,
   MessageInput
 } from '../../components/pages/messages/_user_id/'
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -59,13 +59,6 @@ export default {
     }
   },
   methods: {
-    setBottomOffset() {
-      setTimeout(() => {
-        this.bottomOffset =
-          this.$refs.messageInputArea.$el.clientHeight - 20 + 'px'
-        this.scrollToBottom()
-      }, 30)
-    },
     sendMessage(text) {
       this.$store.dispatch('chat/SEND_MESSAGE', {
         text,
@@ -73,10 +66,11 @@ export default {
       })
     },
     scrollToBottom() {
-      window.scrollTo(0, document.body.clientHeight)
+      const el = this.$refs.messages
+      el.scrollTop = el.childNodes[0].clientHeight
     },
     focusOnMessageInputArea() {
-      this.$refs.messageInputArea.focusOnArea()
+      if (this.$refs.messageInputArea) this.$refs.messageInputArea.focusOnArea()
     }
   },
   watch: {
@@ -96,14 +90,11 @@ export default {
 
   async fetch({ store, params, redirect }) {
     const user_id = parseInt(params.user_id)
-    const index = store.getters['chat/GET_CHATS']
+    const index = store.state.chat.chats
       .map(item => item.user_id)
       .indexOf(user_id)
     try {
-      if (
-        index === -1 ||
-        store.getters['chat/GET_CHATS'][index].messages.length === 1
-      ) {
+      if (index === -1 || store.state.chat.chats[index].messages.length === 1) {
         await store.dispatch('chat/FEED_CHAT_WITH_USER_ID', {
           id: user_id,
           setAsCurrent: true
@@ -119,7 +110,6 @@ export default {
     this.$store.dispatch('chat/SET_LAST_SEEN_MESSAGE', this.CHAT.id)
   },
   async mounted() {
-    this.setBottomOffset()
     this.$nextTick(() => {
       this.scrollToBottom()
     })
@@ -128,6 +118,7 @@ export default {
     })
   },
   destroyed() {
+    document.removeEventListener('keypress', () => {})
     this.$store.dispatch('chat/RETURN_CURRENT_CHAT')
   }
 }
@@ -135,19 +126,28 @@ export default {
 
 <style scoped>
 .chat {
-  --space-new: calc(var(--space) * 2 / 3);
-  --message-offset: var(--space-half);
-}
-.chat .chat__top {
   max-width: var(--body-max-width);
   margin: auto;
-  position: fixed;
+  --space-new: calc(var(--space) * 2 / 3);
+  --message-offset: var(--space-half);
+  position: absolute;
   top: 0;
-  display: flex;
-  align-items: center;
+  bottom: 0;
   left: 0;
   right: 0;
+
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.chat .chat__top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
   padding: var(--space-half);
+  box-sizing: border-box;
   background-color: var(--grey-light1);
   z-index: 1000;
 }
@@ -159,47 +159,14 @@ export default {
   margin-right: var(--space-new);
 }
 
-.chat__main-is-empty {
-  height: 100%;
-}
-
-.chat__bottom {
-  display: flex;
-  box-sizing: border-box;
-  background: var(--grey-light1);
-  height: 60px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--space-half);
-  max-width: var(--body-max-width);
-  margin: auto;
-}
-
-.chat__bottom__btn {
-  margin-left: var(--space-half);
-  color: var(--yellow-base);
-}
-
-.chat__bottom__input {
-  background: var(--white-trans4);
-  border-radius: var(--radius-half);
-  width: 100%;
-  height: 100%;
-  color: var(--white-base);
-  padding: 0 var(--space-half);
-  font-size: var(--p-fs);
-  font-weight: 300;
-  box-sizing: border-box;
-}
-
 .chat__main {
-  width: 100%;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.chat__main__offset {
-  width: 100%;
-  transition: 0s height !important;
+.chat__main__content {
+  margin-top: auto;
 }
 </style>

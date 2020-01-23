@@ -43,7 +43,6 @@ export default {
   color: var(--white-base);
   flex-direction: column;
   max-width: 75vw;
-  margin-left: calc(-1 * var(--space-third));
 }
 
 .message .message__text {
@@ -65,7 +64,6 @@ export default {
 .message--my {
   background: var(--yellow-dark1);
   margin-left: auto;
-  margin-right: calc(-1 * var(--space-third));
 }
 
 .message--mark::before {

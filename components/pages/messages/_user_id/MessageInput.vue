@@ -76,14 +76,16 @@ export default {
 }
 .box {
   max-width: var(--body-max-width);
-  margin: 0 auto;
-  position: fixed;
+  /*margin: 0 auto;*/
+  /*position: fixed;*/
+  /*bottom: 0;*/
+  /*right: 0;*/
+  /*left: 0;*/
   background: var(--grey-light1) !important;
-  bottom: 0;
-  right: 0;
+
   box-sizing: border-box;
   align-items: flex-end;
-  left: 0;
+
   display: flex;
   padding: var(--space-half);
   z-index: 1000;

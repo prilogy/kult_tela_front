@@ -1,25 +1,27 @@
 <template>
-  <ul class="chat__main__messages">
-    <li class="msg" v-for="(msg, index) in chat.messages" :key="msg.id">
-      <MessageCloud
-        :message="msg"
-        :isMy="myId === msg.user_id"
-        :isLastInSeq="
-          !chat.messages[index + 1] ||
-            msg.user_id !== chat.messages[index + 1].user_id
-        "
-      />
-      <div
-        class="chat__main__messages__date"
-        v-if="
-          chat.messages[index + 1] &&
-            chat.messages[index].date !== chat.messages[index + 1].date
-        "
-      >
-        <VCaption>{{ chat.messages[index + 1].date }}</VCaption>
-      </div>
-    </li>
-  </ul>
+  <div>
+    <ul class="messages" v-if="chat">
+      <li class="msg" v-for="(msg, index) in chat.messages" :key="msg.id">
+        <MessageCloud
+          :message="msg"
+          :isMy="myId === msg.user_id"
+          :isLastInSeq="
+            !chat.messages[index + 1] ||
+              msg.user_id !== chat.messages[index + 1].user_id
+          "
+        />
+        <div
+          class="messages__date"
+          v-if="
+            chat.messages[index + 1] &&
+              chat.messages[index].date !== chat.messages[index + 1].date
+          "
+        >
+          <VCaption>{{ chat.messages[index + 1].date }}</VCaption>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -31,26 +33,28 @@ export default {
 </script>
 
 <style scoped>
-.chat__main__messages {
+.messages {
+  padding: 0 var(--space-new);
   display: flex;
   flex-direction: column;
 }
 
-.chat__main__messages .msg {
+.messages .msg {
   width: 100%;
-  margin-bottom: var(--message-offset);
+  margin-bottom: var(--space-half);
 }
 
-.chat__main__messages__date {
+.messages__date {
   width: 100%;
   text-align: center;
   background: var(--white-trans4);
-  margin: var(--message-offset) calc(var(--space) * (-1)) 0
-    calc(var(--space) * (-1));
-  padding: var(--space-third) var(--space);
+  margin-top: var(--space-half);
+  padding: var(--space-third) var(--space-new);
+  margin-left: calc(-1 * var(--space-new));
+  margin-right: calc(-1 * var(--space-new));
 }
 
-.chat__main__messages__date p {
+.messages__date p {
   color: var(--white-trans1);
 }
 </style>
