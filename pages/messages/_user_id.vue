@@ -100,14 +100,11 @@ export default {
           setAsCurrent: true
         })
       } else {
-        await store.dispatch('chat/SET_CURRENT_CHAT', user_id)
+        await store.dispatch('chat/SET_CURRENT_CHAT_FROM_CHATS', user_id)
       }
     } catch (e) {
       redirect('/messages')
     }
-  },
-  beforeUpdate() {
-    this.$store.dispatch('chat/SET_LAST_SEEN_MESSAGE', this.CHAT.id)
   },
   async mounted() {
     this.$nextTick(() => {
@@ -116,6 +113,7 @@ export default {
     document.addEventListener('keypress', () => {
       this.focusOnMessageInputArea()
     })
+    await this.$store.dispatch('chat/SET_LAST_SEEN_MESSAGE')
   },
   destroyed() {
     document.removeEventListener('keypress', () => {})

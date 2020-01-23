@@ -27,10 +27,58 @@
                     {{ chat.messages[chat.messages.length - 1].text }}
                   </VP>
                   <div
-                    v-if="chat.messages_unread !== 0"
+                    v-if="showUnreadMessages(chat)"
                     class="contact__aside__bottom__mark"
                   >
-                    <VCaption>{{ chat.messages_unread }}</VCaption>
+                    <VCaption>
+                      {{
+                        chat.messages[chat.messages.length - 1].id -
+                          chat.last_seen_message_id
+                      }}
+                    </VCaption>
+                  </div>
+                  <div
+                    v-else-if="
+                      chat.last_seen_message_id !==
+                        chat.messages[chat.messages.length - 1].id
+                    "
+                  >
+                    <svg
+                      width="18"
+                      height="14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18 2L6 14 .5 8.5l1.41-1.41L6 11.17 16.59.59 18 2z"
+                        :fill="
+                          chat.last_seen_message_id !==
+                          chat.messages[chat.messages.length - 1].id
+                            ? 'var(--grey-light2)'
+                            : 'var(--yellow-base)'
+                        "
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    v-else-if="
+                      chat.last_seen_message_id ===
+                        chat.messages[chat.messages.length - 1].id &&
+                        chat.messages[chat.messages.length - 1].user_id ===
+                          $store.state.user.user.id
+                    "
+                  >
+                    <svg
+                      width="18"
+                      height="14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18 2L6 14 .5 8.5l1.41-1.41L6 11.17 16.59.59 18 2z"
+                        fill="var(--yellow-base)"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -46,6 +94,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { VDivider, VAvatarSmall } from '../../components/'
+
 export default {
   components: { VAvatarSmall, VDivider },
   data() {
@@ -58,6 +107,15 @@ export default {
       CHATS: 'chat/GET_CHATS'
     })
   },
+  methods: {
+    showUnreadMessages(chat) {
+      return (
+        chat.messages[chat.messages.length - 1].user_id !==
+          this.$store.state.user.user.id &&
+        chat.last_seen_message_id !== chat.messages[chat.messages.length - 1].id
+      )
+    }
+  },
   mounted() {
     const cssMaxWidth = Number(
       getComputedStyle(document.body)
@@ -67,7 +125,7 @@ export default {
     this.maxWidth =
       (document.body.clientWidth > cssMaxWidth
         ? cssMaxWidth
-        : document.body.clientWidth) * 0.75
+        : document.body.clientWidth) * 0.6
   },
   fetch({ store }) {
     if ([0, 1].includes(store.getters['chat/GET_CHATS'].length)) {
@@ -112,7 +170,7 @@ export default {
 
 .contact__aside__bottom__mark {
   border-radius: 100px;
-  background: var(--yellow-trans1);
+  background: var(--grey-light2);
   padding: 4px 8px;
 }
 

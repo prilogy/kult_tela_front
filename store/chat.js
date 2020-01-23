@@ -27,12 +27,16 @@ export const mutations = {
     }
   },
   SET_CURRENT_CHAT(state, chat) {
-    //state.currentChat = chat
     this._vm.$set(state, 'currentChat', chat)
   }
 }
 
 export const actions = {
+  SET_CHAT({ state, commit }, { chat, forceCurrent = false }) {
+    if (forceCurrent || state.currentChat.id === chat.id)
+      commit('SET_CURRENT_CHAT', chat)
+    else commit('SET_CHAT', chat)
+  },
   async FEED_CHATS({ commit }) {
     const { data: chats } = await this.$api.Chat.getAll()
     commit('SET_CHATS', chats)
@@ -42,7 +46,7 @@ export const actions = {
     if (setAsCurrent === true) await commit('SET_CURRENT_CHAT', chat)
     else await commit('SET_CHAT', chat)
   },
-  SET_CURRENT_CHAT({ state, commit }, user_id) {
+  SET_CURRENT_CHAT_FROM_CHATS({ state, commit }, user_id) {
     const index = getChatIndexById(state.chats, { user_id })
 
     commit('SET_CURRENT_CHAT', state.chats[index])
@@ -57,21 +61,23 @@ export const actions = {
       to_user_id: data.to_user_id
     })
   },
-  async SET_LAST_SEEN_MESSAGE({ state, commit, rootState }, chat_id) {
-    const index = getChatIndexById(state.chats, { id: chat_id })
-    if (index !== -1) {
-      let chat = state.chats[index]
+  async SET_LAST_SEEN_MESSAGE({ state, rootState }) {
+    const route = this.app.router.currentRoute
+    if (route.path.indexOf('messages') !== -1 && route.params.user_id) {
+      let chat = state.currentChat
       const lastMessage = chat.messages[chat.messages.length - 1]
-      if (lastMessage.user_id !== rootState.user.user.id) {
-        console.log('isnt me')
-        chat.last_seen_message_id = lastMessage.id
-        commit('SET_CHAT', chat)
+      if (lastMessage.id !== chat.last_seen_message_id) {
+        if (lastMessage.user_id !== rootState.user.user.id) {
+          const info = {
+            message_id: lastMessage.id,
+            room_id: chat.id
+          }
+          socket(this).emit('chat_message_set_last_seen', info)
+        }
       }
     }
-
-    //commit('SET_CHAT', chat_id)
   },
-  async socket_chatMessage({ commit, state }, message) {
+  async socket_chatMessage({ commit, state, dispatch }, message) {
     let currentChat = false,
       chat
     if (state.currentChat && message.room_id === state.currentChat.id) {
@@ -85,9 +91,24 @@ export const actions = {
       chat.messages.push(message)
     }
     await commit(currentChat ? 'SET_CURRENT_CHAT' : 'SET_CHAT', chat)
+    dispatch('SET_LAST_SEEN_MESSAGE')
   },
   async socket_chatMessageInit({ commit, dispatch }, message) {
     dispatch('FEED_CHAT_WITH_USER_ID', { id: message.to_user_id })
+  },
+  async socket_chatMessageLastSeen({ commit, state, dispatch }, info) {
+    console.log(info)
+    let chat
+    if (state.currentChat && info.room_id === state.currentChat.id) {
+      console.log('cur chat')
+      chat = state.currentChat
+    } else {
+      console.log('not cur chat')
+      const index = getChatIndexById(state.chats, { id: info.room_id })
+      chat = state.chats[index]
+    }
+    chat.last_seen_message_id = info.message_id
+    dispatch('SET_CHAT', { chat })
   }
 }
 
