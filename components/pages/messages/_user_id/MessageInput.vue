@@ -63,9 +63,6 @@ export default {
       this.input = ''
       this.focusOnArea()
     }
-  },
-  mounted() {
-    this.focusOnArea()
   }
 }
 </script>

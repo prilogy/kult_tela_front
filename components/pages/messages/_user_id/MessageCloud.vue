@@ -8,12 +8,27 @@
     }"
   >
     <VP class="message__text" v-text="message.text"></VP>
-    <VCaption class="message__time">{{ message.time }}</VCaption>
+    <div class="message__bottom">
+      <VCaption class="message__time">{{ message.time }}</VCaption>
+      <DoneIcon
+        v-if="isMy"
+        size-modificator="0.73"
+        :fill="
+          message.id <= lastSeenMessageId
+            ? 'var(--yellow-base)'
+            : 'var(--white-trans2)'
+        "
+        :double="message.id <= lastSeenMessageId"
+      ></DoneIcon>
+    </div>
   </div>
 </template>
 
 <script>
+import DoneIcon from '../DoneIcon'
+
 export default {
+  components: { DoneIcon },
   props: {
     message: {
       type: String
@@ -26,6 +41,12 @@ export default {
     },
     isLastInSeq: {
       type: Boolean
+    },
+    isLastSeq: {
+      type: Boolean
+    },
+    lastSeenMessageId: {
+      type: Number
     }
   }
 }
@@ -45,19 +66,25 @@ export default {
   max-width: 75vw;
 }
 
+.message__bottom {
+  margin-top: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.message .message__bottom .message__time {
+  color: var(--white-trans2);
+  align-self: flex-end;
+  font-size: 13px;
+  margin-right: 4px;
+}
+
 .message .message__text {
   word-break: break-all;
   white-space: pre-line;
   font-weight: 300;
-  z-index: 10;
-}
-
-.message .message__time {
-  color: var(--white-trans2);
-  margin-top: 2px;
-  align-self: flex-end;
-  font-size: 13px;
-  margin-left: var(--space-third);
   z-index: 10;
 }
 

@@ -9,6 +9,8 @@
             !chat.messages[index + 1] ||
               msg.user_id !== chat.messages[index + 1].user_id
           "
+          :isLastSeq="lastSeqIds.includes(msg.id)"
+          :lastSeenMessageId="chat.last_seen_message_id || -1"
         />
         <div
           class="messages__date"
@@ -28,7 +30,21 @@
 import MessageCloud from './MessageCloud'
 export default {
   components: { MessageCloud },
-  props: ['chat', 'myId']
+  props: ['chat', 'myId'],
+  computed: {
+    lastSeqIds() {
+      const user_id = this.chat.messages[this.chat.messages.length - 1].user_id
+      const chat = this.chat
+
+      let ids = []
+      for (let i = chat.messages.length - 1; i >= 0; i--) {
+        if (chat.messages[i].user_id === user_id) {
+          ids.push(chat.messages[i].id)
+        } else break
+      }
+      return ids
+    }
+  }
 }
 </script>
 
@@ -41,7 +57,7 @@ export default {
 
 .messages .msg {
   width: 100%;
-  margin-bottom: var(--space-half);
+  margin-bottom: var(--space-third);
 }
 
 .messages__date {

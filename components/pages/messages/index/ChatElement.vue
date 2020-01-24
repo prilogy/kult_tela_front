@@ -42,6 +42,7 @@
             "
           />
         </div>
+
         <div
           v-else-if="
             chat.last_seen_message_id ===
@@ -50,7 +51,7 @@
                 $store.state.user.user.id
           "
         >
-          <DoneIcon fill="var(--yellow-base)" />
+          <DoneIcon double fill="var(--yellow-base)" />
         </div>
       </div>
     </div>
@@ -60,8 +61,6 @@
 <script>
 import { VAvatarSmall } from '../../../'
 import DoneIcon from '../DoneIcon'
-
-// inline component with JSX
 
 export default {
   props: {

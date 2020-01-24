@@ -42,7 +42,7 @@ import {
   AllMessages,
   MessageInput
 } from '../../components/pages/messages/_user_id/'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -82,9 +82,9 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      CHAT: state => state.chat.currentChat,
-      ME: state => state.user.user
+    ...mapGetters({
+      CHAT: 'chat/GET_CURRENT_CHAT',
+      ME: 'user/GET_USER'
     })
   },
 

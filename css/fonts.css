@@ -15,7 +15,6 @@
       format('truetype'),
     /* Safari, Android, iOS */
       url('/fonts/oswald-v26-latin_cyrillic-300.svg#Oswald') format('svg'); /* Legacy iOS */
-  font-display: swap;
 }
 /* oswald-regular - latin_cyrillic */
 @font-face {
@@ -34,7 +33,6 @@
       format('truetype'),
     /* Safari, Android, iOS */
       url('/fonts/oswald-v26-latin_cyrillic-regular.svg#Oswald') format('svg'); /* Legacy iOS */
-  font-display: swap;
 }
 /* oswald-500 - latin_cyrillic */
 @font-face {
@@ -53,7 +51,6 @@
       format('truetype'),
     /* Safari, Android, iOS */
       url('/fonts/oswald-v26-latin_cyrillic-500.svg#Oswald') format('svg'); /* Legacy iOS */
-  font-display: swap;
 }
 /* oswald-600 - latin_cyrillic */
 @font-face {
@@ -72,7 +69,6 @@
       format('truetype'),
     /* Safari, Android, iOS */
       url('/fonts/oswald-v26-latin_cyrillic-600.svg#Oswald') format('svg'); /* Legacy iOS */
-  font-display: swap;
 }
 
 * {
