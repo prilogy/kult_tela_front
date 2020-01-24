@@ -33,7 +33,7 @@ export const mutations = {
 
 export const actions = {
   SET_CHAT({ state, commit }, { chat, forceCurrent = false }) {
-    if (forceCurrent || state.currentChat.id === chat.id)
+    if (forceCurrent || (state.currentChat && state.currentChat.id === chat.id))
       commit('SET_CURRENT_CHAT', chat)
     else commit('SET_CHAT', chat)
   },
@@ -97,13 +97,10 @@ export const actions = {
     dispatch('FEED_CHAT_WITH_USER_ID', { id: message.to_user_id })
   },
   async socket_chatMessageLastSeen({ commit, state, dispatch }, info) {
-    console.log(info)
     let chat
     if (state.currentChat && info.room_id === state.currentChat.id) {
-      console.log('cur chat')
       chat = state.currentChat
     } else {
-      console.log('not cur chat')
       const index = getChatIndexById(state.chats, { id: info.room_id })
       chat = state.chats[index]
     }
@@ -113,6 +110,13 @@ export const actions = {
 }
 
 export const getters = {
-  GET_CHATS: state => state.chats,
+  GET_CHATS: state => {
+    return state.chats.sort((a, b) =>
+      a.messages[a.messages.length - 1].id >
+      b.messages[b.messages.length - 1].id
+        ? -1
+        : 1
+    )
+  },
   GET_CURRENT_CHAT: state => state.currentChat
 }

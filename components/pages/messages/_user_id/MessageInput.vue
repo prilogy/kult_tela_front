@@ -76,11 +76,6 @@ export default {
 }
 .box {
   max-width: var(--body-max-width);
-  /*margin: 0 auto;*/
-  /*position: fixed;*/
-  /*bottom: 0;*/
-  /*right: 0;*/
-  /*left: 0;*/
   background: var(--grey-light1) !important;
 
   box-sizing: border-box;
