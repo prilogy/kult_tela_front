@@ -69,7 +69,7 @@ export default {
 .message__bottom {
   margin-top: 3px;
   display: inline-flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-end;
   z-index: 10;
   margin-left: auto;

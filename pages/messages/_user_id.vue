@@ -59,6 +59,11 @@ export default {
     }
   },
   methods: {
+    messagesScrolled(scrollPos) {
+      if (scrollPos < 600) {
+        this.$store.dispatch('chat/LOAD_MESSAGES_HISTORY')
+      }
+    },
     sendMessage(text) {
       this.$store.dispatch('chat/SEND_MESSAGE', {
         text,
@@ -69,6 +74,10 @@ export default {
       const el = this.$refs.messages
       el.scrollTop = el.childNodes[0].clientHeight
     },
+    scrollTo(height) {
+      const el = this.$refs.messages
+      el.scrollTop = height
+    },
     focusOnMessageInputArea() {
       if (this.$refs.messageInputArea) this.$refs.messageInputArea.focusOnArea()
     }
@@ -77,7 +86,15 @@ export default {
     CHAT: {
       deep: true,
       handler() {
-        this.$nextTick(() => this.scrollToBottom())
+        const el = this.$refs.messages
+        const curCH = el.childNodes[0].clientHeight
+        const scrollTop = el.scrollTop + el.clientHeight + 48
+        this.$nextTick(() => {
+          if (scrollTop >= el.childNodes[0].clientHeight - 200)
+            this.scrollToBottom()
+          else if (el.scrollTop <= 100)
+            this.scrollTo(el.childNodes[0].clientHeight - curCH)
+        })
       }
     }
   },
@@ -113,6 +130,20 @@ export default {
     document.addEventListener('keypress', () => {
       this.focusOnMessageInputArea()
     })
+
+    const el = this.$refs.messages
+
+    let debounce_timer
+    el.addEventListener('scroll', () => {
+      if (debounce_timer) {
+        clearTimeout(debounce_timer)
+      }
+
+      debounce_timer = setTimeout(() => {
+        this.messagesScrolled(el.scrollTop)
+      }, 100)
+    })
+
     await this.$store.dispatch('chat/SET_LAST_SEEN_MESSAGE')
   },
   destroyed() {

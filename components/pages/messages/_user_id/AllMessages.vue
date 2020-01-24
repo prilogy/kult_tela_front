@@ -50,7 +50,7 @@ export default {
 
 <style scoped>
 .messages {
-  padding: 0 var(--space-new);
+  padding: var(--space-new) var(--space-new) 0 var(--space-new);
   display: flex;
   flex-direction: column;
 }

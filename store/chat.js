@@ -77,6 +77,15 @@ export const actions = {
       }
     }
   },
+  async LOAD_MESSAGES_HISTORY({ state, dispatch }) {
+    const currentChat = state.currentChat
+    if (currentChat && !currentChat.history_is_full) {
+      socket(this).emit('chat_messages_history_load', {
+        from_message_id: currentChat.messages[0].id,
+        room_id: currentChat.id
+      })
+    }
+  },
   async socket_chatMessage({ commit, state, dispatch }, message) {
     let currentChat = false,
       chat
@@ -95,6 +104,17 @@ export const actions = {
   },
   async socket_chatMessageInit({ commit, dispatch }, message) {
     dispatch('FEED_CHAT_WITH_USER_ID', { id: message.to_user_id })
+  },
+  async socket_chatMessagesHistoryLoad({ commit, dispatch, state }, messages) {
+    if (messages && messages.length > 0) {
+      let currentChat = state.currentChat
+      currentChat.messages = [...messages, ...currentChat.messages]
+    }
+  },
+  socket_chatMessagesHistoryFull({ commit, dispatch, state }, messages) {
+    let currentChat = state.currentChat
+    currentChat.history_is_full = true
+    dispatch('SET_CHAT', { chat: currentChat })
   },
   async socket_chatMessageLastSeen({ commit, state, dispatch }, info) {
     let chat
