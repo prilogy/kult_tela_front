@@ -21,9 +21,17 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-  },
-  /*
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'preload',
+        href: '/fonts/oswald-v26-latin_cyrillic-300.woff2',
+        as: 'font',
+        crossorigin: 'anonymous'
+      }
+    ]
+  }, //<link rel="preload" href="/fonts/myfont.eot" as="font" crossorigin="anonymous" />
+  /*<link rel="prefetch" href="pathto/font">
    ** Customize the progress-bar color
    */
   loading: {

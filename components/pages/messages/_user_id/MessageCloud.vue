@@ -62,8 +62,8 @@ export default {
   background: var(--grey-light2);
   border-radius: var(--radius);
   color: var(--white-base);
-  flex-direction: column;
   max-width: 75vw;
+  flex-wrap: wrap;
 }
 
 .message__bottom {
@@ -72,6 +72,7 @@ export default {
   align-items: center;
   justify-content: flex-end;
   z-index: 10;
+  margin-left: auto;
 }
 
 .message .message__bottom .message__time {
@@ -79,6 +80,7 @@ export default {
   align-self: flex-end;
   font-size: 13px;
   margin-right: 4px;
+  margin-left: var(--space-new);
 }
 
 .message .message__text {
