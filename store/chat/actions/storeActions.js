@@ -2,13 +2,16 @@ import { socket, getChatIndexById } from '../utils'
 
 const storeActions = {
   SET_CHAT({ state, commit }, { chat, forceCurrent = false }) {
-    if (
-      forceCurrent ||
-      ((state.currentChat && state.currentChat.id === chat.id) ||
-        state.currentChat.user_id === chat.user_id)
-    )
-      commit('SET_CURRENT_CHAT', chat)
-    else commit('SET_CHAT', chat)
+    if (chat) {
+      if (
+        (state.currentChat &&
+          ((state.currentChat && state.currentChat.id === chat.id) ||
+            state.currentChat.user_id === chat.user_id)) ||
+        forceCurrent === true
+      )
+        commit('SET_CURRENT_CHAT', chat)
+      else commit('SET_CHAT', chat)
+    }
   },
   async FEED_CHATS({ commit }) {
     const { data: chats } = await this.$api.Chat.getAll()

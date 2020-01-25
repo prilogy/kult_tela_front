@@ -69,6 +69,7 @@ export default {
       required: true
     }
   },
+
   components: { VAvatarSmall, DoneIcon },
   methods: {
     showUnreadMessages(chat) {

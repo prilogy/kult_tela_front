@@ -18,7 +18,7 @@ const sockets = {
     dispatch('SET_LAST_SEEN_MESSAGE')
   },
   async chatMessageInit({ commit, dispatch }, message) {
-    await dispatch('FEED_CHAT_WITH_USER_ID', { id: message.to_user_id })
+    await dispatch('FEED_CHAT_WITH_USER_ID', { id: message.user_id })
     dispatch('SET_LAST_SEEN_MESSAGE')
   },
   async chatMessagesHistoryLoad({ commit, dispatch, state }, messages) {
@@ -40,7 +40,7 @@ const sockets = {
       const index = getChatIndexById(state.chats, { id: info.room_id })
       chat = state.chats[index]
     }
-    chat.last_seen_message_id = info.message_id
+    if (chat) chat.last_seen_message_id = info.message_id
     dispatch('SET_CHAT', { chat })
   }
 }
