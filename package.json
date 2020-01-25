@@ -1,7 +1,7 @@
 {
-  "name": "kult_tela_frontend",
+  "name": "culttela",
   "version": "1.0.0",
-  "description": "frontend for kult tela",
+  "description": "frontend for cult tela",
   "author": "ArtyomPlay",
   "private": true,
   "scripts": {

@@ -13,11 +13,13 @@
         caption="Рост (в см)"
         v-model="height"
         max="250"
+        min="40"
       ></VInput>
       <VInput
         required
         type="number"
         max="100"
+        min="1"
         caption="Возраст"
         v-model="age"
       ></VInput>

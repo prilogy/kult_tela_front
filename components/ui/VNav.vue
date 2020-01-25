@@ -90,19 +90,35 @@ export default {
       return this.$route.name
     },
     newNotifications() {
+      let count = 0
       if (this.USER) {
         const lastSeenId = this.USER.notifications_last_seen
         if (this.USER.notifications) {
           const lastId = this.USER.notifications[
             this.USER.notifications.length - 1
           ].id
-          return lastId - lastSeenId
-        } else return null
+          count += lastId - lastSeenId
+        }
+        // if (this.CHATS) {
+        //   console.log(
+        //     this.CHATS.reduce((accum, cur) => {
+        //       if (
+        //         cur.messages[cur.messages.length - 1].user_id !==
+        //           this.USER.id &&
+        //         cur.last_seen_message_id !==
+        //           cur.messages[cur.messages.length - 1].id
+        //       )
+        //         accum += 1
+        //     })
+        //   )
+        // }
+        return count
       } else return null
     },
     ...mapGetters({
       LINKS: 'nav/GET_LINKS',
-      USER: 'user/GET_USER'
+      USER: 'user/GET_USER',
+      CHATS: 'chat/GET_CHATS'
     })
   },
   watch: {

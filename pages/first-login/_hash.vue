@@ -21,13 +21,32 @@
       </VPageHeading>
       <form id="form" autocomplete="off" @submit.prevent="sendForm">
         <VH3 mb="var(--space-half)">Ваш email: {{ email }}</VH3>
-        <VInput required caption="Имя" v-model="first_name"></VInput>
-        <VInput required caption="Фамилия" v-model="last_name"></VInput>
-        <VInput required caption="Отчество" v-model="patronymic"></VInput>
+        <VInput
+          maxlength="30"
+          minlength="2"
+          required
+          caption="Фамилия"
+          v-model="last_name"
+        ></VInput>
+        <VInput
+          minlength="2"
+          maxlength="30"
+          required
+          caption="Имя"
+          v-model="first_name"
+        ></VInput>
+        <VInput
+          maxlength="30"
+          minlength="2"
+          caption="Отчество(если есть)"
+          v-model="patronymic"
+        ></VInput>
         <VInput
           required
           step="0.01"
           type="number"
+          max="270"
+          min="40"
           caption="Текущий вес"
           v-model="weight_start"
         ></VInput>
@@ -35,6 +54,8 @@
           required
           step="0.01"
           type="number"
+          min="50"
+          max="250"
           caption="Рост (в см)"
           v-model="height"
         ></VInput>
@@ -42,6 +63,7 @@
           required
           type="number"
           max="100"
+          min="1"
           caption="Возраст"
           v-model="age"
         ></VInput>
@@ -175,7 +197,6 @@ export default {
       return (
         !this.first_name ||
         !this.last_name ||
-        !this.patronymic ||
         !this.weight_start ||
         !this.password ||
         !this.password_verify ||

@@ -22,6 +22,9 @@
           <VCaption>{{ chat.messages[index + 1].date }}</VCaption>
         </div>
       </li>
+      <li v-if="chat.chat_is_empty" class="msg--chat_is-empty">
+        <VP>Здесь будет история переписки</VP>
+      </li>
     </ul>
   </div>
 </template>
@@ -57,7 +60,7 @@ export default {
 
 .messages .msg {
   width: 100%;
-  margin-bottom: var(--space-third);
+  margin-bottom: 6px;
 }
 
 .messages__date {
@@ -72,5 +75,14 @@ export default {
 
 .messages__date p {
   color: var(--white-trans1);
+}
+
+.msg--chat_is-empty {
+  margin-bottom: var(--space);
+  text-align: center;
+}
+
+.msg--chat_is-empty p {
+  color: var(--grey-light2);
 }
 </style>

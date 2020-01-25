@@ -3,6 +3,7 @@
     <div
       ref="area"
       @input="handleArea"
+      @focus="focused"
       class="box__input"
       contenteditable
       @keydown="handleKeys"
@@ -34,6 +35,9 @@ export default {
     }
   },
   methods: {
+    focused() {
+      this.$emit('focused')
+    },
     handleArea(e) {
       this.input = e.target.innerText
     },
@@ -58,7 +62,7 @@ export default {
       this.$refs.area.focus()
     },
     sendMessage() {
-      if (this.input) this.$emit('sendMessage', this.input)
+      if (this.input.trim() !== '') this.$emit('sendMessage', this.input)
       this.$refs.area.innerHTML = ''
       this.input = ''
       this.focusOnArea()

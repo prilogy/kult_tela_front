@@ -30,8 +30,9 @@
     <MessageInput
       class="chat__bottom"
       ref="messageInputArea"
+      @focused="() => shouldScrollToBotton() && scrollTo({ toBottom: true })"
       @sendMessage="sendMessage"
-      @heightChanged="scrollToBottom"
+      @heightChanged="scrollTo({ toBottom: true })"
     ></MessageInput>
   </div>
 </template>
@@ -60,7 +61,7 @@ export default {
   },
   methods: {
     messagesScrolled(scrollPos) {
-      if (scrollPos < 600) {
+      if (scrollPos < 1000) {
         this.$store.dispatch('chat/LOAD_MESSAGES_HISTORY')
       }
     },
@@ -70,16 +71,19 @@ export default {
         to_user_id: this.CHAT.user_id
       })
     },
-    scrollToBottom() {
+    scrollTo({ height, toBottom }) {
       const el = this.$refs.messages
-      el.scrollTop = el.childNodes[0].clientHeight
-    },
-    scrollTo(height) {
-      const el = this.$refs.messages
-      el.scrollTop = height
+      el.scrollTop = toBottom
+        ? (el.scrollTop = el.childNodes[0].clientHeight)
+        : height
     },
     focusOnMessageInputArea() {
       if (this.$refs.messageInputArea) this.$refs.messageInputArea.focusOnArea()
+    },
+    shouldScrollToBotton() {
+      const el = this.$refs.messages
+      const scrollTop = el.scrollTop + el.clientHeight + 48
+      return scrollTop >= el.childNodes[0].clientHeight - 250
     }
   },
   watch: {
@@ -88,12 +92,11 @@ export default {
       handler() {
         const el = this.$refs.messages
         const curCH = el.childNodes[0].clientHeight
-        const scrollTop = el.scrollTop + el.clientHeight + 48
         this.$nextTick(() => {
-          if (scrollTop >= el.childNodes[0].clientHeight - 200)
-            this.scrollToBottom()
-          else if (el.scrollTop <= 100)
-            this.scrollTo(el.childNodes[0].clientHeight - curCH)
+          if (this.shouldScrollToBotton()) this.scrollTo({ toBottom: true })
+          else if (el.scrollTop <= 100) {
+            this.scrollTo({ height: el.childNodes[0].clientHeight - curCH })
+          }
         })
       }
     }
@@ -111,7 +114,7 @@ export default {
       .map(item => item.user_id)
       .indexOf(user_id)
     try {
-      if (index === -1 || store.state.chat.chats[index].messages.length === 1) {
+      if (index === -1 || store.state.chat.chats[index].messages.length <= 20) {
         await store.dispatch('chat/FEED_CHAT_WITH_USER_ID', {
           id: user_id,
           setAsCurrent: true
@@ -125,7 +128,7 @@ export default {
   },
   async mounted() {
     this.$nextTick(() => {
-      this.scrollToBottom()
+      this.scrollTo({ toBottom: true })
     })
     document.addEventListener('keypress', () => {
       this.focusOnMessageInputArea()
@@ -193,6 +196,10 @@ export default {
   overflow: auto;
   display: flex;
   flex-direction: column;
+}
+
+.chat__main::-webkit-scrollbar {
+  display: none;
 }
 
 .chat__main__content {

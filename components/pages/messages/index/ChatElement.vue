@@ -105,9 +105,9 @@ export default {
 
 .contact__aside__bottom__mark {
   border-radius: 100px;
-  background: var(--yellow-dark1);
-  width: 12px;
-  height: 12px;
+  background: var(--yellow-trans1);
+  width: 14px;
+  height: 14px;
 }
 
 .contact__aside__bottom__mark p {

@@ -32,15 +32,18 @@ export default {
   computed: {
     info() {
       const user = this.USER
+      const weight_diff = Math.ceil(user.weight_diff * 10) / 10 || 0
       return [
-        { title: 'Начальный вес', value: user.weight_start + 'кг' },
+        { title: 'Начальный вес', value: user.weight_start + ' кг' },
         {
-          title: 'Сброшено кг',
-          value: (Math.ceil(user.weight_diff * 10) / 10 || 0) + 'кг'
+          title: 'Текущий вес',
+          value: `${user.weight_start - weight_diff}${
+            weight_diff > 0 ? '(-' + weight_diff + ')' : ''
+          } кг`
         },
         {
           title: 'Рост',
-          value: user.height + 'см'
+          value: user.height + ' см'
         },
         { title: 'Служит с', value: user.date_signup },
         { title: 'Войско', value: user.plan_name }
