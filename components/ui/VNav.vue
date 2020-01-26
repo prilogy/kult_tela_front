@@ -1,7 +1,7 @@
 <template>
-  <nav class="nav">
+  <nav class="nav" ref="nav">
     <transition name="showup">
-      <div class="nav__dropdown" v-if="burgerToggle">
+      <div class="nav__dropdown" v-show="burgerToggle">
         <button
           class="nav__dropdown__notifications_button"
           @click="dropDownLinkAction({ url: '/notifications' })"
@@ -99,19 +99,6 @@ export default {
           ].id
           count += lastId - lastSeenId
         }
-        // if (this.CHATS) {
-        //   console.log(
-        //     this.CHATS.reduce((accum, cur) => {
-        //       if (
-        //         cur.messages[cur.messages.length - 1].user_id !==
-        //           this.USER.id &&
-        //         cur.last_seen_message_id !==
-        //           cur.messages[cur.messages.length - 1].id
-        //       )
-        //         accum += 1
-        //     })
-        //   )
-        // }
         return count
       } else return null
     },
@@ -133,6 +120,24 @@ export default {
     ) {
       this.isPWAInstalled = true
     }
+  },
+  mounted() {
+    document.addEventListener('click', evt => {
+      let flyoutElement = this.$refs.nav,
+        targetElement = evt.target // clicked element
+      if (this.burgerToggle) {
+        do {
+          if (targetElement == flyoutElement) {
+            return
+          }
+          targetElement = targetElement.parentNode
+        } while (targetElement)
+        this.hideDropdown()
+      }
+    })
+  },
+  destroyed() {
+    document.removeEventListener('click', evt => {})
   }
 }
 </script>
