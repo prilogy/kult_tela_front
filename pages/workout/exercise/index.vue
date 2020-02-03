@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading>
+    <VPageHeading button>
       Все упражнения
       <template v-slot:info>
         <VTipSmall>
@@ -92,25 +92,23 @@ export default {
   background: var(--yellow-trans3) !important;
 }
 
-.body .titles__item {
-  margin-bottom: var(--space-third);
-}
-
 .body .titles__item > .titles__item__alphabet-char {
   margin-top: var(--space-half);
   margin-bottom: 3px;
 }
 
 .body .titles__item p {
-  padding-top: var(--space-third);
-  padding-bottom: var(--space-third);
+  padding: var(--space-half) var(--space) var(--space-half) var(--space);
+  margin: 0 calc(-1 * var(--space));
 }
 
 .body .titles__item:nth-child(odd) p {
-  margin: 0 calc(-1 * var(--space));
-  padding-left: var(--space);
-  padding-right: var(--space);
   background: var(--white-trans4);
+}
+
+.body .titles__item:active p,
+.body .titles__item:focus p {
+  background: var(--yellow-trans3);
 }
 
 .body .titles__item__title {

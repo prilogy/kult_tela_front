@@ -1,6 +1,12 @@
 export const state = () => ({
   actions: [
     {
+      title: 'Центр тренировок',
+      minPlan: 0,
+      url: '/workout',
+      color: '#f27108'
+    },
+    {
       title: 'Вебинар с Мариной Богомоловой',
       minPlan: 0,
       url: '/special/webinar',
@@ -15,8 +21,7 @@ export const state = () => ({
     { title: 'Калькулятор калорий', minPlan: 0, url: '/calculator' },
     { title: 'Посмотреть планы', minPlan: 0, url: '/plans' },
     { title: 'Редактировать профиль', minPlan: 0, url: '/edit' },
-    { title: 'Советы по питанию', minPlan: 0, url: '/food/tips' },
-    { title: 'Все упражнения', minPlan: 0, url: '/workout/exercise' }
+    { title: 'Советы по питанию', minPlan: 0, url: '/food/tips' }
   ]
 })
 

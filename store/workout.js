@@ -20,7 +20,8 @@ export const actions = {
       console.log(workout)
       commit('SET_WORKOUT', workout.data)
     } catch (e) {
-      this.$router.push('/workout/exercise')
+      console.log('ere')
+      this.$router.push('/workout/')
     }
   },
   async FEED_ALL_EXERCISES({ commit }) {
@@ -28,7 +29,7 @@ export const actions = {
       const { data: exercises } = await this.$api.Exercise.getAll()
       commit('SET_ALL_EXERCISES', exercises)
     } catch (e) {
-      this.$router.push('/')
+      this.$router.push('/workout')
     }
   }
 }

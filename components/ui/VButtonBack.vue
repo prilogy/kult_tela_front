@@ -30,5 +30,12 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 100px;
+  padding: 4px;
+  cursor: pointer;
+}
+.wrapper:focus,
+.wrapper:active,
+.wrapper:hover {
+  background: var(--white-trans3);
 }
 </style>
