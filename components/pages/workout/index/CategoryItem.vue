@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :to="category.url">
-    <div class="item">
+    <div :class="{ item: true, 'item--plan-failed': category.planFailed }">
       <span
         :style="{ width: svgWidth + 'px' }"
         class="svg"
@@ -48,5 +48,27 @@ export default {
 }
 .svg >>> svg > path {
   fill: var(--grey-light3);
+}
+
+.item--plan-failed {
+  opacity: 0.7;
+  background: var(--white-trans4);
+}
+
+.item--plan-failed h3 {
+  color: var(--grey-light2);
+}
+.item--plan-failed .svg >>> svg > path {
+  fill: var(--grey-light2);
+}
+.item--plan-failed:hover {
+  background: var(--white-trans4);
+  cursor: pointer;
+}
+.item--plan-failed:hover h3 {
+  color: var(--grey-light2);
+}
+.item--plan-failed:hover .svg >>> svg > path {
+  fill: var(--grey-light2);
 }
 </style>

@@ -272,17 +272,12 @@ export default {
   font-size: 18px;
   line-height: 1.25;
 }
-.common {
-}
-
-.common br {
-  margin-bottom: var(--space-third);
-}
 
 .common p {
   color: var(--grey-light3);
   line-height: 1.3;
   margin-bottom: var(--space-third);
+  text-align: justify;
 }
 .common h3 {
   margin: var(--space) 0 var(--space-half) 0;
