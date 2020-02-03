@@ -114,10 +114,8 @@ export default {
     })
   },
   methods: {},
-  async asyncData({ store, redirect }) {
-    if (store.getters['workout/GET_WORKOUT'] === null)
-      await store.dispatch('workout/SET_WORKOUT_BY_ID', 1)
-    if (store.getters['workout/GET_WORKOUT'] === null) redirect('/workout/all')
+  async fetch({ store }) {
+    await store.dispatch('workout/FEED_WORKOUT_BY_ID', 1)
   }
 }
 </script>

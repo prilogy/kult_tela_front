@@ -55,7 +55,7 @@ export default {
 }
 .heading__title {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: var(--space-third);
 }
 

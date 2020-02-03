@@ -10,7 +10,6 @@ import VButton from './ui/VButton'
 import VInput from './ui/VInput'
 import VPlanCard from './ui/VPlanCard'
 import VAvatar from './ui/VAvatar'
-import VProfileActions from './ui/VProfileActions'
 import VTipSmall from './ui/VTipSmall'
 import VImageUpload from './ui/VImageUpload'
 import VButtonBack from './ui/VButtonBack'
@@ -42,7 +41,6 @@ export {
   VInput,
   VPlanCard,
   VAvatar,
-  VProfileActions,
   VTipSmall,
   VImageUpload,
   VButtonBack,

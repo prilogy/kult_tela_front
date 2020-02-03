@@ -26,7 +26,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { VAvatar, VProfileActions } from '../components/'
+import { VAvatar } from '../components/'
+import VProfileActions from '../components/pages/index/ProfileActions'
 export default {
   components: { VProfileActions, VAvatar },
   computed: {

@@ -22,45 +22,7 @@ const hexOpacity = {
   0: '00'
 }
 
-const cssVars = Array.from(document.styleSheets)
-  .filter(
-    sheet =>
-      sheet.href === null || sheet.href.startsWith(window.location.origin)
-  )
-  .reduce(
-    (acc, sheet) =>
-      (acc = [
-        ...acc,
-        ...Array.from(sheet.cssRules).reduce(
-          (def, rule) =>
-            (def =
-              rule.selectorText === ':root'
-                ? [
-                    ...def,
-                    ...Array.from(rule.style).filter(name =>
-                      name.startsWith('--')
-                    )
-                  ]
-                : def),
-          []
-        )
-      ]),
-    []
-  )
-
-const _c = name =>
-  getComputedStyle(document.documentElement).getPropertyValue(name)
-
-let colors = {}
-
-cssVars.forEach(vname => {
-  const cname = vname.slice(2).split('-')
-  if (!colors[cname[0]]) colors[cname[0]] = {}
-  colors[cname[0]][cname[1]] = _c(vname)
-})
-
 const clrs = {
-  colors,
   withOpacity(color, opacity) {
     return color + hexOpacity[opacity]
   },

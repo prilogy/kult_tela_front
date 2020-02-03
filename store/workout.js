@@ -1,22 +1,34 @@
 export const state = () => ({
   workout: null,
-  workout_status: null
+  workout_status: null,
+  all_exercises: null
 })
 
 export const mutations = {
   SET_WORKOUT(state, payload) {
     state.workout = payload
+  },
+  SET_ALL_EXERCISES(state, payload) {
+    state.all_exercises = payload
   }
 }
 
 export const actions = {
-  async SET_WORKOUT_BY_ID({ commit }, id) {
+  async FEED_WORKOUT_BY_ID({ commit }, id) {
     try {
       const workout = await this.$api.Workout.getById(id)
       console.log(workout)
       commit('SET_WORKOUT', workout.data)
     } catch (e) {
-      this.$router.push('/workout/all')
+      this.$router.push('/workout/exercise')
+    }
+  },
+  async FEED_ALL_EXERCISES({ commit }) {
+    try {
+      const { data: exercises } = await this.$api.Exercise.getAll()
+      commit('SET_ALL_EXERCISES', exercises)
+    } catch (e) {
+      this.$router.push('/')
     }
   }
 }
@@ -41,5 +53,13 @@ export const getters = {
         return exercises.filter(item => item.id === parseInt(id))[0]
       } else return null
     }
-  }
+  },
+  GET_ALL_EXERCISES: state =>
+    state.all_exercises
+      ? state.all_exercises.sort((a, b) => (a.title < b.title ? -1 : 1))
+      : null,
+  GET_EXERCISE_FROM_ALL: state => id =>
+    state.all_exercises
+      ? state.all_exercises.filter(item => item.id === parseInt(id))[0]
+      : null
 }

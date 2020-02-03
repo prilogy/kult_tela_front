@@ -1,0 +1,119 @@
+<template>
+  <div>
+    <VPageHeading>
+      Все упражнения
+      <template v-slot:info>
+        <VTipSmall>
+          Перед выполнением любого упражнения прочтите
+          <nuxt-link to="/workout/tips">
+            <span style="color: var(--yellow-base)">
+              советы по тренировкам
+            </span>
+          </nuxt-link>
+        </VTipSmall>
+      </template>
+    </VPageHeading>
+    <div class="body">
+      <VInput
+        v-model="search_input"
+        class="body__search-input"
+        placeholder="Поиск по названию"
+      ></VInput>
+      <ul v-if="ALL_EXERCISES">
+        <li
+          class="titles__item"
+          v-for="(item, index) in ALL_EXERCISES"
+          :key="item.id"
+        >
+          <VH3
+            class="titles__item__alphabet-char"
+            v-if="
+              index === 0 || item.title[0] !== ALL_EXERCISES[index - 1].title[0]
+            "
+          >
+            {{ item.title[0] }}
+          </VH3>
+          <nuxt-link :to="'/workout/exercise/' + item.id">
+            <VP class="titles__item__title" color="var(--grey-light3)">
+              {{ item.title }}
+            </VP>
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+import { VPlanCard, VInput, VIcon, VTipSmall } from '../../../components/'
+import { mapGetters } from 'vuex'
+
+export default {
+  components: {
+    VIcon,
+    VInput,
+    VPlanCard,
+    VTipSmall
+  },
+  data() {
+    return {
+      search_input: ''
+    }
+  },
+  computed: {
+    ALL_EXERCISES() {
+      if (!this.search_input)
+        return this.$store.getters['workout/GET_ALL_EXERCISES']
+      else
+        return this.$store.getters['workout/GET_ALL_EXERCISES'].filter(
+          item =>
+            item.title
+              .toLowerCase()
+              .indexOf(this.search_input.toLowerCase().trim()) !== -1
+        )
+    }
+  },
+  async fetch({ store }) {
+    if (!store.getters['workout/GET_ALL_EXERCISES'])
+      await store.dispatch('workout/FEED_ALL_EXERCISES')
+  }
+}
+</script>
+
+<style scoped>
+.body {
+  margin-top: var(--space-half);
+}
+
+.body .body__search-input >>> input {
+  background: var(--grey-light1) !important;
+}
+.body .body__search-input >>> input:focus {
+  background: var(--yellow-trans3) !important;
+}
+
+.body .titles__item {
+  margin-bottom: var(--space-third);
+}
+
+.body .titles__item > .titles__item__alphabet-char {
+  margin-top: var(--space-half);
+  margin-bottom: 3px;
+}
+
+.body .titles__item p {
+  padding-top: var(--space-third);
+  padding-bottom: var(--space-third);
+}
+
+.body .titles__item:nth-child(odd) p {
+  margin: 0 calc(-1 * var(--space));
+  padding-left: var(--space);
+  padding-right: var(--space);
+  background: var(--white-trans4);
+}
+
+.body .titles__item__title {
+  font-size: 20px;
+}
+</style>
