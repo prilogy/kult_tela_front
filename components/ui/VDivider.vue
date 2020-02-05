@@ -1,11 +1,13 @@
 <template>
   <hr
     class="divider"
-    :style="{ 'border-color': color, 'border-width': width + 'px' }"
+    :style="{ 'border-color': color, 'border-width': width + 'px', ...indents }"
   />
 </template>
 
 <script>
+import indents from '../../mixins/indents'
+
 export default {
   props: {
     color: {
@@ -16,7 +18,8 @@ export default {
       type: Number,
       default: 1
     }
-  }
+  },
+  mixins: [indents]
 }
 </script>
 

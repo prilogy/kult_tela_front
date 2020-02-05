@@ -1,14 +1,15 @@
 <template>
-  <nuxt-link :to="category.url">
-    <div :class="{ item: true, 'item--plan-failed': category.planFailed }">
-      <span
-        :style="{ width: svgWidth + 'px' }"
-        class="svg"
-        v-html="category.svg"
-      ></span>
-      <VH3>{{ category.title }}</VH3>
-    </div>
-  </nuxt-link>
+  <div
+    @click="goToCategory"
+    :class="{ item: true, 'item--plan-failed': category.planFailed }"
+  >
+    <span
+      :style="{ width: svgWidth + 'px' }"
+      class="svg"
+      v-html="category.svg"
+    ></span>
+    <VH3>{{ category.title }}</VH3>
+  </div>
 </template>
 
 <script>
@@ -18,6 +19,12 @@ export default {
     svgWidth: {
       type: Number,
       default: 60
+    }
+  },
+  methods: {
+    goToCategory(e) {
+      if (this.category.planFailed) e.preventDefault()
+      else this.$router.push(this.category.url)
     }
   }
 }
@@ -52,7 +59,7 @@ export default {
 
 .item--plan-failed {
   opacity: 0.7;
-  background: var(--white-trans4);
+  cursor: default !important;
 }
 
 .item--plan-failed h3 {
@@ -61,10 +68,13 @@ export default {
 .item--plan-failed .svg >>> svg > path {
   fill: var(--grey-light2);
 }
-.item--plan-failed:hover {
-  background: var(--white-trans4);
-  cursor: pointer;
+
+.item--plan-failed:hover,
+.item--plan-failed:active,
+.item--plan-failed:focus {
+  background: none;
 }
+
 .item--plan-failed:hover h3 {
   color: var(--grey-light2);
 }

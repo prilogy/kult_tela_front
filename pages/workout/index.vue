@@ -35,7 +35,7 @@ export default {
             fill="#000"
           />
         </svg>`,
-          minPlan: 2
+          minPlan: 1
         },
         {
           id: 1,

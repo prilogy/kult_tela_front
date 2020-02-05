@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="$emit('click')"
+    @click="click"
     :style="{ ...indents, ...buttonStyle }"
     :disabled="disabled"
     :class="{
@@ -36,6 +36,12 @@ export default {
       return {
         background: this.bg
       }
+    }
+  },
+  methods: {
+    click(e) {
+      if (this.disabled === true) e.preventDefault()
+      else this.$emit('click')
     }
   }
 }

@@ -63,7 +63,6 @@ export const mutations = {
 export const actions = {
   SET_CURRENT_LINK_ID({ commit, getters }) {
     const name = this.$router.history.current.name
-
     let currentName = ('/' + (name === 'index' ? '' : name)).replace(/-/g, '/')
 
     const currentLink = getters.GET_LINKS.links.filter(

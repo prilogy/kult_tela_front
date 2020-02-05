@@ -114,8 +114,18 @@ export default {
     })
   },
   methods: {},
-  async fetch({ store }) {
-    await store.dispatch('workout/FEED_WORKOUT_BY_ID', 1)
+  async fetch({ store, redirect }) {
+    const user = store.getters['user/GET_USER']
+    if (!user.workout.overweight_level || !user.workout.physical_level)
+      redirect('/workout/fill-info')
+    else {
+      try {
+        await store.dispatch('workout/FEED_WORKOUT')
+      } catch (e) {
+        console.log('asdas')
+        redirect('/workout')
+      }
+    }
   }
 }
 </script>

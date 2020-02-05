@@ -47,7 +47,9 @@ export default function(ctx) {
   }
 
   this.Workout = {
-    getById: id => axios.$get('/workout/' + id)
+    get: () => axios.$get('/workout/plan'),
+    getLevels: () => axios.$get('/workout/level'),
+    setLevels: data => axios.$post('/workout/level', data)
   }
 
   this.Exercise = {

@@ -61,6 +61,8 @@ export default {
 
 .heading__info p {
   color: var(--white-trans1) !important;
+  font-weight: 300;
+  font-size: 19px;
 }
 
 h1,
