@@ -1,119 +1,95 @@
 <template>
-  <div>
-    <VPageHeading button>Тренировка</VPageHeading>
-    <div v-if="WORKOUT != null" class="workout">
-      <VH3 class="workout__name">{{ WORKOUT.name }}</VH3>
-      <VP class="workout__desc">{{ WORKOUT.description }}</VP>
-      <div class="workout__body">
-        <div class="workout__body__top">
-          <VH2>Упражнения</VH2>
-          <div>
-            <div @click="type = false">
-              <svg
-                width="30"
-                height="28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M28.578 13.781L15.706.92a.998.998 0 00-1.412 0L1.422 13.78a2.002 2.002 0 001.412 3.416h1.357v9.178c0 .553.446 1 1 1H13v-7h3.5v7h8.31c.553 0 1-.447 1-1v-9.178h1.356a2.002 2.002 0 001.412-3.416z"
-                  :fill="
-                    type === false ? 'var(--yellow-base)' : 'var(--grey-light2)'
-                  "
-                />
-              </svg>
-            </div>
+  <div class="workout" v-if="WORKOUT">
+    <VPageHeading div-inside button>
+      <div class="workout__top">
+        <VH3>Тренировка</VH3>
+        <VH3>День {{ WORKOUT.day_number }}</VH3>
+      </div>
+    </VPageHeading>
 
-            <div @click="type = true">
-              <svg
-                width="28"
-                height="28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.059 25.13a.564.564 0 01-.028.792L8.814 27.06a.56.56 0 01-.79-.029L.941 19.397a.564.564 0 01.028-.793l1.218-1.135a.56.56 0 01.79.028l7.082 7.632zm9.038-14.365a.564.564 0 01-.029.793l-7.655 7.152a.56.56 0 01-.79-.029l-1.827-1.972a.564.564 0 01.028-.793l7.654-7.15a.558.558 0 01.79.028l1.83 1.971zm-6.434 11.93a.564.564 0 01-.028.793l-1.218 1.137a.56.56 0 01-.79-.029l-7.08-7.634a.564.564 0 01.028-.793l1.216-1.136a.56.56 0 01.79.029l7.082 7.633zM24.46 11.04a.564.564 0 01-.03.793l-1.217 1.137a.56.56 0 01-.79-.028L15.34 5.309a.563.563 0 01.028-.793l1.22-1.14a.558.558 0 01.79.029l7.08 7.634zm2.6-2.43a.565.565 0 01-.028.793l-1.216 1.137a.559.559 0 01-.79-.028l-7.079-7.636a.565.565 0 01.028-.793L19.191.943a.557.557 0 01.789.028l7.08 7.638z"
-                  :fill="
-                    type === true ? 'var(--yellow-base)' : 'var(--grey-light2)'
-                  "
-                />
-              </svg>
-            </div>
+    <AboutLink></AboutLink>
+    <VTipSmall mt="var(--space-half)" mb="var(--space-half)">
+      <VP color="var(--grey-light3)">
+        Не забывайте про правильное распределение нагрузки и ваши ограничения по
+        здоровью
+      </VP>
+    </VTipSmall>
+    <div>
+      <div class="workout__title">
+        <VH3>Упражнения</VH3>
+        <div>
+          <div
+            @click="setWType('home')"
+            v-if="WORKOUT.home"
+            :class="WORKOUT_TYPE === 'home' ? '' : 'svg--disabled'"
+          >
+            <svg
+              width="24"
+              height="23"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M23.503 11.312L12.6.252A.845.845 0 0012 0a.835.835 0 00-.599.252L.498 11.312c-.318.322-.498.76-.498 1.217 0 .948.76 1.72 1.694 1.72h1.15v7.891c0 .476.378.86.846.86h6.616v-6.019h2.965V23h7.04a.853.853 0 00.847-.86v-7.892h1.149c.45 0 .881-.18 1.199-.505a1.74 1.74 0 00-.003-2.431z"
+                fill="#EFF721"
+              />
+            </svg>
+          </div>
+          <div
+            @click="setWType('gym')"
+            v-if="WORKOUT.gym"
+            :class="WORKOUT_TYPE === 'gym' ? '' : 'svg--disabled'"
+          >
+            <svg
+              width="23"
+              height="23"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.263 20.642a.463.463 0 01-.023.651l-1 .935a.46.46 0 01-.649-.024l-5.818-6.27a.463.463 0 01.023-.652l1-.933a.458.458 0 01.65.024l5.817 6.269zm7.424-11.799a.463.463 0 01-.023.651L9.375 15.37a.46.46 0 01-.649-.024l-1.5-1.62a.463.463 0 01.023-.65L13.536 7.2a.458.458 0 01.648.023l1.503 1.62zm-5.285 9.8a.464.464 0 01-.023.65l-1 .935a.458.458 0 01-.65-.024l-5.815-6.27a.463.463 0 01.023-.652l.998-.933a.46.46 0 01.65.023l5.817 6.27zm9.69-9.575a.463.463 0 01-.025.651l-1 .934a.46.46 0 01-.65-.023l-5.816-6.27a.463.463 0 01.023-.65l1.003-.937a.458.458 0 01.649.024l5.815 6.271zm2.135-1.996a.464.464 0 01-.023.651l-.998.934a.458.458 0 01-.649-.023l-5.815-6.272a.464.464 0 01.023-.652l.999-.935a.46.46 0 01.648.023l5.815 6.274z"
+                fill="#EFF721"
+              />
+            </svg>
           </div>
         </div>
-        <ul class="workout__body__list">
-          <li
-            @click="$router.push('/workout/' + item.id)"
-            class="workout__body__list__item list__item"
-            v-for="item in exercises"
-            :key="item.id"
-          >
-            <div class="list__item__icon">
-              <div v-if="item.done === false || !item.done">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="6"
-                    cy="6"
-                    r="6"
-                    fill="var(--grey-light3)"
-                    fill-opacity="0.7"
-                  />
-                </svg>
-              </div>
-              <div v-else>
-                <svg
-                  width="18"
-                  height="14"
-                  viewBox="0 0 18 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.99999 11.2L1.79999 7L0.399994 8.4L5.99999 14L18 2L16.6 0.599998L5.99999 11.2Z"
-                    fill="#EFF721"
-                  />
-                </svg>
-              </div>
-            </div>
-            <VP :color="item.done === true ? 'var(--yellow-base)' : ''">
-              {{ item.name }}
-            </VP>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { VInput, VButton } from '../../../components/'
+import { VInput, VButton, VTipSmall } from '../../../components/'
 import { mapGetters } from 'vuex'
+import AboutLink from '../../../components/pages/workout/pesonal/AboutLink'
 
 export default {
   middleware: 'minPlan_1',
-  components: { VButton, VInput },
+  components: { VTipSmall, VButton, VInput, AboutLink },
   data() {
     return {
       type: false
     }
   },
   computed: {
-    exercises() {
-      return this.type === false
-        ? this.WORKOUT.exercises_home
-        : this.WORKOUT.exercises_gym
+    EXERCISES() {
+      const type = this.WORKOUT_TYPE
+      return this.WORKOUT[type].exercises
+    },
+    WORKOUT_TYPE() {
+      return this.$store.state.workout.workout_type
     },
     ...mapGetters({
       WORKOUT: 'workout/GET_WORKOUT'
     })
   },
-  methods: {},
+  methods: {
+    setWType(type) {
+      if (type !== this.WORKOUT_TYPE) {
+        this.$store.dispatch('workout/SET_WORKOUT_TYPE', type)
+      }
+    }
+  },
   async fetch({ store, redirect }) {
     const user = store.getters['user/GET_USER']
     if (
@@ -122,10 +98,12 @@ export default {
     )
       redirect('/workout/fill-info')
     else {
-      try {
-        await store.dispatch('workout/FEED_WORKOUT')
-      } catch (e) {
-        redirect('/workout')
+      if (!store.getters['workout/GET_WORKOUT']) {
+        try {
+          await store.dispatch('workout/FEED_WORKOUT')
+        } catch (e) {
+          redirect('/workout')
+        }
       }
     }
   }
@@ -133,39 +111,30 @@ export default {
 </script>
 
 <style scoped>
-.workout__name {
-  color: var(--white-base);
-  margin-bottom: var(--space-half);
+.workout {
 }
-
-.workout__desc {
-  color: var(--grey-light3);
-  margin-bottom: var(--space);
-}
-
-.workout__body {
-}
-
-.workout__body__top {
-  margin-bottom: var(--space-half);
+.workout__top {
   display: flex;
   justify-content: space-between;
 }
 
-.workout__body__top > div {
+.workout__title {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
-.workout__body__top > div > div:first-child {
-  margin-right: var(--space);
+.workout__title > div {
+  display: flex;
+}
+.workout__title > div > div:last-child {
+  margin-left: var(--space);
 }
 
-.list__item {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--space-half);
+.workout__title > div > div {
+  cursor: pointer;
 }
-.list__item__icon {
-  margin-right: var(--space-half);
+
+.svg--disabled {
+  opacity: 0.25;
 }
 </style>

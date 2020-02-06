@@ -1,6 +1,6 @@
 export const state = () => ({
   workout: null,
-  workout_status: null,
+  workout_type: 'gym',
   all_exercises: null
 })
 
@@ -8,12 +8,21 @@ export const mutations = {
   SET_WORKOUT(state, payload) {
     state.workout = payload
   },
+  SET_WORKOUT_TYPE(state, payload, onlyVuex = false) {
+    state.workout_type = payload
+    if (onlyVuex === false) {
+      localStorage.setItem('workout_type', payload)
+    }
+  },
   SET_ALL_EXERCISES(state, payload) {
     state.all_exercises = payload
   }
 }
 
 export const actions = {
+  SET_WORKOUT_TYPE({ commit }, payload) {
+    commit('SET_WORKOUT_TYPE', payload)
+  },
   async FEED_WORKOUT({ commit }) {
     try {
       const workout = await this.$api.Workout.get()
@@ -33,26 +42,7 @@ export const actions = {
 }
 
 export const getters = {
-  GET_WORKOUT(state) {
-    let workout = state.workout
-    if (workout !== null)
-      workout.exercises_home = workout.exercises_home.map(item => {
-        item.done = true
-        return item
-      })
-    return workout
-  },
-  GET_EXERCISE_FROM_WORKOUT(state) {
-    return id => {
-      if (state.workout !== null) {
-        const exercises = [
-          ...state.workout.exercises_home,
-          ...state.workout.exercises_gym
-        ]
-        return exercises.filter(item => item.id === parseInt(id))[0]
-      } else return null
-    }
-  },
+  GET_WORKOUT: state => state.workout,
   GET_ALL_EXERCISES: state =>
     state.all_exercises
       ? state.all_exercises.sort((a, b) => (a.title < b.title ? -1 : 1))

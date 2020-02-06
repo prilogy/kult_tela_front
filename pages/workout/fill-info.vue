@@ -142,7 +142,6 @@ export default {
         try {
           await this.$api.Workout.setLevels(levels)
           await this.$store.commit('user/UPDATE_USER', { workout: levels })
-          console.log('hgggggg')
           this.$router.push('/workout/personal')
         } catch (e) {}
       }

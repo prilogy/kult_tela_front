@@ -10,7 +10,10 @@
       }"
     >
       <VButtonBack v-if="button"></VButtonBack>
-      <VH1 v-if="level === '1'">
+      <div style="width: 100%;" v-if="divInside">
+        <slot></slot>
+      </div>
+      <VH1 v-else-if="level === '1'">
         <slot></slot>
       </VH1>
       <VH2 v-else-if="level === '2'">
@@ -44,6 +47,10 @@ export default {
     titleOffset: {
       type: String,
       default: 'var(--space-half)'
+    },
+    divInside: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -57,6 +64,7 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: var(--space-third);
+  width: 100%;
 }
 
 .heading__info p {

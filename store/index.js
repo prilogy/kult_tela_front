@@ -8,6 +8,11 @@ export const actions = {
         const { data: user } = await ctx.app.$api.Auth.tokenAuth()
         await commit('user/SET_USER', user)
         await commit('auth/SET_AUTHENTICATED')
+
+        const ls_wtype = localStorage.getItem('workout_type')
+        if (ls_wtype) {
+          commit('workout/SET_WORKOUT_TYPE', ls_wtype, true)
+        }
       } catch (err) {
         if (!err.response) {
           dispatch(
