@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading>Тренировка</VPageHeading>
+    <VPageHeading button>Тренировка</VPageHeading>
     <div v-if="WORKOUT != null" class="workout">
       <VH3 class="workout__name">{{ WORKOUT.name }}</VH3>
       <VP class="workout__desc">{{ WORKOUT.description }}</VP>
@@ -116,13 +116,15 @@ export default {
   methods: {},
   async fetch({ store, redirect }) {
     const user = store.getters['user/GET_USER']
-    if (!user.workout.overweight_level || !user.workout.physical_level)
+    if (
+      typeof user.workout.overweight_level !== 'number' ||
+      typeof user.workout.physical_level !== 'number'
+    )
       redirect('/workout/fill-info')
     else {
       try {
         await store.dispatch('workout/FEED_WORKOUT')
       } catch (e) {
-        console.log('asdas')
         redirect('/workout')
       }
     }
