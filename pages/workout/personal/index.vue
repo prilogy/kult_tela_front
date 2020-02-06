@@ -10,7 +10,7 @@
     <AboutLink></AboutLink>
     <VTipSmall mt="var(--space-half)" mb="var(--space-half)">
       <VP color="var(--grey-light3)">
-        Не забывайте про правильное распределение нагрузки и ваши ограничения по
+        Не забывайте про правильное распределениe нагрузки и ваши ограничения по
         здоровью
       </VP>
     </VTipSmall>
@@ -54,21 +54,93 @@
           </div>
         </div>
       </div>
+      <div>
+        <ul class="workout__exercises">
+          <li
+            :class="{
+              workout__exercises__item: true,
+              'workout__exercises__item--opened': index === openedItem
+            }"
+            v-for="(item, index) in EXERCISES"
+          >
+            <div
+              class="workout__exercises__item__top"
+              @click="
+                setOpenedItem(
+                  item.description || item.exercise_id ? index : null
+                )
+              "
+            >
+              <VP>{{ item.name }}</VP>
+              <div
+                v-show="item.description || item.exercise_id"
+                :class="{
+                  workout__exercises__item__svg: true,
+                  'workout__exercises__item__svg--opened': index === openedItem
+                }"
+              >
+                <svg
+                  width="20"
+                  height="10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.52 0L0 1.525 8.5 10 17 1.517 15.48 0 8.5 6.967 1.52 0z"
+                    fill="var(--white-base)"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <VDivider></VDivider>
+
+            <div
+              v-if="index === openedItem && item.exercise_id"
+              :class="{
+                exercise__watch: true,
+                'exercise__watch--no-pb': item.description
+              }"
+              @click="goToExercise(item.exercise_id)"
+            >
+              <svg
+                width="22"
+                height="15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M22 2.143V.856a.837.837 0 00-.257-.606.88.88 0 00-.622-.25H.881A.9.9 0 00.26.25.856.856 0 000 .856v1.287h2.2v2.143H0v2.143h2.2V8.57H0v2.143h2.2v2.143H0v1.285a.838.838 0 00.258.607A.881.881 0 00.88 15h20.24a.9.9 0 00.622-.252.857.857 0 00.257-.606v-1.285h-2.2v-2.143H22V8.571h-2.2V6.43H22V4.286h-2.2V2.143H22zM8.8 10.714V4.286L14.3 7.5l-5.5 3.214z"
+                  fill="var(--yellow-base)"
+                />
+              </svg>
+              <VP>Смотреть видео</VP>
+            </div>
+            <VP
+              class="workout__exercises__item__desc"
+              v-if="index === openedItem && item.description"
+            >
+              {{ item.description }}
+            </VP>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { VInput, VButton, VTipSmall } from '../../../components/'
+import { VInput, VButton, VTipSmall, VDivider } from '../../../components/'
 import { mapGetters } from 'vuex'
 import AboutLink from '../../../components/pages/workout/pesonal/AboutLink'
 
 export default {
   middleware: 'minPlan_1',
-  components: { VTipSmall, VButton, VInput, AboutLink },
+  components: { VDivider, VTipSmall, VButton, VInput, AboutLink },
   data() {
     return {
-      type: false
+      type: false,
+      openedItem: null
     }
   },
   computed: {
@@ -84,10 +156,18 @@ export default {
     })
   },
   methods: {
+    setOpenedItem(id) {
+      if (id === this.openedItem) this.openedItem = null
+      else this.openedItem = id
+    },
     setWType(type) {
+      this.openedItem = null
       if (type !== this.WORKOUT_TYPE) {
         this.$store.dispatch('workout/SET_WORKOUT_TYPE', type)
       }
+    },
+    goToExercise(id) {
+      this.$router.push('/workout/exercise/' + id)
     }
   },
   async fetch({ store, redirect }) {
@@ -122,6 +202,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: var(--space);
 }
 .workout__title > div {
   display: flex;
@@ -132,6 +213,57 @@ export default {
 
 .workout__title > div > div {
   cursor: pointer;
+}
+
+.workout__exercises__item {
+  margin-top: var(--space-half);
+}
+
+.workout__exercises__item p {
+  font-weight: 300;
+  margin-bottom: var(--space-half);
+}
+
+.workout__exercises__item--opened {
+  padding: var(--space-half) var(--space-half) 0 var(--space-half);
+  background: var(--white-trans4);
+  border-radius: var(--radius-half);
+  margin-left: calc(-1 * var(--space-half));
+  margin-right: calc(-1 * var(--space-half));
+}
+
+.workout__exercises__item__desc {
+  padding: var(--space-third) 0;
+  color: var(--grey-light3);
+}
+
+.workout__exercises__item__svg {
+  width: 20px !important;
+  margin-left: var(--space-half);
+}
+
+.workout__exercises__item__svg--opened svg {
+  transform: rotate(180deg);
+}
+
+.workout__exercises__item__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exercise__watch {
+  display: flex;
+  align-items: center;
+  padding: var(--space-third) 0;
+}
+
+.exercise__watch--no-pb {
+  padding-bottom: 0;
+}
+
+.exercise__watch p {
+  margin: 0 0 0 var(--space-half);
+  color: var(--yellow-base);
 }
 
 .svg--disabled {
