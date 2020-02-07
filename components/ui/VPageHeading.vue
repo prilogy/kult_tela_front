@@ -3,7 +3,8 @@
     <div
       :class="{
         heading__title: true,
-        'heading__title--no-button': button === false
+        'heading__title--no-button': button === false,
+        'heading__title--center': headerCenter
       }"
       :style="{
         marginBottom: titleOffset === 'var(--space-half)' ? null : titleOffset
@@ -51,6 +52,10 @@ export default {
     divInside: {
       type: Boolean,
       default: false
+    },
+    headerCenter: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -71,6 +76,13 @@ export default {
   color: var(--white-trans1) !important;
   font-weight: 300;
   font-size: 19px;
+}
+
+.heading__title--center h1,
+.heading__title--center h2,
+.heading__title--center h3 {
+  text-align: center;
+  width: 100%;
 }
 
 h1,
