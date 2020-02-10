@@ -1,5 +1,5 @@
 <template>
-  <div class="health">
+  <div class="readme">
     <VPageHeading button level="3">
       Ограничения по здоровью
       <template v-slot:info>
@@ -127,25 +127,6 @@
   </div>
 </template>
 
-<style scoped>
-.health p {
-  color: var(--grey-light3);
-  line-height: 1.3;
-  margin-bottom: var(--space-third);
-  text-align: justify;
-}
-.health h3 {
-  margin: var(--space) 0 var(--space-half) 0;
-}
-
-.health .tip > p {
-  margin: 0;
-}
-
-.health .tip {
-  margin-bottom: var(--space-half);
-}
-</style>
 <script>
 import { VTipSmall } from '../../../components/'
 export default {

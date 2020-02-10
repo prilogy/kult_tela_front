@@ -1,6 +1,5 @@
 <template>
   <div class="actions">
-    <VH2 class="actions__title">Ваши действия</VH2>
     <div class="actions__grid">
       <ActionItem
         v-for="action in ACTIONS"

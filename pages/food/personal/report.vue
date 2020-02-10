@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { VTipSmall, VImageUpload, VButtonBack } from '../../components'
+import { VTipSmall, VImageUpload, VButtonBack } from '../../../components'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

@@ -1,18 +1,17 @@
 <template>
   <div
+    @click="$router.push(action.url)"
     class="item"
     :style="{
       background: $ds.withOpacity(action.color, 20),
       border: action.color + ' solid 2px'
     }"
   >
-    <nuxt-link :to="action.url" style="text-decoration: none">
-      <div class="item__inner">
-        <VP :color="action.color" class="actions__grid__item__inner__p">
-          {{ action.title }}
-        </VP>
-      </div>
-    </nuxt-link>
+    <div class="item__inner">
+      <VP :color="action.color" class="actions__grid__item__inner__p">
+        {{ action.title }}
+      </VP>
+    </div>
   </div>
 </template>
 
@@ -28,6 +27,12 @@ export default {
   padding: var(--space);
   background: #ffffff26;
   border: solid 2px var(--white-base);
+  cursor: pointer;
+}
+.item:focus,
+.item:active,
+.item:hover {
+  transform: translateY(-2px);
 }
 
 .item__inner {

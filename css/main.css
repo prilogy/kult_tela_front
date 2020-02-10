@@ -46,4 +46,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   transition: 0.24s all !important;
+  user-select: none;
+}
+
+.readme__list {
+  margin-left: var(--space);
+  list-style: circle;
+}
+.readme__list li {
+  margin-bottom: var(--space-third);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.readme p {
+  color: var(--grey-light3) !important;
+  line-height: 1.3 !important;
+  margin-bottom: var(--space-third);
+  text-align: justify;
+}
+.readme h3 {
+  margin: var(--space) 0 var(--space-half) 0;
+}
+
+.readme .tip {
+  margin-bottom: var(--space-half);
+}
+
+.readme img {
+  border-radius: var(--radius);
+  max-width: 100%;
+  margin-bottom: var(--space-half);
 }

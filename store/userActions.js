@@ -7,6 +7,12 @@ export const state = () => ({
       color: '#f27108'
     },
     {
+      title: 'Центр питания',
+      minPlan: 0,
+      url: '/food',
+      color: '#f2b3dd'
+    },
+    {
       title: 'Вебинар с Мариной Богомоловой',
       minPlan: 0,
       url: '/special/webinar',

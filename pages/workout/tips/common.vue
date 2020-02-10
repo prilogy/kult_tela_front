@@ -1,5 +1,5 @@
 <template>
-  <div class="common">
+  <div class="readme">
     <VPageHeading button>
       Общие советы
       <template v-slot:info>
@@ -164,7 +164,7 @@
       <VH3>
         Итак, подытожим
       </VH3>
-      <ul class="list-total">
+      <ul class="readme__list">
         <li>Налаживаем периодичность и дробность питания.</li>
         <li>
           В каждом приеме пищи обязательно присутствует белок. Большую часть
@@ -262,32 +262,7 @@ export default {
 </script>
 
 <style scoped>
-.list-total {
-  margin-left: var(--space);
-  list-style: circle;
-}
-.list-total li {
-  margin-bottom: var(--space-third);
-  color: var(--green-base);
-  font-size: 18px;
-  line-height: 1.25;
-}
-
-.common p {
-  color: var(--grey-light3);
-  line-height: 1.3;
-  margin-bottom: var(--space-third);
-  text-align: justify;
-}
-.common h3 {
-  margin: var(--space) 0 var(--space-half) 0;
-}
-
-.common .tip > p {
-  margin: 0;
-}
-
-.common .tip {
-  margin-bottom: var(--space-half);
+ul > li {
+  color: var(--green-base) !important;
 }
 </style>

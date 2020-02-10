@@ -65,7 +65,7 @@
             </li>
           </ul>
         </div>
-        <nuxt-link to="/food/report">
+        <nuxt-link to="/food/personal/report">
           <VButton w100>Отправить отчет</VButton>
         </nuxt-link>
       </div>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { VTipSmall } from '../../components'
+import { VTipSmall } from '../../../components'
 import { mapGetters } from 'vuex'
 
 export default {
