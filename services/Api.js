@@ -49,6 +49,7 @@ export default function(ctx) {
 
   this.Workout = {
     get: () => axios.$get('/workout/plan'),
+    getPrevious: () => axios.$get('/workout/plan/previous'),
     getLevels: () => axios.$get('/workout/level'),
     setLevels: data => axios.$post('/workout/level', data)
   }

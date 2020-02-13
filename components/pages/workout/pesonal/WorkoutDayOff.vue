@@ -26,12 +26,38 @@
         вашего тела.
       </VP>
       <VP class="body__caption">Возвращатесь в следующий день тренировки!</VP>
-      <nuxt-link to="/workout"><VButton w100>Понятно!</VButton></nuxt-link>
+      <div class="actions-wrapper">
+        <nuxt-link to="/workout">
+          <VButton w100>Понятно!</VButton>
+        </nuxt-link>
+        <nuxt-link class="previous-btn" to="/workout/personal/previous">
+          <VP>
+            Посмотреть предыдущий день
+          </VP>
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.actions-wrapper {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.previous-btn {
+  margin-top: var(--space-third);
+  padding: var(--space-third) 0;
+  border-radius: var(--radius-half);
+  background: var(--white-trans4);
+  width: 100%;
+}
+.previous-btn p {
+  color: var(--grey-light3);
+  margin: 0 !important;
+}
+
 .body > div {
   width: 100%;
   display: flex;
