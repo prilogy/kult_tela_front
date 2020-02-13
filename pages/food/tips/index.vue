@@ -38,8 +38,8 @@ export default {
         {
           id: 0,
           title: 'Введение по персональному меню',
-          url: '/nutrients',
-          minPlan: 10
+          url: '/intro',
+          minPlan: 1
         },
         {
           id: 0,

@@ -50,8 +50,9 @@ body {
 }
 
 .readme__list {
+  margin: var(--space-half) 0;
   margin-left: var(--space);
-  list-style: circle;
+  list-style: disc;
 }
 .readme__list li {
   margin-bottom: var(--space-third);
@@ -65,7 +66,7 @@ body {
   margin-bottom: var(--space-third);
   text-align: justify;
 }
-.readme h3 {
+.readme h3:not(.readme__title h3) {
   margin: var(--space) 0 var(--space-half) 0;
 }
 
