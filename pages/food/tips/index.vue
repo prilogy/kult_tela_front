@@ -42,9 +42,14 @@ export default {
           minPlan: 1
         },
         {
-          id: 0,
+          id: 1,
           title: 'Питательные вещества',
           url: '/nutrients'
+        },
+        {
+          id: 2,
+          title: 'Советы от диетолога',
+          url: '/videos'
         }
       ]
     }

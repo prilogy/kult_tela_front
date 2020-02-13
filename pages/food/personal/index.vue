@@ -1,7 +1,7 @@
 <template>
   <div class="food">
     <div v-if="parts">
-      <VPageHeading>
+      <VPageHeading button>
         Ваше питание
         <template v-slot:info>
           Ваше персональное меню питания, подобранное нашими экспертами.

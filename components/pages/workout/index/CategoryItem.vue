@@ -53,6 +53,12 @@ export default {
   font-weight: 300;
   color: var(--grey-light3);
 }
+
+.svg>>svg {
+  min-width: 40px !important;
+  min-height: 40px !important;
+}
+
 .svg >>> svg > path {
   fill: var(--grey-light3);
 }
