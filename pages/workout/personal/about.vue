@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  middleware: 'minPlan_1',
   computed: {
     WORKOUT_DESC() {
       const type = this.$store.state.workout.workout_type
