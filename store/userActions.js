@@ -24,10 +24,7 @@ export const state = () => ({
       url: '/special/consultation',
       color: '#219653'
     },
-    { title: 'Калькулятор калорий', minPlan: 0, url: '/calculator' },
-    { title: 'Посмотреть планы', minPlan: 0, url: '/plans' },
-    { title: 'Редактировать профиль', minPlan: 0, url: '/edit' },
-    { title: 'Советы по питанию', minPlan: 0, url: '/food/tips' }
+    { title: 'Редактировать профиль', minPlan: 0, url: '/edit' }
   ]
 })
 

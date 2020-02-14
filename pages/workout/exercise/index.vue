@@ -73,9 +73,14 @@ export default {
         )
     }
   },
-  async fetch({ store }) {
-    if (!store.getters['workout/GET_ALL_EXERCISES'])
-      await store.dispatch('workout/FEED_ALL_EXERCISES')
+  async fetch({ store, redirect }) {
+    if (!store.getters['workout/GET_ALL_EXERCISES']) {
+      try {
+        await store.dispatch('workout/FEED_ALL_EXERCISES')
+      } catch (e) {
+        redirect('/workout')
+      }
+    }
   }
 }
 </script>

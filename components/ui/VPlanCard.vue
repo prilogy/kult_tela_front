@@ -1,6 +1,6 @@
 <template>
   <div
-    class="plan"
+    :class="{ plan: true, 'plan--selected': isSelected }"
     :style="{ borderColor: colors[100], background: colors[25] }"
   >
     <VH2 weight="regular" :color="colors[100]" mb="var(--space-half)">
@@ -34,7 +34,11 @@ export default {
   components: { VButton, VP, VH2 },
   props: {
     plan: Object,
-    btnText: String
+    btnText: String,
+    isSelected: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     handleButton() {
@@ -58,8 +62,11 @@ export default {
 <style scoped>
 .plan {
   padding: var(--space-half);
-  border: 3px solid;
   border-radius: var(--radius);
+}
+
+.plan--selected {
+  border: 2px solid;
 }
 
 .plan__bottom {

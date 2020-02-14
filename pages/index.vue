@@ -20,16 +20,17 @@
         </div>
       </div>
     </div>
-    <VProfileActions></VProfileActions>
+    <ProfileActions v-if="USER.is_subscription"></ProfileActions>
+    <ExtendSubscription v-else-if="!USER.is_subscription"></ExtendSubscription>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { VAvatar } from '../components/'
-import VProfileActions from '../components/pages/index/ProfileActions'
+import { ProfileActions, ExtendSubscription } from '../components/pages/index/'
 export default {
-  components: { VProfileActions, VAvatar },
+  components: { ProfileActions, VAvatar, ExtendSubscription },
   computed: {
     info() {
       const user = this.USER

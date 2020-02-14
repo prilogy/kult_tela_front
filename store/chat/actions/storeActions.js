@@ -14,8 +14,12 @@ const storeActions = {
     }
   },
   async FEED_CHATS({ commit }) {
-    const { data: chats } = await this.$api.Chat.getAll()
-    commit('SET_CHATS', chats)
+    try {
+      const { data: chats } = await this.$api.Chat.getAll()
+      commit('SET_CHATS', chats)
+    } catch (e) {
+      this.$router.push('/')
+    }
   },
   async FEED_CHAT_WITH_USER_ID(
     { commit, dispatch },

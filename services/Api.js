@@ -54,6 +54,10 @@ export default function(ctx) {
     setLevels: data => axios.$post('/workout/level', data)
   }
 
+  this.Subscription = {
+    extend: data => axios.$post('/user/subscription/extend', data)
+  }
+
   this.Exercise = {
     getById: id => axios.$get('/exercise/' + id),
     getAll: () => axios.$get('/exercise')

@@ -78,10 +78,13 @@ export default {
     }
   },
   async asyncData(ctx) {
-    const { data } = await ctx.app.$api.Top.lastMonth()
-
-    return {
-      top: { lastMonth: data.top, allTime: null }
+    try {
+      const { data } = await ctx.app.$api.Top.lastMonth()
+      return {
+        top: { lastMonth: data.top, allTime: null }
+      }
+    } catch (e) {
+      ctx.redirect('/')
     }
   }
 }

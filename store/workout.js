@@ -28,16 +28,12 @@ export const actions = {
       const workout = await this.$api.Workout.get()
       commit('SET_WORKOUT', workout.data)
     } catch (e) {
-      throw e
+      this.$router.push('/')
     }
   },
   async FEED_ALL_EXERCISES({ commit }) {
-    try {
-      const { data: exercises } = await this.$api.Exercise.getAll()
-      commit('SET_ALL_EXERCISES', exercises)
-    } catch (e) {
-      this.$router.push('/workout')
-    }
+    const { data: exercises } = await this.$api.Exercise.getAll()
+    commit('SET_ALL_EXERCISES', exercises)
   }
 }
 

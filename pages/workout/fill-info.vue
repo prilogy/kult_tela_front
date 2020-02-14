@@ -153,9 +153,13 @@ export default {
       typeof user.workout.overweight_level !== 'number' ||
       typeof user.workout.physical_level !== 'number'
     ) {
-      const { data: levels } = await app.$api.Workout.getLevels()
-      return {
-        levels
+      try {
+        const { data: levels } = await app.$api.Workout.getLevels()
+        return {
+          levels
+        }
+      } catch (e) {
+        redirect('/')
       }
     } else {
       if (store.state.workout.workout) {

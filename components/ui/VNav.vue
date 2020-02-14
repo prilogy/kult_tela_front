@@ -23,8 +23,15 @@
       </div>
     </transition>
     <div class="nav__icons">
-      <n-link v-for="link in LINKS.links" :key="link.id" :to="link.url || ''">
-        <div @click="hideDropdown">
+      <n-link
+        v-for="link in LINKS.links"
+        :key="link.id"
+        :to="(!link.disabled && link.url) || ''"
+      >
+        <div
+          :class="link.disabled ? 'link--disabled' : ''"
+          @click="hideDropdown"
+        >
           <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg">
             <path
               :d="link.icon"
@@ -86,6 +93,19 @@ export default {
     }
   },
   computed: {
+    LINKS() {
+      let links = this.$store.getters['nav/GET_LINKS']
+      if (this.USER.is_subscription === false) {
+        links.links = links.links.map((e, index) => {
+          if (index === 0) return e
+          else return { ...e, disabled: true }
+        })
+        links.dropdownLinks = links.dropdownLinks.filter(
+          e => e.name === 'Выйти из аккаунта'
+        )
+      }
+      return links
+    },
     currentRoute() {
       return this.$route.name
     },
@@ -103,7 +123,6 @@ export default {
       } else return null
     },
     ...mapGetters({
-      LINKS: 'nav/GET_LINKS',
       USER: 'user/GET_USER',
       CHATS: 'chat/GET_CHATS'
     })
@@ -181,6 +200,10 @@ export default {
 
 .nav__dropdown__notifications_button h2:last-child {
   margin-left: var(--space-half);
+}
+
+.link--disabled {
+  opacity: 0.4;
 }
 
 .burger {
