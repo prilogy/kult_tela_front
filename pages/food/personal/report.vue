@@ -58,7 +58,7 @@ import { VTipSmall, VImageUpload, VButtonBack } from '../../../components'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  middleware: 'minPlan_1',
+  middleware: ['requireSub', 'minPlan_1'],
   components: {
     VImageUpload,
     VTipSmall,

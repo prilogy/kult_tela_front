@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  middleware: 'requireSub',
   computed: {
     VIDEO() {
       return this.$store.getters['food/GET_TIP_FROM_ALL'](this.$route.params.id)

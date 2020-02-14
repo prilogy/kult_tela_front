@@ -26,6 +26,7 @@
 import VTipSmall from '../../../components/ui/VTipSmall'
 import CategoryItem from '../../../components/pages/workout/index/CategoryItem'
 export default {
+  middleware: 'requireSub',
   components: { CategoryItem, VTipSmall },
   data() {
     return {

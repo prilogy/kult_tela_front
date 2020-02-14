@@ -49,6 +49,7 @@ import { VPlanCard, VInput, VIcon, VTipSmall } from '../../../components/'
 import { mapGetters } from 'vuex'
 
 export default {
+  middleware: 'requireSub',
   components: {
     VIcon,
     VInput,

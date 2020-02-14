@@ -145,7 +145,7 @@ import {
 } from '../../../components/pages/workout/pesonal/'
 
 export default {
-  middleware: 'minPlan_1',
+  middleware: ['requireSub', 'minPlan_1'],
   components: {
     VDivider,
     VTipSmall,

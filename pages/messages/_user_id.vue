@@ -46,6 +46,7 @@ import {
 import { mapGetters } from 'vuex'
 
 export default {
+  middleware: 'requireSub',
   components: {
     AllMessages,
     VAvatarSmall,

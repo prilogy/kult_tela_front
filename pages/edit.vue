@@ -72,6 +72,7 @@
 import { VInput, VImageUpload, VDivider } from '../components/'
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  middleware: ['minPlan_1', 'requireSub'],
   components: {
     VImageUpload,
     VDivider,

@@ -20,6 +20,7 @@ import { VDivider, VAvatarSmall } from '../../components/'
 import { ChatElement } from '../../components/pages/messages/index/'
 
 export default {
+  middleware: 'requireSub',
   components: { ChatElement, VAvatarSmall, VDivider },
   data() {
     return {

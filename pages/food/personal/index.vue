@@ -83,7 +83,7 @@ import { VTipSmall } from '../../../components'
 import { mapGetters } from 'vuex'
 
 export default {
-  middleware: 'minPlan_1',
+  middleware: ['requireSub', 'minPlan_1'],
   components: {
     VTipSmall
   },

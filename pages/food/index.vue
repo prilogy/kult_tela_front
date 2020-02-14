@@ -13,6 +13,7 @@
 <script>
 import CategoryItem from '../../components/pages/workout/index/CategoryItem'
 export default {
+  middleware: 'requireSub',
   components: { CategoryItem },
   data() {
     return {

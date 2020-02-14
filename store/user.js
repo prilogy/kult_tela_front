@@ -38,7 +38,9 @@ export const actions = {
       }
       if (currentRank != result.data.rank)
         commit('rank/SET_NOTIFICATION', rankPopup, { root: true })
-    } catch (error) {}
+    } catch (error) {
+      console.log('wdadas')
+    }
   },
   async SET_LAST_SEEN_NOTIFICATION({ commit, state }) {
     const length = state.user.notifications.length

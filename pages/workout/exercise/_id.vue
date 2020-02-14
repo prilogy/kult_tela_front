@@ -25,6 +25,7 @@
 <script>
 import { VTipSmall } from '../../../components/'
 export default {
+  middleware: 'requireSub',
   components: { VTipSmall },
   computed: {
     EXERCISE() {

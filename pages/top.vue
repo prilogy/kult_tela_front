@@ -48,6 +48,7 @@
 
 <script>
 export default {
+  middleware: 'requireSub',
   data() {
     return {
       topSwitch: false,

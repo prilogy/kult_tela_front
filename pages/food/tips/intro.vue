@@ -219,7 +219,7 @@
 import { VTipSmall } from '../../../components/'
 export default {
   components: { VTipSmall },
-  middleware: 'minPlan_1'
+  middleware: ['requireSub', 'minPlan_1']
 }
 </script>
 

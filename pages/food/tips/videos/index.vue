@@ -45,6 +45,7 @@ import { VTipSmall } from '../../../../components/'
 import VDivider from '../../../../components/ui/VDivider'
 
 export default {
+  middleware: 'requireSub',
   components: {
     VDivider,
     VTipSmall

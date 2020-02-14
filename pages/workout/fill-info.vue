@@ -108,7 +108,7 @@
 import { VTipSmall, VDivider } from '../../components/'
 
 export default {
-  middleware: 'minPlan_1',
+  middleware: ['minPlan_1', 'requireSub'],
   components: { VDivider, VTipSmall },
   data() {
     return {

@@ -47,6 +47,7 @@
 import { mapActions } from 'vuex'
 import { VInput } from '../../components/'
 export default {
+  middleware: 'requireSub',
   components: { VInput },
   data() {
     return {

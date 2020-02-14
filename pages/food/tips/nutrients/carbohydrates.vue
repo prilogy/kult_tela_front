@@ -33,6 +33,7 @@
 <script>
 import VTipSmall from '../../../../components/ui/VTipSmall'
 export default {
+  middleware: 'requireSub',
   components: { VTipSmall }
 }
 </script>

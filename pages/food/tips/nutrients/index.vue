@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  middleware: 'requireSub',
   methods: {
     goTo(link) {
       this.$router.push('/food/tips/nutrients' + link)
