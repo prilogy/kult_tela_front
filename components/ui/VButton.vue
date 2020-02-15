@@ -10,9 +10,12 @@
       'button--clear': clearstyle
     }"
   >
-    <VH3 :weight="weight" :color="color">
+    <VH3 v-if="level == 3" :weight="weight" :color="color">
       <slot></slot>
     </VH3>
+    <VP v-else-if="level == 'p'" :weight="weight" :color="color">
+      <slot></slot>
+    </VP>
   </button>
 </template>
 
@@ -27,7 +30,11 @@ export default {
     disabled: Boolean,
     bg: String,
     color: String,
-    clearstyle: Boolean
+    clearstyle: Boolean,
+    level: {
+      type: String,
+      default: 3
+    }
   },
   components: { VH3 },
   mixins: [indents],
@@ -91,7 +98,8 @@ export default {
   box-shadow: unset;
 }
 
-.button h3 {
+.button h3,
+.button p {
   color: var(--grey-base);
   text-align: center;
 }

@@ -1,7 +1,7 @@
 <template>
   <div :style="'--msg-max-width:' + maxWidth + 'px'" class="messages">
     <VPageHeading>Сообщения</VPageHeading>
-    <div>
+    <div v-if="CHATS.length > 0">
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
           <nuxt-link :to="'/messages/' + chat.user_id">
@@ -10,6 +10,9 @@
           <VDivider class="contact__divider"></VDivider>
         </li>
       </ul>
+    </div>
+    <div v-else class="no-dialogs">
+      <VP>У вас пока нет диалогов</VP>
     </div>
   </div>
 </template>
@@ -61,5 +64,9 @@ export default {
   margin: var(--space-half) 0;
   margin-left: calc(var(--avatar-size) + 5px);
   margin-right: calc(-1 * (var(--space)));
+}
+.no-dialogs p {
+  text-align: center;
+  color: var(--grey-light2);
 }
 </style>

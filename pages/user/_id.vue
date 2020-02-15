@@ -19,7 +19,9 @@
               </div>
             </div>
             <nuxt-link :to="'/messages/' + USER.id">
-              <VButton mt="var(--space-third)">Написать сообщение</VButton>
+              <VButton level="p" mt="var(--space-third)">
+                Написать сообщение
+              </VButton>
             </nuxt-link>
           </div>
         </div>
@@ -40,9 +42,6 @@ export default {
   computed: {
     info() {
       const user = this.USER
-      // const weight_diff =
-      //   Math.ceil(user.weight_start - user.weight_current * 10) / 10 || 0
-      // console.log(weight_diff)
       const weight_diff = Math.ceil(user.weight_start - user.weight_current)
       return [
         { title: 'Начальный вес', value: user.weight_start + ' кг' },
@@ -62,7 +61,6 @@ export default {
     else {
       try {
         const { data: user } = await ctx.app.$api.Public.getUserById(params.id)
-        console.log(user)
         return { USER: user }
       } catch (e) {
         redirect('/')
