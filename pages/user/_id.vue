@@ -19,7 +19,7 @@
               </div>
             </div>
             <nuxt-link :to="'/messages/' + USER.id">
-              <VButton level="p" mt="var(--space-third)">
+              <VButton w100 level="p" mt="var(--space-third)">
                 Написать сообщение
               </VButton>
             </nuxt-link>

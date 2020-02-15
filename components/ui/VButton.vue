@@ -33,7 +33,7 @@ export default {
     clearstyle: Boolean,
     level: {
       type: String,
-      default: 3
+      default: '3'
     }
   },
   components: { VH3 },
