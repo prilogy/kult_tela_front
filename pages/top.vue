@@ -21,7 +21,12 @@
     </div>
 
     <div v-if="currentTop && currentTop.length !== 0">
-      <div class="top__row" v-for="(user, index) in currentTop" :key="user.id">
+      <div
+        @click="goTo(user)"
+        class="top__row"
+        v-for="(user, index) in currentTop"
+        :key="user.id"
+      >
         <VH3 weight="regular" :color="getColor(index)">
           {{ `#${index + 1} ${user.first_name} ${user.last_name}` }}
         </VH3>
@@ -64,6 +69,9 @@ export default {
     }
   },
   methods: {
+    goTo(user) {
+      this.$router.push('/user/' + user.id)
+    },
     async toggleSwitch(value) {
       if (value === true && this.top.allTime === null) {
         const { data } = await this.$api.Top.allTime()
@@ -96,9 +104,18 @@ export default {
 }
 .top__row {
   display: flex;
+  padding: var(--space-third);
+  border-radius: var(--radius-half);
   justify-content: space-between;
-  margin-bottom: var(--space-third);
+  cursor: pointer;
 }
+
+.top__row:hover,
+.top__row:active,
+.top__row:focus {
+  background: var(--white-trans4);
+}
+
 .top__switch {
   margin-bottom: var(--space-half);
   display: flex;

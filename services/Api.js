@@ -58,6 +58,10 @@ export default function(ctx) {
     extend: data => axios.$post('/user/subscription/extend', data)
   }
 
+  this.Public = {
+    getUserById: id => axios.$get('/public/user/' + id)
+  }
+
   this.Exercise = {
     getById: id => axios.$get('/exercise/' + id),
     getAll: () => axios.$get('/exercise')
