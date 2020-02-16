@@ -3,10 +3,9 @@
     <VPageHeading>
       Онлайн консультация
       <template v-slot:info>
-        Онлайн консультация ыы. Текст
-        <br />
         Заполните форму ниже и оплатите участие, укажите удобный диапазон дат
-        когда вам будет удобно
+        когда вам будет удобно. Беседа проходит в онлайн формате через любой
+        удобный для вас сервис.
       </template>
     </VPageHeading>
 
@@ -57,9 +56,18 @@ export default {
     }
   },
   methods: {
-    proceedToPay() {
-      this.SUCCESS('Ваша заявка успешно отправлена')
-      this.$router.push('/')
+    async proceedToPay() {
+      const info = {
+        tutor: this.tutor,
+        date_from: this.date_from,
+        date_to: this.date_to,
+        type: 1
+      }
+      try {
+        const result = await this.$api.Request.add(info)
+        window.open(result.data.url)
+        this.SUCCESS('Ваша заявка успешно отправлена!')
+      } catch (e) {}
     },
     ...mapActions({
       SUCCESS: 'popup/SET_SUCCESS'

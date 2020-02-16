@@ -62,6 +62,10 @@ export default function(ctx) {
     getUserById: id => axios.$get('/public/user/' + id)
   }
 
+  this.Request = {
+    add: data => axios.$post('/request', data)
+  }
+
   this.Exercise = {
     getById: id => axios.$get('/exercise/' + id),
     getAll: () => axios.$get('/exercise')

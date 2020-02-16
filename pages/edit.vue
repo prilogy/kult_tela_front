@@ -5,7 +5,7 @@
       <VH3 mb="var(--space-half)">email: {{ email }}</VH3>
       <VInput required caption="Имя" v-model="first_name"></VInput>
       <VInput required caption="Фамилия" v-model="last_name"></VInput>
-      <VInput caption="Отчество" v-model="patronymic"></VInput>
+      <VInput caption="Отчество(если есть)" v-model="patronymic"></VInput>
       <VInput
         required
         step="0.01"
