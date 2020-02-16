@@ -58,9 +58,10 @@ export default {
     },
     async extend() {
       const plan_id = this.selectedPlan.id
-      console.log(plan_id)
       try {
-        const data = await this.$api.Subscription.extend({ plan_id })
+        const { data } = await this.$api.Subscription.extend({ plan_id })
+        console.log(data)
+        if (data.url) window.open(data.url)
         this.afterPayment = true
       } catch (e) {}
     },

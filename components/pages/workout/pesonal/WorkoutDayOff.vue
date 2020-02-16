@@ -30,7 +30,11 @@
         <nuxt-link to="/workout">
           <VButton w100>Понятно!</VButton>
         </nuxt-link>
-        <nuxt-link class="previous-btn" to="/workout/personal/previous">
+        <nuxt-link
+          v-if="WORKOUT.day_number > 1"
+          class="previous-btn"
+          to="/workout/personal/previous"
+        >
           <VP>
             Посмотреть предыдущий день
           </VP>
@@ -39,6 +43,16 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    WORKOUT() {
+      return this.$store.getters['workout/GET_WORKOUT']
+    }
+  }
+}
+</script>
 
 <style scoped>
 .actions-wrapper {

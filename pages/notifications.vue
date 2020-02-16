@@ -19,8 +19,18 @@
         <VP>
           {{ item.title }}
         </VP>
-        <div @click="pushTo(item.url)" v-if="item.url">
-          <VIcon icon="back" class="notifications__list__item__icon" />
+        <div @click="pushTo(item.url)" v-if="item.url !== 'null'">
+          <svg
+            class="notifications__list__item__icon"
+            viewBox="0 0 28 27"
+            width="28"
+            height="27"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24.5 11.833H7.483l6.175-6.175-1.65-1.65L3.018 13l8.992 8.991 1.65-1.65-6.176-6.174H24.5v-2.334z"
+            />
+          </svg>
         </div>
       </div>
       <VP
@@ -39,11 +49,18 @@
         <VP>
           {{ item.title }}
         </VP>
-        <div @click="pushTo(item.url)" v-if="item.url">
-          <VIcon
-            icon="back"
+        <div @click="pushTo(item.url)" v-if="item.url !== 'null'">
+          <svg
             class="notifications__list__item__icon notifications__list__item__icon-old"
-          />
+            viewBox="0 0 28 27"
+            width="28"
+            height="27"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24.5 11.833H7.483l6.175-6.175-1.65-1.65L3.018 13l8.992 8.991 1.65-1.65-6.176-6.174H24.5v-2.334z"
+            />
+          </svg>
         </div>
       </div>
     </div>
@@ -96,6 +113,7 @@ export default {
   background: var(--grey-light1);
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .notifications__list__item p {
@@ -104,6 +122,10 @@ export default {
 
 .notifications__list__item__icon {
   transform: rotate(180deg);
+}
+
+.notifications__list__item__icon path {
+  fill: var(--yellow-base);
 }
 
 .notifications__list__item__icon-old {
