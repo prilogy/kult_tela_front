@@ -10,7 +10,7 @@
         allowfullscreen="allowfullscreen"
         width="100%"
         height="340"
-        :src="'http://www.youtube.com/embed/' + EXERCISE.url + '?autoplay=0'"
+        :src="'https://www.youtube.com/embed/' + EXERCISE.url + '?autoplay=0'"
         frameborder="0"
       ></iframe>
     </div>
