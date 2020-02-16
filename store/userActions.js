@@ -13,12 +13,6 @@ export const state = () => ({
       color: '#f2b3dd'
     },
     {
-      title: 'Вебинар с Мариной Богомоловой',
-      minPlan: 0,
-      url: '/special/webinar',
-      color: '#56CCF2'
-    },
-    {
       title: 'Онлайн консультация',
       minPlan: 0,
       url: '/special/consultation',
