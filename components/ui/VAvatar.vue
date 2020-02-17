@@ -28,6 +28,7 @@ export default {
   },
   data() {
     return {
+      viewImage: true,
       style: {},
       loaded: { 0: false, 1: false }
     }

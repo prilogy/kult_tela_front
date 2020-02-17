@@ -1,57 +1,64 @@
 <template>
-  <div class="contact">
-    <VAvatarSmall
-      :mark="chat.user_status ? { borderColor: 'var(--grey-base)' } : null"
-      class="contact__avatar"
-      :src="chat.user.avatar_src"
-    />
-    <div class="contact__aside">
-      <div class="contact__aside__top">
-        <VP class="contact__aside__top__name">
-          {{ chat.user.name }}
-        </VP>
-        <VP class="contact__aside__top__time">
-          {{ chat.messages[chat.messages.length - 1].date }}
-        </VP>
-      </div>
-      <div class="contact__aside__bottom">
-        <VP class="contact__aside__bottom__text">
-          {{
-            (chat.messages[chat.messages.length - 1].user_id ===
-            $store.state.user.user.id
-              ? 'Вы: '
-              : '') + chat.messages[chat.messages.length - 1].text
-          }}
-        </VP>
-        <span
-          v-if="showUnreadMessages(chat)"
-          class="contact__aside__bottom__mark"
-        ></span>
-        <div
-          v-else-if="
-            chat.last_seen_message_id !==
-              chat.messages[chat.messages.length - 1].id
-          "
-        >
-          <DoneIcon
-            :fill="
-              chat.last_seen_message_id !==
-              chat.messages[chat.messages.length - 1].id
-                ? 'var(--grey-light2)'
-                : 'var(--yellow-base)'
-            "
-          />
+  <div>
+    <AdminMark
+      class="admin-mark--all"
+      :user="chat.user"
+      v-if="chat && chat.user && typeof chat.user.admin_role_id === 'number'"
+    ></AdminMark>
+    <div class="contact">
+      <VAvatarSmall
+        :mark="chat.user_status ? { borderColor: 'var(--grey-base)' } : null"
+        class="contact__avatar"
+        :src="chat.user.avatar_src"
+      />
+      <div class="contact__aside">
+        <div class="contact__aside__top">
+          <VP class="contact__aside__top__name">
+            {{ chat.user.name }}
+          </VP>
+          <VP class="contact__aside__top__time">
+            {{ chat.messages[chat.messages.length - 1].date }}
+          </VP>
         </div>
+        <div class="contact__aside__bottom">
+          <VP class="contact__aside__bottom__text">
+            {{
+              (chat.messages[chat.messages.length - 1].user_id ===
+              $store.state.user.user.id
+                ? 'Вы: '
+                : '') + chat.messages[chat.messages.length - 1].text
+            }}
+          </VP>
+          <span
+            v-if="showUnreadMessages(chat)"
+            class="contact__aside__bottom__mark"
+          ></span>
+          <div
+            v-else-if="
+              chat.last_seen_message_id !==
+                chat.messages[chat.messages.length - 1].id
+            "
+          >
+            <DoneIcon
+              :fill="
+                chat.last_seen_message_id !==
+                chat.messages[chat.messages.length - 1].id
+                  ? 'var(--grey-light2)'
+                  : 'var(--yellow-base)'
+              "
+            />
+          </div>
 
-        <div
-          v-else-if="
-            chat.last_seen_message_id ===
-              chat.messages[chat.messages.length - 1].id &&
-              chat.messages[chat.messages.length - 1].user_id ===
-                $store.state.user.user.id
-          "
-        >
-          <DoneIcon double fill="var(--yellow-base)" />
+          <div
+            v-else-if="
+              chat.last_seen_message_id ===
+                chat.messages[chat.messages.length - 1].id &&
+                chat.messages[chat.messages.length - 1].user_id ===
+                  $store.state.user.user.id
+            "
+          >
+            <DoneIcon double fill="var(--yellow-base)" />
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +68,7 @@
 <script>
 import { VAvatarSmall } from '../../../'
 import DoneIcon from '../DoneIcon'
+import AdminMark from '../AdminMark'
 
 export default {
   props: {
@@ -70,7 +78,7 @@ export default {
     }
   },
 
-  components: { VAvatarSmall, DoneIcon },
+  components: { AdminMark, VAvatarSmall, DoneIcon },
   methods: {
     showUnreadMessages(chat) {
       return (
@@ -84,6 +92,11 @@ export default {
 </script>
 
 <style scoped>
+.admin-mark--all {
+  margin-bottom: var(--space-third);
+  margin-left: 25px;
+  border-radius: var(--radius) var(--radius) var(--radius) 0;
+}
 .contact {
   display: flex;
   align-items: center;

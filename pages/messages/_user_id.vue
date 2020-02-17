@@ -1,22 +1,35 @@
 <template>
   <div ref="chatDiv" class="chat">
     <div class="chat__top">
-      <VButtonBack color="white"></VButtonBack>
-      <div class="chat__top__info" v-if="CHAT">
-        <VAvatarSmall
-          :mark="
-            CHAT.user_status ? { borderColor: 'var(--grey-light1)' } : null
-          "
-          size="40px"
-          :src="CHAT.user.avatar_src"
-        ></VAvatarSmall>
-        <div>
-          <VP>{{ CHAT.user.name }}</VP>
-          <VCaption color="var(--grey-light3)">
-            {{ CHAT.user_status ? 'онлайн' : 'не в сети' }}
-          </VCaption>
+      <div>
+        <VButtonBack color="white"></VButtonBack>
+        <div
+          @click="!isAdmin ? $router.push('/user/' + CHAT.user.id) : null"
+          class="chat__top__info"
+          v-if="CHAT"
+        >
+          <VAvatarSmall
+            :mark="
+              CHAT.user_status ? { borderColor: 'var(--grey-light1)' } : null
+            "
+            size="40px"
+            :src="CHAT.user.avatar_src"
+          ></VAvatarSmall>
+          <div>
+            <VP>{{ CHAT.user.name }}</VP>
+            <VCaption color="var(--grey-light3)">
+              {{ CHAT.user_status ? 'онлайн' : 'не в сети' }}
+            </VCaption>
+          </div>
         </div>
       </div>
+
+      <AdminMark
+        class="admin-mark--chat"
+        v-if="isAdmin"
+        :user="CHAT.user"
+        colored-text
+      ></AdminMark>
     </div>
 
     <div ref="messages" class="chat__main" v-if="CHAT">
@@ -44,10 +57,12 @@ import {
   MessageInput
 } from '../../components/pages/messages/_user_id/'
 import { mapGetters } from 'vuex'
+import AdminMark from '../../components/pages/messages/AdminMark'
 
 export default {
   middleware: 'requireSub',
   components: {
+    AdminMark,
     AllMessages,
     VAvatarSmall,
     VButtonBack,
@@ -103,6 +118,11 @@ export default {
     }
   },
   computed: {
+    isAdmin() {
+      if (this.CHAT && this.CHAT.user) {
+        return typeof this.CHAT.user.admin_role_id === 'number'
+      }
+    },
     ...mapGetters({
       CHAT: 'chat/GET_CURRENT_CHAT',
       ME: 'user/GET_USER'
@@ -174,10 +194,16 @@ export default {
   height: 100%;
 }
 
+.admin-mark--chat {
+  border-radius: var(--radius);
+  background: none !important;
+}
+
 .chat .chat__top {
   display: flex;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 
   padding: var(--space-half);
   box-sizing: border-box;
@@ -188,6 +214,11 @@ export default {
   display: flex;
   margin-left: var(--space-new);
 }
+
+.chat__top > div {
+  display: flex;
+}
+
 .chat .chat__top__info > div {
   margin-right: var(--space-new);
 }

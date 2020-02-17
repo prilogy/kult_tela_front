@@ -12,6 +12,8 @@
         type="number"
         required
         step="0.01"
+        min="30"
+        max="250"
         caption="Ваш текущий вес"
         v-model="new_weight"
       ></VInput>

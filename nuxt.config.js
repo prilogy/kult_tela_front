@@ -30,10 +30,7 @@ export default {
         crossorigin: 'anonymous'
       }
     ]
-  }, //<link rel="preload" href="/fonts/myfont.eot" as="font" crossorigin="anonymous" />
-  /*<link rel="prefetch" href="pathto/font">
-   ** Customize the progress-bar color
-   */
+  },
   loading: {
     color: '#eff621',
     height: '4px'

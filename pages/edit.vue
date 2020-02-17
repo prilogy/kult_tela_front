@@ -63,7 +63,7 @@
     </div>
 
     <VP class="validation-caption" v-if="!formValidate">
-      Форма заполнена неправильно
+      Нужно изменить хотя-бы одно поле
     </VP>
   </div>
 </template>

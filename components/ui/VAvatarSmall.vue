@@ -12,7 +12,7 @@
           ref="image"
           :style="imgStyle"
           class="avatar__img"
-          :src="src"
+          :src="src || '/images/blank_avatar.png'"
           alt="avatar"
         />
       </div>

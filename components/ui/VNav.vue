@@ -103,8 +103,8 @@ export default {
         links.dropdownLinks = links.dropdownLinks.filter(
           e => e.name === 'Выйти из аккаунта'
         )
-      }
-      return links
+        return links
+      } else return links
     },
     currentRoute() {
       return this.$route.name
