@@ -1,22 +1,19 @@
 <template>
-  <div class="wrapper">
-    <div class="avatar" v-show="_loaded">
-      <img
-        ref="rankImage"
-        alt="avatar wrapper"
-        class="avatar__wrapper"
-        :src="wrapper_src"
-        @load="setLoaded(0)"
-      />
-      <img
-        :style="style"
-        ref="avatar"
-        alt="avatar"
-        class="avatar__img"
-        :src="image_src"
-        @load="setLoaded(1)"
-      />
-    </div>
+  <div class="avatar__new">
+    <img v-if="img" :src="img.src" alt="avatar" />
+    <img
+      class="blank"
+      alt="blank"
+      v-if="!img"
+      style="opacity: 0"
+      :src="wrapper_src"
+    />
+    <canvas
+      style="visibility: hidden; position: fixed"
+      width="413px"
+      height="582px"
+      ref="cnv"
+    ></canvas>
   </div>
 </template>
 
@@ -30,7 +27,8 @@ export default {
     return {
       viewImage: true,
       style: {},
-      loaded: { 0: false, 1: false }
+      loaded: { 0: false, 1: false },
+      img: null
     }
   },
   computed: {
@@ -70,32 +68,82 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    const canvas = this.$refs.cnv
+    const ctx = canvas.getContext('2d')
+
+    const img = new Image()
+    const wrapper_img = new Image()
+    img.crossOrigin = '*'
+    wrapper_img.crossOrigin = '*'
+
+    img.src = this.image_src
+    wrapper_img.src = this.wrapper_src
+
+    img.onload = () => {
+      wrapper_img.onload = () => {
+        console.log('load')
+        const height = img.height
+        const width = img.width
+        const size = canvas.clientHeight * 0.75
+
+        let leftOffset, newWidth, newHeight
+
+        if (width > height) {
+          const diffK = 1 - (height - size) / height
+          newWidth = width * diffK
+          newHeight = height * diffK
+          leftOffset = -1 * ((newWidth - size) / 2)
+        } else if (width < height) {
+          const diffK = 1 - (height - size) / height
+          newHeight = height * diffK
+          newWidth = width * diffK
+          if (newWidth < canvas.clientWidth * 0.9) {
+            leftOffset = (canvas.clientWidth - newWidth) / 2
+          }
+        }
+
+        ctx.drawImage(img, leftOffset || 0, 0, newWidth, newHeight)
+        ctx.drawImage(
+          wrapper_img,
+          0,
+          0,
+          canvas.clientWidth,
+          canvas.clientHeight
+        )
+        let image = new Image()
+        image.id = 'pic'
+        image.src = canvas.toDataURL('image/jpeg', 1.0)
+        this.img = image
+        this.$refs.cnv.style.display = 'none'
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-.wrapper {
-  --avatar-width: 30vw;
-  --avatar-height: 42vw;
-  --avatar-inner-height: 83%;
-  --avatar-max-width: 206px;
-  --avatar-max-height: 290px;
-  --avatar-min-width: 93px;
-  --avatar-min-height: 135px;
-
+.avatar__new {
+  min-width: 114px;
+  background: var(--yellow-base);
+  max-width: 33vw;
   border-radius: var(--radius-half);
   overflow: hidden;
+}
 
-  width: var(--avatar-width);
-  box-shadow: 0 0 15px 7px #191118;
+.avatar__new p {
+  width: 33vw;
+}
 
-  max-height: var(--avatar-max-height);
-  height: var(--avatar-height);
-  max-width: var(--avatar-max-width);
-  min-width: var(--avatar-min-width);
-  min-height: var(--avatar-min-height);
-  background: var(--yellow-base);
+.avatar__new img {
+  animation: anima 0.3s;
+  width: 100%;
+  border-radius: var(--radius-half);
+}
+
+.blank {
+  margin-bottom: 1px;
 }
 
 @keyframes anima {
@@ -107,41 +155,5 @@ export default {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.avatar {
-  position: relative;
-  height: var(--avatar-height);
-  width: var(--avatar-width);
-  overflow: hidden;
-  max-height: 290px;
-  max-width: 206px;
-  min-width: var(--avatar-min-width);
-  min-height: var(--avatar-min-height);
-  animation: anima 0.3s;
-}
-
-.avatar__img {
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: 0 auto;
-  height: var(--avatar-inner-height);
-  max-height: var(--avatar-max-height);
-  min-width: calc(var(--avatar-min-width) - 10px);
-  min-height: calc(var(--avatar-min-height) - 30px);
-}
-
-.avatar__wrapper {
-  width: var(--avatar-width);
-  max-height: var(--avatar-max-height);
-  max-width: var(--avatar-max-width);
-  z-index: 1;
-  position: absolute;
-  min-width: var(--avatar-min-width);
-  min-height: var(--avatar-min-height);
 }
 </style>
