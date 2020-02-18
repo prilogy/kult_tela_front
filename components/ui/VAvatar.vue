@@ -25,9 +25,6 @@ export default {
   },
   data() {
     return {
-      viewImage: true,
-      style: {},
-      loaded: { 0: false, 1: false },
       img: null
     }
   },
@@ -35,38 +32,6 @@ export default {
     wrapper_src() {
       const rank = this.rank
       return '/ranks/' + rank + '.png'
-    },
-    _loaded() {
-      return this.loaded[0] && this.loaded[1]
-    }
-  },
-  methods: {
-    setLoaded(id) {
-      this.loaded[id] = true
-      if (this._loaded === true) {
-        this.resize(this.$refs.avatar)
-      }
-    },
-    resize(img) {
-      const _img = new Image()
-      _img.src = this.wrapper_src
-      _img.onload = () => {
-        const height = img.clientHeight
-        const width = img.clientWidth
-        const size = this.$refs.rankImage.clientHeight
-
-        let leftOffset = null
-
-        if (width > height) {
-          const diffK = 1 - (height - size) / height
-          const newWidth = width * diffK
-          leftOffset = -1 * ((newWidth - size) / 2)
-
-          this.style = {
-            left: leftOffset + 'px'
-          }
-        }
-      }
     }
   },
   mounted() {
@@ -83,7 +48,6 @@ export default {
 
     img.onload = () => {
       wrapper_img.onload = () => {
-        console.log('load')
         const height = img.height
         const width = img.width
         const size = canvas.clientHeight * 0.75
@@ -126,8 +90,9 @@ export default {
 <style scoped>
 .avatar__new {
   min-width: 114px;
+  height: fit-content;
   background: var(--yellow-base);
-  max-width: 33vw;
+  max-width: 35%;
   border-radius: var(--radius-half);
   overflow: hidden;
 }

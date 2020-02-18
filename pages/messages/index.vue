@@ -5,7 +5,7 @@
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
           <nuxt-link :to="'/messages/' + chat.user_id">
-            <ChatElement :chat="chat"></ChatElement>
+            <ChatElement :dateToday="dateToday" :chat="chat"></ChatElement>
           </nuxt-link>
           <VDivider class="contact__divider"></VDivider>
         </li>
@@ -27,7 +27,8 @@ export default {
   components: { ChatElement, VAvatarSmall, VDivider },
   data() {
     return {
-      maxWidth: null
+      maxWidth: null,
+      dateToday: null
     }
   },
   computed: {
@@ -35,7 +36,15 @@ export default {
       CHATS: 'chat/GET_CHATS'
     })
   },
-
+  created() {
+    const date = new Date()
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    const month =
+      date.getMonth() + 1 < 10
+        ? '0' + (date.getMonth() + 1)
+        : date.getMonth() + 1
+    this.dateToday = `${day}.${month}.${date.getFullYear()}`
+  },
   mounted() {
     const cssMaxWidth = Number(
       getComputedStyle(document.body)
