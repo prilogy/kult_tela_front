@@ -12,6 +12,16 @@
           </VH2>
         </button>
         <button
+          class="nav__dropdown__notifications_button messages-btn"
+          @click="dropDownLinkAction({ url: '/messages' })"
+        >
+          <VH2>Сообщения</VH2>
+          <span
+            v-show="$store.state.chat.isNewMessages"
+            class="messages-bullet"
+          ></span>
+        </button>
+        <button
           @click="dropDownLinkAction(link)"
           v-for="link in LINKS.dropdownLinks"
           :key="link.id"
@@ -119,6 +129,7 @@ export default {
           ].id
           count += lastId - lastSeenId
         }
+        if (this.$store.state.chat.isNewMessages === true) count += 1
         return count
       } else return null
     },
@@ -162,6 +173,19 @@ export default {
 </script>
 
 <style scoped>
+.messages-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.messages-bullet {
+  width: 15px;
+  height: 15px;
+  border-radius: 100px;
+  background: var(--yellow-base);
+  margin-left: var(--space-half);
+}
+
 .nav {
   position: fixed;
   bottom: 0;

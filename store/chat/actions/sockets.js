@@ -2,6 +2,7 @@ import { getChatIndexById } from '../utils'
 
 const sockets = {
   async chatMessage({ commit, state, dispatch }, message) {
+    commit('SET_IS_NEW_MESSAGES', true)
     let currentChat = false,
       chat
     if (state.currentChat && message.room_id === state.currentChat.id) {

@@ -16,6 +16,9 @@ const mutations = {
   },
   SET_CURRENT_CHAT(state, chat) {
     this._vm.$set(state, 'currentChat', chat)
+  },
+  SET_IS_NEW_MESSAGES(state, payload) {
+    state.isNewMessages = payload
   }
 }
 

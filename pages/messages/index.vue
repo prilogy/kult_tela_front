@@ -44,6 +44,7 @@ export default {
         ? '0' + (date.getMonth() + 1)
         : date.getMonth() + 1
     this.dateToday = `${day}.${month}.${date.getFullYear()}`
+    this.$store.commit('chat/SET_IS_NEW_MESSAGES', false)
   },
   mounted() {
     const cssMaxWidth = Number(

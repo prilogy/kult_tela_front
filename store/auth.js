@@ -24,12 +24,16 @@ export const actions = {
       const result = await this.$api.Auth.login({ email, password })
       if (result.success) {
         const { user, token } = result.data
-
-        commit('user/SET_USER', user, { root: true })
-        commit('SET_AUTHENTICATED')
-        commit('SET_TOKEN', token)
-        $nuxt.$router.push('/')
-        window.location.reload(true)
+        if (typeof user.plan_id === 'number') {
+          commit('user/SET_USER', user, { root: true })
+          commit('SET_AUTHENTICATED')
+          commit('SET_TOKEN', token)
+          $nuxt.$router.push('/')
+          window.location.reload(true)
+        } else
+          commit('popup/SET_ERROR', 'Пользователь не существует', {
+            root: true
+          })
       }
     } catch (error) {}
   },

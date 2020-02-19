@@ -37,6 +37,11 @@ export default {
   mounted() {
     const canvas = this.$refs.cnv
     const ctx = canvas.getContext('2d')
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.clientHeight)
+    gradient.addColorStop(0, '#e5e1d5')
+    gradient.addColorStop(1, '#cdc1ab')
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight)
 
     const img = new Image()
     const wrapper_img = new Image()
