@@ -21,7 +21,6 @@
 </template>
 
 <script>
-//TODO: FIX THIS FUCKING AVATAR FOR ADMIN/DIET/TUTOR
 import resizeAndCenterImage from '../../mixins/resizeAndCenterImage'
 export default {
   mixins: [resizeAndCenterImage],
