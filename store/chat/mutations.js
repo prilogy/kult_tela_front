@@ -1,9 +1,6 @@
 import { getChatIndexById } from './utils'
 
 const mutations = {
-  SOCKET_CHAT_PINGED(state, payload) {
-    console.log(payload)
-  },
   SET_CHATS(state, payload) {
     state.chats = payload
   },

@@ -7,7 +7,6 @@
           <nuxt-link :to="'/messages/' + chat.user_id">
             <ChatElement :dateToday="dateToday" :chat="chat"></ChatElement>
           </nuxt-link>
-          <VDivider class="contact__divider"></VDivider>
         </li>
       </ul>
     </div>
@@ -70,11 +69,7 @@ export default {
   --avatar-size: 50px;
   margin-left: calc(-1 * var(--space-third));
 }
-.messages__contacts__item .contact__divider {
-  margin: var(--space-half) 0;
-  margin-left: calc(var(--avatar-size) + 5px);
-  margin-right: calc(-1 * (var(--space)));
-}
+
 .no-dialogs p {
   text-align: center;
   color: var(--grey-light2);

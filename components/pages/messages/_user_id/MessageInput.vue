@@ -1,6 +1,7 @@
 <template>
   <div class="box">
     <div
+      v-if="!locked"
       ref="area"
       @input="handleArea"
       @focus="focused"
@@ -9,6 +10,7 @@
       @keydown="handleKeys"
     ></div>
     <button
+      v-if="!locked"
       :class="{ box__btn: true, 'box__btn--disabled': input === '' }"
       @click="sendMessage"
     >
@@ -23,6 +25,10 @@
         />
       </svg>
     </button>
+
+    <VP v-if="locked" class="locked">
+      Этот чат недоступен
+    </VP>
   </div>
 </template>
 
@@ -31,7 +37,8 @@ export default {
   data() {
     return {
       input: '',
-      lineNumber: 1
+      lineNumber: 1,
+      locked: false
     }
   },
   methods: {
@@ -67,11 +74,27 @@ export default {
       this.input = ''
       this.focusOnArea()
     }
+  },
+  created() {
+    const chat = this.$store.state.chat.currentChat
+    if (chat && chat.locked) this.locked = true
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'chat/SET_CURRENT_CHAT') {
+        if (state.chat.currentChat && state.chat.currentChat.locked)
+          this.locked = true
+      }
+    })
   }
 }
 </script>
 
 <style scoped>
+.box >>> p {
+  text-align: center;
+  width: 100%;
+  color: var(--grey-light3);
+  font-weight: 300;
+}
 .box > div {
   transition: 0s height !important;
 }

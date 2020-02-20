@@ -59,6 +59,7 @@ body {
 }
 
 main {
+  overflow: hidden;
   padding: var(--space);
 }
 </style>

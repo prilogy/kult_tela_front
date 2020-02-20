@@ -43,6 +43,15 @@ const sockets = {
     }
     if (chat) chat.last_seen_message_id = info.message_id
     dispatch('SET_CHAT', { chat })
+  },
+  chatRoomLocked({ dispatch, state }, data) {
+    let chat
+    if (data.room_id === state.currentChat.id) chat = state.currentChat
+    else chat = state.chats.filter(e => e.id === data.room_id)[0]
+    if (chat) {
+      chat.locked = true
+      dispatch('SET_CHAT', { chat })
+    }
   }
 }
 

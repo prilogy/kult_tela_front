@@ -12,7 +12,7 @@
           ref="image"
           :style="imgStyle"
           class="avatar__img"
-          :src="src || '/images/blank_avatar.png'"
+          :src="image_src"
           alt="avatar"
         />
       </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+//TODO: FIX THIS FUCKING AVATAR FOR ADMIN/DIET/TUTOR
 import resizeAndCenterImage from '../../mixins/resizeAndCenterImage'
 export default {
   mixins: [resizeAndCenterImage],
@@ -38,7 +39,8 @@ export default {
     },
     mark: {
       type: Object
-    }
+    },
+    admin_role_id: Number
   },
   data() {
     return {
@@ -48,6 +50,16 @@ export default {
   computed: {
     SIZE() {
       return this.size.replace('px', '')
+    },
+    image_src() {
+      if (!this.src) {
+        if (typeof this.admin_role_id === 'number') {
+          const role_id = this.admin_role_id
+          if (role_id === 0) return '/images/avatars/admin_avatar.png'
+          if (role_id === 1) return '/images/avatars/diet_avatar.jpg'
+          if (role_id === 2) return '/images/avatars/tutor_avatar.jpg'
+        } else return '/images/avatars/blank_avatar.png'
+      } else return this.src
     }
   }
 }

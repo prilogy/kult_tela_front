@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="message-wrapper" :style="{ background: bgColor }">
     <AdminMark
+      @bgColor="color => (bgColor = color)"
       class="admin-mark--all"
       :user="chat.user"
       v-if="chat && chat.user && typeof chat.user.admin_role_id === 'number'"
     ></AdminMark>
     <div class="contact">
       <VAvatarSmall
+        :admin_role_id="chat.user.admin_role_id"
         :mark="chat.user_status ? { borderColor: 'var(--grey-base)' } : null"
         class="contact__avatar"
         :src="chat.user.avatar_src"
@@ -62,11 +64,12 @@
         </div>
       </div>
     </div>
+    <VDivider class="contact__divider"></VDivider>
   </div>
 </template>
 
 <script>
-import { VAvatarSmall } from '../../../'
+import { VAvatarSmall, VDivider } from '../../../'
 import DoneIcon from '../DoneIcon'
 import AdminMark from '../AdminMark'
 
@@ -78,12 +81,16 @@ export default {
     },
     dateToday: String
   },
-  components: { AdminMark, VAvatarSmall, DoneIcon },
+  data() {
+    return {
+      bgColor: null
+    }
+  },
+  components: { VDivider, AdminMark, VAvatarSmall, DoneIcon },
   methods: {
     getDate(date) {
       const dt = date.split('.')
       const tdt = this.dateToday.split('.')
-      console.log(tdt)
       if (dt[0] === tdt[0] && dt[1] === tdt[1] && dt[2] === tdt[2])
         return 'Сегодня'
       else if (
@@ -124,12 +131,24 @@ export default {
 </script>
 
 <style scoped>
+.message-wrapper {
+  margin: 0 calc(-1 * var(--space));
+  padding: 0 var(--space);
+}
+.contact__divider {
+  margin: var(--space-half) 0;
+  margin-left: calc(var(--avatar-size) + 5px);
+  margin-right: calc(-1 * (var(--space)));
+  margin-top: 0;
+  margin-bottom: 0;
+  border-color: var(--white-trans4) !important;
+}
 .admin-mark--all {
-  margin-bottom: var(--space-third);
-  margin-left: 25px;
-  border-radius: var(--radius) var(--radius) var(--radius) 0;
+  padding-bottom: 0;
+  padding-left: 0;
 }
 .contact {
+  padding: var(--space-half) 0;
   display: flex;
   align-items: center;
   width: 100%;

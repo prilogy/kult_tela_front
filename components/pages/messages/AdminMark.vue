@@ -1,10 +1,6 @@
 <template>
-  <div
-    :style="{ background: color }"
-    class="admin-mark"
-    v-if="typeof user.admin_role_id === 'number'"
-  >
-    <VP :color="coloredText && color">
+  <div class="admin-mark" v-if="typeof user.admin_role_id === 'number'">
+    <VP :color="color">
       {{ user.admin_role_name }}
     </VP>
   </div>
@@ -13,21 +9,20 @@
 <script>
 export default {
   props: {
-    coloredText: {
-      type: Boolean,
-      default: false
-    },
     user: Object
   },
   computed: {
     color() {
       const colors = {
-        0: 'var(--yellow-base)',
-        1: 'var(--green-base)',
-        2: 'var(--red-base)'
+        0: '#eff621',
+        1: '#1eb96a',
+        2: '#ff6b01'
       }
       return colors[this.user.admin_role_id] || 'var(--yellow-base)'
     }
+  },
+  created() {
+    if (this.color) this.$emit('bgColor', this.color + '22')
   }
 }
 </script>
@@ -35,10 +30,7 @@ export default {
 <style scoped>
 .admin-mark {
   padding: var(--space-third) var(--space-half);
-
-  background: var(--yellow-base);
-
-  width: fit-content;
+  width: 100%;
 }
 .admin-mark p {
   color: var(--grey-base);

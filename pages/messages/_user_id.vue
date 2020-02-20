@@ -13,6 +13,7 @@
               CHAT.user_status ? { borderColor: 'var(--grey-light1)' } : null
             "
             size="40px"
+            :admin_role_id="CHAT.user.admin_role_id"
             :src="CHAT.user.avatar_src"
           ></VAvatarSmall>
           <div>
@@ -84,7 +85,8 @@ export default {
     sendMessage(text) {
       this.$store.dispatch('chat/SEND_MESSAGE', {
         text,
-        to_user_id: this.CHAT.user_id
+        to_user_id: this.CHAT.user_id,
+        room_id: this.CHAT.id
       })
     },
     scrollTo({ height, toBottom }) {
@@ -197,6 +199,7 @@ export default {
 .admin-mark--chat {
   border-radius: var(--radius);
   background: none !important;
+  width: fit-content;
 }
 
 .chat .chat__top {

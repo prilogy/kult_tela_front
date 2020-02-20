@@ -85,7 +85,6 @@ export default {
       }
       try {
         const result = await this.$api.Auth.createBlankProfile(data)
-        console.log(result)
         window.open(result.data.url)
         this.afterSubmit = true
       } catch (error) {

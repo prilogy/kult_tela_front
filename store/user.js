@@ -19,7 +19,6 @@ export const mutations = {
 
 export const actions = {
   SET_USER({ commit }, payload) {
-    console.log(payload)
     commit('SET_USER', payload)
   },
   async UPDATE_WEIGHT({ commit, state }, new_weight) {
@@ -38,9 +37,7 @@ export const actions = {
       }
       if (currentRank != result.data.rank)
         commit('rank/SET_NOTIFICATION', rankPopup, { root: true })
-    } catch (error) {
-      console.log('wdadas')
-    }
+    } catch (error) {}
   },
   async SET_LAST_SEEN_NOTIFICATION({ commit, state }) {
     const length = state.user.notifications.length
