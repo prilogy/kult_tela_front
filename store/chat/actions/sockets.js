@@ -9,11 +9,17 @@ const sockets = {
       currentChat = true
 
       chat = state.currentChat
-      chat.messages.push(message)
+      if (chat) {
+        if (chat.messages.length > 0) chat.messages.push(message)
+        else chat.messages = [message]
+      }
     } else {
       const index = getChatIndexById(state.chats, { id: message.room_id })
       chat = state.chats[index]
-      chat.messages.push(message)
+      if (chat) {
+        if (chat.messages.length > 0) chat.messages.push(message)
+        else chat.messages = [message]
+      }
     }
     await commit(currentChat ? 'SET_CURRENT_CHAT' : 'SET_CHAT', chat)
     dispatch('SET_LAST_SEEN_MESSAGE')

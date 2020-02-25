@@ -16,12 +16,14 @@ import VButtonBack from './ui/VButtonBack'
 import VDivider from './ui/VDivider'
 import VAvatarSmall from './ui/VAvatarSmall'
 import VPageHeading from './ui/VPageHeading'
+import VTutorPopup from './ui/VTutorPopup'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
 import VPWAPrompt from './utils/VPWAPrompt'
 import VRankNotification from './utils/VRankNotification'
 import VIcon from './utils/VIcon'
+import VBigPopup from './utils/VBigPopup'
 
 export {
   /*
@@ -47,6 +49,7 @@ export {
   VDivider,
   VAvatarSmall,
   VPageHeading,
+  VTutorPopup,
   /**
    * UTILITIES
    */
@@ -54,5 +57,6 @@ export {
   VSuccess,
   VPWAPrompt,
   VRankNotification,
-  VIcon
+  VIcon,
+  VBigPopup
 }

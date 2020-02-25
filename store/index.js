@@ -1,19 +1,19 @@
 export const strict = false
 
 export const actions = {
-  async nuxtClientInit({ commit, getters, dispatch }, ctx) {
+  async nuxtClientInit({ commit, getters, dispatch }, { app }) {
     const token = getters['auth/GET_TOKEN']
+    let user
     if (token) {
       try {
-        const { data: user } = await ctx.app.$api.Auth.tokenAuth()
-
+        const data = await app.$api.Auth.tokenAuth()
+        user = data.data
         if (typeof user.plan_id === 'number') {
-          await commit('user/SET_USER', user)
           await commit('auth/SET_AUTHENTICATED')
-
+          await commit('user/SET_USER', user)
           const ls_wtype = localStorage.getItem('workout_type')
           if (ls_wtype) {
-            commit('workout/SET_WORKOUT_TYPE', ls_wtype, true)
+            await commit('workout/SET_WORKOUT_TYPE', ls_wtype, true)
           }
         } else {
           dispatch('popup/SET_ERROR', 'Ошибка подключения')

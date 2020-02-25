@@ -70,4 +70,9 @@ export default function(ctx) {
     getById: id => axios.$get('/exercise/' + id),
     getAll: () => axios.$get('/exercise')
   }
+
+  this.Tutor = {
+    getAll: () => axios.$get('/user/tutor'),
+    setTutor: data => axios.$post('/user/tutor', data)
+  }
 }

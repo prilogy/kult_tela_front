@@ -7,6 +7,7 @@
     <VError></VError>
     <VSuccess></VSuccess>
     <VRankNotification></VRankNotification>
+    <VTutorPopup @clicked="tutorPopup = false" v-if="tutorPopup"></VTutorPopup>
     <div class="offset"></div>
     <!--    <VFooter></VFooter>-->
   </div>
@@ -18,7 +19,8 @@ import {
   VFooter,
   VError,
   VSuccess,
-  VRankNotification
+  VRankNotification,
+  VTutorPopup
 } from '~/components'
 import { mapActions } from 'vuex'
 
@@ -29,7 +31,13 @@ export default {
     VNav,
     VFooter,
     VError,
-    VRankNotification
+    VRankNotification,
+    VTutorPopup
+  },
+  data() {
+    return {
+      tutorPopup: null
+    }
   },
   methods: {
     ...mapActions({
@@ -38,6 +46,11 @@ export default {
   },
   created() {
     this.SET_CURRENT_LINK_ID()
+    if (
+      this.$store.getters['user/GET_USER'].tutor_id === null &&
+      this.$store.getters['user/GET_USER'].plan_id > 2
+    )
+      this.tutorPopup = true
   },
   watch: {
     $route() {
