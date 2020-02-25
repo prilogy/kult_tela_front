@@ -19,7 +19,9 @@
               chat.messages[index].date !== chat.messages[index + 1].date
           "
         >
-          <VCaption>{{ chat.messages[index + 1].date }}</VCaption>
+          <VCaption>
+            {{ chat.messages[index + 1].date }}
+          </VCaption>
         </div>
       </li>
       <li v-if="chat.chat_is_empty" class="msg--chat_is-empty">
@@ -31,8 +33,10 @@
 
 <script>
 import MessageCloud from './MessageCloud'
+import convertDate from '../../../../mixins/convertDate'
 export default {
   components: { MessageCloud },
+  mixins: [convertDate],
   props: ['chat', 'myId'],
   computed: {
     lastSeqIds() {

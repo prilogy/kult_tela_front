@@ -57,9 +57,17 @@
       <button class="burger" @click="burgerToggle = !burgerToggle">
         <div
           class="burger__mark"
-          v-if="newNotifications && newNotifications > 0"
+          v-if="
+            $store.state.chat.isNewMessages ||
+              (newNotifications && newNotifications > 0)
+          "
         >
-          <p>{{ newNotifications }}</p>
+          <p>
+            {{
+              (newNotifications && newNotifications) ||
+                ($store.state.chat.isNewMessages && 1)
+            }}
+          </p>
         </div>
         <svg
           width="35"
@@ -129,7 +137,6 @@ export default {
           ].id
           count += lastId - lastSeenId
         }
-        if (this.$store.state.chat.isNewMessages === true) count += 1
         return count
       } else return null
     },
