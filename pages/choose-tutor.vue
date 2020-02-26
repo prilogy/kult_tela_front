@@ -54,7 +54,7 @@ export default {
         if (result.success) {
           await this.$store.dispatch(
             'popup/SET_SUCCESS',
-            'Наставник успешно выбран. Теперь вы можете связяться с ним на странице Сообщений'
+            'Наставник успешно выбран.'
           )
           await this.$store.commit('user/UPDATE_USER', {
             tutor_id: result.data.tutor_id

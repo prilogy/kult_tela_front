@@ -25,6 +25,7 @@ const sockets = {
     dispatch('SET_LAST_SEEN_MESSAGE')
   },
   async chatMessageInit({ commit, dispatch }, message) {
+    commit('SET_IS_NEW_MESSAGES', true)
     await dispatch('FEED_CHAT_WITH_USER_ID', { id: message.user_id })
     dispatch('SET_LAST_SEEN_MESSAGE')
   },
