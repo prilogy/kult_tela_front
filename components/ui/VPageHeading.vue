@@ -14,13 +14,13 @@
       <div style="width: 100%;" v-if="divInside">
         <slot></slot>
       </div>
-      <VH1 v-else-if="level === '1'">
+      <VH1 class="heading__title__h" v-else-if="level === '1'">
         <slot></slot>
       </VH1>
-      <VH2 v-else-if="level === '2'">
+      <VH2 class="heading__title__h" v-else-if="level === '2'">
         <slot></slot>
       </VH2>
-      <VH3 v-else-if="level === '3'">
+      <VH3 class="heading__title__h" v-else-if="level === '3'">
         <slot></slot>
       </VH3>
     </div>

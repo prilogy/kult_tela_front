@@ -66,12 +66,16 @@ body {
   margin-bottom: var(--space-third);
   text-align: justify;
 }
-.readme h3:not(.readme__title h3) {
-  margin: var(--space) 0 var(--space-half) 0;
+.readme h3:not(.heading__title__h) {
+  margin: var(--space) 0 var(--space-half) 0 !important;
 }
 
 .readme .tip {
   margin-bottom: var(--space-half);
+}
+
+.readme .tip p {
+  margin: 0;
 }
 
 .readme img {

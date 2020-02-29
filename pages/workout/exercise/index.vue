@@ -14,12 +14,17 @@
       </template>
     </VPageHeading>
     <div class="body">
-      <VInput
-        v-model="search_input"
-        class="body__search-input"
-        placeholder="Поиск по названию"
-      ></VInput>
-      <ul v-if="ALL_EXERCISES">
+      <div style="display: flex">
+        <VInput
+          style="width: 100%"
+          v-model="search_input"
+          class="body__search-input"
+          placeholder="Поиск по названию"
+        ></VInput>
+        <VButton ml="var(--space-half)">Найти</VButton>
+      </div>
+
+      <ul v-if="ALL_EXERCISES.length > 0">
         <li
           class="titles__item"
           v-for="(item, index) in ALL_EXERCISES"
@@ -40,6 +45,14 @@
           </nuxt-link>
         </li>
       </ul>
+      <VP
+        mt="var(--space)"
+        color="var(--grey-light2)"
+        style="text-align: center"
+        v-else
+      >
+        Упражнений не найдено
+      </VP>
     </div>
   </div>
 </template>
