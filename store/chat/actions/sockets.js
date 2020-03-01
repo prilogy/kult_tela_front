@@ -21,8 +21,10 @@ const sockets = {
         else chat.messages = [message]
       }
     }
-    await commit(currentChat ? 'SET_CURRENT_CHAT' : 'SET_CHAT', chat)
-    dispatch('SET_LAST_SEEN_MESSAGE')
+    if (chat) {
+      await commit(currentChat ? 'SET_CURRENT_CHAT' : 'SET_CHAT', chat)
+      dispatch('SET_LAST_SEEN_MESSAGE')
+    }
   },
   async chatMessageInit({ commit, dispatch }, message) {
     commit('SET_IS_NEW_MESSAGES', true)

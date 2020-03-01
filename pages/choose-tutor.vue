@@ -18,6 +18,9 @@
           }"
         >
           <VH3>{{ tutor.name }}</VH3>
+          <VP v-show="tutor.admin_description" mt="var(--space-half)">
+            {{ tutor.admin_description }}
+          </VP>
         </li>
       </ul>
     </div>

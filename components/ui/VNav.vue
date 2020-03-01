@@ -214,6 +214,7 @@ export default {
 .nav__dropdown h2 {
   line-height: 1.4;
   color: var(--white-base);
+  cursor: pointer;
 }
 
 .nav__icons {
