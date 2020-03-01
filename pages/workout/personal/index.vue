@@ -278,6 +278,7 @@ export default {
   display: flex;
   align-items: center;
   padding: var(--space-third) 0;
+  cursor: pointer;
 }
 
 .exercise__watch--no-pb {

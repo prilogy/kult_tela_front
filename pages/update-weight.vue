@@ -27,7 +27,7 @@
     >
       Подтвердить
     </VButton>
-    <VH3 mt="var(--space)" mb="var(--space-half)">История вашего веса</VH3>
+    <!--    <VH3 mt="var(&#45;&#45;space)" mb="var(&#45;&#45;space-half)">История вашего веса</VH3>-->
   </div>
 </template>
 

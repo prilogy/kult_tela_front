@@ -47,7 +47,7 @@ export default {
           title: 'Рост',
           value: user.height + ' см'
         },
-        { title: 'Служит с', value: user.date_signup },
+        { title: 'Служитe с', value: user.date_signup },
         { title: 'Войско', value: user.plan_name }
       ]
     },

@@ -62,7 +62,7 @@ export default {
   background: var(--grey-light2);
   border-radius: var(--radius);
   color: var(--white-base);
-  max-width: 75vw;
+  max-width: 75%;
   flex-wrap: wrap;
 }
 
@@ -84,7 +84,7 @@ export default {
 }
 
 .message .message__text {
-  word-break: break-all;
+  word-break: break-word;
   white-space: pre-line;
   font-weight: 300;
   z-index: 10;
