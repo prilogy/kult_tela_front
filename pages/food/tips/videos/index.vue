@@ -3,7 +3,7 @@
     <VPageHeading button level="3">
       Советы от диетолога
       <template v-slot:info>
-        Ниже представлены видео-советы от диетолога Черниенковой Арины,
+        Ниже представлены видео-советы от врача-диетолога Черниенковой Арины,
         подготовленные специально для вас
       </template>
     </VPageHeading>
@@ -23,7 +23,7 @@
       </ul>
       <div class="no-access" v-if="NOT_ACCESSED_VIDEOS.length > 0">
         <VDivider></VDivider>
-        <VCaption>Советы, доступные только с плана "Артиллерия"</VCaption>
+        <VCaption>Советы, доступные только с пакета "Артиллерия"</VCaption>
         <ul v-if="ACCESSED_VIDEOS">
           <li
             class="item"

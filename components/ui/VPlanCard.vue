@@ -9,7 +9,7 @@
     <VP>{{ plan.description }}</VP>
     <div class="plan__bottom">
       <VH2 weight="regular" :color="colors[100]">
-        {{ plan.cost }}&#8381;/сезон
+        {{ plan.cost }}&#8381;/месяц
       </VH2>
       <VButton
         class="plan__bottom__button"
@@ -19,7 +19,7 @@
         :bg="colors[100]"
         @click="handleButton"
       >
-        {{ btnText || 'Купить план' }}
+        {{ btnText || 'Купить пакет' }}
       </VButton>
     </div>
   </div>

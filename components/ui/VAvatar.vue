@@ -1,15 +1,8 @@
 <template>
   <div class="avatar__new">
-    <img v-if="img" :src="img.src" alt="avatar" />
-    <img
-      class="blank"
-      alt="blank"
-      v-if="!img"
-      style="opacity: 0"
-      :src="wrapper_src"
-    />
+    <img alt="avatar" :src="(img && img.src) || wrapper_src" />
     <canvas
-      style="visibility: hidden; position: fixed"
+      style="position: fixed; opacity: 0"
       width="413px"
       height="582px"
       ref="cnv"
@@ -49,9 +42,9 @@ export default {
     wrapper_img.crossOrigin = '*'
 
     img.src = this.image_src
-    wrapper_img.src = this.wrapper_src
 
     img.onload = () => {
+      wrapper_img.src = this.wrapper_src
       wrapper_img.onload = () => {
         const height = img.height
         const width = img.width
@@ -59,7 +52,7 @@ export default {
 
         let leftOffset, newWidth, newHeight
 
-        if (width > height) {
+        if (width >= height) {
           const diffK = 1 - (height - size) / height
           newWidth = width * diffK
           newHeight = height * diffK

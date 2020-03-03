@@ -9,7 +9,7 @@
     </VPageHeading>
     <VTipSmall mb="var(--space-half)">
       <VP color="var(--grey-light3)">
-        Вы не сможете изменить эти данные до окончания плана тренировки
+        Вы не сможете изменить эти данные до продления или смены пакета службы
       </VP>
     </VTipSmall>
     <div v-if="levels">
@@ -59,8 +59,20 @@
                 </svg>
               </div>
             </div>
-
             <VP>{{ item.description }}</VP>
+            <div v-if="!item.disabled" class="physical-item__choose">
+              <VButton
+                :class="{
+                  'physical-item__choose__btn': true,
+                  'physical-item__choose__btn--selected':
+                    item.id === set_levels.physical_level
+                }"
+              >
+                {{
+                  item.id === set_levels.physical_level ? 'Выбрано' : 'Выбрать'
+                }}
+              </VButton>
+            </div>
           </li>
         </ul>
       </div>
@@ -82,6 +94,21 @@
               <VH3>{{ item.name }}</VH3>
             </div>
             <VP>{{ item.description }}</VP>
+            <div v-if="!item.disabled" class="physical-item__choose">
+              <VButton
+                :class="{
+                  'physical-item__choose__btn': true,
+                  'physical-item__choose__btn--selected':
+                    item.id === set_levels.overweight_level
+                }"
+              >
+                {{
+                  item.id === set_levels.overweight_level
+                    ? 'Выбрано'
+                    : 'Нажмите для выбора'
+                }}
+              </VButton>
+            </div>
           </li>
         </ul>
       </div>
@@ -195,6 +222,32 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.physical-item__choose {
+  margin: var(--space-third) 0 0 0 !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.physical-item__choose__btn {
+  padding: var(--space-third) var(--space);
+  color: var(--yellow-base);
+  border: 2px solid var(--yellow-base);
+  background: none !important;
+}
+
+.physical-item__choose__btn >>> h3 {
+  color: yellow !important;
+  font-size: 19px;
+}
+
+.physical-item__choose__btn--selected {
+  background: var(--yellow-base) !important;
+}
+
+.physical-item__choose__btn--selected >>> h3 {
+  color: var(--grey-base) !important;
 }
 
 .svg--disabled {

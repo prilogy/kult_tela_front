@@ -3,8 +3,10 @@
     <VPageHeading>
       Обновить вес
       <template v-slot:info>
-        Старайтесь обновлять вес хотя-бы раз в два дня чтобы контролировать
-        процесс похудения было проще
+        Старайтесь обновлять вес хотя бы раз в два дня, чтобы контролировать
+        процесс похудения было проще.
+        <br />
+        Теряете килограммы - получаете звание
       </template>
     </VPageHeading>
     <form id="weight-update" @submit.prevent="updateWeight">
@@ -13,7 +15,7 @@
         required
         step="0.01"
         min="30"
-        max="250"
+        max="220"
         caption="Ваш текущий вес"
         v-model="new_weight"
       ></VInput>

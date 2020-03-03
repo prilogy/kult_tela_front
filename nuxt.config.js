@@ -22,13 +22,13 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      /*{
         rel: 'preload',
         href: '/fonts/oswald-v26-latin_cyrillic-300.woff2',
         as: 'font',
         crossorigin: 'anonymous'
-      }
+      }*/
     ]
   },
   loading: {

@@ -29,7 +29,7 @@
           <VH2>{{ link.name }}</VH2>
         </button>
 
-        <!--<VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>-->
+        <VPWAPrompt v-if="!isPWAInstalled"></VPWAPrompt>
       </div>
     </transition>
     <div class="nav__icons">

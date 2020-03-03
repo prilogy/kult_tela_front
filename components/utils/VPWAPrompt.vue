@@ -23,10 +23,12 @@ export default {
   methods: {
     install() {
       this.showInstallBanner = false
-      installEvent.prompt()
-      installEvent.userChoice.then(() => {
-        installEvent = null
-      })
+      if (installEvent) {
+        installEvent.prompt()
+        installEvent.userChoice.then(() => {
+          installEvent = null
+        })
+      }
     }
   }
 }

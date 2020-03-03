@@ -12,7 +12,7 @@
         type="number"
         caption="Рост (в см)"
         v-model="height"
-        max="250"
+        max="220"
         min="40"
       ></VInput>
       <VInput
@@ -72,7 +72,7 @@
 import { VInput, VImageUpload, VDivider } from '../components/'
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  middleware: ['minPlan_1', 'requireSub'],
+  middleware: ['requireSub'],
   components: {
     VImageUpload,
     VDivider,

@@ -48,7 +48,10 @@ export default {
           value: user.height + ' см'
         },
         { title: 'Служитe с', value: user.date_signup },
-        { title: 'Войско', value: user.plan_name }
+        {
+          title: 'Войска',
+          value: user.plan_id === 3 ? 'с наставником' : user.plan_name
+        }
       ]
     },
     ...mapGetters({

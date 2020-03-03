@@ -31,7 +31,7 @@
       <transition name="showup">
         <div v-if="!planToBuy">
           <VPageHeading button titleOffset="var(--space)">
-            Доступные планы
+            Доступные пакеты
           </VPageHeading>
 
           <div class="plans" v-if="plans">

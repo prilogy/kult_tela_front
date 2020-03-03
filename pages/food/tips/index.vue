@@ -23,7 +23,9 @@
       </li>
     </ul>
     <VTipSmall>
-      <VP color="var(--grey-light3)">Для просмотра - нажмите по категории</VP>
+      <VP color="var(--grey-light3)">
+        Для просмотра - нажмите по названию пункта
+      </VP>
     </VTipSmall>
   </div>
 </template>
@@ -44,7 +46,7 @@ export default {
         },
         {
           id: 1,
-          title: 'Питательные вещества',
+          title: 'Основы питания',
           url: '/nutrients'
         },
         {

@@ -3,13 +3,14 @@
     <VPageHeading button>
       Все упражнения
       <template v-slot:info>
-        <VTipSmall>
-          Перед выполнением любого упражнения прочтите
-          <nuxt-link to="/workout/tips">
-            <span style="color: var(--yellow-base)">
-              советы по тренировкам
-            </span>
-          </nuxt-link>
+        Перед выполнением любого упражнения прочтите
+        <nuxt-link to="/workout/tips">
+          <span style="color: var(--yellow-base)">
+            советы по тренировкам
+          </span>
+        </nuxt-link>
+        <VTipSmall style="margin-top: var(--space-half)">
+          Программа тренировок доступна начиная с пакета "Артиллерия"
         </VTipSmall>
       </template>
     </VPageHeading>

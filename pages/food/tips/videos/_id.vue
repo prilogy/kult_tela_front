@@ -10,7 +10,11 @@
         allowfullscreen="allowfullscreen"
         width="100%"
         height="340"
-        :src="'https://www.youtube.com/embed/' + VIDEO.url + '?autoplay=0'"
+        :src="
+          'https://www.youtube.com/embed/' +
+            VIDEO.url +
+            '?modestbranding=1&showinfo=0&rel=0&loop=1'
+        "
         frameborder="0"
       ></iframe>
     </div>

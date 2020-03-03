@@ -1,6 +1,11 @@
 <template>
   <div class="top">
-    <VPageHeading>Лучшие солдаты</VPageHeading>
+    <VPageHeading>
+      Лучшие солдаты
+      <template v-slot:info>
+        <VTipSmall>Скоро введение призов за результат похудения.</VTipSmall>
+      </template>
+    </VPageHeading>
     <div class="top__switch">
       <VButton clearstyle @click="toggleSwitch(false)">
         <VH3
@@ -52,7 +57,9 @@
 </template>
 
 <script>
+import VTipSmall from '../components/ui/VTipSmall'
 export default {
+  components: { VTipSmall },
   middleware: 'requireSub',
   data() {
     return {

@@ -16,9 +16,9 @@
             @click="$router.push('/workout/tips/health')"
             style="color: yellow; cursor: pointer"
           >
-            ограничения по здоровью
+            ограничения по здоровью.
           </span>
-          . Похудение – очень бережный процесс. Не спешите с нагрузками!
+          Похудение – очень бережный процесс. Не спешите с нагрузками!
         </VP>
       </VTipSmall>
       <div>
@@ -134,6 +134,12 @@
           </ul>
         </div>
       </div>
+      <VTipSmall mt="var(--space-half)" mb="var(--space-half)">
+        <VP color="var(--grey-light3)">
+          Следующий день после тренировки, а также суббота и воскресенье -
+          выходные
+        </VP>
+      </VTipSmall>
     </div>
     <WorkoutDayOff v-else-if="WORKOUT.day_off"></WorkoutDayOff>
     <WorkoutPlanDone v-else-if="WORKOUT.plan_done"></WorkoutPlanDone>
