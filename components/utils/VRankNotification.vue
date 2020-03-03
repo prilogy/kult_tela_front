@@ -24,7 +24,7 @@
           w100
           weight="regular"
         >
-          Закрыть
+          Так точно!
         </VButton>
       </div>
     </transition>

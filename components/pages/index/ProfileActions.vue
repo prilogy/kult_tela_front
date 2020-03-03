@@ -2,6 +2,7 @@
   <div class="actions">
     <div class="actions__grid">
       <ActionItem
+        class="actions__grid__item"
         v-for="action in ACTIONS"
         :key="action.id"
         :action="action"
@@ -35,5 +36,13 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(50px, max-content));
   grid-gap: var(--space-half);
+}
+
+.actions__grid__item:last-child:nth-child(3n - 1) {
+  grid-column: span 2;
+}
+
+.actions__grid__item:last-child:nth-child(3n - 2) {
+  grid-column: span 3;
 }
 </style>

@@ -2,7 +2,20 @@
   <transition name="showup">
     <div class="error" v-if="ERROR">
       <VP class="error__text">{{ ERROR }}</VP>
-      <VIcon @click="close" class="error__icon" icon="close" />
+      <div @click="close">
+        <svg
+          class="error__icon"
+          width="20"
+          height="20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 2.326L17.674 0 10 7.674 2.326 0 0 2.326 7.674 10 0 17.674 2.326 20 10 12.326 17.674 20 20 17.674 12.326 10 20 2.326z"
+            fill="#fff"
+          />
+        </svg>
+      </div>
     </div>
   </transition>
 </template>
