@@ -50,7 +50,7 @@ export default {
         { title: 'Служитe с', value: user.date_signup },
         {
           title: 'Войска',
-          value: user.plan_id === 3 ? 'с наставником' : user.plan_name
+          value: user.plan_id === 3 ? 'С наставником' : user.plan_name
         }
       ]
     },

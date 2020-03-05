@@ -23,8 +23,10 @@ export default {
   },
   methods: {
     goToCategory(e) {
-      if (this.category.planFailed) e.preventDefault()
-      else this.$router.push(this.category.url)
+      if (this.category.planFailed) {
+        e.preventDefault()
+        this.$store.dispatch('popup/SET_LOCKED', true)
+      } else this.$router.push(this.category.url)
     }
   }
 }

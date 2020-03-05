@@ -1,6 +1,7 @@
 export const state = () => ({
   error: null,
-  success: null
+  success: null,
+  locked: null
 })
 
 export const mutations = {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   SET_SUCCESS(state, payload) {
     state.success = payload
+  },
+  SET_LOCKED(state, payload) {
+    state.locked = payload
   }
 }
 
@@ -24,6 +28,9 @@ export const actions = {
     setTimeout(() => {
       commit('SET_SUCCESS', null)
     }, 5000)
+  },
+  SET_LOCKED({ commit }, payload) {
+    commit('SET_LOCKED', payload)
   }
 }
 
@@ -33,5 +40,8 @@ export const getters = {
   },
   GET_SUCCESS(state) {
     return state.success
+  },
+  GET_LOCKED(state) {
+    return state.locked
   }
 }

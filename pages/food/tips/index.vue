@@ -59,8 +59,9 @@ export default {
   },
   methods: {
     goTo(item) {
-      if (item.minPlan && item.minPlan > this.CURRENT_PLAN) return null
-      else this.$router.push('/food/tips' + item.url)
+      if (item.minPlan && item.minPlan > this.CURRENT_PLAN) {
+        this.$store.dispatch('popup/SET_LOCKED', true)
+      } else this.$router.push('/food/tips' + item.url)
     }
   },
   computed: {

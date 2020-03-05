@@ -7,9 +7,9 @@
     <VError></VError>
     <VSuccess></VSuccess>
     <VRankNotification></VRankNotification>
+    <VLockedPopup v-if="lockedPopup"></VLockedPopup>
     <VTutorPopup @clicked="tutorPopup = false" v-if="tutorPopup"></VTutorPopup>
     <div class="offset"></div>
-    <!--    <VFooter></VFooter>-->
   </div>
 </template>
 
@@ -20,13 +20,15 @@ import {
   VError,
   VSuccess,
   VRankNotification,
-  VTutorPopup
+  VTutorPopup,
+  VLockedPopup
 } from '~/components'
 import { mapActions } from 'vuex'
 
 export default {
   middleware: 'notAuth',
   components: {
+    VLockedPopup,
     VSuccess,
     VNav,
     VFooter,
@@ -51,6 +53,11 @@ export default {
       this.$store.getters['user/GET_USER'].plan_id > 2
     )
       this.tutorPopup = true
+  },
+  computed: {
+    lockedPopup() {
+      return this.$store.getters['popup/GET_LOCKED']
+    }
   },
   watch: {
     $route() {

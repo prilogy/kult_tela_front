@@ -2,12 +2,25 @@
   <div>
     <div class="bg"></div>
     <transition name="showup">
-      <div class="notification">
+      <div class="notification" v-show="show">
         <slot></slot>
       </div>
     </transition>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      show: false
+    }
+  },
+  mounted() {
+    this.show = true
+  }
+}
+</script>
 
 <style scoped>
 .bg {

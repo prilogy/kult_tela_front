@@ -8,7 +8,7 @@
     }"
   >
     <div class="item__inner">
-      <VP :color="action.color" class="actions__grid__item__inner__p">
+      <VP :color="action.color" class="item__inner__p">
         {{ action.title }}
       </VP>
     </div>
@@ -41,5 +41,9 @@ export default {
   justify-content: center;
   height: 100%;
   text-align: center;
+}
+
+.item__inner__p {
+  letter-spacing: 0.5px;
 }
 </style>

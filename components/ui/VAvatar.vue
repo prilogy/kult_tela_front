@@ -1,6 +1,8 @@
 <template>
   <div class="avatar__new">
-    <img alt="avatar" :src="(img && img.src) || wrapper_src" />
+    <transition name="showup">
+      <img alt="avatar" :src="(img && img.src) || wrapper_src" />
+    </transition>
     <canvas
       style="position: fixed; opacity: 0"
       width="413px"
@@ -89,7 +91,7 @@ export default {
 .avatar__new {
   min-width: 114px;
   height: fit-content;
-  background: var(--yellow-base);
+  background: #cdc1ab;
   max-width: 35%;
   border-radius: var(--radius-half);
   overflow: hidden;

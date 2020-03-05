@@ -18,6 +18,7 @@ export const state = () => ({
       url: '/special/consultation',
       color: '#219653'
     },
+    { title: 'Сменить план', url: '/change-plan', color: '#e0e23c' },
     { title: 'Редактировать профиль', minPlan: 0, url: '/edit' },
     { title: 'Обновить вес', url: '/update-weight' }
   ]

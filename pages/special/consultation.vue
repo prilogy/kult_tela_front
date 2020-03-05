@@ -36,9 +36,17 @@
         caption="Дата до"
         v-model="date_to"
       ></VInput>
-      <VButton type="submit" form="consultation__form" value="submit" w100>
-        Перейти к оплате
-      </VButton>
+
+      <div
+        style="display: flex; justify-content: space-between; align-items: center"
+      >
+        <VH3 style="width: 100%">
+          1000&#8381;/час
+        </VH3>
+        <VButton w100 type="submit" form="consultation__form" value="submit">
+          Записаться
+        </VButton>
+      </div>
     </form>
   </div>
 </template>

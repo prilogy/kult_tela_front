@@ -52,7 +52,10 @@ export default {
           } кг`
         },
         { title: 'Служит с', value: user.date_signup },
-        { title: 'Войска', value: user.plan_name }
+        {
+          title: 'Войска',
+          value: user.plan_id === 3 ? 'С наставником' : user.plan_name
+        }
       ]
     }
   },
