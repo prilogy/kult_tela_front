@@ -3,8 +3,9 @@
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 300;
+  font-display: swap;
   src: url('/fonts/oswald-v26-latin_cyrillic-300.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src: local('Oswald'),
     url('/fonts/oswald-v26-latin_cyrillic-300.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('/fonts/oswald-v26-latin_cyrillic-300.woff2')
@@ -21,8 +22,9 @@
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src: url('/fonts/oswald-v26-latin_cyrillic-regular.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src: local('Oswald'),
     url('/fonts/oswald-v26-latin_cyrillic-regular.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('/fonts/oswald-v26-latin_cyrillic-regular.woff2')
@@ -39,8 +41,9 @@
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 500;
+  font-display: swap;
   src: url('/fonts/oswald-v26-latin_cyrillic-500.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src: local('Oswald'),
     url('/fonts/oswald-v26-latin_cyrillic-500.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('/fonts/oswald-v26-latin_cyrillic-500.woff2')
@@ -57,8 +60,9 @@
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 600;
+  font-display: swap;
   src: url('/fonts/oswald-v26-latin_cyrillic-600.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src: local('Oswald'),
     url('/fonts/oswald-v26-latin_cyrillic-600.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('/fonts/oswald-v26-latin_cyrillic-600.woff2')

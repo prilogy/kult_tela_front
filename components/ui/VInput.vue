@@ -3,13 +3,21 @@
     <VH3 weight="regular" v-if="caption">
       {{ caption }}
     </VH3>
-    <input
-      v-bind="$attrs"
-      :type="type"
-      class="input"
-      v-model="content"
-      @input="handleInput"
-    />
+    <label :for="'input-' + this.$attrs.placeholder || 'input'">
+      <span
+        style="color: var(--yellow-base); margin-bottom: var(--space-third)"
+      >
+        {{ this.$attrs.placeholder }}
+      </span>
+      <input
+        :id="'input-' + this.$attrs.placeholder || 'input'"
+        v-bind="$attrs"
+        :type="type"
+        class="input"
+        v-model="content"
+        @input="handleInput"
+      />
+    </label>
   </div>
 </template>
 

@@ -22,13 +22,13 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      /*{
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
         rel: 'preload',
-        href: '/fonts/oswald-v26-latin_cyrillic-300.woff2',
+        href: '/fonts/oswald-v26-latin_cyrillic-500.woff2',
         as: 'font',
         crossorigin: 'anonymous'
-      }*/
+      }
     ]
   },
   loading: {
@@ -67,8 +67,18 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'nuxt-compress'
   ],
+  'nuxt-compress': {
+    gzip: {
+      cache: true
+    },
+    brotli: {
+      threshold: 10240
+    }
+  },
+
   pwa: {
     meta: {
       theme_color: '#1d1d22',
