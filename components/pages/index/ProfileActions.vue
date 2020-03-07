@@ -2,6 +2,10 @@
   <div class="actions">
     <div class="actions__grid">
       <ActionItem
+        v-if="
+          !action.maxPlan ||
+            $store.getters['user/GET_USER'].plan_id <= action.maxPlan
+        "
         class="actions__grid__item"
         v-for="action in ACTIONS"
         :key="action.id"

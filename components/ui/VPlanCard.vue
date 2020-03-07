@@ -3,23 +3,57 @@
     :class="{ plan: true, 'plan--selected': isSelected }"
     :style="{ borderColor: colors[100], background: colors[25] }"
   >
+    <div v-if="plan.locked_message" class="plan__locked">
+      <div :style="{ backgroundColor: colors[100] }" class="plan__locked__item">
+        <VH3>{{ plan.locked_message }}</VH3>
+      </div>
+    </div>
     <VH2 weight="regular" :color="colors[100]" mb="var(--space-half)">
       {{ plan.name }}
     </VH2>
     <VP>{{ plan.description }}</VP>
     <div class="plan__bottom">
-      <VH2 weight="regular" :color="colors[100]">
+      <VH2
+        v-if="!current && !plan.newCost"
+        weight="regular"
+        :color="colors[100]"
+      >
         {{ plan.cost }}&#8381;/месяц
       </VH2>
+      <div
+        style="display: flex; align-items: center"
+        v-else-if="!current && typeof plan.newCost === 'number'"
+      >
+        <VH2 :color="colors[100]">
+          {{ plan.newCost }}&#8381;{{
+            typeof plan.newCost === 'number' ? '' : '/месяц'
+          }}
+        </VH2>
+
+        <VH3
+          :color="colors[70]"
+          style="text-decoration: line-through;margin-left: var(--space-third)"
+        >
+          {{ plan.cost }}&#8381;
+        </VH3>
+      </div>
+      <VH3 :color="colors[100]" v-else>
+        Текущий пакет
+      </VH3>
       <VButton
-        class="plan__bottom__button"
+        ml="var(--space-third)"
+        v-if="!current && !plan.locked_message"
+        :class="{
+          plan__bottom__button: true,
+          'plan__bottom__button--selected': isSelected
+        }"
         pa="var(--space-third)"
         weight="regular"
         color="var(--white-base)"
         :bg="colors[100]"
         @click="handleButton"
       >
-        {{ btnText || 'Купить пакет' }}
+        {{ isSelected ? btnText.selected : btnText.default }}
       </VButton>
     </div>
   </div>
@@ -29,13 +63,22 @@
 import VH2 from '../typography/VH2'
 import VP from '../typography/VP'
 import VButton from './VButton'
-import VIcon from '../utils/VIcon'
 export default {
   components: { VButton, VP, VH2 },
   props: {
     plan: Object,
-    btnText: String,
+    btnText: {
+      type: Object,
+      default: () => ({
+        default: 'Купить пакет',
+        selected: 'Изменить'
+      })
+    },
     isSelected: {
+      type: Boolean,
+      default: false
+    },
+    current: {
       type: Boolean,
       default: false
     }
@@ -63,6 +106,34 @@ export default {
 .plan {
   padding: var(--space-half);
   border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.plan h2 {
+  line-height: 1;
+}
+
+.plan__locked {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: #00000055;
+}
+
+.plan__locked__item {
+  background: red;
+  text-align: center;
+  width: 100%;
+  padding: var(--space-half);
+}
+
+.plan__locked__item h3 {
+  text-shadow: 0 0 30px #00000044;
+  color: var(--white-base);
 }
 
 .plan--selected {
@@ -84,5 +155,9 @@ export default {
 .plan__bottom__button:active {
   transform: none;
   box-shadow: none;
+}
+
+.plan__bottom__button--selected {
+  background: none !important;
 }
 </style>

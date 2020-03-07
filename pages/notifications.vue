@@ -19,7 +19,11 @@
         <VP>
           {{ item.title }}
         </VP>
-        <div @click="pushTo(item.url)" v-if="item.url !== 'null'">
+        <div
+          style="cursor: pointer"
+          @click="pushTo(item.url)"
+          v-if="item.url !== 'null'"
+        >
           <svg
             class="notifications__list__item__icon"
             viewBox="0 0 28 27"

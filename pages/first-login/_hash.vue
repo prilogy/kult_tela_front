@@ -57,7 +57,7 @@
             type="number"
             min="50"
             max="250"
-            caption="Рост (в см)"
+            caption="Рост(в см)"
             v-model="height"
           ></VInput>
           <VInput

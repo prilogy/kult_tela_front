@@ -4,7 +4,7 @@
       <transition name="showup--reversed">
         <div v-if="planToBuy" class="buy-form">
           <VPlanCard
-            btnText="Изменить"
+            :btnText="{ default: 'Изменить', selected: 'Изменить' }"
             @btnClick="planToBuy = null"
             class="plan--opened"
             :plan="planToBuy"

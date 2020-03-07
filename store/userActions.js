@@ -2,24 +2,26 @@ export const state = () => ({
   actions: [
     {
       title: 'Центр тренировок',
-      minPlan: 0,
       url: '/workout',
       color: '#f27108'
     },
     {
       title: 'Центр питания',
-      minPlan: 0,
       url: '/food',
       color: '#f2b3dd'
     },
     {
       title: 'Онлайн консультация',
-      minPlan: 0,
       url: '/special/consultation',
       color: '#219653'
     },
-    { title: 'Сменить план', url: '/change-plan', color: '#e0e23c' },
-    { title: 'Редактировать профиль', minPlan: 0, url: '/edit' },
+    {
+      title: 'Сменить план',
+      url: '/subscription/change',
+      color: '#e0e23c',
+      maxPlan: 2
+    },
+    { title: 'Редактировать профиль', url: '/edit' },
     { title: 'Обновить вес', url: '/update-weight' }
   ]
 })

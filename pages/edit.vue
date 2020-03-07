@@ -10,7 +10,7 @@
         required
         step="0.01"
         type="number"
-        caption="Рост (в см)"
+        caption="Рост(в см)"
         v-model="height"
         max="220"
         min="40"

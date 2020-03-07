@@ -29,7 +29,9 @@ export default function(ctx) {
   }
 
   this.Plans = {
-    getAll: () => axios.$get('/plan/all')
+    getAll: () => axios.$get('/plan/all'),
+    getChangePrices: () => axios.$get('/plan/change/price'),
+    changePlan: data => axios.$post('/plan/change', data)
   }
 
   this.Top = {
