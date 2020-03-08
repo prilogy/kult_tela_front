@@ -10,18 +10,32 @@
       </template>
     </VPageHeading>
 
-    <form id="consultation__form" @submit.prevent="proceedToPay">
-      <select
-        required
-        v-model="tutor"
-        name="pets"
-        id="consultation__form__tutor"
+    <form v-if="info" id="consultation__form" @submit.prevent="proceedToPay">
+      <VH3 mb="var(--space-half)">Выберите консультанта</VH3>
+      <div
+        :class="{
+          tutor: true,
+          'tutor--selected': tutor && tutor.id === item.id
+        }"
+        v-for="item in info.tutors"
       >
-        <option value="">Выберите желаемого консультанта</option>
-        <option value="Богомолова">Генерал армии Богомолова</option>
-        <option value="Развозжаева">Подполковник Развозжаева</option>
-        <option value="Лимонова">Подполковник Лимонова</option>
-      </select>
+        <img class="tutor__avatar" alt="Аватар" :src="item.img_src" />
+        <div class="tutor__info">
+          <div>
+            <VH3 class="tutor__info__name">{{ item.name }}</VH3>
+            <VP class="tutor__info__desc">{{ item.description }}</VP>
+          </div>
+          <VButton
+            :class="{ 'tutor__btn--selected': tutor && item.id === tutor.id }"
+            form="none"
+            value="none"
+            w100
+            @click="tutor = item"
+          >
+            {{ tutor && item.id === tutor.id ? 'Выбрано' : 'Выбрать' }}
+          </VButton>
+        </div>
+      </div>
       <VInput
         required
         type="date"
@@ -45,15 +59,15 @@
         v-if="info"
         style="display: flex; justify-content: space-between; align-items: center"
       >
-        <VH3 v-if="info.price > 0" style="width: 100%">
-          {{ info.price }}&#8381;/час
+        <VH3 v-if="info.price.price > 0" style="width: 100%">
+          {{ info.price.price }}&#8381;/час
         </VH3>
-        <div v-else-if="info.price === 0">
+        <div v-else-if="info.price.price === 0">
           <VH3>
             Бесплатно
           </VH3>
           <VCaption style="text-align: right; color: var(--grey-light3)">
-            eщё {{ info.free_times_left }}
+            eщё {{ info.price.free_times_left }}
           </VCaption>
         </div>
 
@@ -80,7 +94,7 @@ export default {
   components: { VInput },
   data() {
     return {
-      tutor: '',
+      tutor: null,
       date_from: '',
       date_to: '',
       info: null,
@@ -98,7 +112,7 @@ export default {
   methods: {
     async proceedToPay() {
       const info = {
-        tutor: this.tutor,
+        tutor: this.tutor.name,
         date_from: this.date_from,
         date_to: this.date_to,
         type: 1
@@ -138,6 +152,55 @@ select {
   padding: var(--space-third) var(--space-half);
   box-sizing: border-box;
   margin-bottom: var(--space-half);
+}
+
+.tutor {
+  padding: var(--space-half);
+  border-radius: var(--radius);
+  border: solid 2px var(--yellow-trans4);
+  cursor: pointer;
+  background: var(--yellow-trans4);
+  margin-bottom: var(--space-half);
+  display: flex;
+}
+
+.tutor--selected {
+  border-color: var(--yellow-base);
+}
+
+.tutor__info__desc {
+  white-space: pre-line;
+  margin: var(--space-third) 0;
+  font-weight: 300;
+}
+
+.tutor__btn--selected {
+  background: none;
+  border: none;
+}
+
+.tutor__btn--selected:active,
+.tutor__btn--selected:hover,
+.tutor__btn--selected:focus {
+  box-shadow: none !important;
+}
+
+.tutor__btn--selected >>> h3 {
+  color: var(--white-base) !important;
+}
+
+.tutor__info {
+  width: 100%;
+  margin-left: var(--space-half);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tutor__avatar {
+  max-width: 30%;
+  border: 2px solid var(--yellow-base);
+  border-radius: 4px;
 }
 
 #consultation__form {
