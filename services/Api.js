@@ -65,7 +65,8 @@ export default function(ctx) {
   }
 
   this.Request = {
-    add: data => axios.$post('/request', data)
+    add: data => axios.$post('/request', data),
+    getPrice: () => axios.$get('/request')
   }
 
   this.Exercise = {

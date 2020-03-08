@@ -4,7 +4,7 @@
       Онлайн консультация
       <template v-slot:info>
         Заполните форму ниже и оплатите участие, укажите дату, когда у вас будет
-        свободное время. Беседа проходит в онлайн формате (видео).
+        свободное время. Беседа проходит в онлайн формате(видео).
         <br />
         Это просто. Мы всё объясним. Длительность - 1 час.
       </template>
@@ -25,25 +25,46 @@
       <VInput
         required
         type="date"
-        placeholder="info"
+        placeholder="Дата от"
+        :min="minDate"
+        :max="maxDate"
         caption="Дата от"
         v-model="date_from"
       ></VInput>
       <VInput
         required
         type="date"
-        placeholder="info"
+        :min="minDate"
+        :max="maxDate"
+        placeholder="Дата до"
         caption="Дата до"
         v-model="date_to"
       ></VInput>
 
       <div
+        v-if="info"
         style="display: flex; justify-content: space-between; align-items: center"
       >
-        <VH3 style="width: 100%">
-          1000&#8381;/час
+        <VH3 v-if="info.price > 0" style="width: 100%">
+          {{ info.price }}&#8381;/час
         </VH3>
-        <VButton w100 type="submit" form="consultation__form" value="submit">
+        <div v-else-if="info.price === 0">
+          <VH3>
+            Бесплатно
+          </VH3>
+          <VCaption style="text-align: right; color: var(--grey-light3)">
+            eщё {{ info.free_times_left }}
+          </VCaption>
+        </div>
+
+        <VButton
+          ml="var(--space-half)"
+          w100
+          type="submit"
+          form="consultation__form"
+          value="submit"
+          :disabled="!validateForm"
+        >
           Записаться
         </VButton>
       </div>
@@ -61,7 +82,17 @@ export default {
     return {
       tutor: '',
       date_from: '',
-      date_to: ''
+      date_to: '',
+      info: null,
+      minDate: null,
+      maxDate: null
+    }
+  },
+  computed: {
+    validateForm() {
+      return (
+        Boolean(this.tutor) && Boolean(this.date_from) && Boolean(this.date_to)
+      )
     }
   },
   methods: {
@@ -74,13 +105,26 @@ export default {
       }
       try {
         const result = await this.$api.Request.add(info)
-        window.open(result.data.url)
         this.SUCCESS('Ваша заявка успешно отправлена!')
+        if (result.data && result.data.url) window.open(result.data.url)
+        else this.$router.push('/')
       } catch (e) {}
     },
     ...mapActions({
       SUCCESS: 'popup/SET_SUCCESS'
     })
+  },
+  async asyncData(ctx) {
+    try {
+      const { data: info } = await ctx.app.$api.Request.getPrice()
+      return { info }
+    } catch (e) {}
+  },
+  created() {
+    const date = new Date()
+    this.minDate = date.toJSON().split('T')[0]
+    date.setDate(date.getDate() + 20)
+    this.maxDate = date.toJSON().split('T')[0]
   }
 }
 </script>

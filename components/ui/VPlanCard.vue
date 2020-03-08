@@ -92,15 +92,13 @@ export default {
       this.$emit('btnClick', this.plan.id)
     }
   },
-  computed: {
-    colors() {
-      const base = this.plan.color
-      return {
-        100: base,
-        70: base + this.$ds.getHexOpacity(70),
-        50: base + this.$ds.getHexOpacity(50),
-        25: base + this.$ds.getHexOpacity(25)
-      }
+  created() {
+    const base = this.plan.color
+    this.colors = {
+      100: base,
+      70: base + this.$ds.getHexOpacity(70),
+      50: base + this.$ds.getHexOpacity(50),
+      25: base + this.$ds.getHexOpacity(25)
     }
   }
 }

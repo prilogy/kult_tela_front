@@ -38,6 +38,14 @@ h3 {
 }
 
 .input {
+  user-select: auto !important;
+}
+
+.input[type='date']::-webkit-calendar-picker-indicator {
+  background: none;
+}
+
+.input {
   background: var(--grey-light2);
   width: 100%;
   font-size: var(--h3-fs);

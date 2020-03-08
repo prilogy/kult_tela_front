@@ -74,9 +74,10 @@ export default {
 }
 
 .button--disabled {
-  background: var(--grey-light3);
-  color: var(--grey-light2);
+  opacity: 0.3;
+  cursor: default;
 }
+
 .button--disabled:active,
 .button--disabled:hover,
 .button--disabled:focus {
