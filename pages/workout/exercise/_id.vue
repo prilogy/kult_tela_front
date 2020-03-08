@@ -49,7 +49,7 @@ export default {
   },
   async fetch({ store, params }) {
     if (!store.getters['workout/GET_EXERCISE_FROM_ALL'](params.id))
-      await store.dispatch('workout/FEED_ALL_EXERCISES')
+      await store.dispatch('workout/FEED_ONE_EXERCISE', params.id)
   }
 }
 </script>

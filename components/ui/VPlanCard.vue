@@ -3,18 +3,13 @@
     :class="{ plan: true, 'plan--selected': isSelected }"
     :style="{ borderColor: colors[100], background: colors[25] }"
   >
-    <div v-if="plan.locked_message" class="plan__locked">
-      <div :style="{ backgroundColor: colors[100] }" class="plan__locked__item">
-        <VH3>{{ plan.locked_message }}</VH3>
-      </div>
-    </div>
     <VH2 weight="regular" :color="colors[100]" mb="var(--space-half)">
       {{ plan.name }}
     </VH2>
     <VP>{{ plan.description }}</VP>
     <div class="plan__bottom">
       <VH2
-        v-if="!current && !plan.newCost"
+        v-if="!current && !plan.newCost && !plan.locked_message"
         weight="regular"
         :color="colors[100]"
       >
@@ -22,7 +17,9 @@
       </VH2>
       <div
         style="display: flex; align-items: center"
-        v-else-if="!current && typeof plan.newCost === 'number'"
+        v-else-if="
+          !current && typeof plan.newCost === 'number' && !plan.locked_message
+        "
       >
         <VH2 :color="colors[100]">
           {{ plan.newCost }}&#8381;{{
@@ -36,6 +33,13 @@
         >
           {{ plan.cost }}&#8381;
         </VH3>
+      </div>
+      <div
+        :style="{ backgroundColor: colors[100] }"
+        v-else-if="plan.locked_message"
+        class="plan__locked"
+      >
+        <VH3>{{ plan.locked_message }}</VH3>
       </div>
       <VH3 :color="colors[100]" v-else>
         Текущий пакет
@@ -106,7 +110,6 @@ export default {
 .plan {
   padding: var(--space-half);
   border-radius: var(--radius);
-  position: relative;
   overflow: hidden;
 }
 
@@ -115,23 +118,15 @@ export default {
 }
 
 .plan__locked {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
   background: #00000055;
-}
-
-.plan__locked__item {
-  background: red;
-  text-align: center;
   width: 100%;
   padding: var(--space-half);
+  margin: 0 calc(-1 * var(--space-half)) calc(-1 * var(--space-half))
+    calc(-1 * var(--space-half));
 }
 
-.plan__locked__item h3 {
+.plan__locked h3 {
+  text-align: center;
   text-shadow: 0 0 30px #00000044;
   color: var(--white-base);
 }

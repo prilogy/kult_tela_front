@@ -91,6 +91,10 @@ export default {
       try {
         const { data } = await this.$api.FoodReport.send(form)
         this.SET_REPORT_STATUS(data)
+        this.sets = this.sets.map(e => {
+          e.image = null
+          return e
+        })
         this.SET_SUCCESS('Отчет успешно загружен!')
       } catch (e) {}
     },

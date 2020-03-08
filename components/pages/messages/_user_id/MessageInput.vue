@@ -5,6 +5,7 @@
       ref="area"
       @input="handleArea"
       @focus="focused"
+      placeholder="Напишите сообщение..."
       class="box__input"
       contenteditable
       @keydown="handleKeys"
@@ -89,6 +90,15 @@ export default {
 </script>
 
 <style scoped>
+.box__input[placeholder]:empty::before {
+  content: attr(placeholder);
+  color: var(--grey-light2);
+  font-weight: 400;
+}
+
+.box__input[placeholder]:empty:focus::before {
+  content: '';
+}
 .box >>> p {
   text-align: center;
   width: 100%;

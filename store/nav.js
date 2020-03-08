@@ -55,6 +55,7 @@ export const state = () => ({
     }
   ],
   dropdownLinks: [
+    { id: 6, name: 'Техническая помощь', url: '/support' },
     {
       id: 5,
       name: 'Выйти из аккаунта',

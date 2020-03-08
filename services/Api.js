@@ -69,8 +69,12 @@ export default function(ctx) {
   }
 
   this.Exercise = {
-    getById: id => axios.$get('/exercise/' + id),
+    getById: id => axios.$get('/exercise?id=' + id),
     getAll: () => axios.$get('/exercise')
+  }
+
+  this.Support = {
+    getAdminId: () => axios.$get('/support')
   }
 
   this.Tutor = {

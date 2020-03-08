@@ -30,8 +30,13 @@
       </transition>
       <transition name="showup">
         <div v-if="!planToBuy">
-          <VPageHeading button titleOffset="var(--space)">
+          <VPageHeading button>
             Доступные пакеты
+            <template v-slot:info>
+              <VTipSmall>
+                Срок службы - 1 месяц
+              </VTipSmall>
+            </template>
           </VPageHeading>
 
           <div class="plans" v-if="plans">
@@ -58,11 +63,11 @@
 </template>
 
 <script>
-import { VPlanCard, VInput, VButtonBack } from '../components/'
+import { VPlanCard, VInput, VButtonBack, VTipSmall } from '../components/'
 
 export default {
   layout: 'noNav',
-  components: { VButtonBack, VInput, VPlanCard },
+  components: { VTipSmall, VButtonBack, VInput, VPlanCard },
   data() {
     return {
       plans: null,

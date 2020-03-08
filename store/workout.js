@@ -16,6 +16,10 @@ export const mutations = {
   },
   SET_ALL_EXERCISES(state, payload) {
     state.all_exercises = payload
+  },
+  ADD_ONE_EXERCISE(state, exercise) {
+    if (state.all_exercises === null) state.all_exercises = [exercise]
+    else state.all_exercises = [...state.all_exercises, exercise]
   }
 }
 
@@ -34,6 +38,10 @@ export const actions = {
   async FEED_ALL_EXERCISES({ commit }) {
     const { data: exercises } = await this.$api.Exercise.getAll()
     commit('SET_ALL_EXERCISES', exercises)
+  },
+  async FEED_ONE_EXERCISE({ commit }, id) {
+    const { data: exercises } = await this.$api.Exercise.getById(id)
+    commit('ADD_ONE_EXERCISE', exercises[0])
   }
 }
 

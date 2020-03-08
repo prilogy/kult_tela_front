@@ -89,7 +89,8 @@ export default {
     }
   },
   async fetch({ store, redirect }) {
-    if (!store.getters['workout/GET_ALL_EXERCISES']) {
+    const exercises = store.getters['workout/GET_ALL_EXERCISES']
+    if (!exercises || exercises.length < 10) {
       try {
         await store.dispatch('workout/FEED_ALL_EXERCISES')
       } catch (e) {

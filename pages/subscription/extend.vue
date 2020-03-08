@@ -15,7 +15,7 @@
           :key="plan.id"
           :plan="plan"
           :isSelected="selectedPlan === plan"
-          btnText="Выбрать"
+          :btnText="{ default: 'Выбрать', selected: 'Выбрано' }"
         ></VPlanCard>
       </div>
       <VButton
