@@ -6,6 +6,25 @@
       :key="category.id"
       :category="category"
     ></CategoryItem>
+    <div class="tutor">
+      <VPageHeading level="3">Для вас несет службу</VPageHeading>
+      <div class="tutor__info">
+        <img
+          class="tutor__info__avatar"
+          src="/images/avatars/coach.jpg"
+          alt="Аватарка тренера"
+        />
+        <div>
+          <VP class="tutor__info__title" mb="var(--space-half)">
+            Владимиров Владимир
+          </VP>
+          <VP color="var(--grey-light3)">
+            Сертифицированный тренер со стажем работы 7 лет, призер Чемпионата
+            Мира по пауэрлифтингу.
+          </VP>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -73,4 +92,30 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.tutor {
+  margin-top: var(--space);
+}
+.tutor__info {
+  display: flex;
+}
+
+.tutor__info > div {
+  margin-left: var(--space);
+}
+
+.tutor__info__title {
+  color: var(--yellow-base);
+  text-shadow: 0 0 40px #eff62144;
+  font-size: 20px;
+  margin-bottom: var(--space-half);
+}
+
+.tutor__info__avatar {
+  min-width: 118px;
+  max-width: 40%;
+  border: 2px solid var(--yellow-base);
+  border-radius: 3px;
+  box-shadow: 0 -5px 40px -10px #eff62133;
+}
+</style>
