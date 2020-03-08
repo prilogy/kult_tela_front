@@ -1,5 +1,10 @@
 <template>
-  <div class="message-wrapper" :style="{ background: bgColor }">
+  <div
+    v-if="chat && chat.messages"
+    class="message-wrapper"
+    :style="{ background: bgColor }"
+  >
+    <!-- TODO: REFACTOR! -->
     <AdminMark
       @bgColor="color => (bgColor = color)"
       class="admin-mark--all"

@@ -132,7 +132,15 @@ export default {
   },
 
   async fetch({ store, params, redirect }) {
-    const user_id = parseInt(params.user_id)
+    let user_id = params.user_id,
+      conversation = false
+    if (user_id.toString().indexOf('c') !== -1) {
+      console.log('HELO BITACHES')
+      user_id = parseInt(user_id.slice(1))
+      conversation = true
+    } else user_id = parseInt(user_id)
+    console.log(user_id, conversation)
+
     const index = store.state.chat.chats
       .map(item => item.user_id)
       .indexOf(user_id)
@@ -140,7 +148,8 @@ export default {
       if (index === -1 || store.state.chat.chats[index].messages.length <= 20) {
         await store.dispatch('chat/FEED_CHAT_WITH_USER_ID', {
           id: user_id,
-          setAsCurrent: true
+          setAsCurrent: true,
+          conversation
         })
       } else {
         await store.dispatch('chat/SET_CURRENT_CHAT_FROM_CHATS', user_id)
@@ -148,6 +157,10 @@ export default {
     } catch (e) {
       redirect('/messages')
     }
+  },
+  created() {
+    console.log(this.$route.params)
+    if (this.$route.query.c === null) console.log('aSSSSSSSSSSSSS')
   },
   async mounted() {
     this.$nextTick(() => {

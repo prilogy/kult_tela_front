@@ -23,9 +23,12 @@ const storeActions = {
   },
   async FEED_CHAT_WITH_USER_ID(
     { commit, dispatch },
-    { id, setAsCurrent = false }
+    { id, setAsCurrent = false, conversation = false }
   ) {
-    const { data: chat } = await this.$api.Chat.getById(id)
+    console.log('conv:', conversation)
+    const { data: chat } = conversation
+      ? await this.$api.Chat.getConversationById(id)
+      : await this.$api.Chat.getById(id)
     await dispatch('SET_CHAT', { chat, forceCurrent: setAsCurrent || false })
   },
   SET_CURRENT_CHAT_FROM_CHATS({ state, commit }, user_id) {
