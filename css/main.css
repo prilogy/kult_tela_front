@@ -47,7 +47,7 @@ body {
   text-rendering: optimizeLegibility;
   transition: 0.24s all !important;
 }
-
+/*
 *:not(input.field):not(textarea.field) {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -55,6 +55,7 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+*/
 
 .readme__list {
   margin: var(--space-half) 0;

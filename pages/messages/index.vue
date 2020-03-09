@@ -4,9 +4,7 @@
     <div v-if="CHATS.length > 0">
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
-          <nuxt-link :to="'/messages/' + chat.user_id">
-            <ChatElement :dateToday="dateToday" :chat="chat"></ChatElement>
-          </nuxt-link>
+          <ChatElement :dateToday="dateToday" :chat="chat"></ChatElement>
         </li>
       </ul>
     </div>

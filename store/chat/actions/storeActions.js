@@ -31,8 +31,8 @@ const storeActions = {
       : await this.$api.Chat.getById(id)
     await dispatch('SET_CHAT', { chat, forceCurrent: setAsCurrent || false })
   },
-  SET_CURRENT_CHAT_FROM_CHATS({ state, commit }, user_id) {
-    const index = getChatIndexById(state.chats, { user_id })
+  SET_CURRENT_CHAT_FROM_CHATS({ state, commit }, id) {
+    const index = getChatIndexById(state.chats, { id })
 
     commit('SET_CURRENT_CHAT', state.chats[index])
   },

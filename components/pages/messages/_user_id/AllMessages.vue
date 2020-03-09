@@ -24,7 +24,7 @@
           </VCaption>
         </div>
       </li>
-      <li v-if="chat.chat_is_empty" class="msg--chat_is-empty">
+      <li v-if="chat.is_empty" class="msg--chat_is-empty">
         <VP>Здесь будет история переписки</VP>
       </li>
     </ul>

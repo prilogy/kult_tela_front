@@ -10,16 +10,16 @@
         >
           <VAvatarSmall
             :mark="
-              CHAT.user_status ? { borderColor: 'var(--grey-light1)' } : null
+              chatf.status.bool ? { borderColor: 'var(--grey-light1)' } : null
             "
             size="40px"
-            :admin_role_id="CHAT.user.admin_role_id"
-            :src="CHAT.user.avatar_src"
+            :admin_role_id="user && user.admin_role_id"
+            :src="user && user.avatar_src"
           ></VAvatarSmall>
           <div>
-            <VP>{{ CHAT.user.name }}</VP>
+            <VP>{{ chatf.name }}</VP>
             <VCaption color="var(--grey-light3)">
-              {{ CHAT.user_status ? 'онлайн' : 'не в сети' }}
+              {{ chatf.status.text }}
             </VCaption>
           </div>
         </div>
@@ -28,7 +28,7 @@
       <AdminMark
         class="admin-mark--chat"
         v-if="isAdmin"
-        :user="CHAT.user"
+        :user="user"
         colored-text
       ></AdminMark>
     </div>
@@ -85,7 +85,7 @@ export default {
     sendMessage(text) {
       this.$store.dispatch('chat/SEND_MESSAGE', {
         text,
-        to_user_id: this.CHAT.user_id,
+        to_user_id: this.user ? this.user.id : null,
         room_id: this.CHAT.id
       })
     },
@@ -120,10 +120,25 @@ export default {
     }
   },
   computed: {
-    isAdmin() {
-      if (this.CHAT && this.CHAT.user) {
-        return typeof this.CHAT.user.admin_role_id === 'number'
+    chatf() {
+      const chat = this.CHAT
+      const user = this.user
+      return {
+        name: chat.name || user.name,
+        status: {
+          text: user ? (user.status ? 'онлайн' : 'не в сети') : '',
+          bool: user ? user.status : false
+        }
       }
+    },
+    user() {
+      return !this.CHAT.conversation && this.CHAT
+        ? this.CHAT.users.filter(e => e.id !== this.ME.id)[0]
+        : null
+    },
+    isAdmin() {
+      const user = this.user
+      return user ? typeof user.admin_role_id === 'number' : null
     },
     ...mapGetters({
       CHAT: 'chat/GET_CURRENT_CHAT',
@@ -152,7 +167,14 @@ export default {
           conversation
         })
       } else {
-        await store.dispatch('chat/SET_CURRENT_CHAT_FROM_CHATS', user_id)
+        let id
+        if (conversation) id = user_id
+        else {
+          id = this.$store.getters['chat/GET_CHATS'].filter(
+            e => e.user_ids.includes(user_id) && e.user_ids.length === 2
+          )[0].id
+        }
+        await store.dispatch('chat/SET_CURRENT_CHAT_FROM_CHATS', id)
       }
     } catch (e) {
       redirect('/messages')

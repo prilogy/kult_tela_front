@@ -21,7 +21,9 @@ export default {
     async goToAdmin() {
       const { data } = await this.$api.Support.getAdminId()
       if (data && data.id) {
-        this.$router.push('/messages/' + data.id)
+        const link = '/messages/' + data.id
+        console.log(link)
+        this.$router.push(link)
       }
     }
   }

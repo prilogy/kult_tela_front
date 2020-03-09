@@ -17,7 +17,7 @@
           <VInput
             type="text"
             autocomplete="username"
-            placeholder="Логин"
+            placeholder="Email"
             required
             v-model="login"
           />
