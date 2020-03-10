@@ -43,7 +43,8 @@ const storeActions = {
     socket(this).emit('chat_message', {
       text: data.text,
       to_user_id: data.to_user_id,
-      room_id: data.room_id
+      room_id: data.room_id,
+      attachments: data.attachments
     })
   },
   async SET_LAST_SEEN_MESSAGE({ state, rootState }) {

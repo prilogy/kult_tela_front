@@ -16,6 +16,7 @@ export default function(ctx) {
   }
 
   this.Chat = {
+    uploadImage: data => axios.$post('/chat/image', data),
     getAll: () => axios.$get('/chat'),
     getById: id => axios.$get('/chat/' + id),
     getConversationById: id => axios.$get('/chat/' + id + '?c=true')

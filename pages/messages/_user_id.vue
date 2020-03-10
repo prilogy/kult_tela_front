@@ -42,6 +42,9 @@
     </div>
 
     <MessageInput
+      :imageLocked="imageLocked"
+      @imageUploaded="setImageSrc"
+      @imageDeleted="setImageSrc(null)"
       class="chat__bottom"
       ref="messageInputArea"
       @focused="() => shouldScrollToBotton() && scrollTo({ toBottom: true })"
@@ -73,21 +76,44 @@ export default {
   data() {
     return {
       input: '',
-      bottomOffset: '30px'
+      image_src: null,
+      imageLocked: false
     }
   },
   methods: {
+    setImageSrc(v) {
+      this.image_src = v
+    },
     messagesScrolled(scrollPos) {
       if (scrollPos < 1000) {
         this.$store.dispatch('chat/LOAD_MESSAGES_HISTORY')
       }
     },
-    sendMessage(text) {
-      this.$store.dispatch('chat/SEND_MESSAGE', {
-        text,
-        to_user_id: this.user ? this.user.id : null,
-        room_id: this.CHAT.id
-      })
+    async sendMessage(text) {
+      const to_user_id = this.user ? this.user.id : null
+      let attachments = null
+      if (this.image_src && typeof to_user_id === 'number') {
+        try {
+          const form = new FormData()
+          form.append('to_user_id', to_user_id)
+          form.append('image_src', this.image_src)
+          const { data } = await this.$api.Chat.uploadImage(form)
+          if (data.src) {
+            attachments = [{ src: data.src, type: 'image' }]
+          }
+        } catch (e) {
+          this.imageLocked = true
+        }
+      }
+      if (text.trim() !== '') {
+        await this.$store.dispatch('chat/SEND_MESSAGE', {
+          text,
+          to_user_id,
+          room_id: this.CHAT.id,
+          attachments
+        })
+        this.$refs.messageInputArea.resetImage()
+      }
     },
     scrollTo({ height, toBottom }) {
       const el = this.$refs.messages
