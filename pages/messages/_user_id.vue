@@ -14,7 +14,7 @@
             "
             size="40px"
             :admin_role_id="user && user.admin_role_id"
-            :src="user && user.avatar_src"
+            :src="chatf.avatar_src"
           ></VAvatarSmall>
           <div>
             <VP>{{ chatf.name }}</VP>
@@ -125,8 +125,19 @@ export default {
       const user = this.user
       return {
         name: chat.name || user.name,
+        avatar_src: user
+          ? user.avatar_src
+          : chat.conversation
+          ? chat.image_src || null
+          : null,
         status: {
-          text: user ? (user.status ? 'онлайн' : 'не в сети') : '',
+          text: user
+            ? user.status
+              ? 'онлайн'
+              : 'не в сети'
+            : chat.conversation
+            ? chat.user_ids.length + ' участников'
+            : '',
           bool: user ? user.status : false
         }
       }
@@ -150,11 +161,9 @@ export default {
     let user_id = params.user_id,
       conversation = false
     if (user_id.toString().indexOf('c') !== -1) {
-      console.log('HELO BITACHES')
       user_id = parseInt(user_id.slice(1))
       conversation = true
     } else user_id = parseInt(user_id)
-    console.log(user_id, conversation)
 
     const index = store.state.chat.chats
       .map(item => item.user_id)
@@ -179,10 +188,6 @@ export default {
     } catch (e) {
       redirect('/messages')
     }
-  },
-  created() {
-    console.log(this.$route.params)
-    if (this.$route.query.c === null) console.log('aSSSSSSSSSSSSS')
   },
   async mounted() {
     this.$nextTick(() => {

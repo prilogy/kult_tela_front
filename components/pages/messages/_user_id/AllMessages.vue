@@ -3,6 +3,11 @@
     <ul class="messages" v-if="chat">
       <li class="msg" v-for="(msg, index) in chat.messages" :key="msg.id">
         <MessageCloud
+          :user="
+            chat.conversation
+              ? chat.users.filter(e => e.id === msg.user_id)[0] || { me: true }
+              : null
+          "
           :message="msg"
           :isMy="myId === msg.user_id"
           :isLastInSeq="
@@ -24,7 +29,10 @@
           </VCaption>
         </div>
       </li>
-      <li v-if="chat.is_empty" class="msg--chat_is-empty">
+      <li
+        v-if="chat.is_empty && (!chat.messages || chat.messages.length === 0)"
+        class="msg--chat_is-empty"
+      >
         <VP>Здесь будет история переписки</VP>
       </li>
     </ul>

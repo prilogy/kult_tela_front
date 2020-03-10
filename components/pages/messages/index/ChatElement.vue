@@ -1,11 +1,6 @@
 <template>
   <nuxt-link :to="link">
-    <div
-      v-if="chat && user"
-      class="message-wrapper"
-      :style="{ background: bgColor }"
-    >
-      <!-- TODO: REFACTOR! -->
+    <div v-if="chat" class="message-wrapper" :style="{ background: bgColor }">
       <AdminMark
         @bgColor="color => (bgColor = color)"
         class="admin-mark--all"
@@ -15,7 +10,9 @@
       <div class="contact">
         <VAvatarSmall
           :admin_role_id="chatf.avatar.admin_role_id"
-          :mark="user.status ? { borderColor: 'var(--grey-base)' } : null"
+          :mark="
+            user && user.status ? { borderColor: 'var(--grey-base)' } : null
+          "
           class="contact__avatar"
           :src="chatf.avatar.src"
         />
@@ -121,15 +118,22 @@ export default {
             !chat.conversation &&
             typeof user.admin_role_id === 'number' &&
             user.admin_role_id,
-          src: chat.conversation ? null : user.avatar_src
+          src: chat.conversation
+            ? chat.image_src || null
+            : user
+            ? user.avatar_src
+            : null
         },
         name: chat.name || user.name,
         date: lastMessage ? this.getDate(lastMessage.date) : null,
-        lastMessageText:
-          (lastMessage &&
-            (lastMessage.user_id === currentUserId ? 'Вы: ' : '') +
-              lastMessage.text) ||
-          'Нет сообщений',
+        lastMessageText: lastMessage
+          ? (lastMessage.user_id === currentUserId
+              ? 'Вы: '
+              : chat.conversation
+              ? chat.users.filter(e => e.id === lastMessage.user_id)[0].name +
+                ': '
+              : '') + lastMessage.text
+          : 'Нет сообщений',
         lastMessage,
         currentUserId,
         showUnreadMessages:
@@ -141,9 +145,11 @@ export default {
       }
     },
     user() {
-      return this.chat.users.filter(
-        e => e.id !== this.$store.getters['user/GET_USER'].id
-      )[0]
+      return this.chat.conversation
+        ? null
+        : this.chat.users.filter(
+            e => e.id !== this.$store.getters['user/GET_USER'].id
+          )[0]
     }
   },
   components: { VDivider, AdminMark, VAvatarSmall, DoneIcon }

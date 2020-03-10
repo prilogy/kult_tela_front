@@ -3,17 +3,17 @@ export const state = () => ({
     {
       title: 'Центр тренировок',
       url: '/workout',
-      color: '#f27108'
+      color: '#4f8bf2'
     },
     {
       title: 'Центр питания',
       url: '/food',
-      color: '#f2b3dd'
+      color: '#f2bda7'
     },
     {
       title: 'Онлайн консультация',
       url: '/special/consultation',
-      color: '#219653'
+      color: '#e15e4c'
     },
     {
       title: 'Сменить план',

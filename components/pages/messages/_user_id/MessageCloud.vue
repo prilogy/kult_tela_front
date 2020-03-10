@@ -7,6 +7,13 @@
       'message--mark': isLastInSeq && !isMy
     }"
   >
+    <nuxt-link
+      class="message__name"
+      v-if="user && !user.me && !isMy"
+      :to="'/user/' + user.id"
+    >
+      <VP>{{ user.name }}</VP>
+    </nuxt-link>
     <VP class="message__text" v-text="message.text"></VP>
     <div class="message__bottom">
       <VCaption class="message__time">{{ message.time }}</VCaption>
@@ -47,19 +54,21 @@ export default {
     },
     lastSeenMessageId: {
       type: Number
-    }
+    },
+    user: Object
   }
 }
 </script>
 
 <style scoped>
 .message {
+  --msg-color: #313133;
   position: relative;
   align-self: flex-start;
   width: fit-content;
   display: flex;
   padding: var(--space-half);
-  background: var(--grey-light2);
+  background: var(--msg-color);
   border-radius: var(--radius);
   color: var(--white-base);
   max-width: 75%;
@@ -90,6 +99,16 @@ export default {
   z-index: 10;
 }
 
+.message__name {
+  width: 100%;
+}
+
+.message__name p {
+  color: var(--yellow-base);
+  font-weight: 300;
+  width: 100%;
+}
+
 .message--my {
   background: var(--yellow-dark1);
   margin-left: auto;
@@ -103,7 +122,7 @@ export default {
   left: -10px;
   height: 20px;
   width: 20px;
-  background: var(--grey-light2);
+  background: var(--msg-color);
   border-bottom-right-radius: 5px;
 }
 

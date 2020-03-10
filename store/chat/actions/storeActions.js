@@ -25,7 +25,6 @@ const storeActions = {
     { commit, dispatch },
     { id, setAsCurrent = false, conversation = false }
   ) {
-    console.log('conv:', conversation)
     const { data: chat } = conversation
       ? await this.$api.Chat.getConversationById(id)
       : await this.$api.Chat.getById(id)
