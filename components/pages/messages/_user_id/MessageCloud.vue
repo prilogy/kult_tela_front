@@ -15,6 +15,9 @@
       <VP>{{ user.name }}</VP>
     </nuxt-link>
     <VP class="message__text" v-text="message.text"></VP>
+    <div class="message__attachments" v-if="message.attachments">
+      <img :src="item.src" v-for="item in message.attachments" />
+    </div>
     <div class="message__bottom">
       <VCaption class="message__time">{{ message.time }}</VCaption>
       <DoneIcon
@@ -124,6 +127,12 @@ export default {
   width: 20px;
   background: var(--msg-color);
   border-bottom-right-radius: 5px;
+}
+
+.message__attachments img {
+  max-width: 100%;
+  border-radius: var(--radius-half);
+  margin-top: var(--space-third);
 }
 
 .message--mark::after {
