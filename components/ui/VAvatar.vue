@@ -50,25 +50,28 @@ export default {
       wrapper_img.onload = () => {
         const height = img.height
         const width = img.width
-        const size = canvas.clientHeight * 0.75
 
-        let leftOffset, newWidth, newHeight
+        let leftOffset, newWidth, newHeight, topOffset
 
         if (width >= height) {
+          const size = canvas.clientHeight * 0.75
           const diffK = 1 - (height - size) / height
           newWidth = width * diffK
           newHeight = height * diffK
           leftOffset = -1 * ((newWidth - size) / 2)
-        } else if (width < height) {
-          const diffK = 1 - (height - size) / height
+        } else {
+          const size = canvas.clientWidth * 0.9
+
+          const diffK = 1 - (width - size) / width
           newHeight = height * diffK
           newWidth = width * diffK
-          if (newWidth < canvas.clientWidth * 0.9) {
+          topOffset = -1 * ((newHeight - size) / 2.5)
+          if (newWidth < canvas.clientWidth) {
             leftOffset = (canvas.clientWidth - newWidth) / 2
           }
         }
 
-        ctx.drawImage(img, leftOffset || 0, 0, newWidth, newHeight)
+        ctx.drawImage(img, leftOffset || 0, topOffset || 0, newWidth, newHeight)
         ctx.drawImage(
           wrapper_img,
           0,
