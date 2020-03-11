@@ -29,7 +29,19 @@
     >
       Подтвердить
     </VButton>
-    <!--    <VH3 mt="var(&#45;&#45;space)" mb="var(&#45;&#45;space-half)">История вашего веса</VH3>-->
+    <!--    <VH3 mt="var(&#45;&#45;space)" mb="var(&#45;&#45;space-half)">-->
+    <!--      История вашего веса-->
+    <!--    </VH3>-->
+    <!--    <div ref="chartWrapper" style="width: 100%">-->
+    <!--      <svg v-if="weightHistory" style="width: 100%">-->
+    <!--        <polyline-->
+    <!--          fill="none"-->
+    <!--          stroke="var(&#45;&#45;yellow-base)"-->
+    <!--          stroke-width="2"-->
+    <!--          :points="weightHistory.line"-->
+    <!--        ></polyline>-->
+    <!--      </svg>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -41,8 +53,27 @@ export default {
   components: { VInput },
   data() {
     return {
-      new_weight: null
+      new_weight: null,
+      weightHistory: null
     }
+  },
+
+  mounted() {
+    /*const history = this.$store.getters['user/GET_USER'].weight_history || null
+    if (history) {
+      const maxX = this.$refs.chartWrapper.clientWidth
+      console.log(maxX, history.length)
+      const step = maxX / (history.length - 1)
+      console.log('step', step)
+      this.weightHistory =
+        {
+          line: history.reduce(
+            (acc = '', cur, idx) => acc + ' ' + idx * step + ',' + cur.weight,
+            ''
+          ),
+          data: history.map((e, idx) => ({ x: idx * step, y: e.weight }))
+        } || null
+    } else return null*/
   },
   methods: {
     async updateWeight() {

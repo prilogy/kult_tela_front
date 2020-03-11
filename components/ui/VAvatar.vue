@@ -1,15 +1,19 @@
 <template>
-  <div class="avatar__new">
-    <transition name="showup">
-      <img alt="avatar" :src="(img && img.src) || wrapper_src" />
-    </transition>
-    <canvas
-      style="position: fixed; opacity: 0"
-      width="413px"
-      height="582px"
-      ref="cnv"
-    ></canvas>
-  </div>
+  <transition name="showup">
+    <div class="avatar__new" :style="{ height: !img ? '160px' : '' }">
+      <img
+        alt="avatar"
+        v-show="img && img.src"
+        :src="(img && img.src) || wrapper_src"
+      />
+      <canvas
+        style="position: fixed; opacity: 0"
+        width="413px"
+        height="582px"
+        ref="cnv"
+      ></canvas>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -25,7 +29,7 @@ export default {
   },
   computed: {
     wrapper_src() {
-      const rank = this.rank
+      const rank = this.rank == 10 ? 9 : this.rank
       return '/ranks/' + rank + '.png'
     }
   },

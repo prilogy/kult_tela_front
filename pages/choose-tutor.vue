@@ -17,10 +17,34 @@
             'list-item--selected': currentTutor && currentTutor.id === tutor.id
           }"
         >
-          <VH3>{{ tutor.name }}</VH3>
-          <VP v-show="tutor.admin_description" mt="var(--space-half)">
-            {{ tutor.admin_description }}
-          </VP>
+          <VAvatar
+            v-if="tutor.avatar_src"
+            :image_src="tutor.avatar_src"
+            :rank="9"
+            class="list-item__avatar"
+          ></VAvatar>
+          <div class="list-item__info">
+            <div>
+              <VH3>{{ tutor.name }}</VH3>
+              <VP v-show="tutor.admin_description" mt="var(--space-half)">
+                {{ tutor.admin_description }}
+              </VP>
+            </div>
+            <VButton
+              :class="{
+                'list-item__button': true,
+                'list-item__button--selected':
+                  currentTutor && currentTutor.id === tutor.id
+              }"
+              w100
+            >
+              {{
+                currentTutor && currentTutor.id === tutor.id
+                  ? 'Выбран'
+                  : 'Выбрать'
+              }}
+            </VButton>
+          </div>
         </li>
       </ul>
     </div>
@@ -39,8 +63,9 @@
 
 <script>
 import VDivider from '../components/ui/VDivider'
+import VAvatar from '../components/ui/VAvatar'
 export default {
-  components: { VDivider },
+  components: { VAvatar, VDivider },
   layout: 'noNavAuth',
   data() {
     return {
@@ -89,11 +114,45 @@ export default {
   border-radius: var(--radius);
   border: solid 2px var(--yellow-trans4);
   cursor: pointer;
+  display: flex;
   background: var(--yellow-trans4);
   margin-bottom: var(--space-half);
 }
 
+.list-item__avatar {
+  border: 2px solid var(--yellow-base);
+}
+
+.list-item .list-item__info {
+  margin-left: var(--space-half);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list-item__button {
+  margin-top: auto;
+  padding: var(--space-third) 0;
+}
+
+.list-item__button--selected {
+  background: none;
+  border: none;
+}
+
+.list-item__button--selected >>> h3 {
+  color: var(--white-base);
+}
+
+.list-item__button--selected:hover,
+.list-item__button--selected:active,
+.list-item__button--selected:focus {
+  box-shadow: none;
+}
+
 .list-item--selected {
   border-color: var(--yellow-base);
+  box-shadow: 0 0 50px #eff62133 !important;
 }
 </style>

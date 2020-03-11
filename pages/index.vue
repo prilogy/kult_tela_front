@@ -39,9 +39,8 @@ export default {
         { title: 'Начальный вес', value: user.weight_start + ' кг' },
         {
           title: 'Текущий вес',
-          value: `${user.weight_start - weight_diff}${
-            weight_diff > 0 ? '(-' + weight_diff + ')' : ''
-          } кг`
+          value: `${Math.ceil((user.weight_start - user.weight_diff) * 10) /
+            10}${weight_diff > 0 ? '(-' + weight_diff + ')' : ''} кг`
         },
         {
           title: 'Рост',

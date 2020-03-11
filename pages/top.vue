@@ -3,7 +3,7 @@
     <VPageHeading>
       Лучшие солдаты
       <template v-slot:info>
-        <VTipSmall>Скоро введение призов за результат похудения.</VTipSmall>
+        <VTipSmall>Скоро введение призов за результат похудения</VTipSmall>
       </template>
     </VPageHeading>
     <div class="top__switch">
@@ -42,15 +42,29 @@
             place="3"
           ></TopItem>
         </div>
+        <div class="top_avatars__10" v-if="topSwitch">
+          <TopItem
+            v-if="user"
+            @click="goTo(user)"
+            :user="user"
+            v-for="(user, idx) in currentTop.slice(3, 11)"
+            :key="user.id"
+            :place="idx + 4"
+          ></TopItem>
+        </div>
       </div>
       <div
         @click="goTo(user)"
         class="top__row"
-        v-for="(user, index) in currentTop.slice(3)"
+        v-for="(user, index) in currentTop.slice(topSwitch ? 11 : 3)"
         :key="user.id"
       >
         <VH3 weight="regular">
-          {{ `#${index + 4} ${user.first_name} ${user.last_name}` }}
+          {{
+            `#${index + (topSwitch ? 12 : 4)} ${user.last_name +
+              ' ' +
+              user.first_name}`
+          }}
         </VH3>
         <VH3>
           -{{
@@ -136,10 +150,20 @@ export default {
 }
 
 .top_avatars__23 {
-  margin-top: var(--space-half);
   width: 100%;
   display: flex;
   justify-content: space-around;
+  max-width: 400px;
+  margin: var(--space-half) auto 0 auto;
+}
+
+.top_avatars__10 {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .top__row {

@@ -97,7 +97,7 @@
             <VH3 weight="regular" mb="var(--space-half)" mt="var(--space-half)">
               Аватар
             </VH3>
-            <VTipSmall mt="var(--space-third)">
+            <VTipSmall mb="var(--space-half)" mt="var(--space-third)">
               <VP color="var(--grey-light3)">
                 Фото желательно анфас и по грудь/пояс
               </VP>

@@ -3,8 +3,8 @@
     <VPageHeading>Редактировать</VPageHeading>
     <form id="form" autocomplete="off" @submit.prevent="sendForm">
       <VH3 mb="var(--space-half)">email: {{ email }}</VH3>
-      <VInput required caption="Имя" v-model="first_name"></VInput>
       <VInput required caption="Фамилия" v-model="last_name"></VInput>
+      <VInput required caption="Имя" v-model="first_name"></VInput>
       <VInput caption="Отчество(если есть)" v-model="patronymic"></VInput>
       <VInput
         required

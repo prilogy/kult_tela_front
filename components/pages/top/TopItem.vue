@@ -2,7 +2,9 @@
   <div
     @click="goToUser"
     class="item"
-    :style="'--current-color: ' + currentAttrs.color"
+    :style="
+      '--current-color: ' + (currentAttrs ? currentAttrs.color : '#A2A2A2')
+    "
   >
     <div class="item__left">
       <div>
@@ -13,7 +15,9 @@
     <div class="item__right">
       <VAvatar
         :style="{
-          boxShadow: '0 0 40px ' + currentAttrs.color + '44'
+          boxShadow: currentAttrs
+            ? '0 0 40px ' + currentAttrs.color + '44'
+            : null
         }"
         :image_src="user.avatar_src"
         :rank="user.rank"
@@ -98,6 +102,7 @@ export default {
 
 .item__right p {
   margin-top: var(--space-third);
+  margin-bottom: var(--space-third);
   text-align: center;
   width: fit-content;
   color: var(--current-color);
