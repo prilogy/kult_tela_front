@@ -7,7 +7,10 @@
     <VError></VError>
     <VSuccess></VSuccess>
     <VRankNotification></VRankNotification>
-    <VLockedPopup v-if="lockedPopup"></VLockedPopup>
+    <VLockedPopup
+      :text="typeof lockedPopup === 'string' ? lockedPopup : null"
+      v-if="lockedPopup"
+    ></VLockedPopup>
     <VTutorPopup @clicked="tutorPopup = false" v-if="tutorPopup"></VTutorPopup>
     <div class="offset"></div>
   </div>

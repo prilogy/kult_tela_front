@@ -27,6 +27,11 @@
         <VH3 weight="regular">
           Аватар
         </VH3>
+        <VTipSmall mt="var(--space-third)">
+          <VP color="var(--grey-light3)">
+            Фото желательно анфас и по грудь/пояс
+          </VP>
+        </VTipSmall>
         <div v-if="!avatar_src" class="avatar-preview">
           <div class="avatar-preview__caption">
             <VP>Текущий аватар</VP>
@@ -69,11 +74,12 @@
 </template>
 
 <script>
-import { VInput, VImageUpload, VDivider } from '../components/'
+import { VInput, VImageUpload, VDivider, VTipSmall } from '../components/'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   middleware: ['requireSub'],
   components: {
+    VTipSmall,
     VImageUpload,
     VDivider,
     VInput

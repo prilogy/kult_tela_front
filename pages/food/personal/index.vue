@@ -65,9 +65,24 @@
             </li>
           </ul>
         </div>
-        <nuxt-link to="/food/personal/report">
-          <VButton w100>Отправить отчет</VButton>
-        </nuxt-link>
+
+        <VTipSmall>
+          <VP color="var(--grey-light3)">
+            Калораж меню меняется при обновлении веса! Будьте честны перед
+            собой!
+            <br />
+            Сами меню меняются каждый день! Завтра будет новое! Творчество
+            допускается!
+          </VP>
+        </VTipSmall>
+        <div @click="goToReport">
+          <VButton
+            :disabled="this.$store.getters['user/GET_USER'].plan_id < 2"
+            w100
+          >
+            Отправить отчет питания
+          </VButton>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -93,6 +108,17 @@ export default {
     }
   },
   methods: {
+    goToReport() {
+      const ifAccessed = this.$store.getters['user/GET_USER'].plan_id > 1
+      if (ifAccessed) {
+        this.$router.push('/food/personal/report')
+      } else {
+        this.$store.dispatch(
+          'popup/SET_LOCKED',
+          'Доступно в пакетах большей стоимости. Фото пищи оценивают диетолог и наставник.'
+        )
+      }
+    },
     setOpened(index) {
       this.parts[index].isOpened = !this.parts[index].isOpened
     },

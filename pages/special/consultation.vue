@@ -4,11 +4,23 @@
       Онлайн консультация
       <template v-slot:info>
         Заполните форму ниже и оплатите участие, укажите дату, когда у вас будет
-        свободное время. Беседа проходит в онлайн формате(видео).
+        свободное время. Беседа проходит в онлайн формате (видео).
         <br />
         Это просто. Мы всё объясним. Длительность - 1 час.
       </template>
     </VPageHeading>
+
+    <div v-if="info" class="consultation__price">
+      <VH3 v-if="info.price.price > 0" style="width: 100%">
+        Стоимость - {{ info.price.price }}&#8381;/час
+      </VH3>
+      <div v-else-if="info.price.price === 0">
+        <VH3>
+          У вас {{ info.price.free_times_left }} бесплатных консультации
+        </VH3>
+      </div>
+    </div>
+    <VDivider mt="var(--space-half)" mb="var(--space-half)"></VDivider>
 
     <form v-if="info" id="consultation__form" @submit.prevent="proceedToPay">
       <VH3 mb="var(--space-half)">Выберите консультанта</VH3>
@@ -55,33 +67,15 @@
         v-model="date_to"
       ></VInput>
 
-      <div
-        v-if="info"
-        style="display: flex; justify-content: space-between; align-items: center"
+      <VButton
+        w100
+        type="submit"
+        form="consultation__form"
+        value="submit"
+        :disabled="!validateForm"
       >
-        <VH3 v-if="info.price.price > 0" style="width: 100%">
-          {{ info.price.price }}&#8381;/час
-        </VH3>
-        <div v-else-if="info.price.price === 0">
-          <VH3>
-            Бесплатно
-          </VH3>
-          <VCaption style="text-align: right; color: var(--grey-light3)">
-            eщё {{ info.price.free_times_left }}
-          </VCaption>
-        </div>
-
-        <VButton
-          ml="var(--space-half)"
-          w100
-          type="submit"
-          form="consultation__form"
-          value="submit"
-          :disabled="!validateForm"
-        >
-          Записаться
-        </VButton>
-      </div>
+        Записаться
+      </VButton>
     </form>
   </div>
 </template>
@@ -89,9 +83,10 @@
 <script>
 import { mapActions } from 'vuex'
 import { VInput } from '../../components/'
+import VDivider from '../../components/ui/VDivider'
 export default {
   middleware: 'requireSub',
-  components: { VInput },
+  components: { VDivider, VInput },
   data() {
     return {
       tutor: null,
@@ -144,6 +139,11 @@ export default {
 </script>
 
 <style scoped>
+.consultation__price {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-half);
+}
 select {
   background: var(--grey-light2);
   width: 100%;

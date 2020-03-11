@@ -1,5 +1,10 @@
 <template>
-  <VButton @click="install" mt="var(--space-half)" w100>
+  <VButton
+    v-if="showInstallBanner"
+    @click="install"
+    mt="var(--space-half)"
+    w100
+  >
     Добавить на рабочий стол
   </VButton>
 </template>
@@ -13,22 +18,30 @@ export default {
       showInstallBanner: false
     }
   },
-  created() {
+  mounted() {
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault()
       installEvent = e
       this.showInstallBanner = true
     })
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      this.showInstallBanner = false
+    }
   },
   methods: {
     install() {
-      this.showInstallBanner = false
       if (installEvent) {
         installEvent.prompt()
-        installEvent.userChoice.then(() => {
-          installEvent = null
+        installEvent.userChoice.then(choiceResult => {
+          if (choiceResult.outcome === 'accepted') {
+            this.showInstallBanner = false
+            console.log('User accepted the install prompt')
+          } else {
+            console.log('User dismissed the install prompt')
+          }
         })
-      }
+      } else this.showInstallBanner = false
     }
   }
 }

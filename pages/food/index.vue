@@ -20,7 +20,19 @@
             Черниенкова Арина
           </VP>
           <VP color="var(--grey-light3)">
-            Врач-диетолог, высшее медицинское образование, стаж работы 3 года.
+            Врач-диетолог, высшее медицинское образование, стаж работы 4 года.
+          </VP>
+          <VP
+            color="var(--grey-light3)"
+            v-if="$store.getters['user/GET_USER'].plan_id > 1"
+          >
+            Чат со мной можно найти в разделе
+            <span
+              @click="$router.push('/messages')"
+              style="color: var(--yellow-base)"
+            >
+              "сообщения"
+            </span>
           </VP>
         </div>
       </div>

@@ -1,10 +1,13 @@
 <template>
   <VBigPopup class="tutor">
     <VH3 mb="var(--space-half)">Функция недоступна</VH3>
-    <VP>
+    <VP v-if="!text">
       Доступно в пакетах Артиллерия, Супер-солдат, Супер-солдат с наставником.
       <br />
       Изменить пакет участия можно в любой момент.
+    </VP>
+    <VP v-else>
+      {{ text }}
     </VP>
     <VButton w100 mt="var(--space-half)" @click="goTo('/change-plan')">
       Сменить пакет
@@ -18,6 +21,9 @@
 <script>
 import VBigPopup from '../utils/VBigPopup'
 export default {
+  props: {
+    text: String
+  },
   components: {
     VBigPopup
   },

@@ -80,6 +80,7 @@ export default {
       imageLocked: false
     }
   },
+  //TODO: повесить прокрутку вниз при загрузке любого изображения
   methods: {
     setImageSrc(v) {
       this.image_src = v

@@ -11,12 +11,12 @@ export const state = () => ({
       color: '#f2bda7'
     },
     {
-      title: 'Онлайн консультация',
+      title: 'Онлайн-консультация',
       url: '/special/consultation',
       color: '#e15e4c'
     },
     {
-      title: 'Сменить план',
+      title: 'Сменить пакет',
       url: '/subscription/change',
       color: '#e0e23c',
       maxPlan: 2

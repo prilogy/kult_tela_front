@@ -10,7 +10,7 @@
           </span>
         </nuxt-link>
         <VTipSmall style="margin-top: var(--space-half)">
-          Программа тренировок доступна начиная с пакета "Артиллерия"
+          Программа тренировок доступна, начиная с пакета "Артиллерия"
         </VTipSmall>
       </template>
     </VPageHeading>
