@@ -11,8 +11,8 @@
     </VPageHeading>
 
     <div v-if="info" class="consultation__price">
-      <VH3 v-if="info.price.price > 0" style="width: 100%">
-        Стоимость - {{ info.price.price }}&#8381;/час
+      <VH3 v-if="info.price.price > 0" style="width: 100%;">
+        Стоимость консультации - {{ info.price.price }}&#8381;/час
       </VH3>
       <div v-else-if="info.price.price === 0">
         <VH3>

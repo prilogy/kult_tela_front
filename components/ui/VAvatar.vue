@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     wrapper_src() {
-      const rank = this.rank == 10 ? 9 : this.rank
+      const rank = this.rank
       return '/ranks/' + rank + '.png'
     }
   },
