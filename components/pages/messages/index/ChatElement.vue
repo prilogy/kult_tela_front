@@ -116,6 +116,7 @@ export default {
         avatar: {
           admin_role_id:
             !chat.conversation &&
+            user &&
             typeof user.admin_role_id === 'number' &&
             user.admin_role_id,
           src: chat.conversation

@@ -10,9 +10,11 @@
     <nuxt-link
       class="message__name"
       v-if="user && !user.me && !isMy"
-      :to="'/user/' + user.id"
+      :to="typeof user.admin_role_id !== 'number' ? '/user/' + user.id : ''"
     >
-      <VP>{{ user.name }}</VP>
+      <VP :color="user.admin_role_id === 1 ? 'var(--green-base)' : ''">
+        {{ user.name }}
+      </VP>
     </nuxt-link>
     <VP class="message__text" v-text="message.text"></VP>
     <div class="message__attachments" v-if="message.attachments">
