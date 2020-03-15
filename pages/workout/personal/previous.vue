@@ -30,10 +30,12 @@
           <VH3>Упражнения</VH3>
           <div>
             <div
+              class="workout__title__type"
               @click="setWType('home')"
               v-if="WORKOUT.home"
               :class="WORKOUT_TYPE === 'home' ? '' : 'svg--disabled'"
             >
+              <VP color="var(--yellow-base)">Дома</VP>
               <svg
                 width="24"
                 height="23"
@@ -47,10 +49,12 @@
               </svg>
             </div>
             <div
+              class="workout__title__type"
               @click="setWType('gym')"
               v-if="WORKOUT.gym"
               :class="WORKOUT_TYPE === 'gym' ? '' : 'svg--disabled'"
             >
+              <VP>В зале</VP>
               <svg
                 width="23"
                 height="23"
@@ -233,6 +237,16 @@ export default {
 
 .workout__title > div > div {
   cursor: pointer;
+}
+
+.workout__title__type {
+  display: flex;
+  align-items: center;
+}
+
+.workout__title__type p {
+  color: var(--yellow-base);
+  margin-right: var(--space-third);
 }
 
 .workout__exercises__item {

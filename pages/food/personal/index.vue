@@ -66,15 +66,14 @@
           </ul>
         </div>
 
-        <VTipSmall>
-          <VP color="var(--grey-light3)">
-            Калораж меню меняется при обновлении веса! Будьте честны перед
-            собой!
-            <br />
-            Сами меню меняются каждый день! Завтра будет новое! Творчество
-            допускается!
-          </VP>
-        </VTipSmall>
+        <nuxt-link to="/food/personal/next">
+          <VButton mb="var(--space-half" w100 level="p">
+            Посмотреть меню на следующие дни
+          </VButton>
+        </nuxt-link>
+
+        <VDivider mb="var(--space-half)"></VDivider>
+
         <div @click="goToReport">
           <VButton
             :disabled="this.$store.getters['user/GET_USER'].plan_id < 2"
@@ -96,10 +95,12 @@
 <script>
 import { VTipSmall } from '../../../components'
 import { mapGetters } from 'vuex'
+import VDivider from '../../../components/ui/VDivider'
 
 export default {
   middleware: ['requireSub', 'minPlan_1'],
   components: {
+    VDivider,
     VTipSmall
   },
   data() {

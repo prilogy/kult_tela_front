@@ -43,6 +43,7 @@ export default function(ctx) {
 
   this.Food = {
     getDaily: () => axios.$get('/food/daily'),
+    getNext: () => axios.$get('/food/next'),
     getTipsVideos: () => axios.$get('/food/tips-videos')
   }
 
