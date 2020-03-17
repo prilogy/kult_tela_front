@@ -95,11 +95,7 @@ export default {
     },
     chatf() {
       const chat = this.chat
-      const user =
-        chat &&
-        chat.users.filter(
-          e => e.id !== this.$store.getters['user/GET_USER'].id
-        )[0]
+      const user = this.user
 
       const currentUserId = this.$store.getters['user/GET_USER'].id
 

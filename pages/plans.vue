@@ -30,7 +30,7 @@
       </transition>
       <transition name="showup">
         <div v-if="!planToBuy">
-          <VPageHeading button>
+          <VPageHeading button to="/login">
             Доступные пакеты
             <template v-slot:info>
               <VTipSmall>
@@ -63,11 +63,11 @@
 </template>
 
 <script>
-import { VPlanCard, VInput, VButtonBack, VTipSmall } from '../components/'
+import { VPlanCard, VInput, VTipSmall } from '../components/'
 
 export default {
   layout: 'noNav',
-  components: { VTipSmall, VButtonBack, VInput, VPlanCard },
+  components: { VTipSmall, VInput, VPlanCard },
   data() {
     return {
       plans: null,
@@ -98,9 +98,14 @@ export default {
     }
   },
   async asyncData(ctx) {
+    const id = ctx.query.p ? parseInt(ctx.query.p) : null
     try {
       const { data: plans } = await ctx.app.$api.Plans.getAll()
-      return { plans }
+      let toReturn = { plans }
+      if (typeof id === 'number') {
+        toReturn.planToBuy = plans.filter(plan => plan.id === id)[0]
+      }
+      return toReturn
     } catch (e) {
       ctx.redirect('/login')
     }

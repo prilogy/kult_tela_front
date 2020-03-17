@@ -113,7 +113,7 @@ export default {
   computed: {
     LINKS() {
       let links = this.$store.getters['nav/GET_LINKS']
-      if (this.USER.is_subscription === false) {
+      if (this.USER && this.USER.is_subscription === false) {
         links.links = links.links.map((e, index) => {
           if (index === 0) return e
           else return { ...e, disabled: true }

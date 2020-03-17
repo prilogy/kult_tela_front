@@ -10,7 +10,7 @@
         marginBottom: titleOffset === 'var(--space-half)' ? null : titleOffset
       }"
     >
-      <VButtonBack v-if="button"></VButtonBack>
+      <VButtonBack v-if="button" :to="to"></VButtonBack>
       <div style="width: 100%;" v-if="divInside">
         <slot></slot>
       </div>
@@ -56,7 +56,8 @@ export default {
     headerCenter: {
       type: Boolean,
       default: false
-    }
+    },
+    to: String
   }
 }
 </script>

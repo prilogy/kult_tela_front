@@ -74,6 +74,7 @@
 
 <script>
 export default {
+  middleware: ['requireSub', 'minPlan_1'],
   data() {
     return {
       menus: null

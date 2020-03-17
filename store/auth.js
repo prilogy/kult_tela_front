@@ -38,8 +38,8 @@ export const actions = {
     } catch (error) {}
   },
   async LOGOUT({ commit }) {
-    await this.$router.push('/login')
     commit('LOGOUT')
+    await this.$router.push('/login')
     commit('user/SET_USER', null, { root: true })
   }
 }

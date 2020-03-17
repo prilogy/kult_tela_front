@@ -15,11 +15,16 @@ export default {
     color: {
       type: String,
       default: 'var(--yellow-base)'
+    },
+    to: {
+      type: String,
+      default: null
     }
   },
   methods: {
     back() {
-      this.$router.back()
+      if (this.to) this.$router.push(this.to)
+      else this.$router.back()
     }
   }
 }

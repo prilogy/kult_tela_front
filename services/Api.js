@@ -22,6 +22,12 @@ export default function(ctx) {
     getConversationById: id => axios.$get('/chat/' + id + '?c=true')
   }
 
+  this.Password = {
+    request: data => axios.$post('/user/password', data),
+    verify: data => axios.$post('/user/password/verify', data),
+    reset: data => axios.$post('/user/password/reset', data)
+  }
+
   this.User = {
     updateWeight: data => axios.$post('/user/update/weight', data),
     updateWorkout: data => axios.$post('/user/update/workout', data),

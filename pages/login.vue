@@ -15,8 +15,8 @@
       <div class="login-form__middle">
         <form id="login-form" @submit.prevent="doLogin">
           <VInput
-            type="text"
-            autocomplete="username"
+            type="email"
+            autocomplete="email"
             placeholder="Email"
             required
             v-model="login"
@@ -32,7 +32,10 @@
         </form>
       </div>
       <div class="login-form__bottom">
-        <VP class="login-form__bottom__caption">Забыли пароль?</VP>
+        <nuxt-link to="/reset-password">
+          <VP class="login-form__bottom__caption">Забыли пароль?</VP>
+        </nuxt-link>
+
         <VButton
           type="submit"
           form="login-form"
