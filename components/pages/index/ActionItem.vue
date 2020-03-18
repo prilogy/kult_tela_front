@@ -8,7 +8,7 @@
     }"
   >
     <VP v-if="action.paid" :color="action.color" class="item__dollar">
-      $
+      ₽
     </VP>
     <div class="item__inner">
       <VP :color="action.color" class="item__inner__p">
@@ -28,7 +28,7 @@ export default {
 .item__dollar {
   font-size: 12px;
   position: absolute;
-  left: var(--space-third);
+  right: var(--space-third);
   top: var(--space-third);
 }
 .item {
