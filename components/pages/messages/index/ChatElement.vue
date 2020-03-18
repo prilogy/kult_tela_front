@@ -79,8 +79,7 @@ export default {
     chat: {
       type: Object,
       required: true
-    },
-    dateToday: String
+    }
   },
   data() {
     return {

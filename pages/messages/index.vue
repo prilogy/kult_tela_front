@@ -4,7 +4,7 @@
     <div v-if="CHATS.length > 0">
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
-          <ChatElement :dateToday="dateToday" :chat="chat"></ChatElement>
+          <ChatElement :chat="chat"></ChatElement>
         </li>
       </ul>
     </div>
@@ -34,13 +34,6 @@ export default {
     })
   },
   created() {
-    const date = new Date()
-    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-    const month =
-      date.getMonth() + 1 < 10
-        ? '0' + (date.getMonth() + 1)
-        : date.getMonth() + 1
-    this.dateToday = `${day}.${month}.${date.getFullYear()}`
     this.$store.commit('chat/SET_IS_NEW_MESSAGES', false)
   },
   mounted() {

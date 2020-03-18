@@ -37,9 +37,9 @@
                 chat.messages[index + 1].date.date
           "
         >
-          <VCaption>
-            {{ chat.messages[index + 1].date.date }}
-          </VCaption>
+          <VP style="font-weight: 300">
+            {{ getAlias(chat.messages[index + 1].date.date) }}
+          </VP>
         </div>
       </li>
       <li
