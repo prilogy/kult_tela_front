@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <VPageHeading>
+    <VPageHeading button to="/">
       Лучшие солдаты
       <template v-slot:info>
         <VTipSmall>Скоро введение призов за результат похудения</VTipSmall>

@@ -1,7 +1,18 @@
 <template>
   <div>
     <ul class="messages" v-if="chat">
-      <li class="msg" v-for="(msg, index) in chat.messages" :key="msg.id">
+      <li
+        :style="{
+          marginBottom:
+            chat.messages[index + 1] &&
+            chat.messages[index].date !== chat.messages[index + 1].date
+              ? 0
+              : null
+        }"
+        class="msg"
+        v-for="(msg, index) in chat.messages"
+        :key="msg.id"
+      >
         <MessageCloud
           :user="
             chat.conversation
@@ -79,10 +90,9 @@ export default {
   width: 100%;
   text-align: center;
   background: var(--white-trans4);
-  margin-top: var(--space-half);
+  margin: var(--space) calc(-1 * var(--space-new)) var(--space)
+    calc(-1 * var(--space-new));
   padding: var(--space-third) var(--space-new);
-  margin-left: calc(-1 * var(--space-new));
-  margin-right: calc(-1 * var(--space-new));
 }
 
 .messages__date p {

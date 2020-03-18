@@ -13,13 +13,15 @@ export const state = () => ({
     {
       title: 'Онлайн-консультация',
       url: '/special/consultation',
-      color: '#e15e4c'
+      color: '#e15e4c',
+      paid: true
     },
     {
       title: 'Сменить пакет',
       url: '/subscription/change',
       color: '#e0e23c',
-      maxPlan: 2
+      maxPlan: 2,
+      paid: true
     },
     { title: 'Редактировать профиль', url: '/edit' },
     { title: 'Обновить вес', url: '/update-weight' }

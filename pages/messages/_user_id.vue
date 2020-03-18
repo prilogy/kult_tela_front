@@ -2,7 +2,7 @@
   <div ref="chatDiv" class="chat">
     <div class="chat__top">
       <div>
-        <VButtonBack color="white"></VButtonBack>
+        <VButtonBack to="/messages" color="white"></VButtonBack>
         <div
           @click="!isAdmin ? $router.push('/user/' + CHAT.user.id) : null"
           class="chat__top__info"
@@ -42,7 +42,7 @@
     </div>
 
     <MessageInput
-      :imageLocked="imageLocked"
+      :imageLocked="imageLocked || CHAT.conversation"
       @imageUploaded="setImageSrc"
       @imageDeleted="setImageSrc(null)"
       class="chat__bottom"

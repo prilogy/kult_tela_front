@@ -134,8 +134,7 @@ export default {
         lastMessage,
         currentUserId,
         showUnreadMessages:
-          (user &&
-            lastMessage &&
+          (lastMessage &&
             lastMessage.user_id !== currentUserId &&
             chat.last_seen_message_id !== lastMessage.id) ||
           null

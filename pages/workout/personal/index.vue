@@ -19,6 +19,7 @@
             ограничения по здоровью.
           </span>
           Похудение – очень бережный процесс. Не спешите с нагрузками!
+          Тренировки дома или в зале.
         </VP>
       </VTipSmall>
       <div>
@@ -178,7 +179,7 @@ export default {
     EXERCISES() {
       const type = this.WORKOUT_TYPE
       if (this.WORKOUT && !this.WORKOUT.plan_done && !this.WORKOUT.day_off) {
-        return this.WORKOUT[type].exercises
+        return this.WORKOUT[type] ? this.WORKOUT[type].exercises : null
       } else return null
     },
     WORKOUT_TYPE() {
@@ -187,6 +188,9 @@ export default {
     ...mapGetters({
       WORKOUT: 'workout/GET_WORKOUT'
     })
+  },
+  created() {
+    if (this.EXERCISES === null) this.setWType('gym')
   },
   methods: {
     setOpenedItem(id) {

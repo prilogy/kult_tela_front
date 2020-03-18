@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading>Центр тренировок</VPageHeading>
+    <VPageHeading button to="/">Центр тренировок</VPageHeading>
     <CategoryItem
       v-for="category in cats"
       :key="category.id"
