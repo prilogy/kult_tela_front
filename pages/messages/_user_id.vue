@@ -4,7 +4,11 @@
       <div>
         <VButtonBack to="/messages" color="white"></VButtonBack>
         <div
-          @click="!isAdmin ? $router.push('/user/' + CHAT.user.id) : null"
+          @click="
+            !isAdmin && !CHAT.conversation
+              ? $router.push('/user/' + user.id)
+              : null
+          "
           class="chat__top__info"
           v-if="CHAT"
         >

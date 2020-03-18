@@ -9,7 +9,7 @@
     <VP v-else>
       {{ text }}
     </VP>
-    <VButton w100 mt="var(--space-half)" @click="goTo('/change-plan')">
+    <VButton w100 mt="var(--space-half)" @click="goTo('/subscription/change')">
       Сменить пакет
     </VButton>
     <VButton w100 mt="var(--space-half)" @click="goTo">

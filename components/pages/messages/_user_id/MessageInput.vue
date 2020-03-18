@@ -223,6 +223,7 @@ export default {
 }
 
 .box__input {
+  min-height: 25px;
   width: 100%;
   font-size: 18px;
   color: var(--white-base);

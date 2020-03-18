@@ -7,12 +7,9 @@
       border: action.color + ' solid 2px'
     }"
   >
-    <VP v-if="action.paid" :color="action.color" class="item__dollar">
-      ₽
-    </VP>
     <div class="item__inner">
       <VP :color="action.color" class="item__inner__p">
-        {{ action.title }}
+        {{ action.title + (action.paid ? ' ₽' : '') }}
       </VP>
     </div>
   </div>
@@ -25,12 +22,6 @@ export default {
 </script>
 
 <style scoped>
-.item__dollar {
-  font-size: 12px;
-  position: absolute;
-  right: var(--space-third);
-  top: var(--space-third);
-}
 .item {
   position: relative;
   border-radius: var(--radius-half);

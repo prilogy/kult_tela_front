@@ -20,8 +20,7 @@ export const state = () => ({
       title: 'Сменить пакет',
       url: '/subscription/change',
       color: '#e0e23c',
-      maxPlan: 2,
-      paid: true
+      maxPlan: 2
     },
     { title: 'Редактировать профиль', url: '/edit' },
     { title: 'Обновить вес', url: '/update-weight' },
