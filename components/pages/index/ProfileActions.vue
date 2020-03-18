@@ -47,6 +47,6 @@ export default {
 }
 
 .actions__grid__item:last-child:nth-child(3n - 2) {
-  grid-column: span 3;
+  grid-column: span 2;
 }
 </style>

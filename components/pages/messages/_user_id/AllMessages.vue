@@ -5,7 +5,8 @@
         :style="{
           marginBottom:
             chat.messages[index + 1] &&
-            chat.messages[index].date !== chat.messages[index + 1].date
+            chat.messages[index].date.date !==
+              chat.messages[index + 1].date.date
               ? 0
               : null
         }"
@@ -32,11 +33,12 @@
           class="messages__date"
           v-if="
             chat.messages[index + 1] &&
-              chat.messages[index].date !== chat.messages[index + 1].date
+              chat.messages[index].date.date !==
+                chat.messages[index + 1].date.date
           "
         >
           <VCaption>
-            {{ chat.messages[index + 1].date }}
+            {{ chat.messages[index + 1].date.date }}
           </VCaption>
         </div>
       </li>
@@ -52,10 +54,10 @@
 
 <script>
 import MessageCloud from './MessageCloud'
-import convertDate from '../../../../mixins/convertDate'
+import dateFuncs from '../../../../mixins/dateFuncs'
 export default {
   components: { MessageCloud },
-  mixins: [convertDate],
+  mixins: [dateFuncs],
   props: ['chat', 'myId'],
   computed: {
     lastSeqIds() {

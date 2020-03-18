@@ -1,5 +1,9 @@
 <template>
   <div class="login-form__wrapper">
+    <VP class="warning-text">
+      Для корректной работы приложения рекомендуется использовать последниe
+      версии браузеров Chrome, Firefox или Opera.
+    </VP>
     <div class="login-form">
       <div class="login-form__top">
         <VH1>Вход</VH1>
@@ -83,6 +87,14 @@ export default {
 </script>
 
 <style scoped>
+.warning-text {
+  position: absolute;
+  bottom: var(--space);
+  left: var(--space);
+  right: var(--space);
+  text-align: center;
+  color: var(--grey-light2);
+}
 .login-form__wrapper {
   display: flex;
   justify-content: center;

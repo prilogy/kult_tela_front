@@ -16,7 +16,9 @@ const getters = {
         : 1
     })
   },
-  GET_CURRENT_CHAT: state => state.currentChat
+  GET_CURRENT_CHAT: state => {
+    return state.currentChat
+  }
 }
 
 export default getters

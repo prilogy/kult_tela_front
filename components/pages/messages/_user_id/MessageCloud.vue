@@ -21,7 +21,7 @@
       <img :src="item.src" v-for="item in message.attachments" />
     </div>
     <div class="message__bottom">
-      <VCaption class="message__time">{{ message.time }}</VCaption>
+      <VCaption class="message__time">{{ message.date.time }}</VCaption>
       <DoneIcon
         v-if="isMy"
         size-modificator="0.73"
@@ -61,7 +61,8 @@ export default {
       type: Number
     },
     user: Object
-  }
+  },
+  computed: {}
 }
 </script>
 

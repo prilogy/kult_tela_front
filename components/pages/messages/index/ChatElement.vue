@@ -70,10 +70,11 @@
 import { VAvatarSmall, VDivider } from '../../../'
 import DoneIcon from '../DoneIcon'
 import AdminMark from '../AdminMark'
-import convertDate from '../../../../mixins/convertDate'
+import dateFuncs from '../../../../mixins/dateFuncs'
 
 export default {
-  mixins: [convertDate],
+  components: { VDivider, AdminMark, VAvatarSmall, DoneIcon },
+  mixins: [dateFuncs],
   props: {
     chat: {
       type: Object,
@@ -99,7 +100,7 @@ export default {
 
       const currentUserId = this.$store.getters['user/GET_USER'].id
 
-      const lastMessage =
+      let lastMessage =
         chat.messages && chat.messages.length > 0
           ? chat.messages[chat.messages.length - 1]
           : null
@@ -122,7 +123,7 @@ export default {
             : null
         },
         name: chat.name || user.name,
-        date: lastMessage ? this.getDate(lastMessage.date) : null,
+        date: lastMessage ? this.getAlias(lastMessage.date.date) : null,
         lastMessageText: lastMessage
           ? (lastMessage.user_id === currentUserId
               ? 'Вы: '
@@ -147,8 +148,7 @@ export default {
             e => e.id !== this.$store.getters['user/GET_USER'].id
           )[0]
     }
-  },
-  components: { VDivider, AdminMark, VAvatarSmall, DoneIcon }
+  }
 }
 </script>
 

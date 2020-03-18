@@ -24,7 +24,8 @@ export const state = () => ({
       paid: true
     },
     { title: 'Редактировать профиль', url: '/edit' },
-    { title: 'Обновить вес', url: '/update-weight' }
+    { title: 'Обновить вес', url: '/update-weight' },
+    { title: 'О приложении', url: '/about' }
   ]
 })
 

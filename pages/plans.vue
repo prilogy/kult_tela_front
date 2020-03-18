@@ -25,6 +25,10 @@
             <VButton type="submit" form="buy-form" value="submit" w100>
               Перейти к оплате
             </VButton>
+            <VP class="warning-text">
+              Приложение сделано профессионалами, но носит рекомендательный
+              характер. Вы сами несёте ответственность за свое здоровье и жизнь.
+            </VP>
           </form>
         </div>
       </transition>
@@ -103,7 +107,8 @@ export default {
       const { data: plans } = await ctx.app.$api.Plans.getAll()
       let toReturn = { plans }
       if (typeof id === 'number') {
-        toReturn.planToBuy = plans.filter(plan => plan.id === id)[0]
+        const planToBuy = plans.filter(plan => plan.id === id)[0]
+        if (!planToBuy.locked_message) toReturn.planToBuy = planToBuy
       }
       return toReturn
     } catch (e) {
@@ -114,6 +119,12 @@ export default {
 </script>
 
 <style scoped>
+.warning-text {
+  font-weight: 300;
+  color: var(--grey-light3);
+  margin-top: var(--space-half);
+  text-align: center;
+}
 .popup {
   max-width: var(--body-max-width);
   background: var(--grey-base);
