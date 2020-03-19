@@ -9,11 +9,13 @@
     <div class="tutor">
       <VPageHeading level="3">Для вас несет службу</VPageHeading>
       <div class="tutor__info">
-        <img
-          class="tutor__info__avatar"
-          src="/images/avatars/coach.jpg"
-          alt="Аватарка тренера"
-        />
+        <div class="tutor__info__avatar__wrapper">
+          <img
+            class="tutor__info__avatar"
+            src="/images/avatars/coach.jpg"
+            alt="Аватарка тренера"
+          />
+        </div>
         <div>
           <VP class="tutor__info__title" mb="var(--space-half)">
             Владимиров Владимир
@@ -111,9 +113,17 @@ export default {
   margin-bottom: var(--space-half);
 }
 
+.tutor__info__avatar__wrapper {
+  display: block;
+  max-width: 45%;
+  width: min-content;
+  margin: 0 !important;
+}
+
 .tutor__info__avatar {
   min-width: 118px;
-  max-width: 40%;
+  max-height: 100%;
+  max-width: 100%;
   border: 2px solid var(--yellow-base);
   border-radius: 3px;
   box-shadow: 0 -5px 40px -10px #eff62133;
