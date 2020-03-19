@@ -13,7 +13,7 @@
         weight="regular"
         :color="colors[100]"
       >
-        {{ plan.cost }}&#8381;/месяц
+        {{ isFree ? 'Бесплатно' : plan.cost + '&#8381;/месяц' }}
       </VH2>
       <div
         style="display: flex; align-items: center"
@@ -83,6 +83,10 @@ export default {
       default: false
     },
     current: {
+      type: Boolean,
+      default: false
+    },
+    isFree: {
       type: Boolean,
       default: false
     }

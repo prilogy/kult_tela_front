@@ -8,24 +8,18 @@
       v-bind="$attrs"
       :type="type"
       class="input"
-      v-model="content"
-      @input="handleInput"
+      :value="value"
+      @input="handleInput($event.target.value)"
     />
   </div>
 </template>
 <script>
 export default {
   props: ['value', 'caption', 'type'],
-  data() {
-    return {
-      content: this.value
-    }
-  },
   methods: {
-    handleInput(e) {
-      let content = this.content
-      if (this.type === 'number') content = content.split(',').join('.')
-      this.$emit('input', content)
+    handleInput(value) {
+      if (this.type === 'number') value = value.split(',').join('.')
+      this.$emit('input', value)
     }
   }
 }

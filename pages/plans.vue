@@ -5,9 +5,10 @@
         <div v-if="planToBuy" class="buy-form">
           <VPlanCard
             :btnText="{ default: 'Изменить', selected: 'Изменить' }"
-            @btnClick="planToBuy = null"
+            @btnClick="getBack"
             class="plan--opened"
             :plan="planToBuy"
+            :isFree="code && codeIsValid"
           ></VPlanCard>
 
           <VP my="var(--space-half)">
@@ -22,8 +23,14 @@
               caption="Email"
               v-model="email"
             ></VInput>
-            <VButton type="submit" form="buy-form" value="submit" w100>
-              Перейти к оплате
+            <VButton
+              :disabled="!email"
+              type="submit"
+              form="buy-form"
+              value="submit"
+              w100
+            >
+              {{ code && codeIsValid ? 'Подтвердить' : 'Перейти к оплате' }}
             </VButton>
             <VP class="warning-text">
               Приложение сделано профессионалами, но носит рекомендательный
@@ -42,6 +49,15 @@
               </VTipSmall>
             </template>
           </VPageHeading>
+
+          <div class="promo">
+            <VInput
+              v-model="code"
+              style="width: 100%"
+              placeholder="Ввести промокод"
+            />
+            <VButton :disabled="!code" @click="verifyPromo">Ввод</VButton>
+          </div>
 
           <div class="plans" v-if="plans">
             <VPlanCard
@@ -74,6 +90,8 @@ export default {
   components: { VTipSmall, VInput, VPlanCard },
   data() {
     return {
+      code: null,
+      codeIsValid: false,
       plans: null,
       planToBuy: null,
       email: '',
@@ -81,6 +99,25 @@ export default {
     }
   },
   methods: {
+    getBack() {
+      this.code = null
+      this.codeIsValid = false
+      this.planToBuy = null
+    },
+    async verifyPromo() {
+      if (this.code) {
+        try {
+          const r = await this.$api.Promo.verify({ code: this.code })
+          if (typeof r.data.plan_id === 'number') {
+            this.handleBuy(r.data.plan_id)
+            this.codeIsValid = true
+          }
+        } catch (e) {
+          this.code = null
+          this.codeIsValid = false
+        }
+      }
+    },
     back() {
       this.$router.back()
     },
@@ -88,13 +125,18 @@ export default {
       this.planToBuy = this.plans.filter(plan => plan.id === id)[0]
     },
     async proceedToBuy() {
-      const data = {
+      let data = {
         email: this.email,
         plan_id: this.planToBuy.id
       }
+
+      if (this.code && this.codeIsValid) {
+        data.code = this.code
+      }
+
       try {
         const result = await this.$api.Auth.createBlankProfile(data)
-        window.open(result.data.url)
+        if (result.data.url) window.open(result.data.url)
         this.afterSubmit = true
       } catch (error) {
         this.email = ''
@@ -119,6 +161,15 @@ export default {
 </script>
 
 <style scoped>
+.promo {
+  display: flex;
+  margin-bottom: var(--space-half);
+}
+
+.promo button {
+  margin-left: var(--space-half);
+}
+
 .warning-text {
   font-weight: 300;
   color: var(--grey-light3);

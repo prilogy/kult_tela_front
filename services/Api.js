@@ -15,6 +15,10 @@ export default function(ctx) {
     fillInfo: data => axios.$post('/auth/signup/fill', data)
   }
 
+  this.Promo = {
+    verify: data => axios.$post('/promo', data)
+  }
+
   this.Chat = {
     uploadImage: data => axios.$post('/chat/image', data),
     getAll: () => axios.$get('/chat'),
