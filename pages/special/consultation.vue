@@ -1,7 +1,7 @@
 <template>
   <div class="consultation">
-    <VPageHeading>
-      Онлайн консультация
+    <VPageHeading button level="3">
+      Онлайн-консультация
       <template v-slot:info>
         Заполните форму ниже и оплатите участие, укажите дату, когда у вас будет
         свободное время. Беседа проходит в онлайн формате (видео).

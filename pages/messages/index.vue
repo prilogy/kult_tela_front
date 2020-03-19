@@ -1,6 +1,6 @@
 <template>
   <div :style="'--msg-max-width:' + maxWidth + 'px'" class="messages">
-    <VPageHeading>Сообщения</VPageHeading>
+    <VPageHeading button>Сообщения</VPageHeading>
     <div v-if="CHATS.length > 0">
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">

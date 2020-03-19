@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading>
+    <VPageHeading button>
       Обновить вес
       <template v-slot:info>
         Старайтесь обновлять вес хотя бы раз в два дня, чтобы контролировать

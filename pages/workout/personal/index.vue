@@ -51,7 +51,7 @@
               v-if="WORKOUT.gym"
               :class="WORKOUT_TYPE === 'gym' ? '' : 'svg--disabled'"
             >
-              <VP>В зале</VP>
+              <VP v-if="WORKOUT.home">В зале</VP>
               <svg
                 width="23"
                 height="23"

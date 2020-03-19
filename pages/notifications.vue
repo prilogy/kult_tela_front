@@ -1,6 +1,6 @@
 <template>
   <div class="notifications">
-    <VPageHeading>Оповещения</VPageHeading>
+    <VPageHeading button>Оповещения</VPageHeading>
     <div v-if="!NOTIFICATIONS">
       <VH3
         weight="regular"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading>Редактировать</VPageHeading>
+    <VPageHeading button>Редактировать</VPageHeading>
     <form id="form" autocomplete="off" @submit.prevent="sendForm">
       <VH3 mb="var(--space-half)">email: {{ email }}</VH3>
       <VInput required caption="Фамилия" v-model="last_name"></VInput>

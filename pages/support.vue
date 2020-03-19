@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading>
+    <VPageHeading button level="3">
       Техническая помощь
     </VPageHeading>
     <VP>
