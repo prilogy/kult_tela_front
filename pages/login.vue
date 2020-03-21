@@ -46,10 +46,6 @@
           Войти
         </VButton>
       </div>
-      <VP class="warning-text">
-        Для корректной работы приложения рекомендуется использовать последниe
-        версии браузеров Chrome, Firefox или Opera.
-      </VP>
     </div>
   </div>
 </template>
@@ -87,11 +83,6 @@ export default {
 </script>
 
 <style scoped>
-.warning-text {
-  margin-top: var(--space-half);
-  text-align: center;
-  color: var(--grey-light2);
-}
 .login-form__wrapper {
   display: flex;
   justify-content: center;

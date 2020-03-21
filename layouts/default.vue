@@ -7,6 +7,10 @@
     <VError></VError>
     <VSuccess></VSuccess>
     <VRankNotification></VRankNotification>
+    <VBrowserPopup
+      @close="closeBrowserPopup"
+      v-if="browserPopup"
+    ></VBrowserPopup>
     <VLockedPopup
       :text="typeof lockedPopup === 'string' ? lockedPopup : null"
       v-if="lockedPopup"
@@ -27,10 +31,12 @@ import {
   VLockedPopup
 } from '~/components'
 import { mapActions } from 'vuex'
+import VBrowserPopup from '../components/ui/VBrowserPopup'
 
 export default {
   middleware: 'notAuth',
   components: {
+    VBrowserPopup,
     VLockedPopup,
     VSuccess,
     VNav,
@@ -41,16 +47,24 @@ export default {
   },
   data() {
     return {
+      browserPopup: false,
       tutorPopup: null
     }
   },
   methods: {
     ...mapActions({
       SET_CURRENT_LINK_ID: 'nav/SET_CURRENT_LINK_ID'
-    })
+    }),
+    closeBrowserPopup() {
+      this.browserPopup = false
+      localStorage.setItem('browser_popup', 'used')
+    }
   },
   created() {
     this.SET_CURRENT_LINK_ID()
+
+    if (!localStorage.getItem('browser_popup')) this.browserPopup = true
+
     if (
       this.$store.getters['user/GET_USER'].tutor_id === null &&
       this.$store.getters['user/GET_USER'].plan_id > 2

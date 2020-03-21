@@ -18,6 +18,7 @@ import VAvatarSmall from './ui/VAvatarSmall'
 import VPageHeading from './ui/VPageHeading'
 import VTutorPopup from './ui/VTutorPopup'
 import VLockedPopup from './ui/VLockedPopup'
+import VBrowserPopup from './ui/VBrowserPopup'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -52,6 +53,7 @@ export {
   VPageHeading,
   VTutorPopup,
   VLockedPopup,
+  VBrowserPopup,
   /**
    * UTILITIES
    */
