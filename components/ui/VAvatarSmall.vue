@@ -54,6 +54,7 @@ export default {
       if (!this.src) {
         if (typeof this.admin_role_id === 'number') {
           const role_id = this.admin_role_id
+          if (role_id === -1) return '/images/avatars/admin_avatar.png'
           if (role_id === 0) return '/images/avatars/admin_avatar.png'
           if (role_id === 1) return '/images/avatars/diet_avatar.jpg'
           if (role_id === 2) return '/images/avatars/tutor_avatar.jpg'

@@ -56,6 +56,11 @@ body {
   user-select: none;
 }
 
+[contenteditable] {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
 .readme__list {
   margin: var(--space-half) 0;
   margin-left: var(--space);

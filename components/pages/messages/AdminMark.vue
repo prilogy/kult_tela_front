@@ -17,6 +17,7 @@ export default {
   computed: {
     color() {
       const colors = {
+        '-1': '#eff621',
         0: '#eff621',
         1: '#1eb96a',
         2: '#ff6b01'
