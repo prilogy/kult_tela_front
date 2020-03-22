@@ -5,8 +5,7 @@ const storeActions = {
     if (chat) {
       if (
         (state.currentChat &&
-          ((state.currentChat && state.currentChat.id === chat.id) ||
-            state.currentChat.user_id === chat.user_id)) ||
+          (state.currentChat && state.currentChat.id === chat.id)) ||
         forceCurrent === true
       )
         commit('SET_CURRENT_CHAT', chat)

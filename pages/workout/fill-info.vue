@@ -78,7 +78,7 @@
           </li>
         </ul>
       </div>
-      <div>
+      <div id="overweight">
         <VPageHeading level="3">
           Избыточный вес
         </VPageHeading>
@@ -118,7 +118,13 @@
         mt="var(--space
 "
       />
-      <VButton :disabled="!validate" mt="var(--space)" w100 @click="setLevels">
+      <VButton
+        id="accept-button"
+        :disabled="!validate"
+        mt="var(--space)"
+        w100
+        @click="setLevels"
+      >
         Подтвердить
       </VButton>
       <VP
@@ -135,8 +141,10 @@
 
 <script>
 import { VTipSmall, VDivider } from '../../components/'
+import scrollTo from '../../mixins/scrollTo'
 
 export default {
+  mixins: [scrollTo],
   middleware: ['minPlan_1', 'requireSub'],
   components: { VDivider, VTipSmall },
   data() {
@@ -160,10 +168,12 @@ export default {
     setPhyicalLevel(item) {
       if (!item.disabled) {
         this.set_levels.physical_level = item.id
+        this.scrollTo('#overweight', 400)
       }
     },
     setOverweightLevel(item) {
       this.set_levels.overweight_level = item.id
+      this.scrollTo('#accept-button', 300)
     },
     async setLevels() {
       const levels = this.set_levels

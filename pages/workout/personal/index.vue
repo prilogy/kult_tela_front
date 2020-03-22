@@ -144,6 +144,18 @@
           Понедельник, среда и пятница - тренировка, остальные дни - вольно!
         </VP>
       </VTipSmall>
+      <VTipSmall
+        v-if="$store.getters['user/GET_USER'].workout.physical_level > 1"
+        mt="var(--space-half)"
+        mb="var(--space-half)"
+      >
+        <VP color="var(--grey-light3)">
+          Если у вас нет возможности тренироваться в зале, напишите в
+          <nuxt-link to="/support">
+            <VP color="var(--yellow-base)">техническую поддержку.</VP>
+          </nuxt-link>
+        </VP>
+      </VTipSmall>
     </div>
     <WorkoutDayOff v-else-if="WORKOUT.day_off"></WorkoutDayOff>
     <WorkoutPlanDone v-else-if="WORKOUT.plan_done"></WorkoutPlanDone>

@@ -42,13 +42,14 @@
             form="none"
             value="none"
             w100
-            @click="tutor = item"
+            @click="chooseTutor(item)"
           >
             {{ tutor && item.id === tutor.id ? 'Выбрано' : 'Выбрать' }}
           </VButton>
         </div>
       </div>
       <VInput
+        id="date-input"
         required
         type="date"
         placeholder="Дата от"
@@ -84,7 +85,10 @@
 import { mapActions } from 'vuex'
 import { VInput } from '../../components/'
 import VDivider from '../../components/ui/VDivider'
+import scrollTo from '../../mixins/scrollTo'
+
 export default {
+  mixins: [scrollTo],
   middleware: 'requireSub',
   components: { VDivider, VInput },
   data() {
@@ -105,6 +109,10 @@ export default {
     }
   },
   methods: {
+    chooseTutor(item) {
+      this.tutor = item
+      this.scrollTo('#date-input', 300)
+    },
     async proceedToPay() {
       const info = {
         tutor: this.tutor.name,

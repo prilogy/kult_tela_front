@@ -1,6 +1,10 @@
 <template>
   <nuxt-link :to="link">
-    <div v-if="chat" class="message-wrapper" :style="{ background: bgColor }">
+    <div
+      v-if="chat && chatf"
+      class="message-wrapper"
+      :style="{ background: bgColor }"
+    >
       <AdminMark
         @bgColor="color => (bgColor = color)"
         class="admin-mark--all"

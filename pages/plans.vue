@@ -109,8 +109,8 @@ export default {
         try {
           const r = await this.$api.Promo.verify({ code: this.code })
           if (typeof r.data.plan_id === 'number') {
-            this.handleBuy(r.data.plan_id)
             this.codeIsValid = true
+            this.handleBuy(r.data.plan_id, true)
           }
         } catch (e) {
           this.code = null
@@ -121,7 +121,11 @@ export default {
     back() {
       this.$router.back()
     },
-    handleBuy(id) {
+    handleBuy(id, promo = false) {
+      if (promo === false) {
+        this.code = null
+        this.codeIsValid = false
+      }
       this.planToBuy = this.plans.filter(plan => plan.id === id)[0]
     },
     async proceedToBuy() {

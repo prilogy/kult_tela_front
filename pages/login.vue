@@ -1,6 +1,7 @@
 <template>
   <div class="login-form__wrapper">
     <div class="login-form">
+      <VH2 mb="var(--space-half)" style="text-align: center">Скоро запуск!</VH2>
       <div class="login-form__top">
         <VH1>Вход</VH1>
         <div class="login-form__top__button">

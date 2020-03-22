@@ -45,6 +45,7 @@ const sockets = {
   async chatMessageLastSeen({ commit, state, dispatch }, info) {
     let chat
     if (state.currentChat && info.room_id === state.currentChat.id) {
+      console.log('current')
       chat = state.currentChat
     } else {
       const index = getChatIndexById(state.chats, { id: info.room_id })

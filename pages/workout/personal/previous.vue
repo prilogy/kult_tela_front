@@ -141,6 +141,18 @@
               </VP>
             </li>
           </ul>
+          <VTipSmall
+            v-if="$store.getters['user/GET_USER'].workout.physical_level > 1"
+            mt="var(--space-half)"
+            mb="var(--space-half)"
+          >
+            <VP color="var(--grey-light3)">
+              Если у вас нет возможности тренироваться в зале, напишите в
+              <nuxt-link to="/support">
+                <VP color="var(--yellow-base)">техническую поддержку.</VP>
+              </nuxt-link>
+            </VP>
+          </VTipSmall>
         </div>
       </div>
     </div>
