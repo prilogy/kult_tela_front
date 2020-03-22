@@ -125,14 +125,14 @@ export default {
             ? user.avatar_src
             : null
         },
-        name: chat.name || user.name,
+        name: chat.name || user.name || 'Чат',
         date: lastMessage ? this.getAlias(lastMessage.date.date) : null,
         lastMessageText: lastMessage
           ? (lastMessage.user_id === currentUserId
               ? 'Вы: '
               : chat.conversation
-              ? chat.users.filter(e => e.id === lastMessage.user_id)[0].name +
-                ': '
+              ? (chat.users.filter(e => e.id === lastMessage.user_id)[0]
+                  ?.name || '') + ': '
               : '') + lastMessage.text
           : 'Нет сообщений',
         lastMessage,

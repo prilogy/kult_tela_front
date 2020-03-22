@@ -2,11 +2,16 @@ import { socket, getChatIndexById } from '../utils'
 
 const storeActions = {
   SET_CHAT({ state, commit }, { chat, forceCurrent = false }) {
+    const current_id =
+      this.$router.history.current.params &&
+      parseInt(this.$router.history.current.params.user_id)
+
     if (chat) {
       if (
         (state.currentChat &&
           (state.currentChat && state.currentChat.id === chat.id)) ||
-        forceCurrent === true
+        forceCurrent === true ||
+        (chat.user_ids.includes(current_id) && !chat.conversation)
       )
         commit('SET_CURRENT_CHAT', chat)
       else commit('SET_CHAT', chat)

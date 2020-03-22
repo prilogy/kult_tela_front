@@ -27,8 +27,15 @@ const sockets = {
     }
   },
   async chatMessageInit({ commit, dispatch }, message) {
-    commit('SET_IS_NEW_MESSAGES', true)
-    await dispatch('FEED_CHAT_WITH_USER_ID', { id: message.user_id })
+    const current_id =
+      this.$router.history.current.params &&
+      parseInt(this.$router.history.current.params.user_id)
+
+    if (current_id !== message.user_id) commit('SET_IS_NEW_MESSAGES', true)
+    await dispatch('FEED_CHAT_WITH_USER_ID', {
+      id: message.user_id,
+      setAsCurrent: false
+    })
     dispatch('SET_LAST_SEEN_MESSAGE')
   },
   async chatMessagesHistoryLoad({ commit, dispatch, state }, messages) {

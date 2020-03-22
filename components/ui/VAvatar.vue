@@ -69,7 +69,7 @@ export default {
           const diffK = 1 - (width - size) / width
           newHeight = height * diffK
           newWidth = width * diffK
-          topOffset = -1 * ((newHeight - size) / 2.5)
+          //topOffset = -1 * ((newHeight - size) / 2.5)
           if (newWidth < canvas.clientWidth) {
             leftOffset = (canvas.clientWidth - newWidth) / 2
           }
