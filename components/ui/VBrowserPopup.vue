@@ -6,7 +6,7 @@
       версии браузеров Google Chrome, Mozilla Firefox или Opera.
     </VP>
     <VP>
-      Посмотреть как устроено приложение можно в разделе "О приложении".
+      Посмотреть, как устроено приложение можно в разделе "О приложении".
     </VP>
     <nuxt-link to="/about">
       <VButton w100 @click="$emit('close')">О приложении</VButton>
@@ -19,6 +19,7 @@
 
 <script>
 import VBigPopup from '../utils/VBigPopup'
+
 export default {
   components: {
     VBigPopup
@@ -30,10 +31,12 @@ export default {
 .browser-popup >>> .notification {
   display: block;
 }
+
 .browser-popup h3 {
   text-align: left;
   margin-bottom: var(--space-half);
 }
+
 .browser-popup >>> .notification {
   z-index: 103;
 }

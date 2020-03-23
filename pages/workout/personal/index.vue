@@ -19,7 +19,11 @@
             ограничения по здоровью.
           </span>
           Похудение – очень бережный процесс. Не спешите с нагрузками!
-          Тренировки дома или в зале.
+          {{
+            $store.getters['user/GET_USER'].workout.physical_level > 1
+              ? 'Тренировки - в зале.'
+              : ''
+          }}
         </VP>
       </VTipSmall>
       <div>
@@ -152,7 +156,9 @@
         <VP color="var(--grey-light3)">
           Если у вас нет возможности тренироваться в зале, напишите в
           <nuxt-link to="/support">
-            <VP color="var(--yellow-base)">техническую поддержку.</VP>
+            <span style="color: var(--yellow-base)">
+              техническую поддержку.
+            </span>
           </nuxt-link>
         </VP>
       </VTipSmall>
@@ -163,7 +169,7 @@
 </template>
 
 <script>
-import { VInput, VButton, VTipSmall, VDivider } from '../../../components/'
+import { VDivider, VTipSmall } from '../../../components/'
 import { mapGetters } from 'vuex'
 import {
   AboutLink,
@@ -241,6 +247,7 @@ export default {
 <style scoped>
 .workout {
 }
+
 .workout__top {
   display: flex;
   justify-content: space-between;
@@ -266,6 +273,7 @@ export default {
 .workout__title > div {
   display: flex;
 }
+
 .workout__title > div > div:last-child {
   margin-left: var(--space);
 }

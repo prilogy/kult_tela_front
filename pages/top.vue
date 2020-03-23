@@ -66,15 +66,7 @@
               user.first_name}`
           }}
         </VH3>
-        <VH3>
-          -{{
-            /*
-            `${Math.ceil(user.weight_start * 10) / 10 || 0}кг > ${Math.ceil(
-              (user.weight_start - user.weight_diff) * 10
-            ) / 10 || 0}кг`*/
-            Math.round(user.weight_diff)
-          }}кг
-        </VH3>
+        <VH3>-{{ Math.round(user.weight_diff) }}кг</VH3>
       </div>
     </div>
     <div v-else>
@@ -93,6 +85,7 @@
 import VTipSmall from '../components/ui/VTipSmall'
 import VAvatar from '../components/ui/VAvatar'
 import TopItem from '../components/pages/top/TopItem'
+
 export default {
   components: { TopItem, VAvatar, VTipSmall },
   middleware: 'requireSub',

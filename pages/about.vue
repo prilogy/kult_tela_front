@@ -26,6 +26,7 @@
         <VP>
           Позвонить -
           <a href="tel:+79648708939">+78043336816</a>
+          (звонок бесплатный)
         </VP>
       </li>
       <li>
@@ -65,6 +66,7 @@
 
 <script>
 import VDivider from '../components/ui/VDivider'
+
 export default {
   components: { VDivider }
 }
@@ -85,9 +87,11 @@ p {
 a {
   color: var(--yellow-base);
 }
+
 ul {
   margin-top: var(--space-half);
 }
+
 ul > li {
   margin-left: var(--space-half);
   margin-bottom: var(--space-third);

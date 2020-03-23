@@ -1,6 +1,6 @@
 <template>
   <div :style="'--msg-max-width:' + maxWidth + 'px'" class="messages">
-    <VPageHeading button>Сообщения</VPageHeading>
+    <VPageHeading button to="/">Сообщения</VPageHeading>
     <div v-if="CHATS.length > 0">
       <ul v-for="chat in CHATS" :key="chat.id" class="messages__contacts">
         <li class="messages__contacts__item">
@@ -16,7 +16,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { VDivider, VAvatarSmall } from '../../components/'
+import { VAvatarSmall, VDivider } from '../../components/'
 import { ChatElement } from '../../components/pages/messages/index/'
 
 export default {

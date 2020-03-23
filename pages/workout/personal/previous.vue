@@ -23,7 +23,11 @@
             ограничения по здоровью
           </span>
           . Похудение – очень бережный процесс. Не спешите с нагрузками!
-          Тренировки дома или в зале.
+          {{
+            $store.getters['user/GET_USER'].workout.physical_level > 1
+              ? 'Тренировки - в зале.'
+              : ''
+          }}
         </VP>
       </VTipSmall>
       <div>
@@ -162,8 +166,7 @@
 </template>
 
 <script>
-import { VTipSmall, VDivider } from '../../../components/'
-import { mapGetters } from 'vuex'
+import { VDivider, VTipSmall } from '../../../components/'
 import {
   AboutLink,
   WorkoutDayOff,
@@ -230,6 +233,7 @@ export default {
 <style scoped>
 .workout {
 }
+
 .workout__top {
   display: flex;
   justify-content: space-between;
@@ -241,9 +245,11 @@ export default {
   align-items: center;
   margin-bottom: var(--space);
 }
+
 .workout__title > div {
   display: flex;
 }
+
 .workout__title > div > div:last-child {
   margin-left: var(--space);
 }
