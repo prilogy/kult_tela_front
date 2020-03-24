@@ -19,6 +19,7 @@ import VPageHeading from './ui/VPageHeading'
 import VTutorPopup from './ui/VTutorPopup'
 import VLockedPopup from './ui/VLockedPopup'
 import VBrowserPopup from './ui/VBrowserPopup'
+import VGuidePopup from './ui/VGuidePopup'
 
 import VError from './utils/VError'
 import VSuccess from './utils/VSuccess'
@@ -54,6 +55,7 @@ export {
   VTutorPopup,
   VLockedPopup,
   VBrowserPopup,
+  VGuidePopup,
   /**
    * UTILITIES
    */

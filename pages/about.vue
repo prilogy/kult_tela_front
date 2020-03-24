@@ -1,7 +1,22 @@
 <template>
   <div>
     <VPageHeading button to="/">О приложении</VPageHeading>
-    <VP>
+
+    <VH3 mb="var(--space-half)">Экскурсия по онлайн-армии</VH3>
+    <iframe
+      id="ytplayer"
+      @load="isIframe = true"
+      type="text/html"
+      allowfullscreen="allowfullscreen"
+      width="100%"
+      height="340"
+      :src="
+        'https://www.youtube.com/embed/mEo6Tb0893g?modestbranding=1&showinfo=0&rel=0&loop=1'
+      "
+      frameborder="0"
+    ></iframe>
+
+    <VP mt="var(--space)">
       Информационное приложение фитнес-проекта "Культ тела". Носит
       рекомендательный характер.
     </VP>
