@@ -64,58 +64,58 @@
 </template>
 
 <script>
-import { VInput } from '../../components'
-import VTipSmall from '../../components/ui/VTipSmall'
+  import {VInput} from '../../components'
+  import VTipSmall from '../../components/ui/VTipSmall'
 
-export default {
-  components: { VTipSmall, VInput },
-  layout: 'noNav',
-  data() {
-    return {
-      password: '',
-      re_password: '',
-      submited: false,
-      hash: null
-    }
-  },
-  computed: {
-    validate() {
-      return (
-        this.password &&
-        this.re_password &&
-        this.password === this.re_password &&
-        this.password.length > 5 &&
-        this.re_password.length > 5
-      )
-    }
-  },
-  methods: {
-    async resetPassword() {
-      if (this.hash && this.validate) {
-        try {
-          await this.$api.Password.reset({
-            hash: this.hash,
-            new_password: this.password
-          })
-          this.submited = true
-        } catch (e) {}
+  export default {
+    components: {VTipSmall, VInput},
+    layout: 'noNav',
+    data() {
+      return {
+        password: '',
+        re_password: '',
+        submited: false,
+        hash: null
+      }
+    },
+    computed: {
+      validate() {
+        return (
+          this.password &&
+          this.re_password &&
+          this.password === this.re_password &&
+          this.password.length > 5 &&
+          this.re_password.length > 5
+        )
+      }
+    },
+    methods: {
+      async resetPassword() {
+        if (this.hash && this.validate) {
+          try {
+            await this.$api.Password.reset({
+              hash: this.hash,
+              new_password: this.password
+            })
+            this.submited = true
+          } catch (e) {
+          }
+        }
+      }
+    },
+    async asyncData(ctx) {
+      try {
+        const r = await ctx.app.$api.Password.verify({hash: ctx.params.hash})
+        return {hash: ctx.params.hash}
+      } catch (e) {
+        ctx.redirect('/login')
       }
     }
-  },
-  async asyncData(ctx) {
-    console.log(ctx)
-    try {
-      const r = await ctx.app.$api.Password.verify({ hash: ctx.params.hash })
-      return { hash: ctx.params.hash }
-    } catch (e) {
-      ctx.redirect('/login')
-    }
   }
-}
 </script>
 
 <style scoped>
-h3 {
-  text-align: center;
-}
+  h3 {
+    text-align: center;
+  }
 </style>

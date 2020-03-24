@@ -5,7 +5,7 @@
       <template v-slot:info>
         Старайтесь обновлять вес хотя бы раз в два дня, чтобы контролировать
         процесс похудения было проще.
-        <br />
+        <br/>
         Теряете килограммы - получаете звание
       </template>
     </VPageHeading>
@@ -46,56 +46,41 @@
 </template>
 
 <script>
-import { VInput } from '../components/'
-import { mapActions } from 'vuex'
-export default {
-  middleware: 'requireSub',
-  components: { VInput },
-  data() {
-    return {
-      new_weight: null,
-      weightHistory: null
-    }
-  },
+  import {VInput} from '../components/'
+  import {mapActions} from 'vuex'
 
-  mounted() {
-    /*const history = this.$store.getters['user/GET_USER'].weight_history || null
-    if (history) {
-      const maxX = this.$refs.chartWrapper.clientWidth
-      console.log(maxX, history.length)
-      const step = maxX / (history.length - 1)
-      console.log('step', step)
-      this.weightHistory =
-        {
-          line: history.reduce(
-            (acc = '', cur, idx) => acc + ' ' + idx * step + ',' + cur.weight,
-            ''
-          ),
-          data: history.map((e, idx) => ({ x: idx * step, y: e.weight }))
-        } || null
-    } else return null*/
-  },
-  methods: {
-    async updateWeight() {
-      try {
-        await this.UPDATE_WEIGHT(this.new_weight)
-        this.SET_SUCCESS('Вес успешно обновлен')
-        this.$router.push('/')
-      } catch (error) {}
+  export default {
+    middleware: 'requireSub',
+    components: {VInput},
+    data() {
+      return {
+        new_weight: null,
+        weightHistory: null
+      }
     },
-    ...mapActions({
-      UPDATE_WEIGHT: 'user/UPDATE_WEIGHT',
-      SET_SUCCESS: 'popup/SET_SUCCESS'
-    })
+    methods: {
+      async updateWeight() {
+        try {
+          await this.UPDATE_WEIGHT(this.new_weight)
+          this.SET_SUCCESS('Вес успешно обновлен')
+          this.$router.push('/')
+        } catch (error) {
+        }
+      },
+      ...mapActions({
+        UPDATE_WEIGHT: 'user/UPDATE_WEIGHT',
+        SET_SUCCESS: 'popup/SET_SUCCESS'
+      })
+    }
   }
-}
 </script>
 
 <style scoped>
-.info {
-  margin-bottom: var(--space);
-}
-h1 {
-  margin-bottom: var(--space-half);
-}
+  .info {
+    margin-bottom: var(--space);
+  }
+
+  h1 {
+    margin-bottom: var(--space-half);
+  }
 </style>

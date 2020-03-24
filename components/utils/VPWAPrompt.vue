@@ -9,40 +9,39 @@
   </VButton>
 </template>
 <script>
-import VButton from '../ui/VButton'
-let installEvent
-export default {
-  components: { VButton },
-  data() {
-    return {
-      showInstallBanner: false
-    }
-  },
-  mounted() {
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault()
-      installEvent = e
-      this.showInstallBanner = true
-    })
+  import VButton from '../ui/VButton'
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      this.showInstallBanner = false
-    }
-  },
-  methods: {
-    install() {
-      if (installEvent) {
-        installEvent.prompt()
-        installEvent.userChoice.then(choiceResult => {
-          if (choiceResult.outcome === 'accepted') {
-            this.showInstallBanner = false
-            console.log('User accepted the install prompt')
-          } else {
-            console.log('User dismissed the install prompt')
-          }
-        })
-      } else this.showInstallBanner = false
+  let installEvent
+  export default {
+    components: {VButton},
+    data() {
+      return {
+        showInstallBanner: false
+      }
+    },
+    mounted() {
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault()
+        installEvent = e
+        this.showInstallBanner = true
+      })
+
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        this.showInstallBanner = false
+      }
+    },
+    methods: {
+      install() {
+        if (installEvent) {
+          installEvent.prompt()
+          installEvent.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+              this.showInstallBanner = false
+            } else {
+            }
+          })
+        } else this.showInstallBanner = false
+      }
     }
   }
-}
 </script>

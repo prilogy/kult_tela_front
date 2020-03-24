@@ -16,23 +16,22 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    async goToAdmin() {
-      const { data } = await this.$api.Support.getAdminId()
-      if (data && data.id) {
-        const link = '/messages/' + data.id
-        console.log(link)
-        this.$router.push(link)
+  export default {
+    methods: {
+      async goToAdmin() {
+        const {data} = await this.$api.Support.getAdminId()
+        if (data && data.id) {
+          const link = '/messages/' + data.id
+          this.$router.push(link)
+        }
       }
     }
   }
-}
 </script>
 
 <style scoped>
-p {
-  color: var(--grey-light3) !important;
-  margin-bottom: var(--space-half);
-}
+  p {
+    color: var(--grey-light3) !important;
+    margin-bottom: var(--space-half);
+  }
 </style>

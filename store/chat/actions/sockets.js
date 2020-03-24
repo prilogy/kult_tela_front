@@ -38,6 +38,7 @@ const sockets = {
     })
     dispatch('SET_LAST_SEEN_MESSAGE')
   },
+
   async chatMessagesHistoryLoad({ commit, dispatch, state }, messages) {
     if (messages && messages.length > 0) {
       let currentChat = state.currentChat
@@ -52,7 +53,6 @@ const sockets = {
   async chatMessageLastSeen({ commit, state, dispatch }, info) {
     let chat
     if (state.currentChat && info.room_id === state.currentChat.id) {
-      console.log('current')
       chat = state.currentChat
     } else {
       const index = getChatIndexById(state.chats, { id: info.room_id })

@@ -15,6 +15,7 @@
       "
       frameborder="0"
     ></iframe>
+    
 
     <VP mt="var(--space)">
       Информационное приложение фитнес-проекта "Культ тела". Носит
@@ -80,39 +81,39 @@
 </template>
 
 <script>
-import VDivider from '../components/ui/VDivider'
+  import VDivider from '../components/ui/VDivider'
 
-export default {
-  components: { VDivider }
-}
+  export default {
+    components: {VDivider}
+  }
 </script>
 
 <style scoped>
-p {
-  color: var(--grey-light3) !important;
-  text-align: justify !important;
-  font-size: 18px;
-  margin-bottom: var(--space-third);
-}
+  p {
+    color: var(--grey-light3) !important;
+    text-align: justify !important;
+    font-size: 18px;
+    margin-bottom: var(--space-third);
+  }
 
-.p-header {
-  color: var(--white-base) !important;
-}
+  .p-header {
+    color: var(--white-base) !important;
+  }
 
-a {
-  color: var(--yellow-base);
-}
+  a {
+    color: var(--yellow-base);
+  }
 
-ul {
-  margin-top: var(--space-half);
-}
+  ul {
+    margin-top: var(--space-half);
+  }
 
-ul > li {
-  margin-left: var(--space-half);
-  margin-bottom: var(--space-third);
-}
+  ul > li {
+    margin-left: var(--space-half);
+    margin-bottom: var(--space-third);
+  }
 
-ul > li > p {
-  text-align: left !important;
-}
+  ul > li > p {
+    text-align: left !important;
+  }
 </style>

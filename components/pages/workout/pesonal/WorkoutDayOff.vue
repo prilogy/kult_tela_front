@@ -19,97 +19,120 @@
       <VP>
         Сегодня день отдыха!
       </VP>
+
       <VP class="body__caption">
         Похудение – очень бережный процесс.
-        <br />
+        <br/>
         Поэтому одним из главных факторов успешного похудения является отдых
         вашего тела.
       </VP>
 
+
+      <VP class="body__caption">Возвращайтесь в следующий день тренировки!</VP>
+
       <VP class="body__caption">
-        Понедельник, среда и пятница - тренировка, остальные дни - вольно!
+        Понедельник, среда, пятница - тренировки, воскресенье - вольно!
       </VP>
 
-      <VP class="body__caption">Возвращатесь в следующий день тренировки!</VP>
       <div class="actions-wrapper">
         <nuxt-link to="/workout">
           <VButton w100>Понятно!</VButton>
         </nuxt-link>
-        <nuxt-link
-          v-if="WORKOUT.day_number > 1"
-          class="previous-btn"
-          to="/workout/personal/previous"
-        >
-          <VP>
-            Посмотреть предыдущий день
+        <div v-if="WORKOUT.day_number > 1">
+          <nuxt-link
+            to="/workout/personal/previous"
+          >
+            <VP class="previous-btn">
+              Посмотреть предыдущий день
+            </VP>
+          </nuxt-link>
+        </div>
+
+        <VTipSmall mb="var(--space-half)" style="border-color: var(--green-base)">
+          <VP class="body__caption body__caption-tip"> Можно тренироваться во вторник,
+            четверг,
+            субботу, нажав на
+            "посмотреть предыдущий
+            день".
           </VP>
-        </nuxt-link>
+        </VTipSmall>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  computed: {
-    WORKOUT() {
-      return this.$store.getters['workout/GET_WORKOUT']
+  import VTipSmall from "../../../ui/VTipSmall"
+
+  export default {
+    components: {VTipSmall},
+    computed: {
+      WORKOUT() {
+        return this.$store.getters['workout/GET_WORKOUT']
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-.actions-wrapper {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-}
-.previous-btn {
-  margin-top: var(--space-third);
-  padding: var(--space-third) 0;
-  border-radius: var(--radius-half);
-  background: var(--white-trans4);
-  width: 100%;
-}
-.previous-btn p {
-  color: var(--grey-light3);
-  margin: 0 !important;
-}
+  .actions-wrapper {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
 
-.body > div {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .previous-btn {
+    margin-top: var(--space-third);
+    padding: var(--space-third) 0;
+    border-radius: var(--radius-half);
+    background: var(--white-trans4);
+    width: 100%;
+    color: var(--grey-light3);
+  }
 
-.body >>> h2 {
-  color: var(--green-base) !important;
-}
 
-.body p {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: var(--space-half);
-}
+  .body > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.body__caption {
-  font-size: 18px !important;
-  color: var(--grey-light3);
-}
+  .body >>> h2 {
+    color: var(--green-base) !important;
+  }
 
-.body button {
-  background: var(--green-base) !important;
-}
+  .body p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: var(--space-half);
+  }
 
-.body__svg {
-  max-width: 200px;
-  max-height: 200px;
-  margin-bottom: var(--space);
-}
-.body__svg path {
-  fill: var(--green-base);
-}
+  .body__caption {
+    font-size: 18px !important;
+    color: var(--grey-light3);
+  }
+
+  .body button {
+    background: var(--green-base) !important;
+  }
+
+  .body__svg {
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: var(--space);
+  }
+
+  .body__svg path {
+    fill: var(--green-base);
+  }
+
+
+  .body__caption-tip {
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
 </style>
