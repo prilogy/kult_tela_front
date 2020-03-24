@@ -10,7 +10,7 @@
         marginBottom: titleOffset === 'var(--space-half)' ? null : titleOffset
       }"
     >
-      <VButtonBack v-if="button" :to="to"></VButtonBack>
+      <VButtonBack :color="btnColor" v-if="button" :to="to"></VButtonBack>
       <div style="width: 100%;" v-if="divInside">
         <slot></slot>
       </div>
@@ -33,68 +33,71 @@
 </template>
 
 <script>
-import VButtonBack from './VButtonBack'
-export default {
-  components: { VButtonBack },
-  props: {
-    button: {
-      type: Boolean,
-      default: false
-    },
-    level: {
-      type: String,
-      default: '2'
-    },
-    titleOffset: {
-      type: String,
-      default: 'var(--space-half)'
-    },
-    divInside: {
-      type: Boolean,
-      default: false
-    },
-    headerCenter: {
-      type: Boolean,
-      default: false
-    },
-    to: String
+  import VButtonBack from './VButtonBack'
+
+  export default {
+    components: { VButtonBack },
+    props: {
+      button: {
+        type: Boolean,
+        default: false
+      },
+      level: {
+        type: String,
+        default: '2'
+      },
+      titleOffset: {
+        type: String,
+        default: 'var(--space-half)'
+      },
+      divInside: {
+        type: Boolean,
+        default: false
+      },
+      headerCenter: {
+        type: Boolean,
+        default: false
+      },
+      btnColor: String,
+      to: String
+    }
   }
-}
 </script>
 
 <style scoped>
-.heading {
-  margin-bottom: var(--space-half);
-}
-.heading__title {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--space-third);
-  width: 100%;
-}
+  .heading {
+    margin-bottom: var(--space-half);
+  }
 
-.heading__info p {
-  color: var(--white-trans1) !important;
-  font-weight: 300;
-  font-size: 19px;
-}
+  .heading__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-third);
+    width: 100%;
+  }
 
-.heading__title--center h1,
-.heading__title--center h2,
-.heading__title--center h3 {
-  text-align: center;
-  width: 100%;
-}
+  .heading__info p {
+    color: var(--white-trans1) !important;
+    font-weight: 300;
+    font-size: 19px;
+  }
 
-h1,
-h2,
-h3 {
-  margin-left: var(--space-half);
-}
+  .heading__title--center h1,
+  .heading__title--center h2,
+  .heading__title--center h3 {
+    text-align: center;
+    width: 100%;
+  }
 
-.heading__title--no-button h1,
-.heading__title--no-button h2,
-.heading__title--no-button h3 {
-  margin-left: 0;
-}
+  h1,
+  h2,
+  h3 {
+    margin-left: var(--space-half);
+  }
+
+  .heading__title--no-button h1,
+  .heading__title--no-button h2,
+  .heading__title--no-button h3 {
+    margin-left: 0;
+  }
 </style>

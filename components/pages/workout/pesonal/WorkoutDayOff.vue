@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <VPageHeading headerCenter>День отдыха</VPageHeading>
+    <VPageHeading btn-color="var(--green-base)" button>День отдыха</VPageHeading>
     <div>
       <svg
         class="body__svg"
@@ -66,7 +66,7 @@
   import VTipSmall from "../../../ui/VTipSmall"
 
   export default {
-    components: {VTipSmall},
+    components: { VTipSmall },
     computed: {
       WORKOUT() {
         return this.$store.getters['workout/GET_WORKOUT']
@@ -77,9 +77,28 @@
 
 <style scoped>
   .actions-wrapper {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+
+  .body > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+  }
+
+  .body >>> h2 {
+    color: var(--green-base) !important;
+  }
+
+  .body p {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: var(--space-half);
   }
 
   .previous-btn {
@@ -89,26 +108,9 @@
     background: var(--white-trans4);
     width: 100%;
     color: var(--grey-light3);
+    text-align: center !important;
   }
 
-
-  .body > div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .body >>> h2 {
-    color: var(--green-base) !important;
-  }
-
-  .body p {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 300;
-    margin-bottom: var(--space-half);
-  }
 
   .body__caption {
     font-size: 18px !important;
@@ -120,6 +122,7 @@
   }
 
   .body__svg {
+    align-self: center;
     max-width: 200px;
     max-height: 200px;
     margin-bottom: var(--space);

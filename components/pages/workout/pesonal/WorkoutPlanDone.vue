@@ -37,7 +37,7 @@
         </g>
         <defs>
           <clipPath id="clip0">
-            <path fill="#fff" d="M80 26h511v511H80z" />
+            <path fill="#fff" d="M80 26h511v511H80z"/>
           </clipPath>
           <filter
             id="filter0_d"
@@ -48,17 +48,17 @@
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
             <feColorMatrix
               in="SourceAlpha"
               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             />
-            <feOffset />
-            <feGaussianBlur stdDeviation="40" />
+            <feOffset/>
+            <feGaussianBlur stdDeviation="40"/>
             <feColorMatrix
               values="0 0 0 0 1 0 0 0 0 0.623529 0 0 0 0 0 0 0 0 0.32 0"
             />
-            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow" />
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
             <feBlend
               in="SourceGraphic"
               in2="effect1_dropShadow"
@@ -74,48 +74,51 @@
       <VP class="body__caption">
         Продолжить тренировки вы сможете после начала нового месяца
       </VP>
-      <nuxt-link to="/"><VButton w100>Понятно!</VButton></nuxt-link>
+      <nuxt-link to="/">
+        <VButton w100>Так точно!</VButton>
+      </nuxt-link>
     </div>
   </div>
 </template>
 
 <style scoped>
-.body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.body >>> h2 {
-  color: #fdbf00 !important;
-}
+  .body >>> h2 {
+    color: #fdbf00 !important;
+  }
 
-.body > * {
-  text-align: center;
-}
+  .body > * {
+    text-align: center;
+  }
 
-.body p {
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: var(--space-half);
-}
+  .body p {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: var(--space-half);
+  }
 
-.body__caption {
-  font-size: 18px !important;
-  color: var(--grey-light3);
-}
+  .body__caption {
+    font-size: 18px !important;
+    color: var(--grey-light3);
+  }
 
-.body button {
-  background: #fdbf00 !important;
-}
+  .body button {
+    background: #fdbf00 !important;
+  }
 
-.body__svg {
-  max-width: 270px;
-  max-height: 270px;
-}
-.body__svg g {
-  fill: var(--yellow-base);
-  box-shadow: 0 0 10px red;
-}
+  .body__svg {
+    max-width: 270px;
+    max-height: 270px;
+  }
+
+  .body__svg g {
+    fill: var(--yellow-base);
+    box-shadow: 0 0 10px red;
+  }
 </style>
