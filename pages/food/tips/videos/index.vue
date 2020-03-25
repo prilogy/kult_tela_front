@@ -41,60 +41,62 @@
 </template>
 
 <script>
-import { VTipSmall } from '../../../../components/'
-import VDivider from '../../../../components/ui/VDivider'
+  import { VTipSmall } from '../../../../components/'
+  import VDivider from '../../../../components/ui/VDivider'
 
-export default {
-  middleware: 'requireSub',
-  components: {
-    VDivider,
-    VTipSmall
-  },
-  computed: {
-    ACCESSED_VIDEOS() {
-      return this.$store.getters['food/GET_TIPS_VIDEOS'].filter(e => e.url)
+  export default {
+    middleware: 'requireSub',
+    components: {
+      VDivider,
+      VTipSmall
     },
-    NOT_ACCESSED_VIDEOS() {
-      return this.$store.getters['food/GET_TIPS_VIDEOS'].filter(e => !e.url)
+    computed: {
+      ACCESSED_VIDEOS() {
+        return this.$store.getters['food/GET_TIPS_VIDEOS'].filter(e => e.url && e.id !== 30)
+      },
+      NOT_ACCESSED_VIDEOS() {
+        return this.$store.getters['food/GET_TIPS_VIDEOS'].filter(e => !e.url && e.id !== 30)
+      }
+    },
+    async fetch({ store }) {
+      if (!store.getters['food/GET_TIPS_VIDEOS'])
+        await store.dispatch('food/FEED_TIPS_VIDEOS')
     }
-  },
-  async fetch({ store }) {
-    if (!store.getters['food/GET_TIPS_VIDEOS'])
-      await store.dispatch('food/FEED_TIPS_VIDEOS')
   }
-}
 </script>
 
 <style scoped>
-.item {
-  padding: var(--space-half);
-  cursor: pointer;
-  border-radius: var(--radius-half);
-}
-.item:hover,
-.item:active,
-.item:focus {
-  background: var(--white-trans4);
-}
+  .item {
+    padding: var(--space-half);
+    cursor: pointer;
+    border-radius: var(--radius-half);
+  }
 
-.item h3 {
-  color: var(--yellow-base) !important;
-  font-size: 20px;
-}
+  .item:hover,
+  .item:active,
+  .item:focus {
+    background: var(--white-trans4);
+  }
 
-.no-access p {
-  padding: var(--space-third) 0;
-  color: var(--grey-light3);
-  text-align: center;
-}
+  .item h3 {
+    color: var(--yellow-base) !important;
+    font-size: 20px;
+  }
 
-.no-access .item h3 {
-  color: var(--grey-light2) !important;
-}
-.no-access .item:hover,
-.no-access .item:active,
-.no-access .item:focus {
-  background: none;
-  cursor: default;
-}
+  .no-access p {
+    padding: var(--space-third) 0;
+    color: var(--grey-light3);
+    text-align: center;
+  }
+
+  .no-access .item h3 {
+    color: var(--grey-light2) !important;
+  }
+
+  .no-access .item:hover,
+  .no-access .item:active,
+  .no-access .item:focus {
+    background: none;
+    cursor: default;
+  }
 </style>
