@@ -3,7 +3,8 @@
     <VPageHeading button to="/">
       Лучшие офицеры
       <template v-slot:info>
-        <VTipSmall>Скоро введение призов за результат похудения</VTipSmall>
+        Расчет на основе % похудения
+        <VTipSmall mt="var(--space-half)">Скоро введение призов за результат похудения</VTipSmall>
       </template>
     </VPageHeading>
     <div class="top__switch">

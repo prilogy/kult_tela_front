@@ -20,9 +20,9 @@
           </span>
           Похудение – очень бережный процесс. Не спешите с нагрузками!
           {{
-            $store.getters['user/GET_USER'].workout.physical_level > 1
-              ? 'Тренировки - в зале.'
-              : ''
+          $store.getters['user/GET_USER'].workout.physical_level > 1
+          ? 'Тренировки - в зале.'
+          : ''
           }}
         </VP>
       </VTipSmall>
@@ -145,7 +145,7 @@
       </div>
       <VTipSmall mt="var(--space-half)" mb="var(--space-half)">
         <VP color="var(--grey-light3)">
-          Понедельник, среда и пятница - тренировка, остальные дни - вольно!
+          Понедельник, среда, пятница - тренировки, воскресенье - вольно!
         </VP>
       </VTipSmall>
       <VTipSmall
@@ -169,172 +169,172 @@
 </template>
 
 <script>
-import { VDivider, VTipSmall } from '../../../components/'
-import { mapGetters } from 'vuex'
-import {
-  AboutLink,
-  WorkoutDayOff,
-  WorkoutPlanDone
-} from '../../../components/pages/workout/pesonal/'
-
-export default {
-  middleware: ['requireSub', 'minPlan_1'],
-  components: {
-    VDivider,
-    VTipSmall,
+  import { VDivider, VTipSmall } from '../../../components/'
+  import { mapGetters } from 'vuex'
+  import {
     AboutLink,
     WorkoutDayOff,
     WorkoutPlanDone
-  },
-  data() {
-    return {
-      type: false,
-      openedItem: null
-    }
-  },
-  computed: {
-    EXERCISES() {
-      const type = this.WORKOUT_TYPE
-      if (this.WORKOUT && !this.WORKOUT.plan_done && !this.WORKOUT.day_off) {
-        return this.WORKOUT[type] ? this.WORKOUT[type].exercises : null
-      } else return null
+  } from '../../../components/pages/workout/pesonal/'
+
+  export default {
+    middleware: ['requireSub', 'minPlan_1'],
+    components: {
+      VDivider,
+      VTipSmall,
+      AboutLink,
+      WorkoutDayOff,
+      WorkoutPlanDone
     },
-    WORKOUT_TYPE() {
-      return this.$store.state.workout.workout_type
-    },
-    ...mapGetters({
-      WORKOUT: 'workout/GET_WORKOUT'
-    })
-  },
-  created() {
-    if (this.EXERCISES === null) this.setWType('gym')
-  },
-  methods: {
-    setOpenedItem(id) {
-      if (id === this.openedItem) this.openedItem = null
-      else this.openedItem = id
-    },
-    setWType(type) {
-      this.openedItem = null
-      if (type !== this.WORKOUT_TYPE) {
-        this.$store.dispatch('workout/SET_WORKOUT_TYPE', type)
+    data() {
+      return {
+        type: false,
+        openedItem: null
       }
     },
-    goToExercise(id) {
-      this.$router.push('/workout/exercise/' + id)
-    }
-  },
-  async fetch({ store, redirect }) {
-    const user = store.getters['user/GET_USER']
-    if (
-      typeof user.workout.overweight_level !== 'number' ||
-      typeof user.workout.physical_level !== 'number'
-    )
-      redirect('/workout/fill-info')
-    else {
-      if (!store.getters['workout/GET_WORKOUT']) {
-        try {
-          await store.dispatch('workout/FEED_WORKOUT')
-        } catch (e) {
-          redirect('/workout')
+    computed: {
+      EXERCISES() {
+        const type = this.WORKOUT_TYPE
+        if (this.WORKOUT && !this.WORKOUT.plan_done && !this.WORKOUT.day_off) {
+          return this.WORKOUT[type] ? this.WORKOUT[type].exercises : null
+        } else return null
+      },
+      WORKOUT_TYPE() {
+        return this.$store.state.workout.workout_type
+      },
+      ...mapGetters({
+        WORKOUT: 'workout/GET_WORKOUT'
+      })
+    },
+    created() {
+      if (this.EXERCISES === null) this.setWType('gym')
+    },
+    methods: {
+      setOpenedItem(id) {
+        if (id === this.openedItem) this.openedItem = null
+        else this.openedItem = id
+      },
+      setWType(type) {
+        this.openedItem = null
+        if (type !== this.WORKOUT_TYPE) {
+          this.$store.dispatch('workout/SET_WORKOUT_TYPE', type)
+        }
+      },
+      goToExercise(id) {
+        this.$router.push('/workout/exercise/' + id)
+      }
+    },
+    async fetch({ store, redirect }) {
+      const user = store.getters['user/GET_USER']
+      if (
+        typeof user.workout.overweight_level !== 'number' ||
+        typeof user.workout.physical_level !== 'number'
+      )
+        redirect('/workout/fill-info')
+      else {
+        if (!store.getters['workout/GET_WORKOUT']) {
+          try {
+            await store.dispatch('workout/FEED_WORKOUT')
+          } catch (e) {
+            redirect('/workout')
+          }
         }
       }
     }
   }
-}
 </script>
 
 <style scoped>
-.workout {
-}
+  .workout {
+  }
 
-.workout__top {
-  display: flex;
-  justify-content: space-between;
-}
+  .workout__top {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.workout__title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space);
-}
+  .workout__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space);
+  }
 
-.workout__title__type {
-  display: flex;
-  align-items: center;
-}
+  .workout__title__type {
+    display: flex;
+    align-items: center;
+  }
 
-.workout__title__type p {
-  color: var(--yellow-base);
-  margin-right: var(--space-third);
-}
+  .workout__title__type p {
+    color: var(--yellow-base);
+    margin-right: var(--space-third);
+  }
 
-.workout__title > div {
-  display: flex;
-}
+  .workout__title > div {
+    display: flex;
+  }
 
-.workout__title > div > div:last-child {
-  margin-left: var(--space);
-}
+  .workout__title > div > div:last-child {
+    margin-left: var(--space);
+  }
 
-.workout__title > div > div {
-  cursor: pointer;
-}
+  .workout__title > div > div {
+    cursor: pointer;
+  }
 
-.workout__exercises__item {
-  margin-top: var(--space-half);
-}
+  .workout__exercises__item {
+    margin-top: var(--space-half);
+  }
 
-.workout__exercises__item p {
-  font-weight: 300;
-  margin-bottom: var(--space-half);
-}
+  .workout__exercises__item p {
+    font-weight: 300;
+    margin-bottom: var(--space-half);
+  }
 
-.workout__exercises__item--opened {
-  padding: var(--space-half) var(--space-half) 0 var(--space-half);
-  background: var(--white-trans4);
-  border-radius: var(--radius-half);
-  margin-left: calc(-1 * var(--space-half));
-  margin-right: calc(-1 * var(--space-half));
-}
+  .workout__exercises__item--opened {
+    padding: var(--space-half) var(--space-half) 0 var(--space-half);
+    background: var(--white-trans4);
+    border-radius: var(--radius-half);
+    margin-left: calc(-1 * var(--space-half));
+    margin-right: calc(-1 * var(--space-half));
+  }
 
-.workout__exercises__item__desc {
-  padding: var(--space-third) 0;
-  color: var(--grey-light3);
-}
+  .workout__exercises__item__desc {
+    padding: var(--space-third) 0;
+    color: var(--grey-light3);
+  }
 
-.workout__exercises__item__svg {
-  width: 20px !important;
-  margin-left: var(--space-half);
-}
+  .workout__exercises__item__svg {
+    width: 20px !important;
+    margin-left: var(--space-half);
+  }
 
-.workout__exercises__item__svg--opened svg {
-  transform: rotate(180deg);
-}
+  .workout__exercises__item__svg--opened svg {
+    transform: rotate(180deg);
+  }
 
-.workout__exercises__item__top {
-  display: flex;
-  justify-content: space-between;
-}
+  .workout__exercises__item__top {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.exercise__watch {
-  display: flex;
-  align-items: center;
-  padding: var(--space-third) 0;
-  cursor: pointer;
-}
+  .exercise__watch {
+    display: flex;
+    align-items: center;
+    padding: var(--space-third) 0;
+    cursor: pointer;
+  }
 
-.exercise__watch--no-pb {
-  padding-bottom: 0;
-}
+  .exercise__watch--no-pb {
+    padding-bottom: 0;
+  }
 
-.exercise__watch p {
-  margin: 0 0 0 var(--space-half);
-  color: var(--yellow-base);
-}
+  .exercise__watch p {
+    margin: 0 0 0 var(--space-half);
+    color: var(--yellow-base);
+  }
 
-.svg--disabled {
-  opacity: 0.25;
-}
+  .svg--disabled {
+    opacity: 0.25;
+  }
 </style>

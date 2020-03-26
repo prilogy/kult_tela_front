@@ -46,16 +46,15 @@
               Посмотреть предыдущий день
             </VP>
           </nuxt-link>
+          <VTipSmall mt="var(--space-half)" style="border-color: var(--green-base)">
+            <VP class="body__caption body__caption-tip"> Можно тренироваться во вторник,
+              четверг,
+              субботу, нажав на
+              "посмотреть предыдущий
+              день".
+            </VP>
+          </VTipSmall>
         </div>
-
-        <VTipSmall mb="var(--space-half)" style="border-color: var(--green-base)">
-          <VP class="body__caption body__caption-tip"> Можно тренироваться во вторник,
-            четверг,
-            субботу, нажав на
-            "посмотреть предыдущий
-            день".
-          </VP>
-        </VTipSmall>
       </div>
 
     </div>

@@ -23,11 +23,12 @@
       >
         <VH2 :color="colors[100]">
           {{ plan.newCost }}&#8381;{{
-            typeof plan.newCost === 'number' ? '' : '/месяц'
+          typeof plan.newCost === 'number' ? '' : '/месяц'
           }}
         </VH2>
 
         <VH3
+          v-if="plan.cost"
           :color="colors[70]"
           style="text-decoration: line-through;margin-left: var(--space-third)"
         >
@@ -64,97 +65,98 @@
 </template>
 
 <script>
-import VH2 from '../typography/VH2'
-import VP from '../typography/VP'
-import VButton from './VButton'
-export default {
-  components: { VButton, VP, VH2 },
-  props: {
-    plan: Object,
-    btnText: {
-      type: Object,
-      default: () => ({
-        default: 'Купить пакет',
-        selected: 'Изменить'
-      })
+  import VH2 from '../typography/VH2'
+  import VP from '../typography/VP'
+  import VButton from './VButton'
+
+  export default {
+    components: { VButton, VP, VH2 },
+    props: {
+      plan: Object,
+      btnText: {
+        type: Object,
+        default: () => ({
+          default: 'Купить пакет',
+          selected: 'Изменить'
+        })
+      },
+      isSelected: {
+        type: Boolean,
+        default: false
+      },
+      current: {
+        type: Boolean,
+        default: false
+      },
+      isFree: {
+        type: Boolean,
+        default: false
+      }
     },
-    isSelected: {
-      type: Boolean,
-      default: false
+    methods: {
+      handleButton() {
+        this.$emit('btnClick', this.plan.id)
+      }
     },
-    current: {
-      type: Boolean,
-      default: false
-    },
-    isFree: {
-      type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    handleButton() {
-      this.$emit('btnClick', this.plan.id)
-    }
-  },
-  created() {
-    const base = this.plan.color
-    this.colors = {
-      100: base,
-      70: base + this.$ds.getHexOpacity(70),
-      50: base + this.$ds.getHexOpacity(50),
-      25: base + this.$ds.getHexOpacity(25)
+    created() {
+      const base = this.plan.color
+      this.colors = {
+        100: base,
+        70: base + this.$ds.getHexOpacity(70),
+        50: base + this.$ds.getHexOpacity(50),
+        25: base + this.$ds.getHexOpacity(25)
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-.plan {
-  padding: var(--space-half);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
+  .plan {
+    padding: var(--space-half);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
 
-.plan h2 {
-  line-height: 1;
-}
+  .plan h2 {
+    line-height: 1;
+  }
 
-.plan__locked {
-  background: #00000055;
-  width: 100%;
-  padding: var(--space-half);
-  margin: 0 calc(-1 * var(--space-half)) calc(-1 * var(--space-half))
-    calc(-1 * var(--space-half));
-}
+  .plan__locked {
+    background: #00000055;
+    width: 100%;
+    padding: var(--space-half);
+    margin: 0 calc(-1 * var(--space-half)) calc(-1 * var(--space-half)) calc(-1 * var(--space-half));
+  }
 
-.plan__locked h3 {
-  text-align: center;
-  text-shadow: 0 0 30px #00000044;
-  color: var(--white-base);
-}
+  .plan__locked h3 {
+    text-align: center;
+    text-shadow: 0 0 30px #00000044;
+    color: var(--white-base);
+  }
 
-.plan--selected {
-  border: 2px solid;
-}
+  .plan--selected {
+    border: 2px solid;
+  }
 
-.plan__bottom {
-  margin-top: var(--space-half);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .plan__bottom {
+    margin-top: var(--space-half);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.plan__bottom__button {
-  padding: var(--space-third) var(--space-half);
-}
-.plan__bottom__button:hover,
-.plan__bottom__button:focus,
-.plan__bottom__button:active {
-  transform: none;
-  box-shadow: none;
-}
+  .plan__bottom__button {
+    padding: var(--space-third) var(--space-half);
+  }
 
-.plan__bottom__button--selected {
-  background: none !important;
-}
+  .plan__bottom__button:hover,
+  .plan__bottom__button:focus,
+  .plan__bottom__button:active {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .plan__bottom__button--selected {
+    background: none !important;
+  }
 </style>
