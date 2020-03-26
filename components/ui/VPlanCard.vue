@@ -13,7 +13,13 @@
         weight="regular"
         :color="colors[100]"
       >
-        {{ isFree ? 'Бесплатно' : plan.cost + '&#8381;/месяц' }}
+        <span v-if="isFree">
+          Бесплатно
+        </span>
+        <span v-else>
+          {{plan.cost}}<span
+          style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>/месяц
+        </span>
       </VH2>
       <div
         style="display: flex; align-items: center"
@@ -22,7 +28,8 @@
         "
       >
         <VH2 :color="colors[100]">
-          {{ plan.newCost }}&#8381;{{
+          {{ plan.newCost }}<span
+          style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>{{
           typeof plan.newCost === 'number' ? '' : '/месяц'
           }}
         </VH2>
@@ -32,7 +39,9 @@
           :color="colors[70]"
           style="text-decoration: line-through;margin-left: var(--space-third)"
         >
-          {{ plan.cost }}&#8381;
+          {{ plan.cost }}<span
+          style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>
+
         </VH3>
       </div>
       <div

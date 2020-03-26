@@ -12,7 +12,8 @@
 
     <div v-if="info" class="consultation__price">
       <VH3 v-if="info.price.price > 0" style="width: 100%;">
-        Стоимость консультации - {{ info.price.price }}&#8381;
+        Стоимость консультации - {{ info.price.price }}<span
+        style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>
       </VH3>
       <div v-else-if="info.price.price === 0">
         <VH3>
