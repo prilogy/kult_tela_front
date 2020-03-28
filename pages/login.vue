@@ -46,7 +46,7 @@
           Войти
         </VButton>
       </div>
-      <VGuidePopup @close="videoPopup = false" v-if="videoPopup" />
+      <VGuidePopup @close="videoPopup = false" v-if="videoPopup"/>
       <div class="online-army" @click="videoPopup = true">
         <VH3>Экскурсия по Онлайн-Армии</VH3>
         <svg
@@ -70,105 +70,112 @@
 </template>
 
 <script>
-import { VGuidePopup, VInput } from '../components'
-import { mapActions } from 'vuex'
+  import { VGuidePopup, VInput } from '../components'
+  import { mapActions } from 'vuex'
 
-export default {
-  head: {
+  export default {
+    head: {
       title: 'Культ тела. Онлайн-Армия похудения и ЗОЖ',
       meta: [
-        { hid: 'description', name: 'description', content: 'Культ тела - проект для похудения дома или в зале. енерал Марина Богомолова похудела на 100 кг за 2 года. Смогла она - сможешь и ты!' },
-        { hid: 'keywords', name: 'keywords', content: 'Культ тела, армия похудения, культ тела 4, культ тела личный кабинет, культ тела онлайн армия, онлайн армия, армия безопасного похудения, похудеть в Пенза, Культ тела Пенза, онлайн похудение, онлайн тренировки, фитнес, фитнес онлайн,
-        похудение, похудение дома, диета малышевой, похудеть онлайн, диета, диета для похудения, тренировки онлайн' }
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Культ тела - проект для похудения дома или в зале. енерал Марина Богомолова похудела на 100 кг за 2 года. Смогла она - сможешь и ты!'
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: 'Культ тела, армия похудения, культ тела 4, культ тела личный кабинет, культ тела онлайн армия, онлайн армия, армия безопасного похудения, похудеть в Пенза, Культ тела Пенза, онлайн похудение, онлайн тренировки, фитнес, фитнес онлайн,похудение, похудение дома, диета малышевой, похудеть онлайн, диета, диета для похудения, тренировки онлайн'
+        }
       ],
-  },
-  layout: 'noNav',
-  middleware: 'auth',
-  components: {
-    VGuidePopup,
-    VInput
-  },
-  data() {
-    return {
-      login: '',
-      password: '',
-      videoPopup: false
-    }
-  },
-  methods: {
-    async doLogin(e) {
-      const user = {
-        email: this.login,
-        password: this.password
-      }
-
-      await this.LOGIN(user)
     },
-    ...mapActions({
-      LOGIN: 'auth/LOGIN'
-    })
+    layout: 'noNav',
+    middleware: 'auth',
+    components: {
+      VGuidePopup,
+      VInput
+    },
+    data() {
+      return {
+        login: '',
+        password: '',
+        videoPopup: false
+      }
+    },
+    methods: {
+      async doLogin(e) {
+        const user = {
+          email: this.login,
+          password: this.password
+        }
+
+        await this.LOGIN(user)
+      },
+      ...mapActions({
+        LOGIN: 'auth/LOGIN'
+      })
+    }
   }
-}
 </script>
 
 <style scoped>
-.online-army {
-  margin: var(--space) calc(-1 * var(--space)) 0 calc(-1 * var(--space));
-  padding: var(--space-half) var(--space);
-  background: var(--yellow-base);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-}
+  .online-army {
+    margin: var(--space) calc(-1 * var(--space)) 0 calc(-1 * var(--space));
+    padding: var(--space-half) var(--space);
+    background: var(--yellow-base);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
 
-.online-army h3 {
-  color: var(--grey-base);
-}
+  .online-army h3 {
+    color: var(--grey-base);
+  }
 
-.login-form__wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+  .login-form__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-.login-form {
-  width: 100%;
-  max-width: 500px;
-}
+  .login-form {
+    width: 100%;
+    max-width: 500px;
+  }
 
-.login-form__top {
-  display: flex;
-  justify-content: space-between;
-}
+  .login-form__top {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.login-form__top__button {
-  display: flex;
-  align-items: center;
-}
+  .login-form__top__button {
+    display: flex;
+    align-items: center;
+  }
 
-.login-form__top__button button {
-  margin-left: var(--space-half);
-}
+  .login-form__top__button button {
+    margin-left: var(--space-half);
+  }
 
-.login-form__middle {
-  margin: var(--space-half) 0;
-}
+  .login-form__middle {
+    margin: var(--space-half) 0;
+  }
 
-.login-form div:first-child {
-  margin-bottom: var(--space-half);
-}
+  .login-form div:first-child {
+    margin-bottom: var(--space-half);
+  }
 
-.login-form__bottom {
-  display: flex;
-  justify-content: space-between;
-}
+  .login-form__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.login-form__bottom__caption {
-  color: var(--grey-light3);
-}
+  .login-form__bottom__caption {
+    color: var(--grey-light3);
+  }
 
-.sds {
-}
+  .sds {
+  }
 </style>

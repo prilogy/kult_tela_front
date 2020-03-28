@@ -145,7 +145,7 @@
       </div>
       <VTipSmall mt="var(--space-half)" mb="var(--space-half)">
         <VP color="var(--grey-light3)">
-          Понедельник, среда, пятница - тренировки, воскресенье - вольно!
+          Понедельник - суббота тренировки через день, воскресенье - вольно!
         </VP>
       </VTipSmall>
       <VTipSmall
