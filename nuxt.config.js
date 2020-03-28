@@ -18,7 +18,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: 'Культ тела - проект для похудения дома или в зале. Генерал Марина Богомолова похудела на 100 кг за 2 года. Смогла она - сможешь и ты!'
       }
     ],
     link: [
@@ -102,6 +102,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+    }
   }
 }
