@@ -41,7 +41,7 @@
           contenteditable
           @keydown="handleKeys"
         ></div>
-        <button @click.prevent="toggleEmoji()" class="box__emoji-btn">
+        <button v-if="!locked" @click.prevent="toggleEmoji()" class="box__emoji-btn">
           <svg viewBox="0 0 512 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
             <path :fill="emoji ? 'var(--yellow-base)' : 'var(--grey-light2)'"
                   d="M375 220c-11 0-20-9-20-20a10 10 0 00-20 0 20 20 0 11-40 0 50 50 0 01100 0c0 11-9 20-20 20zm-157-20a50 50 0 00-100 0 20 20 0 1040 0 10 10 0 0120 0 20 20 0 1040 0zm170 275a20 20 0 00-20-34 216 216 0 1167-65 20 20 0 1034 22A255 255 0 00256 0 254 254 0 000 256a254 254 0 00256 256c47 0 93-13 132-37zm-46-184c-7 0-12 3-16 8 0 0-26 28-70 28s-70-28-70-28a20 20 0 10-30 26c4 4 39 42 100 42s96-38 100-42a20 20 0 00-14-34z"/>
@@ -51,7 +51,7 @@
           v-if="!locked"
           :class="{
           box__btn: true,
-          'box__btn--disabled': input === ''
+          'box__btn--disabled': input === '' && !image_preview
         }"
           @click="sendMessage"
         >
@@ -109,25 +109,26 @@
     },
     methods: {
       appendEmoji(text) {
-        let sel, range;
+        let sel, range
         try {
           if (window.getSelection) {
-            sel = window.getSelection();
+            sel = window.getSelection()
             if (sel.getRangeAt && sel.rangeCount) {
-              range = sel.getRangeAt(0);
-              range.deleteContents();
-              range.insertNode(document.createTextNode(text));
+              range = sel.getRangeAt(0)
+              range.deleteContents()
+              range.insertNode(document.createTextNode(text + ' '))
+              this.input += text
               range.collapse()
             }
           } else if (document.selection && document.selection.createRange) {
-            document.selection.createRange().text = text;
+            document.selection.createRange().text = text
+            this.input += text
           }
         } catch (e) {
         }
       },
       toggleEmoji(v = null) {
-
-        this.emoji = v === null ? !Boolean(this.emoji) : v;
+        this.emoji = v === null ? !Boolean(this.emoji) : v
       },
       resetImage() {
         this.image_preview = null
@@ -177,7 +178,7 @@
         this.$refs.area.focus()
       },
       sendMessage() {
-        if (this.input.trim() !== '') this.$emit('sendMessage', this.input)
+        if (this.input.trim() !== '' || this.image_preview) this.$emit('sendMessage', this.input)
         this.$refs.area.innerHTML = ''
         this.input = ''
         this.focusOnArea()
@@ -185,7 +186,7 @@
     },
     created() {
       const chat = this.$store.state.chat.currentChat
-      if (chat.users.filter(e => typeof e.admin_role_id === 'number').length > 0)
+      if (chat.users.filter(e => typeof e.admin_role_id === 'number').length > 0 || chat.conversation === true)
         this.attach = true
       if (chat) if (chat && chat.locked) this.locked = true
       this.$store.subscribe((mutation, state) => {
