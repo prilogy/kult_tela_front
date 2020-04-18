@@ -7,6 +7,7 @@
             :btnText="{ default: 'Изменить', selected: 'Изменить' }"
             @btnClick="getBack"
             class="plan--opened"
+            :inList="false"
             :plan="planToBuy"
             :isFree="code && codeIsValid"
           ></VPlanCard>
@@ -65,6 +66,7 @@
               v-for="plan in plans"
               :key="plan.id"
               :plan="plan"
+              v-if="!plan.disabled"
             ></VPlanCard>
           </div>
         </div>

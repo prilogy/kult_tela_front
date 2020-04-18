@@ -53,60 +53,60 @@
 </template>
 
 <script>
-import MessageCloud from './MessageCloud'
-import dateFuncs from '../../../../mixins/dateFuncs'
-export default {
-  components: { MessageCloud },
-  mixins: [dateFuncs],
-  props: ['chat', 'myId'],
-  computed: {
-    lastSeqIds() {
-      const user_id = this.chat.messages[this.chat.messages.length - 1].user_id
-      const chat = this.chat
+  import MessageCloud from './MessageCloud'
+  import dateFuncs from '../../../../mixins/dateFuncs'
 
-      let ids = []
-      for (let i = chat.messages.length - 1; i >= 0; i--) {
-        if (chat.messages[i].user_id === user_id) {
-          ids.push(chat.messages[i].id)
-        } else break
+  export default {
+    components: { MessageCloud },
+    mixins: [dateFuncs],
+    props: ['chat', 'myId'],
+    computed: {
+      lastSeqIds() {
+        const user_id = this.chat.messages[this.chat.messages.length - 1].user_id
+        const chat = this.chat
+
+        let ids = []
+        for (let i = chat.messages.length - 1; i >= 0; i--) {
+          if (chat.messages[i].user_id === user_id) {
+            ids.push(chat.messages[i].id)
+          } else break
+        }
+        return ids
       }
-      return ids
     }
   }
-}
 </script>
 
 <style scoped>
-.messages {
-  padding: var(--space-new) var(--space-new) 0 var(--space-new);
-  display: flex;
-  flex-direction: column;
-}
+  .messages {
+    padding: var(--space-new) var(--space-new) 0 var(--space-new);
+    display: flex;
+    flex-direction: column;
+  }
 
-.messages .msg {
-  width: 100%;
-  margin-bottom: 6px;
-}
+  .messages .msg {
+    width: 100%;
+    margin-bottom: 6px;
+  }
 
-.messages__date {
-  width: 100%;
-  text-align: center;
-  background: var(--white-trans4);
-  margin: var(--space) calc(-1 * var(--space-new)) var(--space)
-    calc(-1 * var(--space-new));
-  padding: var(--space-third) var(--space-new);
-}
+  .messages__date {
+    width: 100%;
+    text-align: center;
+    background: var(--white-trans4);
+    margin: var(--space) calc(-1 * var(--space-new)) var(--space) calc(-1 * var(--space-new));
+    padding: var(--space-third) var(--space-new);
+  }
 
-.messages__date p {
-  color: var(--white-trans1);
-}
+  .messages__date p {
+    color: var(--white-trans1);
+  }
 
-.msg--chat_is-empty {
-  margin-bottom: var(--space);
-  text-align: center;
-}
+  .msg--chat_is-empty {
+    margin-bottom: var(--space);
+    text-align: center;
+  }
 
-.msg--chat_is-empty p {
-  color: var(--grey-light2);
-}
+  .msg--chat_is-empty p {
+    color: var(--grey-light2);
+  }
 </style>

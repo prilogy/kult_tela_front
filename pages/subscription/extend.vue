@@ -12,6 +12,7 @@
         <VPlanCard
           @btnClick="handleClick(plan)"
           v-for="plan in plans"
+          v-if="!plan.disabled"
           :key="plan.id"
           :plan="plan"
           :isSelected="selectedPlan === plan"
@@ -71,7 +72,12 @@ export default {
   async asyncData(ctx) {
     try {
       const { data: plans } = await ctx.app.$api.Plans.getAll()
-      return { plans }
+      return {
+        plans: plans.map(e => {
+        if(e.trial) delete e.trial
+        return e
+        })
+      }
     } catch (e) {
       ctx.redirect('/')
     }

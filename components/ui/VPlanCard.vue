@@ -16,6 +16,9 @@
         <span v-if="isFree">
           Бесплатно
         </span>
+        <span v-else-if="typeof plan.trial === 'number'">
+          {{plan.trial}} дней бесплатно
+        </span>
         <span v-else>
           {{plan.cost}}<span
           style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>/месяц
@@ -67,7 +70,7 @@
         :bg="colors[100]"
         @click="handleButton"
       >
-        {{ isSelected ? btnText.selected : btnText.default }}
+        {{  isSelected ? btnText.selected : typeof plan.trial === 'number' && inList ? 'Получить' : btnText.default }}
       </VButton>
     </div>
   </div>
@@ -100,6 +103,10 @@
       isFree: {
         type: Boolean,
         default: false
+      },
+      inList: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
