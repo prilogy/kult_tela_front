@@ -4,10 +4,10 @@
       <div class="login-form__top">
         <VH1>Вход</VH1>
         <div class="login-form__top__button">
-          <VH3 weight="regular">или</VH3>
+          <VH3 weight="regular" ml="var(--space-half)">или</VH3>
           <nuxt-link to="/plans">
             <VButton weight="regular" pa="var(--space-half)">
-              Купить доступ
+              Получить бесплатно
             </VButton>
           </nuxt-link>
         </div>

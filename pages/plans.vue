@@ -13,7 +13,7 @@
           ></VPlanCard>
 
           <VP my="var(--space-half)">
-            Введите email, на который после оплаты будут отправлены дальнейшие
+            Введите email, на который будут отправлены дальнейшие
             инструкции по регистрации
           </VP>
           <form id="buy-form" @submit.prevent="proceedToBuy">
@@ -31,7 +31,7 @@
               value="submit"
               w100
             >
-              {{ code && codeIsValid ? 'Подтвердить' : 'Перейти к оплате' }}
+              {{ code && codeIsValid ? 'Подтвердить' : typeof planToBuy.trial === 'number' ? 'Получить бесплатно' : 'Перейти к оплате' }}
             </VButton>
             <VP class="warning-text">
               Приложение сделано профессионалами, но носит рекомендательный

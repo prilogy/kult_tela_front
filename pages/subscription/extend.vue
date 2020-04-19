@@ -25,7 +25,7 @@
         w100
         mt="var(--space-half)"
       >
-        Перейти к оплате
+        {{ selectedPlan && selectedPlan.trial ? 'Получить бесплатно' : 'Перейти к оплате' }}
       </VButton>
     </div>
     <div v-else class="after-payment">
@@ -60,8 +60,14 @@ export default {
     async extend() {
       const plan_id = this.selectedPlan.id
       try {
-        const { data } = await this.$api.Subscription.extend({ plan_id })
-        if (data.url) window.open(data.url)
+        const r = await this.$api.Subscription.extend({ plan_id })
+        console.log(r)
+        if (r.data && r.data.url) window.open(r.data.url, '_self')
+        else {
+          await this.$router.push('/', () => {
+            this.$router.go(0)
+          })
+        }
         this.afterPayment = true
       } catch (e) {}
     },
@@ -71,12 +77,23 @@ export default {
   },
   async asyncData(ctx) {
     try {
-      const { data: plans } = await ctx.app.$api.Plans.getAll()
-      return {
-        plans: plans.map(e => {
-        if(e.trial) delete e.trial
-        return e
+      let { data: plans } = await ctx.app.$api.Plans.getAll()
+
+      if(ctx.app.store.state.user.user.plan_id === 0)
+        plans = plans.map(e => {
+          if(typeof e.trial === 'number') {
+            delete e.newCost
+          }
+          return e
         })
+      else plans = plans.map(e => {
+        if(e.trial)
+          delete e.trial
+        return e
+      })
+
+      return {
+        plans
       }
     } catch (e) {
       ctx.redirect('/')

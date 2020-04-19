@@ -20,13 +20,13 @@
         v-for="plan in plans"
         :key="plan.id"
         :plan="plan"
-        :current="typeof plan.newCost !== 'number'"
+        :current="typeof plan.newCost !== 'number' && !plan.trial"
         :btnText="{ default: 'Выбрать', selected: 'Выбрано' }"
         :isSelected="selectedPlan && plan.id === selectedPlan.id"
       ></VPlanCard>
     </div>
     <VButton id="payment-btn" @click="proceedToPayment" :disabled="!selectedPlan" w100>
-      Перейти к оплате
+      {{ selectedPlan && selectedPlan.trial ? 'Получить бесплатно' : 'Перейти к оплате'}}
     </VButton>
   </div>
 </template>
@@ -55,7 +55,14 @@
           }
           try {
             const result = await this.$api.Plans.changePlan(data)
-            window.open(result.data.url, '_self')
+            console.log(result)
+            if(result.data && result.data.url)
+              window.open(result.data.url, '_self')
+            else {
+              await this.$router.push('/', () => {
+                this.$router.go(0)
+              })
+            }
           } catch (error) {
             await this.$store.dispatch(
               'popup/SET_ERROR',
@@ -68,7 +75,19 @@
     },
     async asyncData(ctx) {
       try {
-        const { data: plans } = await ctx.app.$api.Plans.getChangePrices()
+        let { data: plans } = await ctx.app.$api.Plans.getChangePrices()
+        if(ctx.app.store.state.user.user.plan_id === 0)
+          plans = plans.map(e => {
+            if(typeof e.trial === 'number') {
+              delete e.newCost
+            }
+            return e
+          })
+        else plans = plans.map(e => {
+          if(e.trial)
+            delete e.trial
+          return e
+        })
         return { plans }
       } catch (e) {
         ctx.redirect('/')
