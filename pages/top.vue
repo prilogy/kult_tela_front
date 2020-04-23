@@ -29,17 +29,19 @@
     <div v-if="currentTop && currentTop.length !== 0">
       <div class="top_avatars">
         <div class="top_avatars__first" v-if="currentTop[0]">
-          <TopItem :user="currentTop[0]" place="1"></TopItem>
+          <TopItem :key="currentTop[0].id" :user="currentTop[0]" place="1"></TopItem>
         </div>
         <div class="top_avatars__23">
           <TopItem
             v-if="currentTop[1]"
             :user="currentTop[1]"
+            :key="currentTop[1].id"
             place="2"
           ></TopItem>
           <TopItem
             v-if="currentTop[2]"
             :user="currentTop[2]"
+            :key="currentTop[2].id"
             place="3"
           ></TopItem>
         </div>
