@@ -6,43 +6,49 @@
       версии браузеров Google Chrome, Mozilla Firefox или Opera.
     </VP>
     <VP>
-      Посмотреть, как устроено приложение можно в разделе "О приложении".
+      Узнать, как не потерять приложение
+    </VP>
+    <nuxt-link to="/how-to-install">
+      <VButton mb="var(--space-half)" w100 @click="$emit('close')">Как сохранить приложение</VButton>
+    </nuxt-link>
+    <VP>
+      Посмотреть, как устроено приложение
     </VP>
     <nuxt-link to="/about">
-      <VButton w100 @click="$emit('close')">О приложении</VButton>
+      <VButton mb="var(--space-half)" w100 @click="$emit('close')">О приложении</VButton>
     </nuxt-link>
-    <VButton w100 mt="var(--space-half)" @click="$emit('close')">
+    <VButton w100 @click="$emit('close')">
       Закрыть
     </VButton>
   </VBigPopup>
 </template>
 
 <script>
-import VBigPopup from '../utils/VBigPopup'
+  import VBigPopup from '../utils/VBigPopup'
 
-export default {
-  components: {
-    VBigPopup
+  export default {
+    components: {
+      VBigPopup
+    }
   }
-}
 </script>
 
 <style scoped>
-.browser-popup >>> .notification {
-  display: block;
-}
+  .browser-popup >>> .notification {
+    display: block;
+  }
 
-.browser-popup h3 {
-  text-align: left;
-  margin-bottom: var(--space-half);
-}
+  .browser-popup h3 {
+    text-align: left;
+    margin-bottom: var(--space-half);
+  }
 
-.browser-popup >>> .notification {
-  z-index: 103;
-}
+  .browser-popup >>> .notification {
+    z-index: 103;
+  }
 
-.browser-popup >>> p {
-  text-align: left;
-  margin-bottom: var(--space-third);
-}
+  .browser-popup >>> p {
+    text-align: left;
+    margin-bottom: var(--space-third);
+  }
 </style>

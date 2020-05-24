@@ -1,19 +1,30 @@
 <template>
-  <VButton
-    v-if="showInstallBanner"
-    @click="install"
-    mt="var(--space-half)"
-    w100
-  >
-    Добавить на рабочий стол
-  </VButton>
+  <div style="width: 100%">
+    <VButton
+      v-if="showInstallBanner"
+      @click="install"
+      mt="var(--space-half)"
+      w100
+    >
+      Добавить на рабочий стол
+    </VButton>
+    <VButton
+      v-else
+      @click="$router.push('/how-to-install')"
+      mt="var(--space-half)"
+      w100
+    >
+      Как сохранить приложение?
+    </VButton>
+  </div>
+
 </template>
 <script>
   import VButton from '../ui/VButton'
 
   let installEvent
   export default {
-    components: {VButton},
+    components: { VButton },
     data() {
       return {
         showInstallBanner: false
