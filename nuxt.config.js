@@ -73,7 +73,18 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    'nuxt-compress'
+    'nuxt-compress',
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '64496917',
+        webvisor: true,
+        clickmap: true,
+        useCDN: false,
+        trackLinks: true,
+        accurateTrackBounce: true
+      }
+    ]
   ],
   'nuxt-compress': {
     gzip: {

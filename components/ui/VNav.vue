@@ -11,16 +11,16 @@
             {{ newNotifications <= 0 ? '' : newNotifications }}
           </VH2>
         </button>
-        <button
-          class="nav__dropdown__notifications_button messages-btn"
-          @click="dropDownLinkAction({ url: '/messages' })"
-        >
-          <VH2>Сообщения</VH2>
-          <span
-            v-show="$store.state.chat.isNewMessages"
-            class="messages-bullet"
-          ></span>
-        </button>
+        <!--        <button-->
+        <!--          class="nav__dropdown__notifications_button messages-btn"-->
+        <!--          @click="dropDownLinkAction({ url: '/messages' })"-->
+        <!--        >-->
+        <!--          <VH2>Сообщения</VH2>-->
+        <!--          <span-->
+        <!--            v-show="$store.state.chat.isNewMessages"-->
+        <!--            class="messages-bullet"-->
+        <!--          ></span>-->
+        <!--        </button>-->
         <button
           @click="dropDownLinkAction(link)"
           v-for="link in LINKS.dropdownLinks"
@@ -64,21 +64,15 @@
         >
           <p>
             {{
-              (newNotifications && newNotifications) ||
-                ($store.state.chat.isNewMessages && 1)
+            (newNotifications && newNotifications) ||
+            ($store.state.chat.isNewMessages && 1)
             }}
           </p>
         </div>
-        <svg
-          width="35"
-          height="35"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="35" height="25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            :fill="burgerToggle ? 'var(--yellow-base' : 'var(--grey-base)'"
-            d="M0 0h35v7H0zM0 14h35v7H0zM0 28h35v7H0z"
-          />
+            d="M33.5 10h-32C.12 10 0 11.12 0 12.5S.12 15 1.5 15h32c1.38 0 1.5-1.12 1.5-2.5s-.12-2.5-1.5-2.5zm0 10h-32C.12 20 0 21.12 0 22.5S.12 25 1.5 25h32c1.38 0 1.5-1.12 1.5-2.5s-.12-2.5-1.5-2.5zM1.5 5h32C34.88 5 35 3.88 35 2.5S34.88 0 33.5 0h-32C.12 0 0 1.12 0 2.5S.12 5 1.5 5z"
+            :fill="burgerToggle ? 'var(--yellow-base' : 'var(--grey-base)'"/>
         </svg>
       </button>
     </div>
@@ -86,187 +80,190 @@
 </template>
 
 <script>
-import VH2 from '../typography/VH2'
-import VButton from './VButton'
-import VPWAPrompt from '../utils/VPWAPrompt'
-import { mapActions, mapGetters } from 'vuex'
-import VCaption from '../typography/VCaption'
+  import VH2 from '../typography/VH2'
+  import VButton from './VButton'
+  import VPWAPrompt from '../utils/VPWAPrompt'
+  import { mapGetters } from 'vuex'
+  import VCaption from '../typography/VCaption'
 
-export default {
-  components: { VCaption, VH2, VButton, VPWAPrompt },
-  data() {
-    return {
-      burgerToggle: false,
-      isPWAInstalled: false
-    }
-  },
-  methods: {
-    hideDropdown() {
-      this.burgerToggle = false
+  export default {
+    components: { VCaption, VH2, VButton, VPWAPrompt },
+    data() {
+      return {
+        burgerToggle: false,
+        isPWAInstalled: false
+      }
     },
-    dropDownLinkAction(link) {
-      if (link.action) link.action()
-      else if (link.url) this.$router.push(link.url)
-      this.hideDropdown()
-    }
-  },
-  computed: {
-    LINKS() {
-      let links = this.$store.getters['nav/GET_LINKS']
-      if (this.USER && this.USER.is_subscription === false) {
-        links.links = links.links.map((e, index) => {
-          if (index === 0) return e
-          else return { ...e, disabled: true }
-        })
-        links.dropdownLinks = links.dropdownLinks.filter(
-          e => e.name === 'Выйти из аккаунта'
-        )
-        return links
-      } else return links
-    },
-    currentRoute() {
-      return this.$route.name
-    },
-    newNotifications() {
-      let count = 0
-      if (this.USER) {
-        const lastSeenId = this.USER.notifications_last_seen
-        if (this.USER.notifications) {
-          const lastId = this.USER.notifications[
-            this.USER.notifications.length - 1
-          ].id
-          count += lastId - lastSeenId
-        }
-        return count
-      } else return null
-    },
-    ...mapGetters({
-      USER: 'user/GET_USER',
-      CHATS: 'chat/GET_CHATS'
-    })
-  },
-  watch: {
-    currentRoute() {
-      this.hideDropdown()
-    }
-  },
-  created() {
-    if (
-      window.matchMedia('(display-mode: standalone)').matches ||
-      window.navigator.standalone === true
-    ) {
-      this.isPWAInstalled = true
-    }
-  },
-  mounted() {
-    document.addEventListener('click', evt => {
-      let flyoutElement = this.$refs.nav,
-        targetElement = evt.target // clicked element
-      if (this.burgerToggle) {
-        do {
-          if (targetElement == flyoutElement) {
-            return
-          }
-          targetElement = targetElement.parentNode
-        } while (targetElement)
+    methods: {
+      hideDropdown() {
+        this.burgerToggle = false
+      },
+      dropDownLinkAction(link) {
+        if (link.action) link.action()
+        else if (link.url) this.$router.push(link.url)
         this.hideDropdown()
       }
-    })
-  },
-  destroyed() {
-    document.removeEventListener('click', evt => {})
+    },
+    computed: {
+      LINKS() {
+        let links = this.$store.getters['nav/GET_LINKS']
+        if (this.USER && this.USER.is_subscription === false) {
+          links.links = links.links.map((e, index) => {
+            if (index === 0) return e
+            else return { ...e, disabled: true }
+          })
+          links.dropdownLinks = links.dropdownLinks.filter(
+            e => e.name === 'Выйти из аккаунта'
+          )
+          return links
+        } else return links
+      },
+      currentRoute() {
+        return this.$route.name
+      },
+      newNotifications() {
+        let count = 0
+        if (this.USER) {
+          const lastSeenId = this.USER.notifications_last_seen
+          if (this.USER.notifications) {
+            const lastId = this.USER.notifications[
+            this.USER.notifications.length - 1
+              ].id
+            count += lastId - lastSeenId
+          }
+          return count
+        } else return null
+      },
+      ...mapGetters({
+        USER: 'user/GET_USER',
+        CHATS: 'chat/GET_CHATS'
+      })
+    },
+    watch: {
+      currentRoute() {
+        this.hideDropdown()
+      }
+    },
+    created() {
+      if (
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true
+      ) {
+        this.isPWAInstalled = true
+      }
+    },
+    mounted() {
+      document.addEventListener('click', evt => {
+        let flyoutElement = this.$refs.nav,
+          targetElement = evt.target // clicked element
+        if (this.burgerToggle) {
+          do {
+            if (targetElement == flyoutElement) {
+              return
+            }
+            targetElement = targetElement.parentNode
+          } while (targetElement)
+          this.hideDropdown()
+        }
+      })
+    },
+    destroyed() {
+      document.removeEventListener('click', evt => {
+      })
+    }
   }
-}
 </script>
 
 <style scoped>
-.messages-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.messages-bullet {
-  width: 15px;
-  height: 15px;
-  border-radius: 100px;
-  background: var(--yellow-base);
-  margin-left: var(--space-half);
-}
+  .messages-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
-.nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  max-width: var(--body-max-width);
-  z-index: 100;
-}
+  .messages-bullet {
+    width: 15px;
+    height: 15px;
+    border-radius: 100px;
+    background: var(--yellow-base);
+    margin-left: var(--space-half);
+  }
 
-.nav__dropdown {
-  border-radius: var(--radius) var(--radius) 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: var(--grey-light1);
-  padding: var(--space);
-  z-index: 999;
-}
+  .nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: var(--body-max-width);
+    z-index: 100;
+  }
 
-.nav__dropdown h2 {
-  line-height: 1.4;
-  color: var(--white-base);
-  cursor: pointer;
-}
+  .nav__dropdown {
+    border-radius: var(--radius) var(--radius) 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--grey-light1);
+    padding: var(--space);
+    z-index: 999;
+  }
 
-.nav__icons {
-  align-items: center;
-  display: flex;
-  justify-content: space-around;
-  background: var(--grey-light2);
-  height: var(--navbar-height);
-  z-index: 1000;
-}
+  .nav__dropdown h2 {
+    line-height: 1.4;
+    color: var(--white-base);
+    cursor: pointer;
+  }
 
-.nav__dropdown__notifications_button {
-  display: flex;
-}
+  .nav__icons {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    background: var(--grey-light2);
+    height: var(--navbar-height);
+    z-index: 1000;
+  }
 
-.nav__dropdown__notifications_button h2:last-child {
-  margin-left: var(--space-half);
-}
+  .nav__dropdown__notifications_button {
+    display: flex;
+  }
 
-.link--disabled {
-  opacity: 0.4;
-}
+  .nav__dropdown__notifications_button h2:last-child {
+    margin-left: var(--space-half);
+  }
 
-.burger {
-  position: relative;
-}
+  .link--disabled {
+    opacity: 0.4;
+  }
 
-.burger__mark {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  position: absolute;
-  background: var(--yellow-base);
-  right: -5px;
-  width: 20px;
-  height: 20px;
-  top: -7px;
-}
+  .burger {
+    position: relative;
+  }
 
-.burger__mark p {
-  color: var(--grey-base);
-  font-size: 12px;
-  font-weight: 600;
-}
+  .burger__mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    position: absolute;
+    background: var(--yellow-base);
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    top: -7px;
+  }
 
-.nav__icons__icon {
-  width: 35px;
-  height: 35px;
-  background: var(--grey-base);
-}
-.nav__icons__icon--active {
-  background: var(--yellow-base);
-}
+  .burger__mark p {
+    color: var(--grey-base);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .nav__icons__icon {
+    width: 35px;
+    height: 35px;
+    background: var(--grey-base);
+  }
+
+  .nav__icons__icon--active {
+    background: var(--yellow-base);
+  }
 </style>
