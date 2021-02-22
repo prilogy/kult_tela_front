@@ -60,6 +60,11 @@
             title: 'Советы генерала похудения',
             url: '/videos/30',
             minPlan: 1
+          },
+          {
+            id: 4,
+            title: 'Помощник похудения',
+            url: '/kilolight'
           }
         ]
       }
