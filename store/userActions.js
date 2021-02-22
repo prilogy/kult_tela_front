@@ -11,6 +11,11 @@ export const state = () => ({
       color: '#f2bda7'
     },
     {
+      title: 'Иммунитет',
+      url: '/immunity',
+      color: '#30cdb3'
+    },
+    {
       title: 'Онлайн-консультация',
       url: '/special/consultation',
       color: '#e15e4c',

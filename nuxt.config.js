@@ -11,7 +11,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'Культ тела - онлайн армия',
+    title: 'Культ тела. Безопасное похудение онлайн. Иммунитет',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -1,6 +1,7 @@
 <template>
   <div class="login-form__wrapper">
     <div class="login-form">
+      <VH1 class="login-form__title">Армия похудения</VH1>
       <div class="login-form__top">
         <VH1>Вход</VH1>
         <div class="login-form__top__button">
@@ -48,7 +49,7 @@
       </div>
       <VGuidePopup @close="videoPopup = false" v-if="videoPopup"/>
       <div class="online-army" @click="videoPopup = true">
-        <VH3>Экскурсия по Онлайн-Армии</VH3>
+        <VH3 style="font-size: 18px">Экскурсия по приложению. Результаты</VH3>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="40"
@@ -176,6 +177,8 @@
     color: var(--grey-light3);
   }
 
-  .sds {
+  .login-form__title {
+    text-align: center;
+    margin-bottom: calc(2*var(--space));
   }
 </style>

@@ -31,7 +31,8 @@
               value="submit"
               w100
             >
-              {{ code && codeIsValid ? 'Подтвердить' : typeof planToBuy.trial === 'number' ? 'Получить бесплатно' : 'Перейти к оплате' }}
+              {{ code && codeIsValid ? 'Подтвердить' : typeof planToBuy.trial === 'number' ? 'Получить бесплатно' : 'Перейти к оплате'
+              }}
             </VButton>
             <VP class="warning-text">
               Приложение сделано профессионалами, но носит рекомендательный
@@ -182,6 +183,7 @@ export default {
   margin-top: var(--space-half);
   text-align: center;
 }
+
 .popup {
   max-width: var(--body-max-width);
   background: var(--grey-base);
@@ -210,6 +212,7 @@ export default {
   margin-bottom: var(--space);
   align-items: baseline;
 }
+
 .top img {
   margin-right: var(--space);
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <VPageHeading button>
-      Установка приложения
+      Как установить приложение на экран
     </VPageHeading>
     <VH3 mb="var(--space-half)" color="var(--white-base)">Какое устройство вы используете?</VH3>
     <ul class="list">
@@ -14,7 +14,7 @@
     <div v-if="currentDevice != null" class="guide">
       <VPageHeading level="3">
         {{currentDevice.guideTitle}}
-        <template v-slot:info>{{currentDevice.guideDesc}}</template>
+        <template v-slot:info>Для установки приложения на {{currentDevice.platform}} используйте браузер <span style="color: var(--yellow-base)">{{currentDevice.browser}}</span></template>
       </VPageHeading>
       <div class="step" v-for="step in currentDevice.guide" :key="step.id">
         <div class="__num">
@@ -41,17 +41,18 @@
           {
             id: 0,
             title: 'Устройство на Android',
-            guideTitle: 'Установка приложения на Android',
-            guideDesc: 'Для установки приложения на Android рекомендуется использовать браузер Google Chrome.',
+            platform: 'Android',
+            guideTitle: 'Установка приложения на экран',
+            browser: 'Google Chrome',
             guide: [
               {
                 id: 0,
-                text: 'Откройте меню браузера и нажмите на кнопку "Добавить на главный экран".',
+                text: 'Откройте меню браузера нажатием на иконку "Три точки" в правом верхнем углу экрана',
                 image: '/images/install/android1.jpg'
               },
               {
                 id: 1,
-                text: 'Нажмите на "Добавить" для подтверждения установки.',
+                text: 'Выберите «Добавить на главный экран»',
                 image: '/images/install/android2.jpg'
               },
               {
@@ -64,21 +65,27 @@
           {
             id: 1,
             title: 'Устройство на iOS',
-            guideTitle: 'Установка приложения на iOS',
-            guideDesc: 'Для установки приложения на iOS рекомендуется использовать браузер Safari.',
+            platform: 'iOS',
+            guideTitle: 'Установка приложения на экран',
+            browser: 'Safari',
             guide: [
               {
                 id: 0,
-                text: 'Откройте меню браузера и нажмите на кнопку "На экран <<Домой>>".',
-                image: '/images/install/ios1.jpg'
+                text: 'Внизу экрана, на всплывающем окне нажмите кнопку меню',
+                image: '/images/install/ios1.jpg' // TODO: Добавить картикнку
               },
               {
                 id: 1,
+                text: 'Нажмите на кнопку "На экран <<Домой>>".',
+                image: '/images/install/ios1.jpg'
+              },
+              {
+                id: 2,
                 text: 'Нажмите на "Добавить" для подтверждения установки.',
                 image: '/images/install/ios2.jpg'
               },
               {
-                id: 2,
+                id: 3,
                 text: 'Готово! Теперь Культ Тела появится в вашем списке приложений!',
                 image: '/images/install/ios3.jpg'
               }
@@ -87,24 +94,31 @@
           {
             id: 2,
             title: 'Компьютер на Windows',
-            guideTitle: 'Установка приложения на Windows',
-            guideDesc: 'Для установки приложения на Windows рекомендуется использовать браузер Google Chrome.',
+            platform: 'Windows',
+            guideTitle: 'Установка приложения на экран',
+            browser: 'Google Chrome',
             guide: [
+              // Нажмите на значок меню в правом верхнем углу экрана
               {
                 id: 0,
-                text: 'Откройте меню браузера и нажмите на кнопку "Установка приложения culttela.ru...".',
-                image: '/images/install/pc1.png'
+                text: 'Нажмите на значок меню в правом верхнем углу экрана',
+                image: '/images/install/pc0.png'
               },
               {
                 id: 1,
+                text: 'В появившемся окне выберите «Установка приложения culttela.ru»',
+                image: '/images/install/pc1.png'
+              },
+              {
+                id: 2,
                 text: 'Нажмите на "Установить" для подтверждения установки.',
                 image: '/images/install/pc2.png'
               },
               {
-                id: 2,
-                text: 'Готово! Теперь Культ Тела появится в вашем меню пуск приложений!',
+                id: 3,
+                text: 'Готово! Теперь Культ Тела появится в вашем меню «Пуск» приложений!',
                 image: '/images/install/pc3.png'
-              }
+              },
             ]
           }
         ]

@@ -7,6 +7,8 @@
           Ваше персональное меню питания, подобранное нашими экспертами.
           <br />
           Вес указан до приготовления. Меню обновляется каждый день.
+          <br />
+          А вы не забывайте обновлять вес!
         </template>
       </VPageHeading>
       <div class="food__body">
@@ -53,6 +55,15 @@
                   советы по питанию
                 </span>
               </n-link>
+            </VP>
+          </VTipSmall>
+          <VTipSmall mt="var(--space-half)">
+            <VP color="var(--grey-light3)">
+              Стоит попробовать! Натуральный помощник для снижения веса «Кило-лайт». Комплект из 3х банок  «Утро», «День», «Вечер».
+              <br />
+              Состав комплекса на <a href="http://www.kilolight.ru/" target="_blank"><span style="color: var(--yellow-base)">www.kilolight.ru </span></a>
+              <br />
+              Не является лекарственным средством
             </VP>
           </VTipSmall>
         </div>

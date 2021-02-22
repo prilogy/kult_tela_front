@@ -4,9 +4,10 @@
       <VPageHeading button>
         Отчет о питании
         <template v-if="!isAllUploaded" v-slot:info>
-          Ваш отчет о питании видит диетолог{{
-            $store.getters['user/GET_USER'].plan_id > 2 ? 'и наставник.' : '.'
-          }}
+          Ваш отчет о питании видит диетолог.s
+<!--          {{-->
+<!--            $store.getters['user/GET_USER'].plan_id > 2 ? 'и наставник.' : '.'-->
+<!--          }}-->
           Рекомендуется для максимальной эффективности.
         </template>
       </VPageHeading>

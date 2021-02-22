@@ -11,12 +11,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/yandex-metrika": "^1.0.3",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.1",
     "nuxt-client-init-module": "^0.1.7",
-    "nuxt-compress": "^1.1.0",
+    "nuxt-compress": "^4.1.0",
     "socket.io-client": "^2.3.0",
     "vue-socket.io-extended": "^4.0.1"
   },

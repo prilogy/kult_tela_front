@@ -44,8 +44,8 @@
             10}${weight_diff > 0 ? '(-' + weight_diff + ')' : ''} кг`
           },
           {
-            title: 'Рост',
-            value: user.height + ' см'
+            title: 'Физ. уровень',
+            value: user && user.workout && user.workout.phyiscal_level_name
           },
           { title: 'Служитe с', value: user.date_signup },
           {
