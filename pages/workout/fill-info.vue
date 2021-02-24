@@ -250,7 +250,7 @@ export default {
       const levels = this.set_levels
       if (this.validate) {
         try {
-          const payload = { ...levels, scheduleType: this.scheduleType }
+          const payload = { ...levels, schedule_type: this.scheduleType }
           await this.$api.Workout.setLevels(payload)
           await this.$store.commit('user/UPDATE_USER', { workout: levels })
           await this.$router.push('/workout/personal')
