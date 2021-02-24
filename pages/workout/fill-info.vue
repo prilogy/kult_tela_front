@@ -83,7 +83,7 @@
                 }"
               >
                 {{
-                item.id === set_levels.physical_level ? 'Выбрано' : 'Выбрать'
+                  item.id === set_levels.physical_level ? 'Выбрано' : 'Выбрать'
                 }}
               </VButton>
             </div>
@@ -117,15 +117,56 @@
                 }"
               >
                 {{
-                item.id === set_levels.overweight_level
-                ? 'Выбрано'
-                : 'Нажмите для выбора'
+                  item.id === set_levels.overweight_level
+                    ? 'Выбрано'
+                    : 'Нажмите для выбора'
                 }}
               </VButton>
             </div>
           </li>
         </ul>
       </div>
+
+      <div id="schedule">
+        <VPageHeading level="3">
+          График тренировок
+          <template v-slot:info>
+            Выберите по какому графику вам будет удобнее проводить тренировки
+          </template>
+        </VPageHeading>
+        <ul>
+          <li
+            @click="setSchedule(item.value)"
+            :class="{
+              'physical-item': true,
+              'physical-item--selected': item.value === scheduleType
+            }"
+            :key="item.value"
+            v-for="item in scheduleTypes"
+          >
+            <div class="physical-item__top">
+              <VH3>{{ item.name }}</VH3>
+            </div>
+            <VP>{{ item.description }}</VP>
+            <div class="physical-item__choose">
+              <VButton
+                :class="{
+                  'physical-item__choose__btn': true,
+                  'physical-item__choose__btn--selected':
+                    item.value === scheduleType
+                }"
+              >
+                {{
+                  item.value === scheduleType
+                    ? 'Выбрано'
+                    : 'Нажмите для выбора'
+                }}
+              </VButton>
+            </div>
+          </li>
+        </ul>
+      </div>
+
       <VDivider
         mt="var(--space
 "
@@ -152,186 +193,205 @@
 </template>
 
 <script>
-  import { VDivider, VTipSmall } from '../../components/'
-  import scrollTo from '../../mixins/scrollTo'
+import { VDivider, VTipSmall } from '../../components/'
+import scrollTo from '../../mixins/scrollTo'
 
-  export default {
-    mixins: [scrollTo],
-    middleware: ['minPlan_1', 'requireSub'],
-    components: { VDivider, VTipSmall },
-    data() {
-      return {
-        levels: null,
-        set_levels: {
-          overweight_level: null,
-          physical_level: null
-        }
-      }
-    },
-    computed: {
-      validate() {
-        return (
-          typeof this.set_levels.physical_level === 'number' &&
-          typeof this.set_levels.overweight_level === 'number'
-        )
-      }
-    },
-    methods: {
-      setPhyicalLevel(item) {
-        if (!item.disabled) {
-          this.set_levels.physical_level = item.id
-          this.scrollTo('#overweight', 400)
-        }
+export default {
+  mixins: [scrollTo],
+  middleware: ['minPlan_1', 'requireSub'],
+  components: { VDivider, VTipSmall },
+  data() {
+    return {
+      levels: null,
+      set_levels: {
+        overweight_level: null,
+        physical_level: null
       },
-      setOverweightLevel(item) {
-        this.set_levels.overweight_level = item.id
-        this.scrollTo('#accept-button', 300)
-      },
-      async setLevels() {
-        const levels = this.set_levels
-        if (this.validate) {
-          try {
-            await this.$api.Workout.setLevels(levels)
-            await this.$store.commit('user/UPDATE_USER', { workout: levels })
-            this.$router.push('/workout/personal')
-          } catch (e) {
-          }
+      scheduleTypes: [
+        {
+          value: 'odd',
+          name: 'Нечётные дни',
+          description: 'Понедельник, среда, пятница'
+        },
+        {
+          value: 'even',
+          name: 'Чётные дни',
+          description: 'Вторник, четверг, суббота'
         }
+      ],
+      scheduleType: null
+    }
+  },
+  computed: {
+    validate() {
+      return (
+        typeof this.set_levels.physical_level === 'number' &&
+        typeof this.set_levels.overweight_level === 'number' &&
+        typeof this.scheduleType === 'string'
+      )
+    }
+  },
+  methods: {
+    setSchedule(val) {
+      this.scheduleType = val
+      this.scrollTo('#accept-button', 400)
+    },
+    setPhyicalLevel(item) {
+      if (!item.disabled) {
+        this.set_levels.physical_level = item.id
+        this.scrollTo('#overweight', 400)
       }
     },
-    async asyncData({ store, redirect, app }) {
-      const user = store.state.user.user
-      if (
-        typeof user.workout.overweight_level !== 'number' ||
-        typeof user.workout.physical_level !== 'number'
-      ) {
+    setOverweightLevel(item) {
+      this.set_levels.overweight_level = item.id
+      this.scrollTo('#schedule', 300)
+    },
+    async setLevels() {
+      const levels = this.set_levels
+      if (this.validate) {
         try {
-          const { data: levels } = await app.$api.Workout.getLevels()
-          return {
-            levels
-          }
+          const payload = { ...levels, scheduleType: this.scheduleType }
+          await this.$api.Workout.setLevels(payload)
+          await this.$store.commit('user/UPDATE_USER', { workout: levels })
+          await this.$router.push('/workout/personal')
         } catch (e) {
-          redirect('/')
         }
-      } else {
-        if (store.state.workout.workout) {
-          redirect('/workout/personal')
-        } else redirect('/workout')
       }
     }
+  },
+  async asyncData({ store, redirect, app }) {
+    const user = store.state.user.user
+    if (
+      typeof user.workout.overweight_level !== 'number' ||
+      typeof user.workout.physical_level !== 'number'
+    ) {
+      try {
+        const { data: levels } = await app.$api.Workout.getLevels()
+        return {
+          levels
+        }
+      } catch (e) {
+        redirect('/')
+      }
+    } else {
+      if (store.state.workout.workout) {
+        redirect('/workout/personal')
+      } else redirect('/workout')
+    }
   }
+}
 </script>
 
 <style scoped>
-  .physical {
-  }
+.physical {
+}
 
-  .workout__title__type {
-    display: flex;
-    align-items: center;
-  }
+.workout__title__type {
+  display: flex;
+  align-items: center;
+}
 
-  .workout__title__type p {
-    color: var(--yellow-base);
-    margin-right: var(--space-third);
-  }
+.workout__title__type p {
+  color: var(--yellow-base);
+  margin-right: var(--space-third);
+}
 
-  .physical-item {
-    padding: var(--space-half);
-    border-radius: var(--radius);
-    border: solid 2px var(--yellow-trans4);
-    cursor: pointer;
-    background: var(--yellow-trans4);
-    margin-bottom: var(--space-half);
-  }
+.physical-item {
+  padding: var(--space-half);
+  border-radius: var(--radius);
+  border: solid 2px var(--yellow-trans4);
+  cursor: pointer;
+  background: var(--yellow-trans4);
+  margin-bottom: var(--space-half);
+}
 
-  .physical-item p {
-    line-height: 1.3;
-    font-weight: 300;
-  }
+.physical-item p {
+  line-height: 1.3;
+  font-weight: 300;
+}
 
-  .physical-item > div {
-    margin-bottom: var(--space-third);
-  }
+.physical-item > div {
+  margin-bottom: var(--space-third);
+}
 
-  .physical-item__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.physical-item__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .physical-item__choose {
-    margin: var(--space-third) 0 0 0 !important;
-    display: flex;
-    justify-content: flex-end;
-  }
+.physical-item__choose {
+  margin: var(--space-third) 0 0 0 !important;
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .physical-item__choose__btn {
-    padding: var(--space-third) var(--space);
-    color: var(--yellow-base);
-    border: 2px solid var(--yellow-base);
-    background: none !important;
-  }
+.physical-item__choose__btn {
+  padding: var(--space-third) var(--space);
+  color: var(--yellow-base);
+  border: 2px solid var(--yellow-base);
+  background: none !important;
+}
 
-  .physical-item__choose__btn >>> h3 {
-    color: yellow !important;
-    font-size: 19px;
-  }
+.physical-item__choose__btn >>> h3 {
+  color: yellow !important;
+  font-size: 19px;
+}
 
-  .physical-item__choose__btn--selected {
-    background: var(--yellow-base) !important;
-  }
+.physical-item__choose__btn--selected {
+  background: var(--yellow-base) !important;
+}
 
-  .physical-item__choose__btn--selected >>> h3 {
-    color: var(--grey-base) !important;
-  }
+.physical-item__choose__btn--selected >>> h3 {
+  color: var(--grey-base) !important;
+}
 
-  .svg--disabled {
-    opacity: 0.2;
-  }
+.svg--disabled {
+  opacity: 0.2;
+}
 
-  .physical-item__top svg:first-child {
-    margin-right: var(--space-third);
-  }
+.physical-item__top svg:first-child {
+  margin-right: var(--space-third);
+}
 
-  .physical-item:hover,
-  .physical-item:active,
-  .physical-item:focus {
-    border: 2px solid var(--yellow-trans2);
-  }
+.physical-item:hover,
+.physical-item:active,
+.physical-item:focus {
+  border: 2px solid var(--yellow-trans2);
+}
 
-  .physical-item--disabled {
-    background: var(--white-trans4);
-    cursor: default;
-    border-color: var(--white-trans4);
-  }
+.physical-item--disabled {
+  background: var(--white-trans4);
+  cursor: default;
+  border-color: var(--white-trans4);
+}
 
-  .physical-item--disabled h3 {
-    color: var(--grey-light2);
-  }
+.physical-item--disabled h3 {
+  color: var(--grey-light2);
+}
 
-  .physical-item--disabled p {
-    color: var(--grey-light2);
-    font-weight: 400;
-  }
+.physical-item--disabled p {
+  color: var(--grey-light2);
+  font-weight: 400;
+}
 
-  .physical-item--disabled svg path {
-    fill: var(--grey-light2);
-  }
+.physical-item--disabled svg path {
+  fill: var(--grey-light2);
+}
 
-  .physical-item--disabled:hover,
-  .physical-item--disabled:active,
-  .physical-item--disabled:focus {
-    border-color: var(--white-trans4);
-  }
+.physical-item--disabled:hover,
+.physical-item--disabled:active,
+.physical-item--disabled:focus {
+  border-color: var(--white-trans4);
+}
 
-  .physical-item--selected {
-    border-color: var(--yellow-base);
-  }
+.physical-item--selected {
+  border-color: var(--yellow-base);
+}
 
-  .physical-item--selected:hover,
-  .physical-item--selected:active,
-  .physical-item--selected:focus {
-    border-color: var(--yellow-base);
-  }
+.physical-item--selected:hover,
+.physical-item--selected:active,
+.physical-item--selected:focus {
+  border-color: var(--yellow-base);
+}
 </style>
