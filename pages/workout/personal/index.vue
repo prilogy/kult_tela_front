@@ -143,11 +143,6 @@
           </ul>
         </div>
       </div>
-      <VTipSmall mt="var(--space-half)" mb="var(--space-half)">
-        <VP color="var(--grey-light3)">
-          Понедельник - суббота тренировки через день, воскресенье - вольно!
-        </VP>
-      </VTipSmall>
       <VTipSmall
         v-if="$store.getters['user/GET_USER'].workout.physical_level > 1"
         mt="var(--space-half)"
