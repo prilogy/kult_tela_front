@@ -2,7 +2,8 @@ const API_URL_DEFAULT = 'http://localhost:3001/'
 require('dotenv').config()
 
 export default {
-  mode: 'spa',
+  ssr: false,
+  target: 'static',
   server: {
     port: 3000 // default: 3000
   },
@@ -96,6 +97,11 @@ export default {
   },
 
   pwa: {
+    manifest: {
+      name: 'Cult Tela',
+      lang: 'ru',
+      useWebmanifestExtension: false
+    },
     meta: {
       theme_color: '#1d1d22',
       name: 'Культ тела',
