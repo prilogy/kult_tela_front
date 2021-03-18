@@ -17,7 +17,7 @@
       </VH3>
       <div v-else-if="info.price.price === 0">
         <VH3>
-          У вас {{ info.price.free_times_left }} бесплатных консультации
+          У вас {{ info.price.free_times_left }} бесплатная консультация
         </VH3>
       </div>
     </div>

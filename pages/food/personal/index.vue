@@ -14,6 +14,11 @@
       <div class="food__body">
         <div>
           <VH2 class="food__top">Продукты</VH2>
+          <VTipSmall mb="var(--space-half)">
+            <VP color="var(--grey-light3)">
+              Крупы указаны в сухом виде
+            </VP>
+          </VTipSmall>
           <ul
             :class="{ food__list: true, 'food__list--opened': part.isOpened }"
             v-for="(part, index) in parts"

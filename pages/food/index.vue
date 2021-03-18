@@ -1,8 +1,12 @@
 <template>
   <div>
-    <VPageHeading button to="/">Центр питания</VPageHeading>
+    <VPageHeading button to="/">Центр питания
+    <template v-slot:info>
+      Уровень физической подготовки меняется по окончанию месяца. Либо попросите об этом техподдержку
+    </template>
+    </VPageHeading>
     <CategoryItem
-      v-for="(category, index) in cats"
+      v-for="(category, index) in cats.sort((a,b) => a.id >= b.id ? 1 : -1)"
       :key="category.id"
       :category="category"
       :svgWidth="index === 0 && 50"
@@ -43,10 +47,12 @@
 </template>
 
 <script>
+import VTipSmall from '~/components/ui/VTipSmall'
 import CategoryItem from '../../components/pages/workout/index/CategoryItem'
+
 export default {
   middleware: 'requireSub',
-  components: { CategoryItem },
+  components: { CategoryItem, VTipSmall },
   data() {
     return {
       categories: [

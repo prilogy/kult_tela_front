@@ -15,7 +15,7 @@
           list__item: true,
           'list__item--disabled': item.minPlan && item.minPlan > CURRENT_PLAN
         }"
-        v-for="item in cats"
+        v-for="item in cats.sort((a,b) => a.id >= b.id ? 1 : -1)"
         :key="item.id"
         @click="goTo(item)"
       >

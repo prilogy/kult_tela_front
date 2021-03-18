@@ -2,7 +2,7 @@
   <div>
     <VPageHeading button to="/">Центр тренировок</VPageHeading>
     <CategoryItem
-      v-for="category in cats"
+      v-for="category in cats.sort((a,b) => a.id >= b.id ? 1 : -1)"
       :key="category.id"
       :category="category"
     ></CategoryItem>

@@ -68,7 +68,7 @@
     </div>
 
     <VP class="validation-caption" v-if="!formValidate">
-      Нужно изменить хотя-бы одно поле
+      Нужно изменить хотя бы одно поле
     </VP>
   </div>
 </template>

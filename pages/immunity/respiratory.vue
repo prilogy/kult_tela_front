@@ -47,7 +47,7 @@
         width="100%"
         height="340"
         :src="
-        'https://www.youtube.com/embed/mrca9drYbTk?modestbranding=1&showinfo=0&rel=0&loop=1'
+        'https://www.youtube.com/embed/XFyYSvwewWw?modestbranding=1&showinfo=0&rel=0&loop=1'
       "
         frameborder="0"
       ></iframe>
