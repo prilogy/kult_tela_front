@@ -22,6 +22,12 @@
     </div>
     <ProfileActions v-if="USER.is_subscription"></ProfileActions>
     <ExtendSubscription v-else-if="!USER.is_subscription"></ExtendSubscription>
+    <VBrowserPopup
+      @close="closeBrowserPopup"
+      v-if="browserPopup"
+    ></VBrowserPopup>
+    <VTutorPopup @clicked="tutorPopup = false" v-if="tutorPopup"></VTutorPopup>
+    <VChatPopup @clicked="closeChatPopup" v-if="chatPopup"></VChatPopup>
   </div>
 </template>
 
@@ -29,9 +35,17 @@
   import { mapGetters } from 'vuex'
   import { VAvatar } from '../components/'
   import { ExtendSubscription, ProfileActions } from '../components/pages/index/'
+  import VBrowserPopup from '~/components/ui/VBrowserPopup'
+  import VTutorPopup from '~/components/ui/VTutorPopup'
+  import VChatPopup from '~/components/ui/VChatPopup'
 
   export default {
-    components: { ProfileActions, VAvatar, ExtendSubscription },
+    data: () => ({
+      browserPopup: false,
+      tutorPopup: null,
+      chatPopup: false
+    }),
+    components: { VChatPopup, VTutorPopup, VBrowserPopup, ProfileActions, VAvatar, ExtendSubscription },
     computed: {
       info() {
         const user = this.USER
@@ -61,6 +75,26 @@
       ...mapGetters({
         USER: 'user/GET_USER'
       })
+    },
+    created() {
+      if (!localStorage.getItem('browser_popup')) this.browserPopup = true
+      if (!localStorage.getItem('chat_popup')) this.chatPopup = true
+
+      if (
+        this.$store.getters['user/GET_USER'].tutor_id === null &&
+        this.$store.getters['user/GET_USER'].plan_id > 2
+      )
+        this.tutorPopup = true
+    },
+    methods: {
+      closeBrowserPopup() {
+        this.browserPopup = false
+        localStorage.setItem('browser_popup', 'used')
+      },
+      closeChatPopup() {
+        this.chatPopup = false
+        localStorage.setItem('chat_popup', 'used')
+      }
     }
   }
 </script>

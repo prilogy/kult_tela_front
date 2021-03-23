@@ -1,6 +1,14 @@
 <template>
   <div>
-    <VPageHeading button to="/">Центр тренировок</VPageHeading>
+    <VPageHeading button to="/">
+      <template v-slot:info>
+        Уровень физической подготовки меняется по окончанию месяца. Либо попросите об этом
+        <nuxt-link to="/support">
+        <span style="color: var(--yellow-base)">техподдержку</span>
+      </nuxt-link>.
+      </template>
+      Центр тренировок
+    </VPageHeading>
     <CategoryItem
       v-for="category in cats.sort((a,b) => a.id >= b.id ? 1 : -1)"
       :key="category.id"
@@ -32,6 +40,7 @@
 
 <script>
 import CategoryItem from '../../components/pages/workout/index/CategoryItem'
+
 export default {
   middleware: 'requireSub',
   components: { CategoryItem },
@@ -98,6 +107,7 @@ export default {
 .tutor {
   margin-top: var(--space);
 }
+
 .tutor__info {
   display: flex;
 }

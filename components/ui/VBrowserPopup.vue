@@ -9,13 +9,13 @@
       Узнать, как не потерять приложение
     </VP>
     <nuxt-link to="/how-to-install">
-      <VButton mb="var(--space-half)" w100 @click="$emit('close')">Как сохранить приложение</VButton>
+      <VButton mb="var(--space-half)" w100>Как сохранить приложение</VButton>
     </nuxt-link>
     <VP>
       Посмотреть, как устроено приложение
     </VP>
     <nuxt-link to="/about">
-      <VButton mb="var(--space-half)" w100 @click="$emit('close')">О приложении</VButton>
+      <VButton mb="var(--space-half)" w100>О приложении</VButton>
     </nuxt-link>
     <VButton w100 @click="$emit('close')">
       Закрыть

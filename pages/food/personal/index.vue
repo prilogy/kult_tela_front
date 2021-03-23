@@ -66,7 +66,7 @@
             <VP color="var(--grey-light3)">
               Стоит попробовать! Натуральный помощник для снижения веса «Кило-лайт». Комплект из 3х банок  «Утро», «День», «Вечер».
               <br />
-              Состав комплекса на <a href="http://www.kilolight.ru/" target="_blank"><span style="color: var(--yellow-base)">www.kilolight.ru </span></a>
+              Состав комплекса на <a href="https://www.kilolight.ru/" target="_blank"><span style="color: var(--yellow-base)">www.kilolight.ru </span></a>
               <br />
               Не является лекарственным средством
             </VP>

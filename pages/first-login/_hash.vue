@@ -172,6 +172,7 @@
 import { VInput, VTipSmall } from '../../components/'
 import VDivider from '../../components/ui/VDivider'
 import VImageUpload from '../../components/ui/VImageUpload'
+import { mapActions } from 'vuex'
 
 export default {
   layout: 'noNav',
@@ -224,7 +225,10 @@ export default {
 
         try {
           const result = await this.$api.Auth.fillInfo(form)
-          if (result.success === true) this.popup = true
+          if (result.success === true) await this.LOGIN({
+            email: this.email,
+            password: this.password
+          })
         } catch (error) {
           this.$router.push('/login')
         }
@@ -232,7 +236,10 @@ export default {
     },
     avatarHandle(img) {
       this.avatar_src = img
-    }
+    },
+    ...mapActions({
+      LOGIN: 'auth/LOGIN'
+    })
   },
   computed: {
     formValidate() {

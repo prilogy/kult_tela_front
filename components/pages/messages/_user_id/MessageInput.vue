@@ -51,7 +51,7 @@
           v-if="!locked"
           :class="{
           box__btn: true,
-          'box__btn--disabled': input === '' && !image_preview
+          'box__btn--disabled': (input === '' && !image_preview) || sendLocked
         }"
           @click="sendMessage"
         >
@@ -93,7 +93,11 @@
 <script>
   export default {
     props: {
-      imageLocked: Boolean
+      imageLocked: Boolean,
+      sendLocked: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -178,6 +182,7 @@
         this.$refs.area.focus()
       },
       sendMessage() {
+        if(this.sendLocked) return;
         if (this.input.trim() !== '' || this.image_preview) this.$emit('sendMessage', this.input)
         this.$refs.area.innerHTML = ''
         this.input = ''

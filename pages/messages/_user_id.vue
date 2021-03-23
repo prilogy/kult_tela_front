@@ -47,6 +47,7 @@
 
     <MessageInput
       :imageLocked="imageLocked"
+      :send-locked="sendLocked"
       @imageUploaded="setImageSrc"
       @imageDeleted="setImageSrc(null)"
       class="chat__bottom"
@@ -81,7 +82,8 @@
       return {
         input: '',
         image_src: null,
-        imageLocked: false
+        imageLocked: false,
+        sendLocked: false
       }
     },
     methods: {
@@ -104,6 +106,7 @@
       async sendMessage(text) {
         const to_user_id = this.user ? this.user.id : this.$route.params.user_id || null
         let attachments = null
+        this.sendLocked = true
         if (this.image_src && to_user_id !== null) {
           try {
             const form = new FormData()
@@ -124,8 +127,10 @@
             room_id: this.CHAT.id,
             attachments
           })
+
           this.$refs.messageInputArea.resetImage()
         }
+        this.sendLocked = false
       },
       scrollTo({ height, toBottom }) {
         const el = this.$refs.messages

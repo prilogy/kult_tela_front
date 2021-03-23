@@ -1,7 +1,7 @@
 <template>
   <div class="login-form__wrapper">
     <div class="login-form">
-      <VH1 class="login-form__title">Армия похудения</VH1>
+      <VH1 class="login-form__title">Армия похудения и ЗОЖ</VH1>
       <div class="login-form__top">
         <VH1>Вход</VH1>
         <div class="login-form__top__button">
