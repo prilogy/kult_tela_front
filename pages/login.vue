@@ -1,7 +1,7 @@
 <template>
   <div class="login-form__wrapper">
     <div class="login-form">
-      <VH1 class="login-form__title">Армия похудения и ЗОЖ</VH1>
+      <VH2 class="login-form__title">Армия похудения и ЗОЖ</VH2>
       <div class="login-form__top">
         <VH1>Вход</VH1>
         <div class="login-form__top__button">
@@ -48,7 +48,7 @@
         </VButton>
       </div>
       <VGuidePopup @close="videoPopup = false" v-if="videoPopup"/>
-      <div class="online-army" @click="videoPopup = true">
+      <div class="online-army" style="margin-bottom: var(--space)" @click="videoPopup = true">
         <VH3 style="font-size: 18px">Экскурсия по приложению. Результаты</VH3>
         <svg
           xmlns="http://www.w3.org/2000/svg"

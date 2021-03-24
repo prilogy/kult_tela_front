@@ -42,11 +42,10 @@ export default {
   grid-gap: var(--space-half);
 }
 
-.actions__grid__item:last-child:nth-child(3n - 1) {
-  grid-column: span 2;
+@media all and (min-width: 450px) {
+  .actions__grid__item:last-child:nth-child(3n - 1) {
+    grid-column: span 2;
+  }
 }
 
-.actions__grid__item:last-child:nth-child(3n - 2) {
-  grid-column: span 2;
-}
 </style>

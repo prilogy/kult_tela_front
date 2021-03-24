@@ -19,10 +19,12 @@
   export default {
     methods: {
       async goToAdmin() {
+        console.log('xx')
         const {data} = await this.$api.Support.getAdminId()
+        console.log(data)
         if (data && data.id) {
           const link = '/messages/' + data.id
-          this.$router.push(link)
+          await this.$router.push(link)
         }
       }
     }
