@@ -16,7 +16,7 @@
           <VH2 class="food__top">Продукты</VH2>
           <VTipSmall mb="var(--space-half)">
             <VP color="var(--grey-light3)">
-              Крупы указаны в сухом виде
+              Готовим: печем/тушим/варим. Крупы указаны в сухом виде
             </VP>
           </VTipSmall>
           <ul

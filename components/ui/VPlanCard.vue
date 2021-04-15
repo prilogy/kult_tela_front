@@ -7,6 +7,34 @@
       {{ plan.name }}
     </VH2>
     <VP class="plan__description">{{ plan.description }}</VP>
+
+    <div class='plan__bottom' v-if="!current && !plan.newCost && !plan.locked_message && plan.trial && !type">
+      <VH2
+        weight='regular'
+        :color='colors[100]'
+      >
+        <span>
+          {{ plan.cost }}<span
+          style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>/месяц
+        </span>
+      </VH2>
+      <VButton
+        ml='var(--space-third)'
+        v-if='!current && !plan.locked_message'
+        :class="{
+          plan__bottom__button: true,
+          'plan__bottom__button--selected': isSelected
+        }"
+        pa='var(--space-third)'
+        weight='regular'
+        color='var(--white-base)'
+        :bg='colors[100]'
+        @click='handleButton("buy")'
+      >
+        {{ isSelected ? btnText.selected : btnText.default }}
+      </VButton>
+    </div>
+
     <div class='plan__bottom'>
       <VH2
         v-if='!current && !plan.newCost && !plan.locked_message'
@@ -16,14 +44,15 @@
         <span v-if='isFree'>
           Бесплатно
         </span>
-        <span v-else-if="typeof plan.trial === 'number'">
-          {{ plan.trial }} дней бесплатно
+        <span v-else-if="typeof plan.trial === 'number' && type !== 'buy'">
+          {{ plan.trial }} дня бесплатно
         </span>
         <span v-else>
           {{ plan.cost }}<span
           style="font-family: 'Helvetica Neue', sans-serif !important;">&#8381;</span>/месяц
         </span>
       </VH2>
+
       <div
         style='display: flex; align-items: center'
         v-else-if="
@@ -68,7 +97,7 @@
         weight='regular'
         color='var(--white-base)'
         :bg='colors[100]'
-        @click='handleButton'
+        @click="handleButton(typeof plan.trial === 'number' ? 'trial': 'buy')"
       >
         {{ isSelected ? btnText.selected : typeof plan.trial === 'number' && inList ? 'Получить' : btnText.default }}
       </VButton>
@@ -95,6 +124,9 @@ export default {
         selected: 'Изменить'
       })
     },
+    type: {
+      type: String
+    },
     isSelected: {
       type: Boolean,
       default: false
@@ -113,8 +145,8 @@ export default {
     }
   },
   methods: {
-    handleButton() {
-      this.$emit('btnClick', this.plan.id)
+    handleButton(type) {
+      this.$emit('btnClick', {id: this.plan.id, type })
     }
   },
   created() {

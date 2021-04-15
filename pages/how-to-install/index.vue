@@ -72,7 +72,7 @@
               {
                 id: 0,
                 text: 'Внизу экрана, на всплывающем окне нажмите кнопку меню',
-                image: '/images/install/ios1.jpg' // TODO: Добавить картикнку
+                image: '/images/install/ios0.png'
               },
               {
                 id: 1,

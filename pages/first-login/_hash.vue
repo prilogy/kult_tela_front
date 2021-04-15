@@ -36,12 +36,12 @@
             caption="Имя"
             v-model="first_name"
           ></VInput>
-          <VInput
-            maxlength="30"
-            minlength="2"
-            caption="Отчество(если есть)"
-            v-model="patronymic"
-          ></VInput>
+<!--          <VInput-->
+<!--            maxlength="30"-->
+<!--            minlength="2"-->
+<!--            caption="Отчество(если есть)"-->
+<!--            v-model="patronymic"-->
+<!--          ></VInput>-->
           <VInput
             required
             step="0.01"
@@ -60,14 +60,14 @@
             caption="Рост(в см)"
             v-model="height"
           ></VInput>
-          <VInput
-            required
-            type="number"
-            max="100"
-            min="1"
-            caption="Возраст"
-            v-model="age"
-          ></VInput>
+<!--          <VInput-->
+<!--            required-->
+<!--            type="number"-->
+<!--            max="100"-->
+<!--            min="1"-->
+<!--            caption="Возраст"-->
+<!--            v-model="age"-->
+<!--          ></VInput>-->
           <VInput
             required
             minlength="6"
@@ -188,7 +188,7 @@ export default {
       email: '',
       first_name: '',
       last_name: '',
-      patronymic: '',
+      //patronymic: '',
       weight_start: null,
       avatar_src: null,
       password: '',
@@ -196,16 +196,16 @@ export default {
       image_preview: null,
       popup: false,
       height: '',
-      age: '',
+      //age: '',
       names: [
         'hash',
         'first_name',
         'last_name',
-        'patronymic',
+        //'patronymic',
         'weight_start',
         'height',
         'avatar_src',
-        'age',
+        //'age',
         'password'
       ],
       result: null
@@ -251,7 +251,6 @@ export default {
         !this.password_verify ||
         this.password !== this.password_verify ||
         !this.avatar_src ||
-        !this.age ||
         !this.passwordLength
       )
     },

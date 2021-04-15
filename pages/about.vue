@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VPageHeading button to="/">О приложении</VPageHeading>
+    <VPageHeading button to="/">Инфо о приложении</VPageHeading>
 
     <VH3 mb="var(--space-half)">Экскурсия по онлайн-армии</VH3>
     <iframe
@@ -15,7 +15,20 @@
       "
       frameborder="0"
     ></iframe>
-    
+
+    <VH3 mb="var(--space-half)">О проекте</VH3>
+    <iframe
+      id="ytplayer2"
+      @load="isIframe = true"
+      type="text/html"
+      allowfullscreen="allowfullscreen"
+      width="100%"
+      height="340"
+      :src="
+        'https://www.youtube.com/embed/vGaSaZ1SwYc?modestbranding=1&showinfo=0&rel=0&loop=1'
+      "
+      frameborder="0"
+    ></iframe>
 
     <VP mt="var(--space)">
       Информационное приложение фитнес-проекта "Культ тела". Носит

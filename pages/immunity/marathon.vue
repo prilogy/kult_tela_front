@@ -12,7 +12,7 @@
         Хочешь увидеть серии, как герои проходили этот же марафон и преобразили иммунитет и качество жизни?
       </VP>
       <VP>
-        Смотри на Youtube проект <a href="https://youtube.com/playlist?list=PLHnq3G0kkZLdT-uK-MgvfpIrckPJOUZRm" target="_blank"><span style="color: var(--yellow-base)">«Эксперимент_Иммунитет»</span></a>!
+        Смотри на Youtube проект <a href="https://www.youtube.com/playlist?list=PLHnq3G0kkZLeZ5WD0K_3gLF8zVgbnm3Bu" target="_blank"><span style="color: var(--yellow-base)">«Эксперимент_Иммунитет»</span></a>!
       </VP>
       <VP>
         Марафон рассчитан на взрослых людей, без острых воспалительных заболеваний, желчных камней, тяжелых стадий

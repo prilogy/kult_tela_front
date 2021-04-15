@@ -15,7 +15,7 @@
       Посмотреть, как устроено приложение
     </VP>
     <nuxt-link to="/about">
-      <VButton mb="var(--space-half)" w100>О приложении</VButton>
+      <VButton mb="var(--space-half)" w100>Инфо о приложении</VButton>
     </nuxt-link>
     <VButton w100 @click="$emit('close')">
       Закрыть

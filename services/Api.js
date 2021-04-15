@@ -9,7 +9,7 @@ export default function(ctx) {
 
   this.Auth = {
     login: user => axios.$post('/auth', user), // user = { email, password }
-    createBlankProfile: data => axios.$put('/auth/signup', data), //user = { email }
+    createBlankProfile: (data, forceBuy = false) => axios.$put('/auth/signup', data, { params: { forceBuy } }), //user = { email }
     tokenAuth: () => axios.$get('/auth'), // headers must contain token
     isFillAllowed: data => axios.$post('/auth/signup', data),
     fillInfo: data => axios.$post('/auth/signup/fill', data)
@@ -65,6 +65,7 @@ export default function(ctx) {
   this.Workout = {
     get: () => axios.$get('/workout/plan'),
     getPrevious: () => axios.$get('/workout/plan/previous'),
+    getNext: () => axios.$get('/workout/plan/next'),
     getLevels: () => axios.$get('/workout/level'),
     setLevels: data => axios.$post('/workout/level', data)
   }

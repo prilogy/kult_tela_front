@@ -55,6 +55,15 @@
             </VP>
           </VTipSmall>
         </div>
+        <div v-else-if="WORKOUT.day_number == 1">
+          <nuxt-link
+            to="/workout/personal/next"
+          >
+            <VP class="previous-btn">
+              Начать тренировку
+            </VP>
+          </nuxt-link>
+        </div>
       </div>
 
     </div>

@@ -7,6 +7,7 @@
             :btnText="{ default: 'Изменить', selected: 'Изменить' }"
             @btnClick="getBack"
             class="plan--opened"
+            :type="planToBuyType"
             :inList="false"
             :plan="planToBuy"
             :isFree="code && codeIsValid"
@@ -31,7 +32,7 @@
               value="submit"
               w100
             >
-              {{ code && codeIsValid ? 'Подтвердить' : typeof planToBuy.trial === 'number' ? 'Получить бесплатно' : 'Перейти к оплате'
+              {{ code && codeIsValid ? 'Подтвердить' : typeof planToBuy.trial === 'number' && planToBuyType === 'trial' ? 'Получить бесплатно' : 'Перейти к оплате'
               }}
             </VButton>
             <VP class="warning-text">
@@ -97,6 +98,7 @@ export default {
       codeIsValid: false,
       plans: null,
       planToBuy: null,
+      planToBuyType: null,
       email: '',
       afterSubmit: false
     }
@@ -124,11 +126,12 @@ export default {
     back() {
       this.$router.back()
     },
-    handleBuy(id, promo = false) {
+    handleBuy({id, type}, promo = false) {
       if (promo === false) {
         this.code = null
         this.codeIsValid = false
       }
+      this.planToBuyType = type
       this.planToBuy = this.plans.filter(plan => plan.id === id)[0]
     },
     async proceedToBuy() {
@@ -142,7 +145,7 @@ export default {
       }
 
       try {
-        const result = await this.$api.Auth.createBlankProfile(data)
+        const result = await this.$api.Auth.createBlankProfile(data, this.planToBuyType === 'buy')
         if (result.data.url) window.open(result.data.url)
         this.afterSubmit = true
       } catch (error) {

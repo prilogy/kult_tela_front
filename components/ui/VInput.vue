@@ -31,15 +31,13 @@ h3 {
   font-weight: 400;
 }
 
-.input {
-  user-select: auto !important;
-}
-
 .input[type='date']::-webkit-calendar-picker-indicator {
   background: none;
 }
 
 .input {
+  -webkit-appearance: none;
+  user-select: auto !important;
   background: var(--grey-light2);
   width: 100%;
   font-size: var(--h3-fs);
