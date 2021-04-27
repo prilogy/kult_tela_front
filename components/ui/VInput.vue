@@ -45,6 +45,7 @@ h3 {
   padding: var(--space-third) var(--space-half);
   box-sizing: border-box;
   border-radius: var(--radius-half);
+  min-height: 45px;
 }
 
 .input:active,
