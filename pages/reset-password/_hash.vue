@@ -56,7 +56,7 @@
         Пароль успешно сброшен, теперь вы можете войти в учетную запись с новым
         паролем!
       </VH3>
-      <VButton @click="$router.push('/login')" mt="var(--space-half)" w100>
+      <VButton  @click="$router.push('/login')" mt="var(--space-half)" w100>
         К форме входа
       </VButton>
     </div>

@@ -2,7 +2,7 @@
   <div>
     <VPageHeading button>Редактировать</VPageHeading>
     <form id="form" autocomplete="off" @submit.prevent="sendForm">
-      <VH3 mb="var(--space-half)">email: {{ email }}</VH3>
+      <VH3 mb="var(--space-half)">Номер телефона: {{ phone_number }}</VH3>
       <VInput required caption="Фамилия" v-model="last_name"></VInput>
       <VInput required caption="Имя" v-model="first_name"></VInput>
       <VInput caption="Отчество(если есть)" v-model="patronymic"></VInput>
@@ -150,6 +150,7 @@ export default {
     this.patronymic = user.patronymic
     this.height = user.height
     this.age = user.age
+    this.phone_number = user.phone_number
   }
 }
 </script>

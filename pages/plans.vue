@@ -14,19 +14,30 @@
           ></VPlanCard>
 
           <VP my="var(--space-half)">
-            Введите email, на который будут отправлены дальнейшие
-            инструкции по регистрации
+            Введите номер телефона, на который будет отправлен код подтверждения
           </VP>
           <form id="buy-form" @submit.prevent="proceedToBuy">
-            <VInput
-              type="email"
-              required
-              placeholder="example@email.ru"
-              caption="Email"
-              v-model="email"
-            ></VInput>
+<!--            <VInput-->
+<!--              type="email"-->
+<!--              required-->
+<!--              placeholder="example@email.ru"-->
+<!--              caption="Email"-->
+<!--              v-model="email"-->
+<!--            ></VInput>-->
+            <vue-phone-number-input
+              v-model="phone_number"
+              :translations="{
+                countrySelectorLabel: 'Код страны',
+                countrySelectorError: 'Ошибка выбора кода',
+                phoneNumberLabel: 'Телефонный номер',
+                example: 'Пример: '
+              }"
+              :only-countries="['RU']"
+              color="#9A9C2E"
+              :dark="true"
+            ></vue-phone-number-input>
             <VButton
-              :disabled="!email"
+              :disabled="!phoneIsValid"
               type="submit"
               form="buy-form"
               value="submit"
@@ -74,15 +85,30 @@
         </div>
       </transition>
     </div>
+
     <div class="after-submit popup" v-else-if="afterSubmit">
       <VP>
-        На указанную почту отправлено письмо с дальнейшими инструкциями по
-        регистрации. Если письмо не пришло, то проверьте папку “Спам”.
+        Для продолжения введите код из смс, который мы отправили на номер <span style="white-space: nowrap">{{phone_number}}</span>
       </VP>
-      <nuxt-link to="/login">
-        <VButton>К форме входа</VButton>
-      </nuxt-link>
+      <div class="promo">
+        <VInput
+          v-model="proceedCode"
+          style="width: 100%"
+          placeholder="112233"
+        />
+        <VButton :disabled="!proceedCode || proceedCode.length !== 6" @click="proceedNext">Продолжить</VButton>
+      </div>
     </div>
+
+<!--    <div class="after-submit popup" v-else-if="afterSubmit">-->
+<!--      <VP>-->
+<!--        На указанную почту отправлено письмо с дальнейшими инструкциями по-->
+<!--        регистрации. Если письмо не пришло, то проверьте папку “Спам”.-->
+<!--      </VP>-->
+<!--      <nuxt-link to="/login">-->
+<!--        <VButton>К форме входа</VButton>-->
+<!--      </nuxt-link>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -100,7 +126,14 @@ export default {
       planToBuy: null,
       planToBuyType: null,
       email: '',
-      afterSubmit: false
+      phone_number: '',
+      afterSubmit: false,
+      proceedCode: null
+    }
+  },
+  computed: {
+    phoneIsValid() {
+      return ((this.phone_number || '').match(/\d/g) || []).length === 10
     }
   },
   methods: {
@@ -136,8 +169,9 @@ export default {
     },
     async proceedToBuy() {
       let data = {
-        email: this.email,
-        plan_id: this.planToBuy.id
+        // email: this.email,
+        plan_id: this.planToBuy.id,
+        phone_number: this.phone_number
       }
 
       if (this.code && this.codeIsValid) {
@@ -151,8 +185,19 @@ export default {
       } catch (error) {
         this.email = ''
       }
+    },
+    async proceedNext() {
+      try {
+        const r = await this.$api.Auth.verifyCode({ code: this.proceedCode })
+        const hash = r.data.hash || null
+        await this.$router.push('/first-login/' + hash)
+      }
+      catch (e) {
+
+      }
     }
   },
+
   async asyncData(ctx) {
     const id = ctx.query.p ? parseInt(ctx.query.p) : null
     try {
@@ -201,7 +246,6 @@ export default {
 }
 
 .after-submit {
-  text-align: center;
   margin: auto;
 }
 

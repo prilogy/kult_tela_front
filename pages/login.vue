@@ -16,9 +16,8 @@
       <div class="login-form__middle">
         <form id="login-form" @submit.prevent="doLogin">
           <VInput
-            type="email"
-            autocomplete="email"
-            placeholder="Email"
+            autocomplete="phone"
+            placeholder="Телефонный номер или email"
             required
             v-model="login"
           />
@@ -106,7 +105,7 @@
     methods: {
       async doLogin(e) {
         const user = {
-          email: this.login,
+          login: this.login,
           password: this.password
         }
 

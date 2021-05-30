@@ -21,7 +21,7 @@
           </template>
         </VPageHeading>
         <form id="form" autocomplete="off" @submit.prevent="sendForm">
-          <VH3 mb="var(--space-half)">Ваш email: {{ email }}</VH3>
+          <VH3 mb="var(--space-half)">Ваш телефонный номер: {{ phone_number }}</VH3>
           <VInput
             maxlength="30"
             minlength="2"
@@ -185,7 +185,8 @@ export default {
   data() {
     return {
       hash: null,
-      email: '',
+      // email: '',
+      phone_number: null,
       first_name: '',
       last_name: '',
       //patronymic: '',
@@ -226,7 +227,7 @@ export default {
         try {
           const result = await this.$api.Auth.fillInfo(form)
           if (result.success === true) await this.LOGIN({
-            email: this.email,
+            login: this.phone_number,
             password: this.password
           })
         } catch (error) {
@@ -278,7 +279,7 @@ export default {
     const hash = ctx.params.hash
     try {
       const { data: result } = await ctx.app.$api.Auth.isFillAllowed({ hash })
-      if (result.success === true) return { email: result.email, hash, result }
+      if (result.success === true) return { phone_number: result.phone_number, hash, result }
       else return { result }
     } catch (error) {
       return ctx.redirect('/login')

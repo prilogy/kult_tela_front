@@ -18,6 +18,7 @@
     "nuxt-client-init-module": "^0.1.7",
     "nuxt-compress": "^4.1.0",
     "socket.io-client": "^2.3.0",
+    "vue-phone-number-input": "^1.1.10",
     "vue-socket.io-extended": "^4.0.1"
   },
   "devDependencies": {

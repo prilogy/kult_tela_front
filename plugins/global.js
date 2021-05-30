@@ -5,6 +5,8 @@ import VP from '~/components/typography/VP'
 import VCaption from '~/components/typography/VCaption'
 import VButton from '~/components/ui/VButton'
 import VPageHeading from '~/components/ui/VPageHeading'
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 
 import Vue from 'vue'
 
@@ -17,6 +19,8 @@ Vue.component('VCaption', VCaption)
 Vue.component('VButton', VButton)
 
 Vue.component('VPageHeading', VPageHeading)
+
+Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 
 import ds from '@/services/Colors.js'
 

@@ -12,7 +12,8 @@ export default function(ctx) {
     createBlankProfile: (data, forceBuy = false) => axios.$put('/auth/signup', data, { params: { forceBuy } }), //user = { email }
     tokenAuth: () => axios.$get('/auth'), // headers must contain token
     isFillAllowed: data => axios.$post('/auth/signup', data),
-    fillInfo: data => axios.$post('/auth/signup/fill', data)
+    fillInfo: data => axios.$post('/auth/signup/fill', data),
+    verifyCode: data => axios.$post('/auth/signup/code', data)
   }
 
   this.Promo = {
