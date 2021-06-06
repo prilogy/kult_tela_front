@@ -28,8 +28,7 @@ export const actions = {
           commit('user/SET_USER', user, { root: true })
           commit('SET_AUTHENTICATED')
           commit('SET_TOKEN', token)
-          await $nuxt.$router.push('/')
-          window.location.reload(true)
+          await $nuxt.$router.push('/?reload=true')
         } else commit('popup/SET_ERROR', 'Пользователь не существует', {
           root: true
         })

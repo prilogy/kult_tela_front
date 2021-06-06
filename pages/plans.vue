@@ -17,13 +17,13 @@
             Введите номер телефона, на который будет отправлен код подтверждения
           </VP>
           <form id="buy-form" @submit.prevent="proceedToBuy">
-<!--            <VInput-->
-<!--              type="email"-->
-<!--              required-->
-<!--              placeholder="example@email.ru"-->
-<!--              caption="Email"-->
-<!--              v-model="email"-->
-<!--            ></VInput>-->
+            <!--            <VInput-->
+            <!--              type="email"-->
+            <!--              required-->
+            <!--              placeholder="example@email.ru"-->
+            <!--              caption="Email"-->
+            <!--              v-model="email"-->
+            <!--            ></VInput>-->
             <vue-phone-number-input
               v-model="phone_number"
               :translations="{
@@ -46,6 +46,12 @@
               {{ code && codeIsValid ? 'Подтвердить' : typeof planToBuy.trial === 'number' && planToBuyType === 'trial' ? 'Получить бесплатно' : 'Перейти к оплате'
               }}
             </VButton>
+            <div style="display: flex; margin: var(--space-half) 0; justify-content: center; align-items: center">
+              <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 0L5.6 13.633 2 10.9H0L5.6 20 20 0h-2z" fill="var(--yellow-base)" />
+              </svg>
+              <VP ml="var(--space-third)" color="var(--yellow-base)" weight="300">Даю согласие на получение СМС уведомлений</VP>
+            </div>
             <VP class="warning-text">
               Приложение сделано профессионалами, но носит рекомендательный
               характер. Вы сами несёте ответственность за свое здоровье и жизнь.
@@ -88,7 +94,8 @@
 
     <div class="after-submit popup" v-else-if="afterSubmit">
       <VP>
-        Для продолжения введите код из смс, который мы отправили на номер <span style="white-space: nowrap">{{phone_number}}</span>
+        Для продолжения введите код из смс, который мы отправили на номер <span
+        style="white-space: nowrap">{{ phone_number }}</span>
       </VP>
       <div class="promo">
         <VInput
@@ -100,15 +107,15 @@
       </div>
     </div>
 
-<!--    <div class="after-submit popup" v-else-if="afterSubmit">-->
-<!--      <VP>-->
-<!--        На указанную почту отправлено письмо с дальнейшими инструкциями по-->
-<!--        регистрации. Если письмо не пришло, то проверьте папку “Спам”.-->
-<!--      </VP>-->
-<!--      <nuxt-link to="/login">-->
-<!--        <VButton>К форме входа</VButton>-->
-<!--      </nuxt-link>-->
-<!--    </div>-->
+    <!--    <div class="after-submit popup" v-else-if="afterSubmit">-->
+    <!--      <VP>-->
+    <!--        На указанную почту отправлено письмо с дальнейшими инструкциями по-->
+    <!--        регистрации. Если письмо не пришло, то проверьте папку “Спам”.-->
+    <!--      </VP>-->
+    <!--      <nuxt-link to="/login">-->
+    <!--        <VButton>К форме входа</VButton>-->
+    <!--      </nuxt-link>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -159,7 +166,7 @@ export default {
     back() {
       this.$router.back()
     },
-    handleBuy({id, type}, promo = false) {
+    handleBuy({ id, type }, promo = false) {
       if (promo === false) {
         this.code = null
         this.codeIsValid = false
@@ -191,8 +198,7 @@ export default {
         const r = await this.$api.Auth.verifyCode({ code: this.proceedCode })
         const hash = r.data.hash || null
         await this.$router.push('/first-login/' + hash)
-      }
-      catch (e) {
+      } catch (e) {
 
       }
     }

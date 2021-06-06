@@ -231,7 +231,7 @@ export default {
             password: this.password
           })
         } catch (error) {
-          this.$router.push('/login')
+          await this.$router.push('/login')
         }
       }
     },

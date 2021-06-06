@@ -77,6 +77,7 @@
       })
     },
     created() {
+      if(this.$route.query['reload'] === 'true') this.$router.push('/')
       if (!localStorage.getItem('browser_popup')) this.browserPopup = true
       if (!localStorage.getItem('chat_popup')) this.chatPopup = true
 
